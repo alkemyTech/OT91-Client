@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import '../FormStyles.css';
 
-const hasValue = (data, value) => data[value] && data[value].lenght > 0
+const hasValue = (data, value) => data[value] && data[value].length > 0
 const isValidValue = (regExp, value) => regExp.test(value)
 
 const validateLogin = formData => {
@@ -16,8 +16,8 @@ const validateLogin = formData => {
 
     if(!hasValue(formData, 'password'))
         errors.password = 'This field cannot be blank';
-    else if(formData.value < 6)
-        errors.password = 'Password must contain at least 6 characters'
+    else if(formData.password.length < 6)
+        errors.password = 'Password must contain at least 6 characters';
     else if(!isValidValue(passwordRegExp, formData.password))
         errors.password = 'Password must include each of the following character types: letter, number, symbol';
 
