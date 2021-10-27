@@ -4,7 +4,7 @@ import '../FormStyles.css';
 const TestimonialForm = () => {
     const [initialValues, setInitialValues] = useState({
        name: '',
-       description: '' 
+       description: ''
     });
 
     const handleChange = (e) => {
@@ -28,5 +28,5 @@ const TestimonialForm = () => {
         </form>
     );
 }
- 
+
 export default TestimonialForm;

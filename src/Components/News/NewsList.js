@@ -12,7 +12,7 @@ const NewsList = () => {
         <div>
             <h1>Listado de Novedades</h1>
             <ul className="list-container">
-                {newsMock.length > 0 ? 
+                {newsMock.length > 0 ?
                     newsMock.map((element) => {
                         return(
                             <li className="card-info" key={element.id}>
@@ -28,5 +28,5 @@ const NewsList = () => {
         </div>
     );
 }
- 
+
 export default NewsList;

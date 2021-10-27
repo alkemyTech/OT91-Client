@@ -37,5 +37,5 @@ const NewsForm = () => {
         </form>
     );
 }
- 
+
 export default NewsForm;

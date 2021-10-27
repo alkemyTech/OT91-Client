@@ -28,5 +28,5 @@ const ProjectsForm = () => {
     </form>
   );
 }
- 
+
 export default ProjectsForm;
