@@ -6,21 +6,17 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { CardActionArea } from "@material-ui/core";
-
 import Title from "../../Title/Title";
-
 import "../../../Styles/CardStyle.css";
 
 const Detail = () => {
   const { id } = useParams();
-
   const [activity, setActivity] = useState("");
-
-  const [activityDesc, setActivityDesc] = useState("");
+  const [activityDescription, setActivityDescription] = useState("");
 
   const stripedHtml = useCallback(() => {
-    typeof activity.description !== "undefined" &&
-      setActivityDesc(activity.description.replace(/<[^>]+>/g, ""));
+    activity.description &&
+      setActivityDescription(activity.description.replace(/<[^>]+>/g, ""));
   }, [activity.description]);
 
   useEffect(() => {
@@ -49,7 +45,7 @@ const Detail = () => {
           />
         </CardMedia>
         <CardContent>
-          <Typography>{activityDesc}</Typography>
+          <Typography>{activityDescription}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
