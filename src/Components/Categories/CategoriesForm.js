@@ -3,10 +3,18 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Container, TextField, Typography, Button } from '@material-ui/core'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import * as functions from './CategoriesFunctions'
 import '../FormStyles.css'
 
-const CategoriesForm = () => {
-  const [valuesForm, setValuesForm] = useState('')
+const CategoriesForm = ({ editCategorie, id }) => {
+  const [values, setValues] = useState('')
+
+  useEffect(() => {
+    if (editCategorie) {
+      const categorieData = functions.getCategorie(id)
+      setValues(categorieData)
+    }
+  }, [editCategorie])
 
   return (
     <Container
@@ -17,9 +25,9 @@ const CategoriesForm = () => {
     >
       <Formik
         initialValues={{
-          name: valuesForm.name ? valuesForm.name : '',
-          description: valuesForm.description ? valuesForm.description : '',
-          image: valuesForm.image ? valuesForm.image : '',
+          name: values.name ? values.name : '',
+          description: values.description ? values.description : '',
+          image: values.image ? values.image : '',
         }}
         validate={(values) => {
           let errors = {}
@@ -39,6 +47,10 @@ const CategoriesForm = () => {
           return errors
         }}
         onSubmit={(values, { resetForm }) => {
+          editCategorie
+            ? functions.editCategorie(values)
+            : functions.createCategorie(values)
+
           resetForm()
         }}
       >
@@ -132,7 +144,7 @@ const CategoriesForm = () => {
                 Image
               </Typography>
               <div>
-                {valuesForm.image > 0 && (
+                {values.image > 0 && (
                   <img
                     src={values.image}
                     alt='imagen vista previa'
@@ -155,7 +167,7 @@ const CategoriesForm = () => {
                     const imageUrl = new FileReader()
                     imageUrl.readAsDataURL(imageFile)
                     imageUrl.onload = (e) => {
-                      setImg(e.target?.result)
+                      setValues(...values, { image: e.target?.result })
                     }
                   }}
                 />
@@ -193,5 +205,4 @@ const CategoriesForm = () => {
     </Container>
   )
 }
-
 export default CategoriesForm
