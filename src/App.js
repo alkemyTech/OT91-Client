@@ -13,7 +13,7 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
-import OrganizationDataLayout from './Components/OrganizationData/OrganizationDataLayout';
+import OrganizationDataLayout from './Components/OrganizationData/OrganizationDataLayout/OrganizationDataLayout';
 
 function App() {
   return (
