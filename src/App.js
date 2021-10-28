@@ -13,6 +13,7 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
+import OrganizationDataLayout from './Components/OrganizationData/OrganizationDataLayout';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/backoffice/organization" component={OrganizationDataLayout} />
+          <Route path="/backoffice/organization/edit" />
         </Switch>
       </BrowserRouter>
     <div className="App">
