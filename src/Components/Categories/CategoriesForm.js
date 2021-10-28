@@ -193,9 +193,14 @@ const CategoriesForm = ({ editCategorie, id }) => {
 
             <Button
               variant='contained'
-              size='medium'
+              Container
+              fullWidth
+              size='large'
               type='submit'
               color='primary'
+              style={{
+                marginTop: '25px',
+              }}
             >
               Send
             </Button>
