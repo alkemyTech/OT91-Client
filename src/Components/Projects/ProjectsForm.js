@@ -92,8 +92,10 @@ export default function ProjectsForm({idProyect}){
                       <div>
                           <p>Image</p>
                           <div>
+                              {imgState.length>0 && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
+                          </div>
+                          <div>
                             <Field
-                                className='input-field'
                                 type='file' 
                                 accept="image/png, image/jpg" 
                                 id='image'                                
@@ -109,7 +111,6 @@ export default function ProjectsForm({idProyect}){
                                   };
                                 }}
                             /> 
-                            {imgState.length>0 && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
                           </div>
                           <ErrorMessage name='image' component={()=><p className='form_div_error'>{errors.image}</p>}/> 
                       </div>
