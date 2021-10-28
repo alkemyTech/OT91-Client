@@ -10,7 +10,7 @@ const UserModifierForm = ({user}) => {
     const handleOnSubmit =  async (values) => {
         try{
             if(hasUser){
-                await axios.patch(`http://ongapi.alkemy.org/api/users/${user.id}`,values)
+                await axios.put(`http://ongapi.alkemy.org/api/users/${user.id}`,values)
             }else{
                await axios.post('http://ongapi.alkemy.org/api/users',values);
             }
@@ -21,15 +21,29 @@ const UserModifierForm = ({user}) => {
     const validate = (values) => {
         const errors = {};
 
-        if (!values.name) {
-          errors.name = 'Dato obligatorio';
-        } else if (values.name.length < 4) {
+        const errorRequired = (key) => {
+            if(!values[key]){
+                errors[key] = 'Dato Obligatorio'
+                return true
+            }
+            return false
+        };
+
+        const isValidType= key => {
+            if (values.profilePhoto[key] === null){
+                return 'Dato Obligatorio'
+            }else if(values.profilePhoto[key] === "image/jpeg" || values.profilePhoto[key] === "image/png"){
+                return true
+            }
+            return false
+        }
+        const isEmailValid = email => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+
+        if (!errorRequired('name') && values.name.length < 4) {
           errors.name = 'Debe tener 4 caracteres o mas';
         };
       
-        if (!values.email) {
-          errors.email = 'Dato obligatorio';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        if (!errorRequired('email') && !isEmailValid(values.email)) {
           errors.email = 'Dirección de email inválida';
         };
 
@@ -37,26 +51,23 @@ const UserModifierForm = ({user}) => {
             errors.roleId = 'Elija un Rol'
         };
 
-        if(!values.password){
-            errors.password = 'Dato obligatorio';
-        }else if(values.password.length < 8){
+        if(!errorRequired('password') && values.password.length < 8){
             errors.password= 'La contraseña debe tener al menos 8 caracteres';
         };
-        if(!values.profilePhoto){
-            errors.profilePhoto = 'Por favor suba un archivo'
+        if(!errorRequired('profilePhoto') && !isValidType('type') ){
+            errors.profilePhoto = 'Tipo de archivo no soportado, extensiones permitidas: jpg o png'
         }
-        
-      
+
         return errors;
     };
 
-    const {values,touched,errors,handleSubmit,handleChange,handleBlur} = useFormik({
+    const {values,touched,errors,handleSubmit,handleChange,handleBlur,setFieldValue} = useFormik({
         initialValues: {
             name: user?.name ?? '',
             password: user?.password ?? '',
             email: user?.email ?? '',
             roleId:user?.roleId ?? '',
-            profilePhoto:user?.profilePhoto ?? ''
+            profilePhoto:user?.profilePhoto ?? {}
         },
         validate,
         enableReinitialize:true,
@@ -77,7 +88,7 @@ const UserModifierForm = ({user}) => {
                         type="file"
                         id="profilePhoto"
                         accept="image/jpeg"
-                        onChange={handleChange}
+                        onChange={e=>setFieldValue('profilePhoto',e?.target?.files ? e.target.files[0] : null)}
                         onBlur={handleBlur}
                     />
                     {touched.profilePhoto && errors.profilePhoto}
