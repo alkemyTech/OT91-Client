@@ -1,23 +1,14 @@
 import { useFormik } from 'formik';
+import { errorRequired, regExp } from '../../Utils/validation';
 import '../FormStyles.css';
-
-const notHasValue = (data, value) => !(data[value] && data[value].length > 0)
-const notValidValue = (regExp, value) => !regExp.test(value)
 
 const validateLogin = formData => {
     const errors = {};
-    const emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const passwordRegExp = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[a-z\d@$!%*#?&]{6,}$/i;
-    const notValidEmail = notHasValue(formData, 'email') || notValidValue(emailRegExp, formData.email);
+    const notValidEmail = !errorRequired(formData, errors, 'email') && !validValue(regExp.email, formData.email);
+    const notValidPassword = !errorRequired(formData, errors, 'password') && !validValue(regExp.password, formData.password);
 
-    if(notValidEmail) errors.email = 'Email is required and should be a valid email';
-
-    if(notHasValue(formData, 'password'))
-        errors.password = 'This field cannot be blank';
-    else if(formData.password.length < 6)
-        errors.password = 'Password must contain at least 6 characters';
-    else if(notValidValue(passwordRegExp, formData.password))
-        errors.password = 'Password must include each of the following character types: letter, number, symbol';
+    if(notValidEmail) errors.email = 'Email inválido';
+    if(notValidPassword) errors.password = 'La contraseña debe tener al menos 6 caracteres e incluir al menos una letra, un número y un símbolo';
 
     return errors;
 }
