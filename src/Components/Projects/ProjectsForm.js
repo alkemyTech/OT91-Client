@@ -3,23 +3,22 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {Formik, Form, Field,ErrorMessage} from 'formik';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import {getDataForm} from './function'
+import {getDataForm,postDataForm,putDataForm} from './function'
 
 export default function ProjectsForm({idProyect}){
+
   var date = new Date();
   date=date.toISOString().split('T')[0];
 
-  const [state, setstate] = useState(undefined)
+  const [imgState,setImg] = useState('');
+  const [state, setstate] = useState('');
 
   useEffect(() => {
-    if(idProyect){
-      let res =getDataForm(idProyect)
-      setstate(res)
-    }
-  }, [idProyect])
+    if(idProyect) setstate(getDataForm(idProyect));
+  }, [idProyect]);
 
     return (
-      <div className='div_form'>
+      <div className='form-container'>
           <Formik
               initialValues={state? {
                 title:state.title,
@@ -35,28 +34,28 @@ export default function ProjectsForm({idProyect}){
               validate={(valores)=>{
                   let errors={}
 
-                  if(!valores.title) errors.title='You need to enter a title'
-                  if(valores.title.length<4) errors.title='The title must have more than 4 letters'
+                  if(!valores.image) errors.image='You need to add a image.';
                   
-                  if(!valores.description) errors.description='You need to add a description'
+                  if(!valores.title) errors.title='You need to enter a title';
+                  if(valores.title.length<4) errors.title='The title must have more than 4 letters.';
                   
-                  if(!valores.image) errors.image='You need to add a image'
-                  
-                  return errors
+                  if(!valores.description) errors.description='You need to add a description.';
+          
+                  return errors;
               }}
               onSubmit={async (values)=>{
                 const stringreplace =/'<p>'|['</p>']/gi;
-                values.description=values.description.replace(stringreplace,'')
-                console.log(values)
+                values.description=values.description.replace(stringreplace,'');
+                idProyect ?  putDataForm( idProyect, values ) :postDataForm(values)
               }}
               
           >
-              {({errors, setFieldValue})=>(
+              {({errors, setFieldValue, values})=>(
                   <Form className='form' >
-                      <div className='form_div'>
+                      <div >
                           <p>Project Title</p>
                           <Field
-                            className="input-title" 
+                            className="input-field" 
                             type="text" 
                             id='title'
                             name="title"
@@ -67,45 +66,51 @@ export default function ProjectsForm({idProyect}){
                       <div>
                         <p>Date</p>
                         <Field
+                          className='input-field'
                           type='date' 
                           min={date}
-                          name='due_date' 
+                          name='up_date' 
                           id='up_date'
                         />
                       </div>
-                      <div className='form_div'>
-                          <p className='form_div_p'>Description</p>
+                      <div >
+                          <p >Description</p>
                           <CKEditor
-                              editor={ ClassicEditor }
-                              data=''
-                              config={ {
-                                  placeholder:"Write some activity description",
-                              } }
-                              onChange={( event, editor )=> {
-                                const data = editor.getData();
-                                setFieldValue("description", data)
-                              } }
+                            className='input-field'
+                            editor={ ClassicEditor }
+                            data=''
+                            config={ {
+                                placeholder:"Write some activity description",
+                            } }
+                            onChange={( event, editor )=> {
+                              const data = editor.getData();
+                              setFieldValue("description", data)
+                            } }
                           />
                         <ErrorMessage name='description' component={()=><p className='form_div_error'>{errors.description}</p>}/> 
                       </div>
-                      <div className='form_div'>
-                          <p className='form_div_p'>Image</p>
-                          <Field
-                              className='input-image'
-                              type='file' 
-                              accept="image/png, image/jpg" 
-                              id='image'                                
-                              name='image' 
-                              value={undefined}
-                              onChange={(e) => {
-                                const imageFile = e.target.files[0];
-                                const imageUrl = new FileReader();
-                                imageUrl.readAsDataURL(imageFile)
-                                imageUrl.onload=(e)=>{
-                                    setFieldValue("image",e.target.result)
-                                };
-                              }}
-                          />  
+                      <div>
+                          <p>Image</p>
+                          <div>
+                            <Field
+                                className='input-field'
+                                type='file' 
+                                accept="image/png, image/jpg" 
+                                id='image'                                
+                                name='image' 
+                                value={undefined}
+                                onChange={(e) => {
+                                  setFieldValue("image",e)
+                                  const imageFile = e.target.files[0];
+                                  const imageUrl = new FileReader();
+                                  imageUrl.readAsDataURL(imageFile)
+                                  imageUrl.onload=(e)=>{
+                                      setImg(e.target?.result)
+                                  };
+                                }}
+                            /> 
+                            {imgState.length>0 && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
+                          </div>
                           <ErrorMessage name='image' component={()=><p className='form_div_error'>{errors.image}</p>}/> 
                       </div>
                       <button className="submit-btn" type="submit">Send</button>
