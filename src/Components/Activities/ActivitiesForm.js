@@ -16,7 +16,7 @@ export default function ActivitiesForm({idActivity}){
   }, [idActivity]);
 
     return (
-      <div className='div_form'>
+      <div className='form-container'>
           <Formik
               initialValues={state? {
                 name:state.name,
@@ -46,12 +46,12 @@ export default function ActivitiesForm({idActivity}){
               }}
               
           >
-              {({errors, setFieldValue,values})=>(
+              {({errors, setFieldValue})=>(
                   <Form className='form' >
-                      <div className='form_div'>
+                      <div>
                           <p>Activity Name</p>
                           <Field
-                            className="input-name" 
+                            className="input-field" 
                             type="text" 
                             id='name'
                             name="name"
@@ -59,9 +59,8 @@ export default function ActivitiesForm({idActivity}){
                           /> 
                           <ErrorMessage name='name' component={()=><p className='form_div_error'>{errors.name}</p>}/>
                       </div>
-
-                      <div className='form_div'>
-                          <p className='form_div_p'>Description</p>
+                      <div>
+                          <p>Description</p>
                           <CKEditor
                               editor={ ClassicEditor }
                               data=''
@@ -75,8 +74,11 @@ export default function ActivitiesForm({idActivity}){
                           />
                         <ErrorMessage name='description' component={()=><p >{errors.description}</p>}/> 
                       </div>
-                      <div className='form_div'>
-                          <p className='form_div_p'>Image</p>
+                      <div >
+                          <p >Image</p>
+                          <div>
+                            {imgState.length>0 && <img src={imgState} alt='imagen vista previa'  width='180' height='180'  />} 
+                          </div>
                           <div>
                             <Field
                                 className='input-image'
@@ -95,7 +97,6 @@ export default function ActivitiesForm({idActivity}){
                                   };
                                 }}
                             /> 
-                            {imgState.length>0 && <img src={imgState} alt='imagen vista previa'  width='180' height='180'  />} 
                           </div> 
                           <ErrorMessage name='image' component={()=><p className='form_div_error'>{errors.image}</p>}/> 
                       </div>
