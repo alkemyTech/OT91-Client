@@ -4,11 +4,9 @@ import { ErrorsForm } from '../common/messagesForm';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { validateFormTestimonials, replaceCKeditor } from '../common/validateFormTestimonials';
 import {getTestimonial,createTestimonial,modifiedTestimonial} from '../../Services/testimonialService';
-
-
 const TestimonialForm = ({testimonialId}) => {
-
 
   const [imgState,setImgState] = useState();
   const [dataForm, setDataForm] = useState({
@@ -29,29 +27,17 @@ const TestimonialForm = ({testimonialId}) => {
     UrlInput(e, setImgState,setFieldValue);
   };
 
-
+  const placeholder = "Write some testimonial description";
   return (
     <div className='form-container'>
       <Formik
         initialValues={{
           ...dataForm
         }}
-        validate={(values)=>{
-            let errors={}
-
-            if(!values.image) errors.image='You need to add a image';
-
-            if(!values.name) errors.name='You need to enter a name';
-            if(values.name.length<4) errors.name='The name must have more than 4 letters';
-            
-            if(!values.description) errors.description='You need to add a description';
-            
-            return errors
-        }}
+        validate={(values)=>validateFormTestimonials(values)}
         onSubmit={(values)=>{
-          values.description=values.description.replace(/'<p>'|['</p>']/gi,'');
-          values.image= imgState
-          testimonialId ?   modifiedTestimonial( testimonialId, values ) : createTestimonial(values)
+          let valuesForm=replaceCKeditor(values)
+          testimonialId ?   modifiedTestimonial( testimonialId, valuesForm ) : createTestimonial(valuesForm)
         }}
       >
         {({errors, setFieldValue,values})=>(
@@ -73,7 +59,7 @@ const TestimonialForm = ({testimonialId}) => {
                   editor={ ClassicEditor }
                   data=''
                   config={ {
-                      placeholder:"Write some testimonial description",
+                     placeholder
                   } }
                   onChange={(event, editor)=>handleChaneCkEditor(editor,setFieldValue)}
               />
