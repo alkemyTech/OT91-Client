@@ -1,5 +1,5 @@
 import React from 'react'
-import './NewsletterForm.css';
+import '../../Styles/NewsletterForm.css'
 function NewsletterForm() {
     return (    
             <form  onSubmit={localStorage.setItem("tokenNL","settokenNL")} className="FormNL">
