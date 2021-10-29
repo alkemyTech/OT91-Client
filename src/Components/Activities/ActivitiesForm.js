@@ -4,11 +4,9 @@ import { ErrorsForm } from '../common/messagesForm';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { validateForm, replaceCKeditor } from '../common/validateForm';
 import {getActivity,createActivity,modifiedActivity} from '../../Services/activityService';
-
-
 const ActivitiesForm = ({activityId}) => {
-
 
   const [imgState,setImgState] = useState();
   const [dataForm, setDataForm] = useState({
@@ -29,28 +27,16 @@ const ActivitiesForm = ({activityId}) => {
     UrlInput(e, setImgState,setFieldValue);
   };
 
-
   return (
     <div className='form-container'>
       <Formik
         initialValues={{
           ...dataForm
         }}
-        validate={(values)=>{
-            let errors={}
-
-            if(!values.image) errors.image='You need to add a image';
-
-            if(!values.name) errors.name='You need to enter a name';
-            if(values.name.length<4) errors.name='The name must have more than 4 letters';
-            
-            if(!values.description) errors.description='You need to add a description';
-            
-            return errors
-        }}
+        validate={(values)=>validateForm(values)}
         onSubmit={(values)=>{
-          values.description=values.description.replace(/'<p>'|['</p>']/gi,'');
-          activityId ?   modifiedActivity( activityId, values ) : createActivity(values)
+          const dataForm= replaceCKeditor(values)
+          activityId ?   modifiedActivity( activityId, dataForm) : createActivity(dataForm)
         }}
       >
         {({errors, setFieldValue})=>(
