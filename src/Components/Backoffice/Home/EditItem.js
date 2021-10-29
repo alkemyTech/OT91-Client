@@ -5,11 +5,9 @@ function EditItem(props) {
   const { item, slidesIds, setSlidesIds } = props;
 
   const handleSelectImage = () => {
-    if (slidesIds.length < 3) {
-      setSlidesIds([...slidesIds, item.id]);
-    } else {
-      alert("You already chose the 3 images");
-    }
+    slidesIds.length < 3
+      ? setSlidesIds([...slidesIds, item.id])
+      : alert("You already chose 3 images");
   };
 
   return (
