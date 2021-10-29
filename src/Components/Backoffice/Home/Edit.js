@@ -25,7 +25,7 @@ function Edit(props) {
 
   const formik = useFormik({
     initialValues: {
-      homeWelcomeTitle: "Hola"/* homeWelcomeTitle */,
+      homeWelcomeTitle: homeWelcomeTitle,
     },
 
     validate: (values) => {
@@ -37,8 +37,6 @@ function Edit(props) {
     },
 
     onSubmit: (values, { resetForm }) => {
-      /*       console.log(values);
-      console.log(slidesIds); */
       resetForm({ values: "" });
       let greetingsText = JSON.stringify(values, null, 4);
       alert(greetingsText + " Image Ids Selected: " + slidesIds);
@@ -47,7 +45,7 @@ function Edit(props) {
 
   return (
     <>
-      <h1>Home Edit Page</h1>
+      <h1>Página de Edición de Home</h1>
       <form onSubmit={formik.handleSubmit} className="Form">
         <div>
           <Button type="submit" variant="contained">
@@ -55,7 +53,7 @@ function Edit(props) {
           </Button>
         </div>
         <br />
-        <label htmlFor="homeWelcomeTitle">Home Welcome Title: </label>
+        <label htmlFor="homeWelcomeTitle">Título de bienvenida: </label>
         <input
           id="homeWelcomeTitle"
           name="homeWelcomeTitle"
