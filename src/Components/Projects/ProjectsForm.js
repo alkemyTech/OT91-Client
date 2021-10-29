@@ -27,8 +27,7 @@ const ProjectsForm = ({projectId}) => {
   };
 
   const handleChangeinputFile = (e, setFieldValue) =>{ 
-    setFieldValue("image",e);
-    UrlInput(e, setImgState);
+    UrlInput(e, setImgState, setFieldValue);
   };
 
     return (
