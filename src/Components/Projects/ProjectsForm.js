@@ -4,8 +4,8 @@ import { ErrorsForm } from '../common/messagesForm';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { validateForm, replaceCKeditor } from '../common/validateForm';
 import {getProject,createProject,modifiedProject} from '../../Services/projectService';
-
 const ProjectsForm = ({projectId}) => {
 
   var minDateForm = new Date().toISOString().split('T')[0];
@@ -30,31 +30,19 @@ const ProjectsForm = ({projectId}) => {
     UrlInput(e, setImgState, setFieldValue);
   };
 
+  const placeholder="Write some activity description";
+
     return (
       <div className='form-container'>
         <Formik
           initialValues={{
               ...dataForm
           }}
-          validate={(values)=>{
-              let errors={}
-
-              if(!values.image) errors.image='You need to add a image.';
-              
-              if(!values.title) errors.title='You need to enter a title';
-              if(values.title.length<4) errors.title='The title must have more than 4 letters.';
-              
-              if(!values.description) errors.description='You need to add a description.';
-      
-              return errors;
-          }}
+          validate={(values)=>validateForm(values)}
           onSubmit={async (values)=>{
-
-            values.description=values.description.replace(/'<p>'|['</p>']/gi,'');
-            projectId ?  modifiedProject( projectId, values ) : createProject(values);
-
+            const dataForm =replaceCKeditor(values)
+            projectId ?  modifiedProject( projectId, dataForm ) : createProject(dataForm);
           }}
-            
         >
           {({errors, setFieldValue})=>(
             <Form className='form' >
@@ -86,7 +74,7 @@ const ProjectsForm = ({projectId}) => {
                     editor={ ClassicEditor }
                     data=''
                     config={ {
-                        placeholder:"Write some activity description",
+                       placeholder
                     } }
                     onChange={(event, editor)=>handleChaneCkEditor(editor,setFieldValue)}
                   />
