@@ -1,18 +1,19 @@
 import React from 'react';
 import '../FormStyles.css';
 import { useFormik } from 'formik';
-import axios from 'axios';
+import { createUser, updateUser } from '../../Services/userServices';
+import { rolesList } from '../utilsData/roleList';
 
 const UserModifierForm = ({user}) => {
 
-    const hasUser = !!user;
+    const hasUser = () => user ? true : false;
 
     const handleOnSubmit =  async (values) => {
         try{
             if(hasUser){
-                await axios.put(`http://ongapi.alkemy.org/api/users/${user.id}`,values)
+                updateUser(user.id,values);
             }else{
-               await axios.post('http://ongapi.alkemy.org/api/users',values);
+               createUser(values);
             }
         }catch(error) {
         }
@@ -21,29 +22,28 @@ const UserModifierForm = ({user}) => {
     const validate = (values) => {
         const errors = {};
 
-        const errorRequired = (key) => {
-            if(!values[key]){
-                errors[key] = 'Dato Obligatorio'
-                return true
-            }
-            return false
-        };
+        const dataRequired = 'Dato obligatorio';
 
-        const isValidType= key => {
-            if (values.profilePhoto[key] === null){
-                return 'Dato Obligatorio'
-            }else if(values.profilePhoto[key] === "image/jpeg" || values.profilePhoto[key] === "image/png"){
-                return true
-            }
-            return false
+        const isNotValidField = (key) => {
+            if(values[key]) return false;
+            errors[key] = dataRequired;
+            return true;
+        };
+        const isJPEG = (imageType) => imageType === "image/jpeg";
+        const isPNG = (imageType) => imageType === "image/png";  
+
+        const isValidImageType= key => {
+            const profilePhoto = values.profilePhoto[key];
+            if (values.profilePhoto[key] === null) return dataRequired;
+            return isJPEG(profilePhoto) || isPNG(profilePhoto);
         }
         const isEmailValid = email => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
 
-        if (!errorRequired('name') && values.name.length < 4) {
+        if (!isNotValidField('name') && values.name.length < 4) {
           errors.name = 'Debe tener 4 caracteres o mas';
         };
       
-        if (!errorRequired('email') && !isEmailValid(values.email)) {
+        if (!isNotValidField('email') && !isEmailValid(values.email)) {
           errors.email = 'Dirección de email inválida';
         };
 
@@ -51,10 +51,10 @@ const UserModifierForm = ({user}) => {
             errors.roleId = 'Elija un Rol'
         };
 
-        if(!errorRequired('password') && values.password.length < 8){
+        if(!isNotValidField('password') && values.password.length < 8){
             errors.password= 'La contraseña debe tener al menos 8 caracteres';
         };
-        if(!errorRequired('profilePhoto') && !isValidType('type') ){
+        if(!isNotValidField('profilePhoto') && !isValidImageType('type') ){
             errors.profilePhoto = 'Tipo de archivo no soportado, extensiones permitidas: jpg o png'
         }
 
@@ -71,14 +71,12 @@ const UserModifierForm = ({user}) => {
         },
         validate,
         enableReinitialize:true,
-        onSubmit: values => {
-            handleOnSubmit(values)
-        },
+        onSubmit: values => handleOnSubmit(values)
     });
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            {hasUser              
+            {!hasUser              
                 ?<div>
                     <img alt="profilePhoto" src={values.profilePhoto}></img>
                 </div>
@@ -131,10 +129,13 @@ const UserModifierForm = ({user}) => {
                 onChange={handleChange}
             >
                 <option value="" disabled >Seleccione el rol</option>
-                <option value="Administrador">Administrador</option>
-                <option value="Regular">Regular</option>
+                {
+                    rolesList.map(role => {
+                        return <option key={role.roleId} value={role.roleId}>{role.roleId}</option>
+                    })
+                }
             </select>
-            <button className="submit-btn" type="submit">{hasUser ? 'Modificar' : 'Crear'}</button>
+            <button className="submit-btn" type="submit">{!hasUser ? 'Modificar' : 'Crear'}</button>
         </form>
     );
 }
