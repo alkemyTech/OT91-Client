@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import Button from "@material-ui/core/Button/Button";
 import EditItem from "./EditItem";
 
-function Edit(props) {
+const Edit = (props) => {
   const { homeWelcomeTitle } = props;
   const [slides, setSlides] = useState([]);
   const [slidesIds, setSlidesIds] = useState([]);
