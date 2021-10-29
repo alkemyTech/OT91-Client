@@ -6,7 +6,7 @@ const regExp = {
 const validValue = (regExp, value) => !regExp.test(value);
 const notHasValue = (values, key) => !values[key];
 
-const errorRequired = (values,errors,key) => {
+const hasRequiredError = (values,errors,key) => {
     if(notHasValue(values, key)){
         errors[key] = 'Dato Obligatorio';
         return true;
@@ -15,4 +15,4 @@ const errorRequired = (values,errors,key) => {
 };
 
 
-export {regExp, validValue, errorRequired, notHasValue};
+export {regExp, validValue, hasRequiredError, notHasValue};
