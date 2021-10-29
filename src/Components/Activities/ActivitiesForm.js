@@ -26,8 +26,7 @@ const ActivitiesForm = ({activityId}) => {
   };
 
   const handleChangeinputFile = (e, setFieldValue) =>{ 
-    setFieldValue("image",e);
-    UrlInput(e, setImgState);
+    UrlInput(e, setImgState,setFieldValue);
   };
 
 
