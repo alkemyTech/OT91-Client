@@ -1,11 +1,12 @@
 
-export const UrlInput = (e,setUrl) =>{
+export const UrlInput = (e,setUrl,setFieldValue) =>{
 
   const imageFile = e.target.files[0];
   const imageUrl = new FileReader();
   imageUrl.readAsDataURL(imageFile)
   imageUrl.onload=(e)=>{
-    setUrl(e.target?.result)
+    setFieldValue("image",e.target.result)
+    setUrl(e.target.result)
   }
 
 }
