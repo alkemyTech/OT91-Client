@@ -29,7 +29,9 @@ const SlidesForm = ({slides}) => {
     })
       .then((res) => {
         if (initialValues.name.length>4) {
-          return console.log(res);
+          Swal.fire(
+            'Slide Creado!'
+          )
         } else {
           Swal.fire({
             title: 'Error!',
@@ -39,7 +41,7 @@ const SlidesForm = ({slides}) => {
           })
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => (err));
     } else { axios({
       method: "PUT",
       url: `http://ongapi.alkemy.org/api/slides/${slides.id}`,
