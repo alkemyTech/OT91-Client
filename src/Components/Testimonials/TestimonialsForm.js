@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { validateTestimonials, setCKEditorText } from '../common/validateTestimonials';
-import {dispatchRequestcreateOrUpdateTestimonial} from '../../Services/testimonialService';
 import {getTestimonial} from '../../Services/testimonialService';
+import { CustomErrorMessage } from '../common/CustomErrorMessage';
+import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
+import { validateTestimonials} from '../common/validations/validateFormTestimonials';
+import {dispatchRequestcreateOrUpdateTestimonial} from '../../Services/testimonialService'
 const TestimonialForm = ({testimonialId}) => {
 
   const [testimonial, setTestimonial] = useState({
