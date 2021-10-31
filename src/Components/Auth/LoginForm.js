@@ -20,7 +20,7 @@ const LoginForm = () => {
             password: ''
         },
         validate: validateLogin,
-        onSubmit: formData => { }
+        onSubmit: credentials => { }
     })
 
     return (
