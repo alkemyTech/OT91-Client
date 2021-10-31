@@ -7,14 +7,16 @@ export const getTestimonial = async (id) => {
     return data;
 };
 
-export const modifiedTestimonial = async (id,body) => {
+export const modifyTestimonial = async (id,body) => {
     let {data}= await axios.put(`${URL}/testimonials/${id}`,body);
     return data;
 };
 
 export const createTestimonial = async (body) => {
-    console.log(body)
     let {data}= await axios.post(`${URL}/testimonials`,body);
-    console.log(data)
     return data;
+};
+
+export const dispatchRequestcreateOrUpdateTestimonial = (testimonialId,body)=>{
+    testimonialId ? modifyTestimonial(testimonialId,body) : createTestimonial(body)
 };
