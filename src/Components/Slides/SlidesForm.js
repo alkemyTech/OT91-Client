@@ -28,5 +28,5 @@ const SlidesForm = () => {
         </form>
     );
 }
-
+ 
 export default SlidesForm;

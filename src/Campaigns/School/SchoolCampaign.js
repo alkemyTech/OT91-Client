@@ -14,5 +14,5 @@ const SchoolCampaign = () => {
     </>
   );
 }
-
+ 
 export default SchoolCampaign;
