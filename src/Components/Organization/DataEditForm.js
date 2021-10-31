@@ -1,20 +1,76 @@
-import { ShowFormControl } from './ShowFormControl';
-import { ShowFileInput } from './ShowFileInput';
-import { useState } from 'react';
+import { ShowTextInput } from '../Inputs/ShowTextInput';
+import { ShowFileInput } from '../Inputs/ShowFileInput';
+import { ShowCKEditorInput } from '../Inputs/ShowCKEditorInput';
+import { validateRequiredValues, regExp, isValidValue, isValidFile} from '../../Utils/validation';
+import { showError, handleCKEditorChange, handleCKEditorBlur, handleFileChange } from '../../Utils/handlers';
+import { useFormik } from 'formik';
 import '../FormStyles.css';
-import { ShowCKEditorInput } from './ShowCKEditorInput';
+
+const validateOrganizationForm = values => {
+    const errors = {};
+    const {facebook, instagram, ...requiredValues} = values;
+    const acceptTypes = ['image/png', 'image/jpg'];
+    const notValidUrlFacebook = !isValidValue(regExp.url, facebook);
+    const notValidUrlInstagram = !isValidValue(regExp.url, instagram);
+    const notValidImage = !isValidFile(acceptTypes, values.logo);
+
+    validateRequiredValues(values, errors, requiredValues);
+    if(notValidImage) errors.logo = 'Solo se aceptan formatos .png y .jpg'
+    if(notValidUrlFacebook) errors.facebook = 'Debe ser una url válida';
+    if(notValidUrlInstagram) errors.instagram = 'Debe ser una url válida';
+
+    return errors;
+}
 
 const DataEditForm = () => {
-    const [value, setValue] = useState('');
+    const initialValues = {
+        organizationName: '',
+        shortDescription: '',
+        logo: '',
+        longDescription: '',
+        facebook: '',
+        instagram: ''
+    };
+
+    const formik = useFormik({
+        initialValues: initialValues,
+        validate: validateOrganizationForm,
+        onSubmit: values => {}
+    });
 
     return (
-        <form className="form-container">
-            <ShowFormControl name="name" label="Organization name" type="text" value="" placeholder="Ingrese el nombre de la organización"/>
-            <ShowCKEditorInput label="Short description"/>
-            <ShowFileInput btnText="Subir logo" name="logo" value={value} onChange={(e) => setValue(e.target.files[0])} color="primary" accept=".png, .jpg"/>
-            <ShowFormControl name="longDescription" label="Descripcion larga" type="text" value="" placeholder="Escriba la descripción larga" />
-            <ShowFormControl name="facebook" label="Facebook" type="text" value="" placeholder="Ingrese la url"/>
-            <ShowFormControl name="instagram" label="Instagram" type="text" value="" placeholder="Ingrese la url"/>
+        <form className="form-container" onSubmit={formik.handleSubmit}>
+            <ShowTextInput name="organizationName" label="Nombre" type="text" placeholder="Ingrese el nombre de la organización"
+                value={formik.values.organizationName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                errorMessage={showError(formik, 'organizationName')}/>
+            <ShowCKEditorInput
+                name="shortDescription" label="Descripción corta"
+                value={formik.values.shortDescription}
+                onChange={(e, editor) => handleCKEditorChange(formik, editor, 'shortDescription')}
+                onBlur={() => handleCKEditorBlur(formik, 'shortDescription')}
+                errorMessage={showError(formik, 'shortDescription')}/>
+            <ShowFileInput btnText="Subir logo" name="logo" color="primary" accept="image/png, image/jpg"
+                value={formik.values.logo}
+                onChange={(e) => handleFileChange(formik, e.target.files, 'logo')}
+                onBlur={formik.handleBlur}
+                errorMessage={showError(formik, 'logo')}/>
+            <ShowTextInput name="longDescription" label="Descripcion larga" type="text"
+                value={formik.values.longDescription}
+                onChange={formik.handleChange} placeholder="Escriba la descripción larga"
+                onBlur={formik.handleBlur}
+                errorMessage={showError(formik, 'longDescription')}/>
+            <ShowTextInput name="facebook" label="Facebook" type="text"
+                value={formik.values.facebook}
+                onChange={formik.handleChange} placeholder="Ingrese la url"
+                onBlur={formik.handleBlur}
+                errorMessage={showError(formik, 'facebook')}/>
+            <ShowTextInput name="instagram" label="Instagram" type="text"
+                value={formik.values.instagram}
+                onChange={formik.handleChange} placeholder="Ingrese la url"
+                onBlur={formik.handleBlur}
+                errorMessage={showError(formik, 'instagram')}/>
             <button className="submit-btn" type="submit">Guardar cambios</button>
         </form>
     )
