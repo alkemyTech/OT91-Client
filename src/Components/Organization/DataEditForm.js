@@ -1,8 +1,8 @@
 import { ShowTextInput } from '../Inputs/ShowTextInput';
 import { ShowFileInput } from '../Inputs/ShowFileInput';
 import { ShowCKEditorInput } from '../Inputs/ShowCKEditorInput';
-import { validateRequiredValues, regExp, isValidValue, isValidFile} from '../../Utils/validation';
-import { showError, handleCKEditorChange, handleCKEditorBlur, handleFileChange } from '../../Utils/handlers';
+import { validateRequiredValues, regExp, isValidValue, isValidFile } from '../../Utils/validation';
+import { showError, handleCKEditorChange, changeTouchedState, handleFileChange } from '../../Utils/handlers';
 import { useFormik } from 'formik';
 import '../FormStyles.css';
 
@@ -49,12 +49,11 @@ const DataEditForm = () => {
                 name="shortDescription" label="Descripción corta"
                 value={formik.values.shortDescription}
                 onChange={(e, editor) => handleCKEditorChange(formik, editor, 'shortDescription')}
-                onBlur={() => handleCKEditorBlur(formik, 'shortDescription')}
+                onBlur={() => changeTouchedState(formik, 'shortDescription')}
                 errorMessage={showError(formik, 'shortDescription')}/>
             <ShowFileInput btnText="Subir logo" name="logo" color="primary" accept="image/png, image/jpg"
                 value={formik.values.logo}
                 onChange={(e) => handleFileChange(formik, e.target.files, 'logo')}
-                onBlur={formik.handleBlur}
                 errorMessage={showError(formik, 'logo')}/>
             <ShowTextInput name="longDescription" label="Descripcion larga" type="text"
                 value={formik.values.longDescription}
