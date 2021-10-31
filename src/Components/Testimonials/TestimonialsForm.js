@@ -1,44 +1,46 @@
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { ErrorsForm } from '../common/messagesForm';
+import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { validateFormTestimonials, replaceCKeditor } from '../common/validateFormTestimonials';
-import {getTestimonial,createTestimonial,modifiedTestimonial} from '../../Services/testimonialService';
+import { validateTestimonials, setCKEditorText } from '../common/validateTestimonials';
+import {dispatchRequestcreateOrUpdateTestimonial} from '../../Services/testimonialService';
+import {getTestimonial} from '../../Services/testimonialService';
 const TestimonialForm = ({testimonialId}) => {
 
-  const [imgState,setImgState] = useState();
-  const [dataForm, setDataForm] = useState({
+  const [testimonial, setTestimonial] = useState({
     name:'',
     description:'',
     image: ''
   });
 
   useEffect(() => {
-    if(testimonialId) setDataForm(getTestimonial(testimonialId));
+    if(testimonialId) setTestimonial(getTestimonial(testimonialId));
   }, [testimonialId]);
 
-  const handleChaneCkEditor = (editor, setFieldValue) => {
+  const handleChangeDescription = (editor, setFieldValue) => {
     setFieldValue("description", editor.getData())
   };
 
-  const handleChangeinputFile = (e, setFieldValue) =>{ 
-    UrlInput(e, setImgState,setFieldValue);
+  const handleChangeImage = (e, setFieldValue) =>{ 
+    UrlInput(e,setFieldValue);
   };
+
+  const handleSubmit = (values) => {
+    let updatedValues =setCKEditorText(values,'description')
+    dispatchRequestcreateOrUpdateTestimonial(testimonialId,updatedValues)
+  }
 
   const placeholder = "Write some testimonial description";
   return (
     <div className='form-container'>
       <Formik
         initialValues={{
-          ...dataForm
+          ...testimonial
         }}
-        validate={(values)=>validateFormTestimonials(values)}
-        onSubmit={(values)=>{
-          let valuesForm=replaceCKeditor(values)
-          testimonialId ?   modifiedTestimonial( testimonialId, valuesForm ) : createTestimonial(valuesForm)
-        }}
+        validate={(values)=>validateTestimonials(values)}
+        onSubmit={(values)=>handleSubmit(values)}
       >
         {({errors, setFieldValue,values})=>(
           <Form className='form' >
@@ -51,7 +53,7 @@ const TestimonialForm = ({testimonialId}) => {
                 name="name"
                 placeholder="Testimonial Name" 
               /> 
-              {errors.name && ErrorsForm ('title',errors.name)}
+              {errors.name && CustomErrorMessage ('title',errors.name)}
             </div>
             <div>
               <p>Description</p>
@@ -61,14 +63,14 @@ const TestimonialForm = ({testimonialId}) => {
                   config={ {
                      placeholder
                   } }
-                  onChange={(event, editor)=>handleChaneCkEditor(editor,setFieldValue)}
+                  onChange={(event, description)=>handleChangeDescription (description,setFieldValue)}
               />
-              {errors.description && ErrorsForm ('description',errors.description)}
+              {errors.description && CustomErrorMessage ('description',errors.description)}
             </div>
             <div >
               <p >Image</p>
               <div>
-                {imgState && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
+                {testimonial.image && <img src={testimonial.image} alt='imagen vista previa' width='180' height='180' />} 
               </div>
               <div>
                 <Field
@@ -79,11 +81,11 @@ const TestimonialForm = ({testimonialId}) => {
                     name='image' 
                     value=''
                     onChange={(e)=>{ 
-                        handleChangeinputFile(e,setFieldValue)
+                        handleChangeImage(e,setFieldValue)
                     }}
                 /> 
               </div> 
-              {errors.image && ErrorsForm ('image',errors.image)}
+              {errors.image && CustomErrorMessage ('image',errors.image)}
             </div>
             <button className="submit-btn" type="submit">Send</button>
           </Form> 
