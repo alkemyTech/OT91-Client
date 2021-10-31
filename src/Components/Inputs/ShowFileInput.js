@@ -1,5 +1,5 @@
 import { Button, InputLabel, FormHelperText} from '@material-ui/core';
-import { isUploadedFile } from '../../Utils/validation';
+import { isFile } from '../../Utils/validation';
 import '../../Styles/inputs.css';
 
 const ShowFileInput = (props) => {
@@ -12,7 +12,7 @@ const ShowFileInput = (props) => {
                     {btnText}
                 </Button>
             </label>
-            {isUploadedFile(value) && <InputLabel className='show-file-input__file-name'>Archivo subido: {value.name}</InputLabel>}
+            {isFile(value) && <InputLabel className='show-file-input__file-name'>Archivo subido: {value.name}</InputLabel>}
             {errorMessage && <FormHelperText error>{errorMessage}</FormHelperText>}
         </div>
     )
