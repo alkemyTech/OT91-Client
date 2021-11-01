@@ -17,6 +17,6 @@ export const createTestimonial = async (body) => {
     return data;
 };
 
-export const dispatchRequestcreateOrUpdateTestimonial = (testimonialId,body)=>{
+export const createOrUpdateTestimonial = (testimonialId,body)=>{
     testimonialId ? modifyTestimonial(testimonialId,body) : createTestimonial(body)
 };
