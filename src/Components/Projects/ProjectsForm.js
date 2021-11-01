@@ -1,15 +1,16 @@
+
+import { useParams } from 'react-router';
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { setUrlImage } from '../common/file';
+import { setUrlImage } from '../common/File';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {getProject} from '../../Services/projectsService';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
-import {createOrUpdateProject} from '../../Services/projectService';
+import {getProject, createOrUpdateProject} from '../../Services/projectService';
 import { validateProjectsForm} from '../common/validations/validateProjectsForm';
-const ProjectsForm = ({projectId}) => {
-
+const ProjectsForm = () => {
+  const {projectId} = useParams()
   var minDateForm = new Date().toISOString().split('T')[0];
 
   const [project, setProject] = useState({
