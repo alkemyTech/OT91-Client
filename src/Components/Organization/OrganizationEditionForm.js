@@ -1,6 +1,6 @@
-import { ShowTextInput } from '../Inputs/ShowTextInput';
-import { ShowFileInput } from '../Inputs/ShowFileInput';
-import { ShowCKEditorInput } from '../Inputs/ShowCKEditorInput';
+import { TextInput } from '../Inputs/TextInput';
+import { FileInput } from '../Inputs/FileInput';
+import { TextEditor } from '../Inputs/TextEditor';
 import { validateRequiredValues, regExp, validValue, isValidFile} from '../../Utils/validation';
 import { showError, handleCKEditorChange, changeTouchedState, handleFileChange } from '../../Utils/handlers';
 import { useFormik } from 'formik';
@@ -22,7 +22,7 @@ const validateOrganizationForm = values => {
     return errors;
 }
 
-const DataEditForm = () => {
+const OrganizationEditionForm = () => {
     const initialValues = {
         organizationName: '',
         shortDescription: '',
@@ -40,32 +40,32 @@ const DataEditForm = () => {
 
     return (
         <form className="form-container" onSubmit={formik.handleSubmit}>
-            <ShowTextInput name="organizationName" label="Nombre" type="text" placeholder="Ingrese el nombre de la organización"
+            <TextInput name="organizationName" label="Nombre" type="text" placeholder="Ingrese el nombre de la organización"
                 value={formik.values.organizationName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 errorMessage={showError(formik, 'organizationName')}/>
-            <ShowCKEditorInput
+            <TextEditor
                 name="shortDescription" label="Descripción corta"
                 value={formik.values.shortDescription}
                 onChange={(e, editor) => handleCKEditorChange(formik, editor, 'shortDescription')}
                 onBlur={() => changeTouchedState(formik, 'shortDescription')}
                 errorMessage={showError(formik, 'shortDescription')}/>
-            <ShowFileInput btnText="Subir logo" name="logo" color="primary" accept="image/png, image/jpg"
+            <FileInput btnText="Subir logo" name="logo" color="primary" accept="image/png, image/jpg"
                 value={formik.values.logo}
                 onChange={(e) => handleFileChange(formik, e.target.files, 'logo')}
                 errorMessage={showError(formik, 'logo')}/>
-            <ShowTextInput name="longDescription" label="Descripcion larga" type="text"
+            <TextInput name="longDescription" label="Descripcion larga" type="text"
                 value={formik.values.longDescription}
                 onChange={formik.handleChange} placeholder="Escriba la descripción larga"
                 onBlur={formik.handleBlur}
                 errorMessage={showError(formik, 'longDescription')}/>
-            <ShowTextInput name="facebook" label="Facebook" type="text"
+            <TextInput name="facebook" label="Facebook" type="text"
                 value={formik.values.facebook}
                 onChange={formik.handleChange} placeholder="Ingrese la url"
                 onBlur={formik.handleBlur}
                 errorMessage={showError(formik, 'facebook')}/>
-            <ShowTextInput name="instagram" label="Instagram" type="text"
+            <TextInput name="instagram" label="Instagram" type="text"
                 value={formik.values.instagram}
                 onChange={formik.handleChange} placeholder="Ingrese la url"
                 onBlur={formik.handleBlur}
@@ -75,4 +75,4 @@ const DataEditForm = () => {
     )
 }
 
-export default DataEditForm;
+export default OrganizationEditionForm;

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
 import '../../Styles/inputs.css';
 
-const ShowTextInput = ({name, label, type, placeholder, value, errorMessage, className, ...inputEvents}) => {
+const TextInput = ({name, label, type, placeholder, value, errorMessage, className, ...inputEvents}) => {
     return (
         <FormControl className={className}>
             <InputLabel htmlFor={name}>{label}</InputLabel>
@@ -11,4 +11,4 @@ const ShowTextInput = ({name, label, type, placeholder, value, errorMessage, cla
     )
 }
 
-export { ShowTextInput };
+export { TextInput };
