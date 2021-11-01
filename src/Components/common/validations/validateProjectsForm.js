@@ -5,7 +5,7 @@ export const validateProjectsForm = (values) => {
     if(!values.image) errors.image='You need to add a image';
 
     if(!values.title) errors.title='You need to enter a name';
-    if(isSmallerTha(values.name,4)) errors.name='The name must have more than 4 letters';
+    if(isSmallerTha(values.title,4)) errors.title='The name must have more than 4 letters';
     
     if(!values.description) errors.description='You need to add a description';
     
