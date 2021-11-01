@@ -1,8 +1,7 @@
 export const isSmallerTha = (list, maxSize) => list.length < maxSize;
 
-export const validateTestimonials = (values) => {
+export const validateTestimonialsForm = (values) => {
     let errors={}
-
     if(!values.image) errors.image='You need to add a image';
 
     if(!values.name) errors.name='You need to enter a name';
