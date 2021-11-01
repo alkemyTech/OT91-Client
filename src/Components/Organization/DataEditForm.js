@@ -1,7 +1,7 @@
 import { ShowTextInput } from '../Inputs/ShowTextInput';
 import { ShowFileInput } from '../Inputs/ShowFileInput';
 import { ShowCKEditorInput } from '../Inputs/ShowCKEditorInput';
-import { validateRequiredValues, regExp, isValidValue, isValidFile, notHasValue } from '../../Utils/validation';
+import { validateRequiredValues, regExp, validValue, isValidFile} from '../../Utils/validation';
 import { showError, handleCKEditorChange, changeTouchedState, handleFileChange } from '../../Utils/handlers';
 import { useFormik } from 'formik';
 import '../FormStyles.css';
@@ -10,8 +10,8 @@ const validateOrganizationForm = values => {
     const errors = {};
     const {facebook, instagram, ...requiredValues} = values;
     const acceptTypes = ['image/png', 'image/jpg'];
-    const notValidUrlFacebook = facebook.length > 0 && !isValidValue(regExp.url, facebook);
-    const notValidUrlInstagram = instagram.length > 0 && !isValidValue(regExp.url, instagram);
+    const notValidUrlFacebook = facebook.length > 0 && !validValue(regExp.url, facebook);
+    const notValidUrlInstagram = instagram.length > 0 && !validValue(regExp.url, instagram);
     const notValidImage = !isValidFile(acceptTypes, values.logo);
 
     validateRequiredValues(values, errors, requiredValues);
