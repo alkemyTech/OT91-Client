@@ -7,7 +7,7 @@ export const getActivity = async (id) => {
     return data;
 };
 
-export const modifiedActivity = async (id,body) => {
+export const modifyActivity = async (id,body) => {
     let {data}= await axios.put(`${URL}/activities/${id}`,body);
     return data;
 };
@@ -15,4 +15,8 @@ export const modifiedActivity = async (id,body) => {
 export const createActivity = async (body) => {
     let {data}= await axios.post(`${URL}/activities/`,body);
     return data;
+};
+
+export const createOrUpdateActivity = (activityId,body)=>{
+    activityId ? modifyActivity(activityId,body) : createActivity(body)
 };
