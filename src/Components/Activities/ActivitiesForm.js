@@ -5,8 +5,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
-import { validateActivitiesForm} from '../common/validations/validateFormActivities';
-import {createOrUpdateTestimonial, getTestimonial} from '../../Services/ActivityService';
+import { validateActivitiesForm} from '../common/validations/validateActivitiesForm';
+import {createOrUpdateActivity, getActivity} from '../../Services/activityService';
 const ActivitiesForm = ({activityId}) => {
 
   const [activity, setActivity] = useState({
@@ -17,7 +17,7 @@ const ActivitiesForm = ({activityId}) => {
 
 
   useEffect(() => {
-    if(activityId) setActivity(getTestimonial(activityId));
+    if(activityId) setActivity(getActivity(activityId));
   }, [activityId]);
 
   const handleChangeDescription = (description, setFieldValue) => {
@@ -30,7 +30,7 @@ const ActivitiesForm = ({activityId}) => {
 
   const handleSubmit = (values,resetForm) => {
     let updatedValues =setCKEditorText(values,'description')
-    createOrUpdateTestimonial(activityId,updatedValues)
+    createOrUpdateActivity(activityId,updatedValues)
     resetForm();
   }
 
