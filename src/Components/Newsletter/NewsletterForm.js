@@ -1,8 +1,12 @@
 import React from 'react'
 import '../../Styles/NewsletterForm.css'
-function NewsletterForm() {
+
+const SetTokenNewsLetter = () =>{
+    localStorage.setItem("tokenNL","settokenNL")
+}
+    function NewsletterForm() {
     return (    
-            <form  onSubmit={localStorage.setItem("tokenNL","settokenNL")} className="FormNL">
+            <form  onSubmit={SetTokenNewsLetter} className="GreyRoundedContainerForm">
                 <h4>Subscribite a nuestras actualizaciones!</h4>
                 <input
                 type="email"
@@ -10,7 +14,7 @@ function NewsletterForm() {
                 className="InputEmailNL"
                 placeholder="Email"
                 ></input>
-                <button className="ButonNL">Enviar</button>
+                <button className="StandardButton">Enviar</button>
                 <p>No te preocupes, no te enviaremos spam</p>
             </form>
     )

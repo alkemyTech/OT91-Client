@@ -1,24 +1,24 @@
-.FormNL{
+.GreyRoundedContainerForm{
     width:400px;
     height:130px;
     background-color:whitesmoke;
     border-radius: 20px;
 }
-.FormNL input{
+.GreyRoundedContainerForm input{
     border:1px solid rgb(64, 75, 78);
     height: 20px;
 
 }
-.FormNL p{
+.GreyRoundedContainerForm p{
 color:grey;
 font-size: 0.8rem;
 margin-top:3px;
 }
-.FormNL h4{
+.GreyRoundedContainerForm h4{
 font-size: 1.3rem;
 margin-bottom: 1px;
 }
-.ButonNL{
+.StandardButton{
     border: 1px solid grey;
     border-radius: 10%;
     margin-left:3px;
