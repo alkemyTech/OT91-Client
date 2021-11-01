@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useFormik } from "formik";
 import Button from "@material-ui/core/Button/Button";
 import EditItem from "./EditItem";
+import getSlides from "../../../Services/slidesService";
 
-const Edit = (props) => {
-  const { homeWelcomeTitle } = props;
+const EditHomeForm = ({ homeWelcomeTitle }) => {
   const [slides, setSlides] = useState([]);
   const [slidesIds, setSlidesIds] = useState([]);
 
   useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await axios.get(
-          `http://ongapi.alkemy.org/api/slides/`
-        );
-        setSlides(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getUser();
-  }, [slides]);
+    getSlides()
+      .then((response) => setSlides(response.data.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const showSlidesEditionForm = () =>
+    slides.map((slide) => (
+      <EditItem
+        item={slide}
+        slidesIds={slidesIds}
+        setSlidesIds={setSlidesIds}
+      />
+    ));
 
   const formik = useFormik({
-    initialValues: {
-      homeWelcomeTitle: homeWelcomeTitle,
-    },
+    initialValues: { homeWelcomeTitle },
 
     validate: (values) => {
       let errors = {};
-      if (!values.homeWelcomeTitle) {
-        errors.homeWelcomeTitle = "Required";
+      if (!values.homeEditWelcomeTitle) {
+        errors.homeEditWelcomeTitle = "Required";
       }
       return errors;
     },
@@ -45,38 +45,48 @@ const Edit = (props) => {
 
   return (
     <>
-      <h1>Página de Edición de Home</h1>
-      <form onSubmit={formik.handleSubmit} className="Form">
-        <div>
-          <Button type="submit" variant="contained">
-            Aplicar Cambios
-          </Button>
-        </div>
+      <h1 id="homeEditTitle" name="homeEditTitle">
+        Página de Edición de Home
+      </h1>
+      <form
+        id="homeEditForm"
+        name="homeEditForm"
+        onSubmit={formik.handleSubmit}
+        className="Form"
+      >
+        <Button
+          id="homeEditSubmitButton"
+          name="homeEditSubmitButton"
+          type="submit"
+          variant="contained"
+        >
+          Aplicar Cambios
+        </Button>
         <br />
-        <label htmlFor="homeWelcomeTitle">Título de bienvenida: </label>
+        <label
+          id="homeEditWelcomeLabel"
+          name="homeEditWelcomeLabel"
+          htmlFor="homeEditWelcomeTitle"
+        >
+          Título de bienvenida:{" "}
+        </label>
         <input
-          id="homeWelcomeTitle"
-          name="homeWelcomeTitle"
+          id="homeEditWelcomeTitle"
+          name="homeEditWelcomeTitle"
           type="text"
           onChange={formik.handleChange}
-          value={formik.values.homeWelcomeTitle}
+          value={formik.values.homeEditWelcomeTitle}
           className="form-control"
           maxLength={20}
         ></input>
-        {formik.errors.homeWelcomeTitle && (
-          <div className="error">{formik.errors.homeWelcomeTitle}</div>
-        )}
-        <h2>Choose 3 images: </h2>
-        {slides.map((item) => (
-          <EditItem
-            item={item}
-            slidesIds={slidesIds}
-            setSlidesIds={setSlidesIds}
-          />
-        ))}
+            {formik.errors.homeEditWelcomeTitle}
+        <h2 id="homeEditSubTitle" name="homeEditSubTitle">
+          Choose 3 images:{" "}
+        </h2>
+        {showSlidesEditionForm()}
       </form>
     </>
   );
-}
+};
 
-export default Edit;
+export default EditHomeForm;
