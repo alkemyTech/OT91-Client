@@ -9,13 +9,12 @@ const UserModifierForm = ({user}) => {
     const hasUser = () => user ? true : false;
 
     const handleOnSubmit =  async (values) => {
-        try{
-            if(hasUser){
-                updateUser(user.id,values);
-            }else{
-               createUser(values);
-            }
-        }catch(error) {
+        if(hasUser){
+            updateUser(user.id,values).then(result => result)
+            .catch(error => console.log(error))
+        }else {
+            createUser(values).then(response => response)
+            .catch(error => console.log(error))
         }
     };
 
@@ -76,10 +75,7 @@ const UserModifierForm = ({user}) => {
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            {!hasUser              
-                ?<div>
-                    <img alt="profilePhoto" src={values.profilePhoto}></img>
-                </div>
+            {!hasUser ?<div><img alt="profilePhoto" src={values.profilePhoto}></img></div>
                 :<div>
                     <label htmlFor="img">Seleccionar imagen: </label>
                     <input
@@ -130,9 +126,9 @@ const UserModifierForm = ({user}) => {
             >
                 <option value="" disabled >Seleccione el rol</option>
                 {
-                    rolesList.map(role => {
-                        return <option key={role.roleId} value={role.roleId}>{role.roleId}</option>
-                    })
+                    rolesList.map(role => 
+                        <option key={role.roleId} value={role.roleId}>{role.roleId}</option>
+                    )
                 }
             </select>
             <button className="submit-btn" type="submit">{!hasUser ? 'Modificar' : 'Crear'}</button>
