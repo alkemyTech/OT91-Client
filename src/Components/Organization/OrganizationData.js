@@ -8,11 +8,11 @@ const OrganizationData = () => {
     const { push } = useHistory()
     const [orgData,setOrgData]= useState({})
 
+    const loadData = async () => {
+        const {data} = await getOrganizationInformation()
+        setOrgData(data)
+    }
     useEffect(()=>{
-        const loadData = async () => {
-            const {data} = await getOrganizationInformation()
-            setOrgData(data)
-        }
         loadData()
     },[])
 
