@@ -4,54 +4,49 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import "../FormStyles.css";
 import Swal from 'sweetalert2'
+import {CreateSlide, EditSlide} from '../../Services/CreateOrEditSlideService'
 
-const SlidesForm = ({slides}) => {
-  const [initialValues, setInitialValues] = useState({
-    name: slides?.name ?? '',
-    description:slides?.description ?? '',
-    image:slides?.image ?? '',
-    order:slides?.order ?? '',
+const SlidesForm = ({slide}) => {
+  const [initialSlides, setInitialSlides] = useState({
+    name: slide?.name ?? '',
+    description:slide?.description ?? '',
+    image:slide?.image ?? '',
+    order:slide?.order ?? '',
   });
-  const hasSlides = !!slides
+  const hasSlide = !!slide
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const handleData = () => {
-    if(!hasSlides){
-    axios({
-      method: "POST",
-      url: "http://ongapi.alkemy.org/api/slides",
-      data: {
-        name: initialValues.name,
-        description: initialValues.description,
-        image: initialValues.image,
-      },
+  const ShowSucessAlert = () => {
+    Swal.fire(
+      'Slide Creado!'
+    )
+  }
+  const ShowLenghtError = () => {
+    Swal.fire({
+      title: 'Error!',
+      text: 'No se puede tener menos de 4 caracteristicas',
+      icon: 'error',
+      confirmButtonText: 'Ok, voy a editarlo!'
     })
-      .then((res) => {
-        if (initialValues.name.length>4) {
-          Swal.fire(
-            'Slide Creado!'
-          )
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: 'No se puede tener menos de 4 caracteristicas',
-            icon: 'error',
-            confirmButtonText: 'Ok, voy a editarlo!'
-          })
-        }
-      })
-      .catch((err) => (err));
-    } else { axios({
-      method: "PUT",
-      url: `http://ongapi.alkemy.org/api/slides/${slides.id}`,
-      data: {
-        name: initialValues.name,
-        description: initialValues.description,
-        image: initialValues.image,
-      },
-    })}
-  };
+  }
+  const CreateOrEditSlide = () =>{
+    if(!hasSlide)
+    (initialSlides.name.length>4)?
+      CreateSlide(initialSlides)
+    : ShowLenghtError()
+    else {
+      EditSlide(initialSlides)
+    }
+  }
+  const SetImageShorterUrl = (e) => {
+          const imageFile = e.target.files[0]
+          const imageUrl = new FileReader()
+          imageUrl.readAsDataURL(imageFile)
+          imageUrl.onload = (e) => {
+            setInitialSlides({...initialSlides, image:e.target.result})
+          }
+}
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <input
@@ -59,10 +54,10 @@ const SlidesForm = ({slides}) => {
         type='text'
         name='name'
         required
-        value={initialValues.name}
+        value={initialSlides.name}
         onChange={(e) => {
-          setInitialValues({
-            ...initialValues,
+          setInitialSlides({
+            ...initialSlides,
             name: e.target.value,
           })
         }}
@@ -73,12 +68,12 @@ const SlidesForm = ({slides}) => {
         className='input-field'
         type='text'
         name='description'
-        value={initialValues.description}
+        value={initialSlides.description}
         placeholder='Write some description'
         required
         onChange={(e, editor) => {
           const data = editor.getData()
-          setInitialValues({ ...initialValues, description: data})
+          setInitialSlides({ ...initialSlides, description: data})
         }}
       />
       <input
@@ -88,17 +83,10 @@ const SlidesForm = ({slides}) => {
         id='image'
         name='image'
         required
-        onChange={(e) => {
-          const imageFile = e.target.files[0]
-          const imageUrl = new FileReader()
-          imageUrl.readAsDataURL(imageFile)
-          imageUrl.onload = (e) => {
-            setInitialValues({...initialValues, image:e.target.result})
-          }
-        }}
+        onChange={SetImageShorterUrl}
       />
-      <button onClick={handleData} className="submit-btn" type="submit">
-        {hasSlides ? "Editar" : "Enviar"}
+      <button onClick={CreateOrEditSlide} className="submit-btn" type="submit">
+        {hasSlide ? "Editar" : "Enviar"}
       </button>
     </form>
   );
