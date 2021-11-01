@@ -29,7 +29,7 @@ const Detail = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [stripedHtml]);
 
   return (
     <Card className="cardStyle">
