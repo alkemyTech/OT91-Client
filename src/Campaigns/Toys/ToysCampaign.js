@@ -14,5 +14,5 @@ const ToysCampaign = () => {
     </>
   );
 }
- 
+
 export default ToysCampaign;
