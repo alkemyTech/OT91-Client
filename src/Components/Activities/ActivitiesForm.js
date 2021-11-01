@@ -1,56 +1,62 @@
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { ErrorsForm } from '../common/messagesForm';
+import { setUrlImage } from '../common/file';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { validateForm, replaceCKeditor } from '../common/validateForm';
-import {getActivity,createActivity,modifiedActivity} from '../../Services/activityService';
+import { CustomErrorMessage } from '../common/CustomErrorMessage';
+import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
+import { validateActivitiesForm} from '../common/validations/validateFormActivities';
+import {createOrUpdateTestimonial, getTestimonial} from '../../Services/ActivityService';
 const ActivitiesForm = ({activityId}) => {
 
-  const [imgState,setImgState] = useState();
-  const [dataForm, setDataForm] = useState({
+  const [activity, setActivity] = useState({
     name:'',
     description:'',
-    image:''
+    image: ''
   });
 
+
   useEffect(() => {
-    if(activityId) setDataForm(getActivity(activityId));
+    if(activityId) setActivity(getTestimonial(activityId));
   }, [activityId]);
 
-  const handleChaneCkEditor = (editor, setFieldValue) => {
-    setFieldValue("description", editor.getData())
+  const handleChangeDescription = (description, setFieldValue) => {
+    setFieldValue("description", description.getData())
   };
 
-  const handleChangeinputFile = (e, setFieldValue) =>{ 
-    UrlInput(e, setImgState,setFieldValue);
+  const handleChangeImage = (e, setImage) =>{ 
+    setUrlImage(e.target.files[0],setImage)
   };
 
+  const handleSubmit = (values,resetForm) => {
+    let updatedValues =setCKEditorText(values,'description')
+    createOrUpdateTestimonial(activityId,updatedValues)
+    resetForm();
+  }
+
+  const placeholder = "Write some activity description";
   return (
     <div className='form-container'>
       <Formik
         initialValues={{
-          ...dataForm
+          ...activity
         }}
-        validate={(values)=>validateForm(values)}
-        onSubmit={(values)=>{
-          const dataForm= replaceCKeditor(values)
-          activityId ?   modifiedActivity( activityId, dataForm) : createActivity(dataForm)
-        }}
+        validate={(values)=>validateActivitiesForm(values)}
+        onSubmit={(values,{resetForm})=>handleSubmit(values,resetForm)}
       >
-        {({errors, setFieldValue})=>(
+        {({errors, setFieldValue,values})=>(
           <Form className='form' >
             <div>
               <p>Activity Name</p>
               <Field
+                label="Activity Name"
                 className="input-field" 
                 type="text" 
                 id='name'
                 name="name"
                 placeholder="Activity Name" 
               /> 
-              {errors.name && ErrorsForm ('title',errors.name)}
+              {errors.name && CustomErrorMessage ('title',errors.name)}
             </div>
             <div>
               <p>Description</p>
@@ -58,16 +64,16 @@ const ActivitiesForm = ({activityId}) => {
                   editor={ ClassicEditor }
                   data=''
                   config={ {
-                      placeholder:"Write some activity description",
+                     placeholder
                   } }
-                  onChange={(event, editor)=>handleChaneCkEditor(editor,setFieldValue)}
+                  onChange={(event, description)=>handleChangeDescription (description,setFieldValue)}
               />
-              {errors.description && ErrorsForm ('description',errors.description)}
+              {errors.description && CustomErrorMessage ('description',errors.description)}
             </div>
             <div >
               <p >Image</p>
               <div>
-                {imgState && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
+                {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />} 
               </div>
               <div>
                 <Field
@@ -77,12 +83,10 @@ const ActivitiesForm = ({activityId}) => {
                     id='image'                                
                     name='image' 
                     value=''
-                    onChange={(e)=>{
-                      handleChangeinputFile(e, setFieldValue)
-                    }}
+                    onChange={(e)=>handleChangeImage(e,setFieldValue)}
                 /> 
               </div> 
-              {errors.image && ErrorsForm ('image',errors.image)}
+              {errors.image && CustomErrorMessage ('image',errors.image)}
             </div>
             <button className="submit-btn" type="submit">Send</button>
           </Form> 
