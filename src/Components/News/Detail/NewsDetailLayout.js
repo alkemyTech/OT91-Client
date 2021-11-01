@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { useParams } from 'react-router';
 import NewsTitle from './NewsTittle';
 import { Box } from '@material-ui/core';
-import { getNewById } from '../../../Services/getNewById';
+import { getNewById } from '../../../Services/NewServices/getNewById';
 
 const NewsDetailLayout = ({prop}) => {
 
@@ -10,16 +10,16 @@ const NewsDetailLayout = ({prop}) => {
 
     const {id} = useParams()
 
+    const loadNewData = async () => {
+        const {data} = await getNewById()
+        setNewData(data)
+    }
+    
     useEffect(()=>{
-        const loadNewData = async () => {
-            const {data} = await getNewById()
-            setNewData(data)
-        }
         loadNewData()
     },[id])
     
     return ( 
-
         <div>
             <NewsTitle
                 title={prop.title}
@@ -28,9 +28,7 @@ const NewsDetailLayout = ({prop}) => {
             <Box>
                 {newData.body}
             </Box>
-        
         </div> 
-
     );
 }
  
