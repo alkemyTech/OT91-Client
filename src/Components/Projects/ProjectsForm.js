@@ -1,17 +1,18 @@
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { ErrorsForm } from '../common/messagesForm';
+import { setUrlImage } from '../common/file';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { UrlInput } from '../common/getUrlInputFile';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { validateForm, replaceCKeditor } from '../common/validateForm';
-import {getProject,createProject,modifiedProject} from '../../Services/projectService';
+import {getProject} from '../../Services/projectsService';
+import { CustomErrorMessage } from '../common/CustomErrorMessage';
+import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
+import {createOrUpdateProject} from '../../Services/projectService';
+import { validateProjectsForm} from '../common/validations/validateProjectsForm';
 const ProjectsForm = ({projectId}) => {
 
   var minDateForm = new Date().toISOString().split('T')[0];
 
-  const [imgState,setImgState] = useState();
-  const [dataForm, setDataForm] = useState({
+  const [project, setProject] = useState({
     title:'',
     description:'',
     image:'',
@@ -19,16 +20,22 @@ const ProjectsForm = ({projectId}) => {
   });
 
   useEffect(() => {
-    if(projectId) setDataForm(getProject(projectId));
+    if(projectId) setProject(getProject(projectId));
   }, [projectId]);
 
-  const handleChaneCkEditor = (editor, setFieldValue) => {
-    setFieldValue("description", editor.getData())
+  const handleChangeDescription = (description, setFieldValue) => {
+    setFieldValue("description", description.getData())
   };
 
-  const handleChangeinputFile = (e, setFieldValue) =>{ 
-    UrlInput(e, setImgState, setFieldValue);
+  const handleChangeImage = (e, setImage) =>{ 
+    setUrlImage(e.target.files[0],setImage)
   };
+
+  const handleSubmit = (values,resetForm) => {
+    let updatedValues =setCKEditorText(values,'description')
+    createOrUpdateProject(projectId,updatedValues)
+    resetForm();
+  }
 
   const placeholder="Write some activity description";
 
@@ -36,15 +43,12 @@ const ProjectsForm = ({projectId}) => {
       <div className='form-container'>
         <Formik
           initialValues={{
-              ...dataForm
+              ...project
           }}
-          validate={(values)=>validateForm(values)}
-          onSubmit={async (values)=>{
-            const dataForm =replaceCKeditor(values)
-            projectId ?  modifiedProject( projectId, dataForm ) : createProject(dataForm);
-          }}
+          validate={(values)=>validateProjectsForm(values)}
+          onSubmit={(values, {resetForm})=>handleSubmit(values,resetForm)}
         >
-          {({errors, setFieldValue})=>(
+          {({errors, setFieldValue, values})=>(
             <Form className='form' >
               <div >
                 <p>Project Title</p>
@@ -55,7 +59,7 @@ const ProjectsForm = ({projectId}) => {
                   name="title"
                   placeholder="Activity Title" 
                 /> 
-                {errors.title && ErrorsForm ('title',errors.title)}
+                {errors.title && CustomErrorMessage ('title',errors.title)}
               </div>
                 <div>
                   <p>Date</p>
@@ -76,14 +80,14 @@ const ProjectsForm = ({projectId}) => {
                     config={ {
                        placeholder
                     } }
-                    onChange={(event, editor)=>handleChaneCkEditor(editor,setFieldValue)}
+                    onChange={(event, description)=>handleChangeDescription(description,setFieldValue)}
                   />
-                  {errors.description && ErrorsForm ('description',errors.description)}
+                  {errors.description && CustomErrorMessage ('description',errors.description)}
                 </div>
                 <div>
                     <p>Image</p>
                     <div>
-                        {imgState && <img src={imgState} alt='imagen vista previa' width='180' height='180' />} 
+                        {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />} 
                       </div>
                     <div>
                       <Field
@@ -92,12 +96,10 @@ const ProjectsForm = ({projectId}) => {
                           id='image'                                
                           name='image' 
                           value=''
-                          onChange={(e)=>{
-                            handleChangeinputFile(e, setFieldValue)
-                          }}
+                          onChange={(e)=>handleChangeImage(e, setFieldValue)}
                       /> 
                     </div>
-                    {errors.image && ErrorsForm ('image',errors.image)}
+                    {errors.image && CustomErrorMessage ('image',errors.image)}
                 </div>
                 <button className="submit-btn" type="submit">Send</button>
             </Form> 
