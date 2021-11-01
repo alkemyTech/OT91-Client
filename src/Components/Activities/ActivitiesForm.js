@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import { setUrlImage } from '../common/file';
+import { setUrlImage } from '../common/File';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
