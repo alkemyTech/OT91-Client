@@ -7,6 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { CardActionArea } from "@material-ui/core";
 import Title from "../../Title/Title";
+import getActivity from '../../../Services/activityService'
 import "../../../Styles/CardStyle.css";
 
 const Detail = () => {
@@ -20,18 +21,14 @@ const Detail = () => {
   }, [activity.description]);
 
   useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await axios.get(
-          `http://ongapi.alkemy.org/api/activities/${id}`
-        );
-        setActivity(response.data.data);
-        stripedHtml();
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getUser();
+    getActivity(id)
+      .then((response) => {
+          setActivity(response.data.data);
+          stripedHtml();
+        })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
