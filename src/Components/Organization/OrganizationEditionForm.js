@@ -23,7 +23,7 @@ const validateOrganizationForm = values => {
 }
 
 const OrganizationEditionForm = () => {
-    const initialValues = {
+    const organization = {
         organizationName: '',
         shortDescription: '',
         logo: '',
@@ -33,7 +33,7 @@ const OrganizationEditionForm = () => {
     };
 
     const formik = useFormik({
-        initialValues: initialValues,
+        initialValues: organization,
         validate: validateOrganizationForm,
         onSubmit: values => {}
     });
