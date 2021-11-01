@@ -2,8 +2,7 @@ import { Button, InputLabel, FormHelperText} from '@material-ui/core';
 import { isFile } from '../../Utils/validation';
 import '../../Styles/inputs.css';
 
-const ShowFileInput = (props) => {
-    const {btnText, name, value, color, accept, errorMessage, className, ...events} = props;
+const ShowFileInput = ({btnText, name, value, color, accept, errorMessage, className, ...events}) => {
     return (
         <div className={`show-file-input ${className || ''}`}>
             <input type="file" name={name} id={name} {...events} accept={accept} className="hide"/>
