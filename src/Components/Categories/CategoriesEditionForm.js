@@ -4,7 +4,7 @@ import CategoriesForm from './CategoriesForm'
 const CategoriesEditionForm = () => {
   return (
     <>
-      <CategoriesForm id='952' />
+      <CategoriesForm idforEdit='984' />
     </>
   )
 }

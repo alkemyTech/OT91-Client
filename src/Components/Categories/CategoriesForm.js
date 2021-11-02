@@ -25,21 +25,29 @@ const CategoriesForm = (props) => {
     image: '',
   })
 
-  useEffect(async () => {
-    const data = await services
-      .getCategories(idforEdit)
-      .then((result) => result)
-    data
-      ? setcategory({
+  const showDataforEdit = async (idforEdit) => {
+    await services.getCategories(idforEdit).then((result) => {
+      if (result) {
+        setcategory({
           ...category,
-          name: data.name,
-          description: data.description,
-          image: data.image,
-        }) && setisLoading(false)
-      : setisLoading(true)
-    console.log(category)
-    return data
-  }, [])
+          name: result.name,
+          description: result.description,
+          image: result.image,
+        })
+        setisLoading(false)
+      } else {
+        setisLoading(true)
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (idforEdit) showDataforEdit(idforEdit)
+  }, [idforEdit])
+
+  useEffect(() => {
+    if (category) formik.setValues(category)
+  }, [category])
 
   const formik = useFormik({
     initialValues: category,
@@ -51,44 +59,47 @@ const CategoriesForm = (props) => {
 
   return (
     <>
-      {isLoading ? <h1>loading</h1> : <h1>data</h1>}
-      <form className='form-container' onSubmit={formik.handleSubmit}>
-        <GenericInput
-          name='name'
-          label='Nombre de la Categoria'
-          type='text'
-          placeholder='Ingrese el nombre de la Categoria'
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          errorMessage={formik.errors.name}
-          isTouched={formik.touched.name}
-        />
+      {isLoading ? (
+        <p>loading..</p>
+      ) : (
+        <form className='form-container' onSubmit={formik.handleSubmit}>
+          <GenericInput
+            name='name'
+            label='Nombre de la Categoria'
+            type='text'
+            placeholder='Ingrese el nombre de la Categoria'
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            errorMessage={formik.errors.name}
+            isTouched={formik.touched.name}
+          />
 
-        <CkeditInput
-          name='description'
-          label='Descripción'
-          value={formik.values.description}
-          onChange={(e, editor) =>
-            services.handleCKEditorChange(formik, editor, 'description')
-          }
-          errorMessage={formik.errors.description}
-          isTouched={formik.touched.description}
-        />
+          <CkeditInput
+            name='description'
+            label='Descripción'
+            value={formik.values.description}
+            onChange={(e, editor) =>
+              services.handleCKEditorChange(formik, editor, 'description')
+            }
+            errorMessage={formik.errors.description}
+            isTouched={formik.touched.description}
+          />
 
-        <FileInput
-          name='image'
-          accept='image/png, image/jpg'
-          value={formik.values.image}
-          onChange={(e) => services.handleFileChange(formik, 'image', e)}
-          errorMessage={formik.errors.image}
-          isTouched={formik.touched.image}
-        />
+          <FileInput
+            name='image'
+            accept='image/png, image/jpg'
+            value={formik.values.image}
+            onChange={(e) => services.handleFileChange(formik, 'image', e)}
+            errorMessage={formik.errors.image}
+            isTouched={formik.touched.image}
+          />
 
-        <button className='submit-btn' type='submit'>
-          Guardar cambios
-        </button>
-      </form>
+          <button className='submit-btn' type='submit'>
+            Guardar cambios
+          </button>
+        </form>
+      )}
     </>
   )
 }
