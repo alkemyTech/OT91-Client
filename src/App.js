@@ -30,6 +30,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/edit-testimonial/:testimonialId" component={TestimonialForm} />
         </Switch>
       </BrowserRouter>
     <div className="App">
