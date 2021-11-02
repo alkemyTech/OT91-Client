@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://ongapi.alkemy.org/api';
+const URL = 'http://ongapi.alkemy.org/public/api';
 
 export const getProject = async (id) => {
     let {data}= await axios.get(`${URL}/projects/${id}`);
@@ -13,7 +13,7 @@ export const modifyProject = async (id,body) => {
 };
 
 export const createProject = async (body) => {
-    let {data}= await axios.post(`${URL}/projects/`,body);
+    let {data}= await axios.post(`${URL}/projects`,body);
     return data;
 };
 
