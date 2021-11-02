@@ -1,213 +1,95 @@
 import React, { useEffect, useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Container, TextField, Typography, Button } from '@material-ui/core'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import * as functions from './CategoriesFunctions'
+import { useFormik } from 'formik'
+import * as services from './CategorieServices'
 import '../FormStyles.css'
+import * as validations from '../../Services/validations'
+import GenericInput from '../inputsForms/GenericInput'
+import CkeditInput from '../inputsForms/CkeditInput'
+import FileInput from '../inputsForms/FileInput'
 
-const CategoriesForm = ({ editCategorie, id }) => {
-  const [values, setValues] = useState('')
+const validate = (values) => {
+  const errors = {}
+  const invalidTitle = validations.isShort(values.title, 4)
+  if (invalidTitle) {
+    errors.title = 'El Titulo debe ser mas largo'
+  }
+  return errors
+}
 
-  useEffect(() => {
-    if (editCategorie) {
-      const categorieData = functions.getCategorie(id)
-      setValues(categorieData)
-    }
-  }, [editCategorie])
+const CategoriesForm = (props) => {
+  const { idforEdit } = props
+  const [isLoading, setisLoading] = useState(true)
+  const [category, setcategory] = useState({
+    name: '',
+    description: '',
+    image: '',
+  })
+
+  useEffect(async () => {
+    const data = await services
+      .getCategories(idforEdit)
+      .then((result) => result)
+    data
+      ? setcategory({
+          ...category,
+          name: data.name,
+          description: data.description,
+          image: data.image,
+        }) && setisLoading(false)
+      : setisLoading(true)
+    console.log(category)
+    return data
+  }, [])
+
+  const formik = useFormik({
+    initialValues: category,
+    validate,
+    onSubmit: (values) => {
+      services.createOrUpdateNews(idforEdit, values)
+    },
+  })
 
   return (
-    <Container
-      style={{
-        fontFamily: 'arial',
-      }}
-      className='form-container'
-    >
-      <Formik
-        initialValues={{
-          name: values.name ? values.name : '',
-          description: values.description ? values.description : '',
-          image: values.image ? values.image : '',
-        }}
-        validate={(values) => {
-          let errors = {}
-          if (!values.name) {
-            errors.name = 'Debes ponerle un Nombre a la Categoria'
-          }
-          if (values.name.length < 4) {
-            errors.name =
-              'El nombre de la Categoria debe tener mas de 4 caracteres'
-          }
-          if (!values.description) {
-            errors.description = 'Debes poner una descripción de la Categoria'
-          }
-          if (!values.image) {
-            errors.image = 'Debes poner una imagen para tu Categoria'
-          }
-          return errors
-        }}
-        onSubmit={(values, { resetForm }) => {
-          editCategorie
-            ? functions.editCategorie(values)
-            : functions.createCategorie(values)
+    <>
+      {isLoading ? <h1>loading</h1> : <h1>data</h1>}
+      <form className='form-container' onSubmit={formik.handleSubmit}>
+        <GenericInput
+          name='name'
+          label='Nombre de la Categoria'
+          type='text'
+          placeholder='Ingrese el nombre de la Categoria'
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          errorMessage={formik.errors.name}
+          isTouched={formik.touched.name}
+        />
 
-          resetForm()
-        }}
-      >
-        {({ errors, setFieldValue }) => (
-          <Form className='form'>
-            <div>
-              <Typography
-                variant='h6'
-                style={{
-                  fontWeight: 'bold',
-                  margin: '1rem auto',
-                }}
-              >
-                Nombre de la Categoria
-              </Typography>
-              <TextField
-                fullWidth
-                id='fullWidth'
-                variant='outlined'
-                type='text'
-                name='name'
-                placeholder='Escribe el nombre'
-              />
+        <CkeditInput
+          name='description'
+          label='Descripción'
+          value={formik.values.description}
+          onChange={(e, editor) =>
+            services.handleCKEditorChange(formik, editor, 'description')
+          }
+          errorMessage={formik.errors.description}
+          isTouched={formik.touched.description}
+        />
 
-              <ErrorMessage
-                name='name'
-                component={() => (
-                  <Typography
-                    variant='subtitle2'
-                    color='error'
-                    style={{
-                      fontStyle: 'italic',
-                      fontWeight: 'bold',
-                      marginTop: '0.3rem',
-                      marginLeft: '0.2rem',
-                    }}
-                  >
-                    {errors.name}
-                  </Typography>
-                )}
-              />
-            </div>
-            <div>
-              <Typography
-                variant='h6'
-                style={{
-                  fontWeight: 'bold',
-                  margin: '1rem auto',
-                }}
-              >
-                Descripcion
-              </Typography>
-              <CKEditor
-                className='input-field'
-                config={{
-                  placeholder: 'Escribe una descripción',
-                }}
-                editor={ClassicEditor}
-                data=''
-                onChange={(e, editor) => {
-                  const data = editor.getData()
-                  setFieldValue('description', data)
-                }}
-              />
-              <ErrorMessage
-                name='description'
-                component={() => (
-                  <Typography
-                    variant='subtitle2'
-                    color='error'
-                    style={{
-                      fontStyle: 'italic',
-                      fontWeight: 'bold',
-                      marginTop: '0.3rem',
-                      marginLeft: '0.2rem',
-                    }}
-                  >
-                    {errors.description}
-                  </Typography>
-                )}
-              />
-            </div>
-            <div>
-              <Typography
-                variant='h6'
-                style={{
-                  fontWeight: 'bold',
-                  margin: '1rem auto',
-                }}
-              >
-                Image
-              </Typography>
-              <div>
-                {values.image > 0 && (
-                  <img
-                    src={values.image}
-                    alt='imagen vista previa'
-                    width='180'
-                    height='180'
-                  />
-                )}
-              </div>
-              <div>
-                <Field
-                  className='input-image'
-                  type='file'
-                  accept='image/png, image/jpg'
-                  id='image'
-                  name='image'
-                  value={undefined}
-                  onChange={(e) => {
-                    setFieldValue('image', e)
-                    const imageFile = e.target.files[0]
-                    const imageUrl = new FileReader()
-                    imageUrl.readAsDataURL(imageFile)
-                    imageUrl.onload = (e) => {
-                      setValues(...values, { image: e.target?.result })
-                    }
-                  }}
-                />
-              </div>
-              <ErrorMessage
-                name='image'
-                component={() => (
-                  <Typography
-                    variant='subtitle2'
-                    color='error'
-                    style={{
-                      fontStyle: 'italic',
-                      fontWeight: 'bold',
-                      marginTop: '0.3rem',
-                      marginLeft: '0.2rem',
-                    }}
-                  >
-                    {errors.image}
-                  </Typography>
-                )}
-              />
-            </div>
+        <FileInput
+          name='image'
+          accept='image/png, image/jpg'
+          value={formik.values.image}
+          onChange={(e) => services.handleFileChange(formik, 'image', e)}
+          errorMessage={formik.errors.image}
+          isTouched={formik.touched.image}
+        />
 
-            <Button
-              variant='contained'
-              Container
-              fullWidth
-              size='large'
-              type='submit'
-              color='primary'
-              style={{
-                marginTop: '25px',
-              }}
-            >
-              Send
-            </Button>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+        <button className='submit-btn' type='submit'>
+          Guardar cambios
+        </button>
+      </form>
+    </>
   )
 }
 export default CategoriesForm

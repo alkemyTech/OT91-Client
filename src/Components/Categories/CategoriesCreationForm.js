@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoriesForm from './CategoriesForm'
 
-const CategoriesFormCreate = () => {
+const CategoriesCreationForm = () => {
   return (
     <>
       <CategoriesForm editCategorie={false} id={0} />
@@ -9,4 +9,4 @@ const CategoriesFormCreate = () => {
   )
 }
 
-export default CategoriesFormCreate
+export default CategoriesCreationForm
