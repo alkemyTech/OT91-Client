@@ -20,7 +20,7 @@ const ActivitiesForm = () => {
     setFieldValue("description", description.getData())
   };
 
-  const handleChangeImage = (e, setImage) =>{ 
+  const handleChangeImage = (e, setImage) =>{
     setUrlImage(e.target.files[0],setImage)
   };
 
@@ -46,12 +46,12 @@ const ActivitiesForm = () => {
               <p>Activity Name</p>
               <Field
                 label="Activity Name"
-                className="input-field" 
-                type="text" 
+                className="input-field"
+                type="text"
                 id='name'
                 name="name"
-                placeholder="Activity Name" 
-              /> 
+                placeholder="Activity Name"
+              />
               {errors.name && CustomErrorMessage ('title',errors.name)}
             </div>
             <div>
@@ -69,23 +69,23 @@ const ActivitiesForm = () => {
             <div >
               <p >Image</p>
               <div>
-                {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />} 
+                {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />}
               </div>
               <div>
                 <Field
                     className='input-image'
-                    type='file' 
-                    accept="image/png, image/jpg" 
-                    id='image'                                
-                    name='image' 
+                    type='file'
+                    accept="image/png, image/jpg"
+                    id='image'
+                    name='image'
                     value=''
                     onChange={(e)=>handleChangeImage(e,setFieldValue)}
-                /> 
-              </div> 
+                />
+              </div>
               {errors.image && CustomErrorMessage ('image',errors.image)}
             </div>
             <button className="submit-btn" type="submit">Send</button>
-          </Form> 
+          </Form>
         )}
       </Formik>
     </div>
