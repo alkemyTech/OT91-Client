@@ -1,3 +1,4 @@
+
 module.exports = {
   semi: true,
   trailingComma: 'all',
@@ -5,3 +6,4 @@ module.exports = {
   printWidth: 120,
   endOfLine: 'auto',
 };
+
