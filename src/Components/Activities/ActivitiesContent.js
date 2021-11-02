@@ -1,9 +1,9 @@
 import React from 'react'
-
-function ActivitiesContent(props) {
+import ReactHtmlParser from 'react-html-parser';
+function ActivitiesContent(description) {
     return (
         <div>
-            dangerouslySetInnerHTML={{__html: props.description}}
+           {ReactHtmlParser({description})}
         </div>
     )
 }
