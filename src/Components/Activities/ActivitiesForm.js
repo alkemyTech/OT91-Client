@@ -16,8 +16,6 @@ const ActivitiesForm = () => {
     }
   };
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(initialValues);
