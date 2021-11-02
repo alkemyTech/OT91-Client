@@ -18,6 +18,8 @@ export const createActivity = async (body) => {
 };
 
 export const createOrUpdateActivity = async (activityId,body)=>{
-    let {data}=await getActivity(activityId)
-    data? modifyActivity(activityId,body) : createActivity(body)
+    if(activityId){
+        let {data} = await getActivity(activityId)
+        data && modifyActivity(activityId,body)
+    }else createActivity(body)
 };
