@@ -15,7 +15,9 @@ const ActivitiesForm = () => {
       setInitialValues({ ...initialValues, description: e.target.value });
     }
   };
+
   
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(initialValues);
@@ -31,6 +33,8 @@ const ActivitiesForm = () => {
         onChange={handleChange}
         placeholder="Activity Title"
       ></input>
+
+
       <input
         className="input-field"
         type="text"
