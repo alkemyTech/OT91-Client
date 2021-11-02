@@ -22,6 +22,7 @@ const ActivitiesForm = () => {
 
   const handleChangeImage = (e, setImage) =>{
     setUrlImage(e.target.files[0],setImage)
+
   };
 
   const handleSubmit = (values,resetForm) => {

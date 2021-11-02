@@ -13,6 +13,7 @@ import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
+import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/edit-activity/:activityId" component={ActivitiesForm} />
+          <Route path="/edit-project/:projectId" component={ProjectsForm} />
+          <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
         </Switch>
       </BrowserRouter>

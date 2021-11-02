@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import { hasRequiredError, regExp, validValue } from '../../Utils/validation';
 import '../FormStyles.css';
-
 const LoginForm = () => {
     const [initialValues, setInitialValues] = useState({
         email: '',
