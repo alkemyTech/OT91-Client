@@ -47,6 +47,7 @@ const SlidesForm = ({slide}) => {
             setInitialSlides({...initialSlides, image:e.target.result})
           }
 }
+
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <input
