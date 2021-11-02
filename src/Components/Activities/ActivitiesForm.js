@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
+import {useParams} from 'react-router'
 import {Formik, Form, Field} from 'formik';
 import { setUrlImage } from '../common/File';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -6,19 +7,14 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
 import { validateActivitiesForm} from '../common/validations/validateActivitiesForm';
-import {createOrUpdateActivity, getActivity} from '../../Services/activityService';
-const ActivitiesForm = ({activityId}) => {
-
+import {createOrUpdateActivity} from '../../Services/activityService';
+const ActivitiesForm = () => {
+  const {activityId} = useParams();
   const [activity, setActivity] = useState({
     name:'',
     description:'',
     image: ''
   });
-
-
-  useEffect(() => {
-    if(activityId) setActivity(getActivity(activityId));
-  }, [activityId]);
 
   const handleChangeDescription = (description, setFieldValue) => {
     setFieldValue("description", description.getData())
