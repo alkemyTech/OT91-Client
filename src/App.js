@@ -15,6 +15,7 @@ import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
+import AboutUs from "./Components/About/AboutUs";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/activity-detail/:id" component={Detail} />
+          <Route path="/nosotros" component={AboutUs}/>
         </Switch>
       </BrowserRouter>
       <div className="App">
