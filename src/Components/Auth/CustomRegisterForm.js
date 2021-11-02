@@ -10,7 +10,7 @@ const CustomRegisterForm = () => {
 
     const validate = values => {
         const errors = {};
-        
+
         const includesLetter = string => {
             const letters = /[A-Za-z]/;
             return !!letters.test(string)
@@ -18,9 +18,9 @@ const CustomRegisterForm = () => {
 
         const includesSymbols = string => {
             const symbols= /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
-            return !!symbols.test(string);            
+            return !!symbols.test(string);
         }
-        
+
         const includesNumbers= string => {
             const numbers = /[0-9]/;
             return !!numbers.test(string);
@@ -66,35 +66,35 @@ const CustomRegisterForm = () => {
         }
     });
     return (
-        <form 
-            className="form-container" 
+        <form
+            className="form-container"
             onSubmit={handleSubmit}
         >
-            <input 
-                className="input-field" 
+            <input
+                className="input-field"
                 type="text"
                 id="email"
                 placeholder="Ingrese email"
-                value={values.email} 
+                value={values.email}
                 onBlur={handleBlur}
                 onChange={handleChange}
             />
             {touched.email && errors.email }
-            <input 
-                className="input-field" 
-                type="password" 
+            <input
+                className="input-field"
+                type="password"
                 id="password"
-                value={values.password} 
+                value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Contraseña"
             />
             {touched.password  && errors.password }
-            <input 
-                className="input-field" 
-                type="password" 
-                id="repeatedPassword" 
-                value={values.repeatedPassword} 
+            <input
+                className="input-field"
+                type="password"
+                id="repeatedPassword"
+                value={values.repeatedPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Confirmar contraseña"
@@ -104,5 +104,5 @@ const CustomRegisterForm = () => {
         </form>
     );
 }
- 
+
 export default CustomRegisterForm;
