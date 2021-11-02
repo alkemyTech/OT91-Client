@@ -1,25 +1,21 @@
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
+import { useParams } from 'react-router';
 import {Formik, Form, Field} from 'formik';
 import { setUrlImage } from '../common/file';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {getTestimonial} from '../../Services/testimonialService';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
 import {createOrUpdateTestimonial} from '../../Services/testimonialService';
 import { validateTestimonialsForm} from '../common/validations/validateFormTestimonials';
-const TestimonialForm = ({testimonialId}) => {
-
+const TestimonialForm = () => {
+  const {testimonialId} = useParams()
   const [testimonial, setTestimonial] = useState({
     name:'',
     description:'',
     image: ''
   });
 
-
-  useEffect(() => {
-    if(testimonialId) setTestimonial(getTestimonial(testimonialId));
-  }, [testimonialId]);
 
   const handleChangeDescription = (description, setFieldValue) => {
     setFieldValue("description", description.getData())
