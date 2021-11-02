@@ -15,7 +15,7 @@ const ActivitiesForm = () => {
       setInitialValues({ ...initialValues, description: e.target.value });
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(initialValues);
