@@ -28,5 +28,5 @@ const CategoriesForm = () => {
         </form>
     );
 }
- 
+
 export default CategoriesForm;
