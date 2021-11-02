@@ -17,6 +17,9 @@ export const createTestimonial = async (body) => {
     return data;
 };
 
-export const createOrUpdateTestimonial = (testimonialId,body)=>{
-    testimonialId ? modifyTestimonial(testimonialId,body) : createTestimonial(body)
+export const createOrUpdateTestimonial = async (testimonialId,body)=>{
+    if(testimonialId){
+        let {data} = await getTestimonial(testimonialId)
+        data && modifyTestimonial(testimonialId,body)
+    }else createTestimonial(body)
 };
