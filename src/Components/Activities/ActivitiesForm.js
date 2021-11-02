@@ -31,6 +31,8 @@ const ActivitiesForm = () => {
         onChange={handleChange}
         placeholder="Activity Title"
       ></input>
+
+
       <input
         className="input-field"
         type="text"

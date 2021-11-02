@@ -3,6 +3,7 @@ import { hasRequiredError, regExp, validValue } from '../../Utils/validation';
 
 import '../FormStyles.css';
 
+
 const LoginForm = () => {
     const [initialValues, setInitialValues] = useState({
         email: '',
@@ -22,6 +23,7 @@ const LoginForm = () => {
         console.log(initialValues);
         localStorage.setItem('token', 'tokenValueExample')
     }
+
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
