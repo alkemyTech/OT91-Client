@@ -17,11 +17,13 @@ const ProjectsForm = () => {
     title:'',
     description:'',
     image:'',
-    up_date:''
+    due_date:''
   });
 
   useEffect(() => {
-    if(projectId) setProject(getProject(projectId));
+    if(projectId) {
+      setProject(getProject(projectId))
+    };
   }, [projectId]);
 
   const handleChangeDescription = (description, setFieldValue) => {
@@ -68,8 +70,8 @@ const ProjectsForm = () => {
                     className='input-field'
                     type='date' 
                     min={minDateForm}
-                    name='up_date' 
-                    id='up_date'
+                    name='due_date' 
+                    id='due_date'
                   />
                 </div>
                 <div >
