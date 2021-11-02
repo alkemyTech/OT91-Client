@@ -16,7 +16,7 @@ const ActivitiesForm = () => {
     }
   };
 
-  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
