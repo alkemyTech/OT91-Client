@@ -4,7 +4,7 @@ import '../../Styles/AboutUs.css';
 
 const AboutUsDescription = ({description}) => {
     return (
-        <Box className="about-us-description" fullwidth>
+        <Box className="about-us-description">
             <Title title="Nosotros"/>
             <div className="about-us-description__text">
                 <p>{description}</p>
