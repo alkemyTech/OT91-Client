@@ -31,7 +31,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="novedades/:id" component={NewsDetailLayout} />
+          <Route path="/novedades/:id" component={NewsDetailLayout} />
         </Switch>
       </BrowserRouter>
     <div className="App">
