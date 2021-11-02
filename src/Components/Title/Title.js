@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 
-import DefaultImage from "../../Assets/Title/default.jpg";
+import DefaultImage from "../../assets/Title/default.jpg";
 
 import "../../Styles/BoxStyle.css";
 
