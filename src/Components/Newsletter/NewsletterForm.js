@@ -5,7 +5,7 @@ const SetTokenNewsLetter = () =>{
     localStorage.setItem("tokenNL","settokenNL")
 }
     function NewsletterForm() {
-    return (    
+    return (
             <form  onSubmit={SetTokenNewsLetter} className="GreyRoundedContainerForm">
                 <h4>Subscribite a nuestras actualizaciones!</h4>
                 <input
