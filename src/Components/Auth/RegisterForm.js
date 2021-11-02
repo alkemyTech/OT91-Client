@@ -6,7 +6,7 @@ const RegisterForm = () => {
         name: '',
         lastName: ''
     })
-
+    
     const handleChange = (e) => {
         if(e.target.name === 'name'){
             setInitialValues({...initialValues, name: e.target.value})
@@ -29,5 +29,5 @@ const RegisterForm = () => {
         </form>
     );
 }
-
+ 
 export default RegisterForm;
