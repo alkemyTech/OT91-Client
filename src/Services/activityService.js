@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://ongapi.alkemy.org/api';
+const URL = 'http://ongapi.alkemy.org/public/api';
 
 export const getActivity = async (id) => {
     let {data}= await axios.get(`${URL}/activities/${id}`);
@@ -13,7 +13,7 @@ export const modifyActivity = async (id,body) => {
 };
 
 export const createActivity = async (body) => {
-    let {data}= await axios.post(`${URL}/activities/`,body);
+    let {data}= await axios.post(`${URL}/activities`,body);
     return data;
 };
 
