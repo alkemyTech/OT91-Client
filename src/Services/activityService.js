@@ -24,9 +24,6 @@ export const createOrUpdateActivity = async (activityId,body)=>{
     }else createActivity(body)
 };
 
-
-const URL = 'http://ongapi.alkemy.org/api'
-
 const getActivity = (id) => {
 
   const response = axios.get(`http://ongapi.alkemy.org/api/slides/${id}`);
