@@ -21,21 +21,24 @@ const ActivitiesPagination = () => {
         if(activities.length>1)setItems([...activities].splice(0,cards))
     },[activities])
 
+    function setItemsPage(items,index,page){
+        setItems([...items].splice(index,cards))
+        setCurrentPag(page)
+    }
+
     const next=()=>{
         const totalElementos= activities.length
         const next= currentPag +1
         const index= next * cards
         if(index>totalElementos) return;
-        setItems([...activities].splice(index,cards))
-        setCurrentPag(next)
+        setItemsPage(activities,index,next)
     };
 
     const prev=()=>{
         const prev= currentPag-1
         if(prev < 0) return;
         const index= prev * cards
-        setItems([...activities].splice(index,cards))
-        setCurrentPag(prev)
+        setItemsPage(activities,index,prev)
     };
 
     return (
