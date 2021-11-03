@@ -18,16 +18,16 @@ const OrganizationData = () => {
 
     const redirectToEditionForm = () => push("/backoffice/organization/edit")
 
-    return ( 
+    return (
         <Container >
             <img alt="organizationPhoto" src={orgData.logo} />
             <h3>{orgData.name}</h3>
-            <Box sx={{display: 'flex'}}> 
+            <Box sx={{display: 'flex'}}>
                 {orgData.short_description}
             </Box>
             <Button variant="contained" onClick={redirectToEditionForm}>Editar</Button>
         </Container>
     );
 }
- 
+
 export default OrganizationData;
