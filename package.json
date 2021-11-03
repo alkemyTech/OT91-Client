@@ -1,5 +1,5 @@
 {
-  "name": "ong-client",
+  "name": "ong-proyect",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,10 +19,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint ./src",
+    "lint:ci": "npx eslint ./src --format json -o reports/eslint"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -35,5 +40,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:ci",
+      "pre-push": "yarn lint:ci"
+    }
   }
 }

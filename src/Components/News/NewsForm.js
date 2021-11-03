@@ -1,41 +1,100 @@
-import React, { useState } from 'react';
-import '../../Components/FormStyles.css';
+import React, { useState, useEffect } from "react";
+import "../../Components/FormStyles.css";
+import { createOrUpdateNews } from "../../Services/newsServices";
+import { getCategory } from "../../Services/categoriesServices";
+import InputImg from "../Inputs/InputImg";
+import InputEditor from "../Inputs/InputEditor";
 
 const NewsForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        title: '',
-        content: '',
-        category: ''
+  const [news, setNews] = useState({
+    name: "",
+    content: "",
+    category: [],
+    categoryId: "",
+    image: "",
+  });
+  const [categories, setCategories] = useState([]);
+
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case "name":
+        setNews({ ...news, name: e.target.value });
+        break;
+      case "content":
+        setNews({ ...news, content: e.target.value });
+        break;
+      case "category":
+        const newCategorySelected = categories?.find(
+          (category) => category.name === e.target.value
+        );
+        setNews({
+          ...news,
+          category: e.target.value,
+          categoryId: newCategorySelected?.id,
+        });
+        break;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendNews();
+  };
+
+  const sendNews = async () => {
+    createOrUpdateNews(news);
+    setNews({
+      name: "",
+      content: "",
+      category: [],
+      categoryId: "",
+      image: "",
     });
+  };
 
-    const handleChange = (e) => {
-        if(e.target.name === 'title'){
-            setInitialValues({...initialValues, title: e.target.value})
-        } if(e.target.name === 'content'){
-            setInitialValues({...initialValues, content: e.target.value})
-        } if(e.target.name === 'category') {
-            setInitialValues({...initialValues, category: e.target.value})
-        }
-    }
+  useEffect(async () => {
+    const data = await getCategory();
+    setCategories(data);
+  }, []);
+  
+  return (
+    <form className="form-container" onSubmit={handleSubmit}>
+      <label htmlFor="name">Title</label>
+      <input
+        className="input-field"
+        type="text"
+        name="name"
+        value={news.name || ""}
+        onChange={handleChange}
+        minLength="5"
+        required
+      ></input>
+      <InputEditor news={news} setNews={setNews} />
+      <label htmlFor="category">Category</label>
+      <select
+        className="select-field"
+        name="category"
+        value={news.category || ""}
+        onChange={handleChange}
+        required
+      >
+        <option value="" disabled>
+          Select Category
+        </option>
+        {categories?.map((category) => {
+          return (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          );
+        })}
+      </select>
+      <InputImg news={news} setNews={setNews} />
+      <button className="submit-btn" type="submit">
+        Send
+      </button>
+    </form>
+  );
+};
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="title" value={initialValues.title || ''} onChange={handleChange}></input>
-            <input className="input-field" type="text" name="content" value={initialValues.content || ''} onChange={handleChange}></input>
-            <select className="select-field" name="category" value={initialValues.category || ''} onChange={handleChange}>
-                <option value="" disabled>Select category</option>
-                <option value="1">Demo option 1</option>
-                <option value="2">Demo option 2</option>
-                <option value="3">Demo option 3</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
 export default NewsForm;
