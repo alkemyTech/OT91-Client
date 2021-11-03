@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser';
-function ActivitiesContent(description) {
+const ActivitiesContent = ({description}) => {
     return (
         <div>
            {ReactHtmlParser({description})}
