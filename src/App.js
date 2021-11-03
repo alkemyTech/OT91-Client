@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import Detail from './Components/Activities/Detail/Detail';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
 import SlidesForm from './Components/Slides/SlidesForm';
@@ -12,6 +13,8 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
+import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
+import BackofficeUsers from './Components/Backoffice/Users/BackofficeUsers';
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/organization/edit" component={OrganizationEditionForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/users" component={BackofficeUsers} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />

@@ -30,7 +30,7 @@ const ProjectsForm = () => {
     setFieldValue("description", description.getData())
   };
 
-  const handleChangeImage = (e, setImage) =>{ 
+  const handleChangeImage = (e, setImage) =>{
     setUrlImage(e.target.files[0],setImage)
   };
 
@@ -56,21 +56,21 @@ const ProjectsForm = () => {
               <div >
                 <p>Project Title</p>
                 <Field
-                  className="input-field" 
-                  type="text" 
+                  className="input-field"
+                  type="text"
                   id='title'
                   name="title"
-                  placeholder="Activity Title" 
-                /> 
+                  placeholder="Activity Title"
+                />
                 {errors.title && CustomErrorMessage ('title',errors.title)}
               </div>
                 <div>
                   <p>Date</p>
                   <Field
                     className='input-field'
-                    type='date' 
+                    type='date'
                     min={minDateForm}
-                    name='due_date' 
+                    name='due_date'
                     id='due_date'
                   />
                 </div>
@@ -90,22 +90,22 @@ const ProjectsForm = () => {
                 <div>
                     <p>Image</p>
                     <div>
-                        {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />} 
+                        {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />}
                       </div>
                     <div>
                       <Field
-                          type='file' 
-                          accept="image/png, image/jpg" 
-                          id='image'                                
-                          name='image' 
+                          type='file'
+                          accept="image/png, image/jpg"
+                          id='image'
+                          name='image'
                           value=''
                           onChange={(e)=>handleChangeImage(e, setFieldValue)}
-                      /> 
+                      />
                     </div>
                     {errors.image && CustomErrorMessage ('image',errors.image)}
                 </div>
                 <button className="submit-btn" type="submit">Send</button>
-            </Form> 
+            </Form>
           )}
         </Formik>
       </div>

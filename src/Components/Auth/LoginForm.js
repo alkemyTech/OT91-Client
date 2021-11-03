@@ -17,7 +17,7 @@ const LoginForm = () => {
             setInitialValues({...initialValues, password: e.target.value})
         }
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(initialValues);
@@ -33,5 +33,5 @@ const LoginForm = () => {
         </form>
     );
 }
- 
+
 export default LoginForm;
