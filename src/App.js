@@ -14,8 +14,7 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
-import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
-import Detail from './Components/Activities/Detail/Detail';
+import EditCreateMember from "./Components/Members/EditCreateMember";
 
 function App() {
   return (
@@ -26,6 +25,7 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
+          <Route path="/backoffice/members/edit" component={EditCreateMember} />
           <Route path="/backoffice/organization/edit" component={OrganizationEditionForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
