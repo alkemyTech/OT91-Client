@@ -12,4 +12,9 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export default Get
+export const privateGet = async (url,id,token) => {
+    const {data} = await axios.get(`${url}${id?`/${id}`:''}`,{headers: {Authorization:token}})
+    return data
+}
+
+export default Get;
