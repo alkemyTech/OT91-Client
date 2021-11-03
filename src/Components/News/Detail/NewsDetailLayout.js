@@ -14,12 +14,12 @@ const NewsDetailLayout = ({prop}) => {
         const {data} = await getNewById()
         setNewData(data)
     }
-    
+
     useEffect(()=>{
         loadNewData()
     },[id])
-    
-    return ( 
+
+    return (
         <div>
             <NewsTitle
                 title={prop.title}
@@ -28,8 +28,8 @@ const NewsDetailLayout = ({prop}) => {
             <Box>
                 {newData.body}
             </Box>
-        </div> 
+        </div>
     );
 }
- 
+
 export default NewsDetailLayout;
