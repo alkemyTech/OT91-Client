@@ -1,48 +1,94 @@
-import React, { useState } from "react";
-import "../FormStyles.css";
-
+import { useState} from 'react';
+import {useParams} from 'react-router'
+import {Formik, Form, Field} from 'formik';
+import { setUrlImage } from '../common/File';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CustomErrorMessage } from '../common/CustomErrorMessage';
+import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
+import { validateActivitiesForm} from '../common/validations/validateActivitiesForm';
+import {createOrUpdateActivity} from '../../Services/activityService';
 const ActivitiesForm = () => {
-  const [initialValues, setInitialValues] = useState({
-    name: "",
-    description: "",
+  const {activityId} = useParams();
+  const [activity, setActivity] = useState({
+    name:'',
+    description:'',
+    image: ''
   });
 
-  const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setInitialValues({ ...initialValues, name: e.target.value });
-    }
-    if (e.target.name === "description") {
-      setInitialValues({ ...initialValues, description: e.target.value });
-    }
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(initialValues);
+  const handleChangeDescription = (description, setFieldValue) => {
+    setFieldValue("description", description.getData())
   };
 
+  const handleChangeImage = (e, setImage) =>{
+    setUrlImage(e.target.files[0],setImage)
+  };
+
+  const handleSubmit = (values,resetForm) => {
+    let updatedValues =setCKEditorText(values,'description')
+    createOrUpdateActivity(activityId,updatedValues)
+    resetForm();
+  }
+
+  const placeholder = "Write some activity description";
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="name"
-        value={initialValues.name}
-        onChange={handleChange}
-        placeholder="Activity Title"
-      ></input>
-      <input
-        className="input-field"
-        type="text"
-        name="description"
-        value={initialValues.description}
-        onChange={handleChange}
-        placeholder="Write some activity description"
-      ></input>
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
+    <div className='form-container'>
+      <Formik
+        initialValues={{
+          ...activity
+        }}
+        validate={(values)=>validateActivitiesForm(values)}
+        onSubmit={(values,{resetForm})=>handleSubmit(values,resetForm)}
+      >
+        {({errors, setFieldValue,values})=>(
+          <Form className='form' >
+            <div>
+              <p>Activity Name</p>
+              <Field
+                label="Activity Name"
+                className="input-field"
+                type="text"
+                id='name'
+                name="name"
+                placeholder="Activity Name"
+              />
+              {errors.name && CustomErrorMessage ('title',errors.name)}
+            </div>
+            <div>
+              <p>Description</p>
+              <CKEditor
+                  editor={ ClassicEditor }
+                  data=''
+                  config={ {
+                     placeholder
+                  } }
+                  onChange={(event, description)=>handleChangeDescription (description,setFieldValue)}
+              />
+              {errors.description && CustomErrorMessage ('description',errors.description)}
+            </div>
+            <div >
+              <p >Image</p>
+              <div>
+                {values.image && <img src={values.image} alt='imagen vista previa' width='180' height='180' />}
+              </div>
+              <div>
+                <Field
+                    className='input-image'
+                    type='file'
+                    accept="image/png, image/jpg"
+                    id='image'
+                    name='image'
+                    value=''
+                    onChange={(e)=>handleChangeImage(e,setFieldValue)}
+                />
+              </div>
+              {errors.image && CustomErrorMessage ('image',errors.image)}
+            </div>
+            <button className="submit-btn" type="submit">Send</button>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

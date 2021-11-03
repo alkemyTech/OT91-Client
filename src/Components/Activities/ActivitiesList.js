@@ -11,5 +11,5 @@ const ActivitiesList = () => {
         </div>
     );
 }
-
+ 
 export default ActivitiesList;

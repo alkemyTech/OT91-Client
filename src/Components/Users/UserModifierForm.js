@@ -29,7 +29,7 @@ const UserModifierForm = ({user}) => {
             return true;
         };
         const isJPEG = (imageType) => imageType === "image/jpeg";
-        const isPNG = (imageType) => imageType === "image/png";  
+        const isPNG = (imageType) => imageType === "image/png";
 
         const isValidImageType= key => {
             const profilePhoto = values.profilePhoto[key];
@@ -41,7 +41,7 @@ const UserModifierForm = ({user}) => {
         if (!isNotValidField('name') && values.name.length < 4) {
           errors.name = 'Debe tener 4 caracteres o mas';
         };
-      
+
         if (!isNotValidField('email') && !isEmailValid(values.email)) {
           errors.email = 'Dirección de email inválida';
         };
@@ -88,37 +88,37 @@ const UserModifierForm = ({user}) => {
                     {touched.profilePhoto && errors.profilePhoto}
                 </div>
             }
-            <input 
-                className="input-field" 
-                type="text" 
-                id="name" 
-                value={values.name} 
-                onChange={handleChange} 
+            <input
+                className="input-field"
+                type="text"
+                id="name"
+                value={values.name}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Nombre"
             />
             {touched.name && errors.name}
-            <input 
-                className="input-field" 
-                type="text" 
-                id="email" 
-                value={values.email} 
+            <input
+                className="input-field"
+                type="text"
+                id="email"
+                value={values.email}
                 onChange={handleChange}
-                onBlur={handleBlur} 
+                onBlur={handleBlur}
                 placeholder="Email"
             />
             {touched.email && errors.email}
-            <input 
-                className="input-field" 
-                type="password" 
-                id="password" 
-                value={values.password} 
+            <input
+                className="input-field"
+                type="password"
+                id="password"
+                value={values.password}
                 onChange={handleChange}
-                onBlur={handleBlur} 
+                onBlur={handleBlur}
                 placeholder="Contraseña"
             />
             {touched.password && errors.password}
-            <select 
+            <select
                 className="input-field"
                 value={values.roleId}
                 id="roleId"
@@ -126,7 +126,7 @@ const UserModifierForm = ({user}) => {
             >
                 <option value="" disabled >Seleccione el rol</option>
                 {
-                    rolesList.map(role => 
+                    rolesList.map(role =>
                         <option key={role.roleId} value={role.roleId}>{role.roleId}</option>
                     )
                 }
@@ -135,5 +135,5 @@ const UserModifierForm = ({user}) => {
         </form>
     );
 }
- 
+
 export default UserModifierForm;

@@ -93,4 +93,5 @@ const SlidesForm = ({slide}) => {
   );
 };
 
+
 export default SlidesForm;
