@@ -6,6 +6,6 @@ const ActivitiesCards = ({activities}) => {
             {activities ? activities.map(e=><ActivityCard props={e} key={e.id}/>) : <p>No hay Actividades</p>}
         </div>
     )
-}
+};
 
 export default ActivitiesCards;

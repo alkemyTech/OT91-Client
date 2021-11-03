@@ -6,10 +6,10 @@ const ActivitiesList = () => {
 
     return (
         <div>
-            <Title title={'Listado Actividades'} id={'activitiesList'}/>
+            <Title title={'Actividades'} id={'activitiesList'}/>
             <PaginationActivities/>
         </div>
     );
 }
- 
+
 export default ActivitiesList;
