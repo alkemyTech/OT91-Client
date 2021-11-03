@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react"
 import {getAllActivities} from '../../../Services/activityService';
 import ActivitiesCards from '../ActivitiesCards/ActivitiesCards';
+import ArrowRight from '@material-ui/icons/ArrowRight';
+import ArrowLeft from '@material-ui/icons/ArrowLeft';
 
 const cards = 9;
 
@@ -42,8 +44,8 @@ const ActivitiesPagination = () => {
                 <ActivitiesCards activities={items} />
             </div>
           <div className='paginacion_buttons'>
-                <button className='paginacion_btn' onClick={()=>prev()}>{"<--"}</button>
-                <button className='paginacion_btn' onClick={()=>next()}>{"-->"}</button>
+                <button className='paginacion_btn' onClick={()=>prev()}><ArrowLeft/></button>
+                <button className='paginacion_btn' onClick={()=>next()}><ArrowRight/></button>
           </div>
         </div>
     )
