@@ -14,9 +14,6 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
-import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
-import Detail from './Components/Activities/Detail/Detail';
-
 function App() {
   return (
     <>
