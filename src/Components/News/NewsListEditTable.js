@@ -6,7 +6,7 @@ import { createNewsObject } from "../../Utils/formatters";
 const newsList = [
     createNewsObject('Novedad 1', 'https://bit.ly/3GRp1al', new Date()),
     createNewsObject('Novedad 2', 'https://bit.ly/3GRp1al', new Date()),
-    createNewsObject('Novedad 3', 'https://bit.ly/3GRp1al', new Date()),
+    createNewsObject('Novedad 3', 'https://bit.ly/3GRp1al', new Date())
     ];
 
 const NewsListEditTable = () => {
