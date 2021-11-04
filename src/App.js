@@ -16,6 +16,9 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import Detail from './Components/Activities/Detail/Detail';
+import NewsList from './Components/News/NewsList'
+
+
 
 function App() {
   return (
@@ -38,6 +41,7 @@ function App() {
           <Route path="/edit-testimonial/:testimonialId" component={TestimonialForm} />
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
+          <Route path='/novedades' component={NewsList} />
           <Route path="/activity-detail/:id" component={Detail} />
         </Switch>
       </BrowserRouter>
