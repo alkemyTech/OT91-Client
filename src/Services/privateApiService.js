@@ -14,8 +14,8 @@ const Get = () => {
 
 export default Get;
 
-export const tokenExists = () => {
+export const getAuthorizationHeader = () => {
     const token = localStorage.getItem('token');
-    const HeaderAuthorization = {Bearer: token};
-    return token ? HeaderAuthorization : {};
+    if(!token) return;
+    return {Authorization: `Bearer: ${token}`};
 }
