@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
-import * as services from '../../Services/categoriesServices'
+import * as services from '../../Services/CategorieServices'
 import * as inputServices from '../../Services/inputsServices'
 import * as validations from '../../Services/validations'
 import GenericInput from '../inputsForms/GenericInput'
@@ -27,7 +27,7 @@ const CategoriesForm = (props) => {
   })
 
   const showDataforEdit = async (idforEdit) => {
-    await services.getCategories(idforEdit).then((result) => {
+    await services.getCategory(idforEdit).then((result) => {
       if (result) {
         setcategory({
           ...category,
