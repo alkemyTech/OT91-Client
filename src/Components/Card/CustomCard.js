@@ -21,10 +21,10 @@ const CustomCard = ({title,img,description}) => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {title? title : ""}
+                        {title || ""}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {description? description : ""}
+                        {description || ""}
                     </Typography>
                 </CardContent>
             </Card>
