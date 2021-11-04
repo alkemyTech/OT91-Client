@@ -12,10 +12,9 @@ import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
-import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
-import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
-import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
-import Detail from './Components/Activities/Detail/Detail';
+import OrganizationEditionForm from "./Components/Organization/OrganizationEditionForm";
+import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
+import MemberEditCreate from "./Components/Members/MemberEditCreate";
 
 function App() {
   return (
@@ -26,7 +25,11 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/organization/edit" component={OrganizationEditionForm} />
+          <Route path="/backoffice/members/edit" component={MemberEditCreate} />
+          <Route
+            path="/backoffice/organization/edit"
+            component={OrganizationEditionForm}
+          />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
@@ -35,7 +38,10 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/edit-activity/:activityId" component={ActivitiesForm} />
-          <Route path="/edit-testimonial/:testimonialId" component={TestimonialForm} />
+          <Route
+            path="/edit-testimonial/:testimonialId"
+            component={TestimonialForm}
+          />
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
