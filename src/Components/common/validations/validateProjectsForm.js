@@ -6,9 +6,9 @@ export const validateProjectsForm = (values) => {
 
     if(!values.title) errors.title='You need to enter a name';
     if(isSmallerTha(values.title,4)) errors.title='The name must have more than 4 letters';
-    
+
     if(!values.description) errors.description='You need to add a description';
-    
+
     return errors
 
-}
+};

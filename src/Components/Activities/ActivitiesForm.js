@@ -6,7 +6,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
-import { validateActivitiesForm} from '../common/validations/validateActivitiesForm';
+import { validateForm} from '../common/validations/validateForm';
 import {createOrUpdateActivity} from '../../Services/activityService';
 const ActivitiesForm = () => {
   const {activityId} = useParams();
@@ -37,7 +37,7 @@ const ActivitiesForm = () => {
         initialValues={{
           ...activity
         }}
-        validate={(values)=>validateActivitiesForm(values)}
+        validate={(values)=>validateForm(values)}
         onSubmit={(values,{resetForm})=>handleSubmit(values,resetForm)}
       >
         {({errors, setFieldValue,values})=>(
