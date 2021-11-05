@@ -6,17 +6,20 @@ const config = {
     }
 }
 
-const privateInstance = axios.create({
-    baseURL: 'http://ongapi.alkemy.org/public/api',
+const axiosInstance = axios.create({
+    baseURL: 'http://ongapi.alkemy.org/private/api',
 });
 
-privateInstance.interceptors.request.use((config)=> {
-    config.headers.Authorization = localStorage.getItem('token');
+axiosInstance.interceptors.request.use((config)=> {
+    config.headers.Authorization = getAuthorizationHeader();
     config.headers.Group = 91;
     return config
 })
 
-export const privateGet = async (url,id,params={}) => {privateInstance.get(`${url}${id?`/${id}`:''}`,{params})};
+export const privateGet = async (url,id,params={}) => {
+    const idPlaceholder = id ? `/${id}` : '';
+    axiosInstance.get(`${url}${idPlaceholder}`, {params})
+};
 
 const Get = () => {
     axios.get('https://jsonplaceholder.typicode.com/users', config)
@@ -29,3 +32,5 @@ export const getAuthorizationHeader = () => {
     if(!token) return;
     return {Authorization: `Bearer: ${token}`};
 }
+
+export default Get
