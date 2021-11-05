@@ -5,9 +5,9 @@ export const readImageFile = (imageFile, onLoadCallback) =>{
       onLoadCallback(event.target.result)
     }
 }
-  
+
   export const setUrlImage = (imageFile,setFieldValue) =>{
-    
+
     readImageFile(imageFile,function(file){
      setFieldValue("image",file)
     })

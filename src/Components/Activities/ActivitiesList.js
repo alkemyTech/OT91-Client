@@ -1,4 +1,3 @@
-
 import '../CardListStyles.css';
 import Title from '../Title/Title';
 import { useEffect, useState } from 'react';

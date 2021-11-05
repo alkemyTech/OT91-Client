@@ -63,6 +63,9 @@ Thumbs.db
 # production
 /build
 
+#lint
+/reports
+
 # misc
 .DS_Store
 .env.local
