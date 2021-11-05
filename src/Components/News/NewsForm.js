@@ -56,7 +56,7 @@ const NewsForm = () => {
     const data = await getCategory();
     setCategories(data);
   }, []);
-  
+
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <label htmlFor="name">Title</label>
