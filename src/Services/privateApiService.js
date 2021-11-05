@@ -12,4 +12,10 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export default Get
+export default Get;
+
+export const getAuthorizationHeader = () => {
+    const token = localStorage.getItem('token');
+    if(!token) return;
+    return {Authorization: `Bearer: ${token}`};
+}
