@@ -7,5 +7,5 @@ const ActivitiesContent = ({description}) => {
         </div>
     )
 }
-
+//
 export default ActivitiesContent
