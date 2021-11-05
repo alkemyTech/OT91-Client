@@ -1,5 +1,7 @@
 import { Fragment } from 'react'
-import TableEditable from './EditableTable'
+import TableEditable from '../../Assets/EditableTable'
+import { Link } from 'react-router-dom'
+import { Container } from '@material-ui/core'
 
 const CategoriesList = () => {
   const mockCategories = [
@@ -11,7 +13,8 @@ const CategoriesList = () => {
   const handleDeleteClick = () => {}
 
   return (
-    <div className='app-container'>
+    <Container>
+      <Link to='/backoffice/categorías/create'>Create a New Category</Link>
       <table>
         <thead>
           <tr>
@@ -32,7 +35,7 @@ const CategoriesList = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </Container>
   )
 }
 export default CategoriesList
