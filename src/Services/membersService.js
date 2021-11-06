@@ -7,7 +7,7 @@ const getMembers = () => {
   return response;
 };
 
-const storeMember = (data) => {
+const createMember = (data) => {
   const response = axios.post(`${URL}/members`, data);
   return response;
 };
@@ -29,7 +29,7 @@ const removeMember = (id) => {
 
 const membersApiActions = {
   getMembers,
-  storeMember,
+  createMember,
   getMember,
   updateMember,
   removeMember,
