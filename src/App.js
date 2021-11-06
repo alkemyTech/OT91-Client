@@ -15,6 +15,7 @@ import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import Home from './Components/Home';
+import EditHomeForm from './Components/Backoffice/Home/EditHomeForm'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+          <Route path="/backoffice/home" component={EditHomeForm} />
         </Switch>
       </BrowserRouter>
     </>
