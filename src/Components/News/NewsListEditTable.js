@@ -1,12 +1,15 @@
 import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { NewsTableRows } from "./NewsTableRows";
-import { createNewsObject } from "../../Utils/formatters";
+import { createNewsObject } from "../../Services/newsServices";
+
+const onEdit = (id) => console.log(`Editing a news with id:${id}`);
+const onDelete = (id) => console.log(`Deleting a news with id:${id}`);
 
 const newsList = [
-    createNewsObject('Novedad 1', 'https://bit.ly/3GRp1al', new Date()),
-    createNewsObject('Novedad 2', 'https://bit.ly/3GRp1al', new Date()),
-    createNewsObject('Novedad 3', 'https://bit.ly/3GRp1al', new Date()),
+    createNewsObject(1, 'Novedad 1', 'https://bit.ly/3GRp1al', new Date()),
+    createNewsObject(2, 'Novedad 2', 'https://bit.ly/3GRp1al', new Date()),
+    createNewsObject(3, 'Novedad 3', 'https://bit.ly/3GRp1al', new Date())
     ];
 
 const NewsListEditTable = () => {
@@ -27,7 +30,7 @@ const NewsListEditTable = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                <NewsTableRows newsList={newsList} />
+                <NewsTableRows newsList={newsList} onEdit={onEdit} onDelete={onDelete}/>
             </TableBody>
         </Table>
     </TableContainer>
