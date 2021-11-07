@@ -1,17 +1,18 @@
-.list-container{
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+.list-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 50px;
 }
 
-.card-info{
-    list-style: none;
-    padding: 10px 30px;
-    background-color: #A1D4F6;
-    border-radius: 5px;
+.card-info {
+  list-style: none;
+  padding: 10px 30px;
+  background-color: #a1d4f6;
+  border-radius: 5px;
 }
 
-.card-info:hover{
-    cursor: pointer;
-    background-color: #61BBF8;
+.card-info:hover {
+  cursor: pointer;
+  background-color: #61bbf8;
 }
