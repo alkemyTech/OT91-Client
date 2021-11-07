@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getImageInfo } from "../../Services/ongInfoServices";
+import { getImagesSlides } from "../../Services/slidesService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
   Autoplay,
@@ -11,19 +11,18 @@ import SwiperCore, {
 } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
-import Styles from "./Carousel.module.css";
+import "../../Styles/Carousel.css";
 SwiperCore.use([Parallax, Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 const Carousel = () => {
   const [data, setData] = useState([]);
 
   useEffect(async () => {
-    const dataImage = await getImageInfo();
+    const dataImage = await getImagesSlides();
     setData(dataImage);
   }, []);
 
-  console.log(data);
   return (
-    <div className={Styles.containerCarousel}>
+    <div className="containerSlide">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -48,20 +47,20 @@ const Carousel = () => {
         }}
       >
         {data?.map((item, index) => (
-          <div key={index} style={{}} data-swiper-parallax="-23%">
+          <div key={index} data-swiper-parallax="-23%">
             <SwiperSlide
               style={{
                 backgroundImage: `url(${item.image})`,
                 backgroundPosition: "center",
               }}
-              className={Styles.swiperSlide}
+              className="swiperSlide"
             >
-              <div className={Styles.contentSlide}>
-                <h2 className={Styles.title} data-swiper-parallax="-300">
+              <div className="contentSlide">
+                <h2 className="titleSlide" data-swiper-parallax="-300">
                   {item.name}
                 </h2>
 
-                <div className={Styles.description} data-swiper-parallax="-100">
+                <div className="descriptionSlide" data-swiper-parallax="-100">
                   <p>{item.description}</p>
                 </div>
               </div>
