@@ -1,12 +1,12 @@
 import { Box, Typography } from "@material-ui/core";
 import Title from "../Title/Title";
-import '../../Styles/AboutUs.css';
+import '../../Styles/Container.css';
 
 const AboutUsDescription = ({description}) => {
     return (
-        <Box className="about-us-description">
+        <Box className="container-title">
             <Title title="Nosotros"/>
-            <div className="about-us-description__text">
+            <div className="container-title-text">
                 <p>{description}</p>
             </div>
         </Box>
