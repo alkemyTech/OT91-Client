@@ -31,5 +31,10 @@ const getActivity = (id) => {
   return response;
 };
 
+export const getAllActivities = async () =>{
+    let {data} =await axios.get(`${URL}/activities`)
+    return data
+};
+
 export default getActivity;
 
