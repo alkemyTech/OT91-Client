@@ -1,16 +1,16 @@
-.container-title {
+.title-container {
     position: relative;
     max-width: 100%;
 }
 
-.container-title-text {
+.title-container-text {
     width: 100%;
     position: absolute;
     top: 55%;
     text-align: center;
 }
 
-.container-title-text p {
+.title-container-text p {
     display: inline-block;
     max-width: 700px;
     font-size: 18px;
