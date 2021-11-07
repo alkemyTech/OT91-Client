@@ -16,6 +16,11 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import Home from './Components/Home';
+<<<<<<< HEAD
+=======
+import AboutUs from "./Components/AboutUs/AboutUs";
+
+>>>>>>> Render AboutUs in /nosotros route
 function App() {
   return (
     <>
@@ -45,7 +50,11 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+<<<<<<< HEAD
           <Route path="/activities" component={ActivitiesList} />
+=======
+          <Route path="/nosotros" component={AboutUs} />
+>>>>>>> Render AboutUs in /nosotros route
         </Switch>
       </BrowserRouter>
     </>
