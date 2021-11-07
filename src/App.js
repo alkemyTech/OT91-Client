@@ -1,28 +1,29 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
-import CategoriesForm from "./Components/Categories/CategoriesForm";
-import NewsForm from "./Components/News/NewsForm";
-import SlidesForm from "./Components/Slides/SlidesForm";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
-import UserForm from "./Components/Users/UsersForm";
-import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
-import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
-import MembersForm from "./Components/Members/MembersForm";
-import ProjectsForm from "./Components/Projects/ProjectsForm";
-import Detail from "./Components/Activities/Detail/Detail";
-import OrganizationEditionForm from "./Components/Organization/OrganizationEditionForm";
-import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
-import Backoffice from "./Components/Backoffice/Backoffice";
-import ActivitiesList from "./Components/Activities/ActivitiesList";
-import MemberEditCreate from "./Components/Members/MemberEditCreate";
-import Home from "./Components/Home";
-import AboutUs from "./Components/About/AboutUs";
-import ContactForm from "./Components/Contact/ContactForm";
-import NewsListEditTable from "./Components/News/NewsListEditTable";
-import MembersResults from "./Components/Backoffice/Members/MembersResults";
-import EditHomeForm from "./Components/Backoffice/Home/EditHomeForm";
+import React from 'react';
+import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import CategoriesForm from './Components/Categories/CategoriesForm';
+import NewsForm from './Components/News/NewsForm';
+import SlidesForm from './Components/Slides/SlidesForm';
+import TestimonialForm from './Components/Testimonials/TestimonialsForm';
+import UserForm from './Components/Users/UsersForm';
+import SchoolCampaign from './Campaigns/School/SchoolCampaign';
+import ToysCampaign from './Campaigns/Toys/ToysCampaign';
+import MembersForm from './Components/Members/MembersForm';
+import ProjectsForm from './Components/Projects/ProjectsForm';
+import Detail from './Components/Activities/Detail/Detail';
+import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
+import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
+import Backoffice from './Components/Backoffice/Backoffice';
+import ActivitiesList from './Components/Activities/ActivitiesList';
+import MemberEditCreate from './Components/Members/MemberEditCreate';
+import Home from './Components/Home';
+import AboutUs from './Components/About/AboutUs';
+import ContactForm from './Components/Contact/ContactForm';
+import NewsListEditTable from './Components/News/NewsListEditTable';
+import MembersResults from './Components/Backoffice/Members/MembersResults';
+import EditHomeForm from './Components/Backoffice/Home/EditHomeForm';
+import CategoriesList from './Components/Backoffice/Categories/CategoriesList';
 
 function App() {
   return (
@@ -34,10 +35,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/members/edit" component={MemberEditCreate} />
-          <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationEditionForm}
-          />
+          <Route path="/backoffice/organization/edit" component={OrganizationEditionForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/news" component={NewsListEditTable} />
           <Route path="/create-testimonials" component={TestimonialForm} />
@@ -47,10 +45,7 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/edit-activity/:activityId" component={ActivitiesForm} />
-          <Route
-            path="/edit-testimonial/:testimonialId"
-            component={TestimonialForm}
-          />
+          <Route path="/edit-testimonial/:testimonialId" component={TestimonialForm} />
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
@@ -60,6 +55,7 @@ function App() {
           <Route path="/nosotros" component={AboutUs} />
           <Route path="/create-contact-message" component={ContactForm} />
           <Route path="/backoffice/home" component={EditHomeForm} />
+          <Route path="/backoffice/categories" component={CategoriesList} />
         </Switch>
       </BrowserRouter>
     </>
