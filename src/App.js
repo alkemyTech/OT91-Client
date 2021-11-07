@@ -16,8 +16,7 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout'
 import ActivitiesList from './Components/Activities/ActivitiesList'
 import Home from './Components/Home'
-import ContactForm from './Components/Contact/ContactForm'
-
+import NewsList from './Components/News/NewsList'
 function App() {
   return (
     <>
@@ -32,9 +31,10 @@ function App() {
             path='/backoffice/organization/edit'
             component={OrganizationEditionForm}
           />
+          <Route path='/backoffice/categories' component={NewsList} />
+
           <Route path='/backoffice/create-slide' component={SlidesForm} />
           <Route path='/create-testimonials' component={TestimonialForm} />
-          <Route path='/create-contact-message' component={ContactForm} />
           <Route path='/create-user' component={UserForm} />
           <Route path='/create-member' component={MembersForm} />
           <Route path='/create-project' component={ProjectsForm} />
@@ -56,4 +56,5 @@ function App() {
 }
 
 export default App
+
 
