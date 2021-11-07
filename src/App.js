@@ -15,6 +15,8 @@ import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import Home from './Components/Home';
+import Donation from './Components/Donations/Donation';
+import Thanks from './Components/Donations/Thanks';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+          <Route path="/donate" component={Donation} />
+          <Route path="/thanks" component={Thanks} />
         </Switch>
       </BrowserRouter>
     </>
