@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import "../FormStyles.css";
 import Swal from 'sweetalert2'
-import {CreateSlide, EditSlide} from '../../Services/CreateOrEditSlideService'
+import {CreateSlide, EditSlide} from '../../Services/slidesServices'
 
 const SlidesForm = ({slide}) => {
   const [initialSlides, setInitialSlides] = useState({
@@ -47,7 +47,6 @@ const SlidesForm = ({slide}) => {
             setInitialSlides({...initialSlides, image:e.target.result})
           }
 }
-
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <input
