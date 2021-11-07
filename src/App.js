@@ -16,7 +16,6 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import Home from './Components/Home';
-
 function App() {
   return (
     <>
