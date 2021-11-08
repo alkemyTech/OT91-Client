@@ -14,8 +14,10 @@ import ProjectsForm from './Components/Projects/ProjectsForm'
 import Detail from './Components/Activities/Detail/Detail'
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm'
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout'
+import ActivitiesList from './Components/Activities/ActivitiesList'
 import Home from './Components/Home'
 import NewsList from './Components/News/NewsList'
+
 function App() {
   return (
     <>
@@ -25,10 +27,12 @@ function App() {
           <Route path='/create-activity' component={ActivitiesForm} />
           <Route path='/create-category' component={CategoriesForm} />
           <Route path='/create-news' component={NewsForm} />
+          <Route path='/backoffice/members/edit' component={MemberEditCreate} />
           <Route
             path='/backoffice/organization/edit'
             component={OrganizationEditionForm}
           />
+          <Route path='/novedades' component={NewsList} />
           <Route path='/backoffice/create-slide' component={SlidesForm} />
           <Route path='/create-testimonials' component={TestimonialForm} />
           <Route path='/create-user' component={UserForm} />
@@ -43,11 +47,12 @@ function App() {
           />
           <Route path='/edit-project/:projectId' component={ProjectsForm} />
           <Route path='/novedades/:id' component={NewsDetailLayout} />
-          <Route path='/novedades' component={NewsList} />
           <Route path='/activity-detail/:id' component={Detail} />
+          <Route path='/activities' component={ActivitiesList} />
         </Switch>
       </BrowserRouter>
     </>
   )
 }
+
 export default App
