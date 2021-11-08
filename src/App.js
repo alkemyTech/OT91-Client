@@ -15,6 +15,7 @@ import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import MemberEditCreate from './Components/Members/MemberEditCreate';
 import Home from './Components/Home';
 import AboutUs from "./Components/About/AboutUs";
 function App() {
