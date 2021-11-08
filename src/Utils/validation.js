@@ -22,9 +22,7 @@ const hasRequiredError = (values, errors, key) => {
   }
   return false
 }
-
 const listHasValues = (list) => list && list.length > 0
-
 export {
   regExp,
   validValue,

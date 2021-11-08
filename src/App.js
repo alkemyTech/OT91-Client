@@ -16,7 +16,6 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout'
 import Home from './Components/Home'
 import NewsList from './Components/News/NewsList'
-
 function App() {
   return (
     <>
@@ -51,5 +50,4 @@ function App() {
     </>
   )
 }
-
 export default App
