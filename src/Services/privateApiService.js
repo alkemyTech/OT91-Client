@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://ongapi.alkemy.org/private/api';
+const URL = 'http://ongapi.alkemy.org/api';
 
 const config = {
     headers: {
@@ -23,7 +23,7 @@ const verifyProps = (path,id,body) => {
     if (!path || !id || !body) {
         throw new Error(`props not specified for async action put`);
     };
-}
+};
 
 export const privateRequestPut = async(path,id,body) => {
     verifyProps(path,id,body)
