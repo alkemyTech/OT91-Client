@@ -18,7 +18,8 @@ axiosInstance.interceptors.request.use((config)=> {
 
 export const privateGet = async (url,id,params={}) => {
     const idPlaceholder = id ? `/${id}` : '';
-    axiosInstance.get(`${url}${idPlaceholder}`, {params})
+    const { data } = axiosInstance.get(`${url}${idPlaceholder}`, {params})
+    return data
 };
 
 const Get = () => {
