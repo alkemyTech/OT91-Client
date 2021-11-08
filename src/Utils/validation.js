@@ -22,7 +22,38 @@ const hasRequiredError = (values, errors, key) => {
   }
   return false
 }
+
+const isValidImage = (value) => {
+  const validImage = value.type
+  if (validImage === 'image/jpeg' || validImage === 'image/png') {
+    return true
+  } else {
+    return false
+  }
+}
+
+const isValidSocialMedia = (value) => {
+  if (
+    value.includes('https://www.facebook.com/') ||
+    value.includes('https://www.instagram.com/') ||
+    value.includes('https://www.twitter.com/')
+  ) {
+    return true
+  } else {
+    return false
+  }
+}
+
+const isValidNameMembers = (value) => {
+  if (value.length < 3) {
+    return true
+  } else {
+    return false
+  }
+}
+
 const listHasValues = (list) => list && list.length > 0
+
 export {
   regExp,
   validValue,
@@ -31,5 +62,8 @@ export {
   hasRequiredError,
   notHasValue,
   validateRequiredValues,
+  isValidImage,
+  isValidSocialMedia,
+  isValidNameMembers,
   listHasValues,
 }
