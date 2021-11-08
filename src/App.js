@@ -31,7 +31,6 @@ function App() {
             path='/backoffice/organization/edit'
             component={OrganizationEditionForm}
           />
-          <Route path='/novedades' component={NewsList} />
           <Route path='/backoffice/create-slide' component={SlidesForm} />
           <Route path='/create-testimonials' component={TestimonialForm} />
           <Route path='/create-user' component={UserForm} />
@@ -47,6 +46,7 @@ function App() {
           <Route path='/edit-project/:projectId' component={ProjectsForm} />
           <Route path='/novedades/:id' component={NewsDetailLayout} />
           <Route path='/activity-detail/:id' component={Detail} />
+          <Route path='/novedades' component={NewsList} />
           <Route path='/activities' component={ActivitiesList} />
         </Switch>
       </BrowserRouter>
