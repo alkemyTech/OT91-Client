@@ -1,5 +1,10 @@
 import axios from 'axios'
+
 const baseURL = 'http://ongapi.alkemy.org/public/api'
+const headers = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+}
 
 export const getCategories = async () => {
   try {
@@ -18,42 +23,41 @@ export const getCategory = async (id) => {
   return data
 }
 
-export const createCategory = (data) => {
+export const createCategory = (categoryData) => {
   try {
-    const response = axios.post(`${URL}/categories`, data)
-    return response
+    const { data } = axios.post(`${URL}/categories`, categoryData, {
+      headers: headers,
+    })
+    return data
   } catch (error) {
     console.error(error)
   }
 }
 
-export const updateCategory = (id, data) => {
+export const updateCategory = (id, categoryData) => {
   try {
-    const response = axios.put(`${URL}/categories/${id}`, data)
-    return response
+    const { data } = axios.put(`${URL}/categories/${id}`, categoryData, {
+      headers: headers,
+    })
+    return data
   } catch (error) {
     console.error(error)
   }
 }
-const headers = {
-  'Content-Type': 'application/json',
-}
 
-export const createOrUpdate = async (id, categorieData) => {
+export const createOrUpdate = async (id, categoryData) => {
   try {
     if (id) {
-      await axios.put(`${baseURL}/categories/${id}`, categorieData, {
-        headers: headers,
-      })
+      await updateCategory(id, categoryData)
     } else {
-      axios.post(`${baseURL}/categories`, categorieData, { headers: headers })
+      await createCategory(categoryData)
     }
   } catch (err) {
     console.error(err)
   }
 }
 
-const removeCategory = (id) => {
+export const removeCategory = (id) => {
   try {
     const response = axios.delete(`${URL}/categories/${id}`)
     return response
