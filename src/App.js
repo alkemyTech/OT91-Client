@@ -12,10 +12,11 @@ import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
-import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
-import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
-import ActivitiesList from './Components/Activities/ActivitiesList';
-import Home from './Components/Home';
+import OrganizationEditionForm from "./Components/Organization/OrganizationEditionForm";
+import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
+import ActivitiesList from "./Components/Activities/ActivitiesList";
+import Home from "./Components/Home";
+import ActivitiesTable from "./Components/Backoffice/ActivitiesBackOffice/ActivitiesTable";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/members/edit" component={MemberEditCreate} />
+          <Route path="/backoffice/activities" component={ActivitiesTable} />
           <Route
             path="/backoffice/organization/edit"
             component={OrganizationEditionForm}
@@ -50,6 +52,6 @@ function App() {
       </BrowserRouter>
     </>
   );
-};
+}
 
 export default App;
