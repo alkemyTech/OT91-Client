@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://ongapi.alkemy.org/api';
+const URL = 'http://ongapi.alkemy.org/private/api';
 
 const config = {
     headers: {
