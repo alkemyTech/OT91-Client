@@ -31,12 +31,12 @@ const lastNewsMock = [
   },
 ]
 const NewsList = ({ lastNews }) => {
-  const ListHasValues = listHasValues(lastNewsMock)
+  const newsListHasValues = listHasValues(lastNewsMock)
   return (
     <Container className='ContainerList'>
       <Title title='Novedades' />
       <ul className='list-container'>
-        {ListHasValues ? (
+        {newsListHasValues ? (
           lastNewsMock.map((news) => {
             return (
               <CustomCard

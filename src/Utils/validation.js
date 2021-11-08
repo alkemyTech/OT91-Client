@@ -23,13 +23,8 @@ const hasRequiredError = (values, errors, key) => {
   return false
 }
 
-const listHasValues = (value) => {
-  if (value.length > 0) {
-    return true
-  } else {
-    return false
-  }
-}
+const listHasValues = (list) => list && list.length > 0
+
 export {
   regExp,
   validValue,
