@@ -11,7 +11,8 @@ export const getCategories = async () => {
     const response = await axios.get(
       'http://ongapi.alkemy.org/public/api/categories'
     )
-    return response.data.data
+    const data = response.data.data
+    return data
   } catch (error) {
     console.error(error)
   }
@@ -25,9 +26,10 @@ export const getCategory = async (id) => {
 
 export const createCategory = (categoryData) => {
   try {
-    const { data } = axios.post(`${URL}/categories`, categoryData, {
+    const response = axios.post(`${URL}/categories`, categoryData, {
       headers: headers,
     })
+    const data = response.data.data
     return data
   } catch (error) {
     console.error(error)
@@ -36,9 +38,10 @@ export const createCategory = (categoryData) => {
 
 export const updateCategory = (id, categoryData) => {
   try {
-    const { data } = axios.put(`${URL}/categories/${id}`, categoryData, {
+    const response = axios.put(`${URL}/categories/${id}`, categoryData, {
       headers: headers,
     })
+    const data = response.data.data
     return data
   } catch (error) {
     console.error(error)
@@ -48,9 +51,11 @@ export const updateCategory = (id, categoryData) => {
 export const createOrUpdate = async (id, categoryData) => {
   try {
     if (id) {
-      await updateCategory(id, categoryData)
+      const response = await updateCategory(id, categoryData)
+      return response
     } else {
-      await createCategory(categoryData)
+      const response = await createCategory(categoryData)
+      return response
     }
   } catch (err) {
     console.error(err)
@@ -60,7 +65,8 @@ export const createOrUpdate = async (id, categoryData) => {
 export const removeCategory = (id) => {
   try {
     const response = axios.delete(`${URL}/categories/${id}`)
-    return response
+    const data = response.data.data
+    return data
   } catch (error) {
     console.error(error)
   }
