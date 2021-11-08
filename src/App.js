@@ -16,6 +16,7 @@ import OrganizationEditionForm from './Components/Organization/OrganizationEditi
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import Home from './Components/Home';
+import AboutUs from "./Components/About/AboutUs";
 function App() {
   return (
     <>
@@ -46,6 +47,7 @@ function App() {
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
           <Route path="/activities" component={ActivitiesList} />
+          <Route path="/nosotros" component={AboutUs} />
         </Switch>
       </BrowserRouter>
     </>
