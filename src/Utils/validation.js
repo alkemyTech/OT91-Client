@@ -9,12 +9,10 @@ const validValue = (regExp, value) => regExp.test(value)
 const isValidFile = (acceptTypes, file) =>
   isFile(file) && acceptTypes.some((acceptType) => file.type === acceptType)
 const notHasValue = (values, key) => !values[key]
-
 const validateRequiredValues = (values, errors, requiredValues) => {
   const requiredKeys = Object.keys(requiredValues)
   requiredKeys.forEach((value) => hasRequiredError(values, errors, value))
 }
-
 const hasRequiredError = (values, errors, key) => {
   if (notHasValue(values, key)) {
     errors[key] = 'Dato Obligatorio'
@@ -22,7 +20,6 @@ const hasRequiredError = (values, errors, key) => {
   }
   return false
 }
-
 const isValidImage = (value) => {
   const validImage = value.type
   if (validImage === 'image/jpeg' || validImage === 'image/png') {
@@ -31,6 +28,7 @@ const isValidImage = (value) => {
     return false
   }
 }
+const listHasValues = (list) => list && list.length > 0
 
 const isValidSocialMedia = (value) => {
   if (
@@ -43,7 +41,6 @@ const isValidSocialMedia = (value) => {
     return false
   }
 }
-
 const isValidNameMembers = (value) => {
   if (value.length < 3) {
     return true
@@ -51,8 +48,6 @@ const isValidNameMembers = (value) => {
     return false
   }
 }
-
-const listHasValues = (list) => list && list.length > 0
 
 export {
   regExp,
@@ -63,7 +58,7 @@ export {
   notHasValue,
   validateRequiredValues,
   isValidImage,
+  listHasValues,
   isValidSocialMedia,
   isValidNameMembers,
-  listHasValues,
 }

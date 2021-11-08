@@ -17,7 +17,6 @@ import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout'
 import ActivitiesList from './Components/Activities/ActivitiesList'
 import Home from './Components/Home'
 import NewsList from './Components/News/NewsList'
-
 function App() {
   return (
     <>
@@ -54,5 +53,4 @@ function App() {
     </>
   )
 }
-
 export default App
