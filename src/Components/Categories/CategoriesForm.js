@@ -6,7 +6,7 @@ import * as validations from '../../Services/validations'
 import GenericInput from '../inputsForms/GenericInput'
 import CkeditInput from '../inputsForms/CkeditInput'
 import FileInput from '../inputsForms/FileInput'
-import '../FormStyles.css'
+import '../../Styles/FormStyles.css'
 
 const validate = (values) => {
   const errors = {}

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../CardListStyles.css'
+import '../../Styles/CardListStyles.css'
 import { listHasValues } from '../../Utils/validation'
 import Title from '../Title/Title'
 import CustomCard from '../Card/CustomCard'
@@ -30,12 +30,12 @@ const lastNewsMock = [
   },
 ]
 const NewsList = ({ lastNews }) => {
-  const ListHasValues = listHasValues(lastNewsMock)
+  const newsListHasValues = listHasValues(lastNewsMock)
   return (
     <Container className='ContainerList'>
       <Title title='Novedades' />
       <ul className='list-container'>
-        {ListHasValues ? (
+        {newsListHasValues ? (
           lastNewsMock.map((news) => {
             return (
               <CustomCard

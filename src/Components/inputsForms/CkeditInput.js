@@ -6,7 +6,7 @@ import {
   FormLabel,
   InputLabel,
 } from '@material-ui/core'
-import '../FormStyles.css'
+import '../../Styles/FormStyles.css'
 
 const ckeditInput = ({
   label,
