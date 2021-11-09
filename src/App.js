@@ -1,13 +1,9 @@
-
 function App() {
   return (
     <>
       <BrowserRouter>
         <Switch>
-          <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationEditionForm}
-          />
+          <Route path="/backoffice/organization/edit" component={OrganizationEditionForm}/>
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
@@ -27,7 +23,7 @@ function App() {
         </Switch>
       </BrowserRouter>
     </>
-  );
+  )
 }
 
 export default App;
