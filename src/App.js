@@ -14,8 +14,11 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
+import Backoffice from './Components/Backoffice/Backoffice';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import MemberEditCreate from './Components/Members/MemberEditCreate';
 import Home from './Components/Home';
+import AboutUs from "./Components/About/AboutUs";
 function App() {
   return (
     <>
@@ -45,7 +48,9 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+          <Route path="/backoffice" component={Backoffice} />
           <Route path="/activities" component={ActivitiesList} />
+          <Route path="/nosotros" component={AboutUs} />
         </Switch>
       </BrowserRouter>
     </>
