@@ -19,6 +19,7 @@ import ActivitiesList from './Components/Activities/ActivitiesList';
 import MemberEditCreate from './Components/Members/MemberEditCreate';
 import Home from './Components/Home';
 import AboutUs from "./Components/About/AboutUs";
+import ListSlides from './Components/Slides/ListSlides/ListSlides';
 function App() {
   return (
     <>
@@ -51,6 +52,7 @@ function App() {
           <Route path="/backoffice" component={Backoffice} />
           <Route path="/activities" component={ActivitiesList} />
           <Route path="/nosotros" component={AboutUs} />
+          <Route path='/list-slides' component={ListSlides}/>
         </Switch>
       </BrowserRouter>
     </>
