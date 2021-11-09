@@ -52,5 +52,15 @@ export const privateRequestPut = async(path,id,body) => {
 
     return data;
 };
-
+export const onPrivateDelete = async(url,id) =>{
+    const getAuthorization = getAuthorizationHeader();
+    if(!getAuthorization.Authorization) return;
+    else{
+        return await axios.delete(url,id,{
+            headers:getAuthorization,
+        })
+        .then((response) => (response.data))
+          .catch((error) => console.log(error));
+    }
+}
 export default Get;
