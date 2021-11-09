@@ -7,12 +7,12 @@ const config = {
 };
 
 const axiosInstance = axios.create({
-  baseURL: "http://ongapi.alkemy.org/api",
+  baseURL: "http://ongapi.alkemy.org/public/api",
 });
 
 export const publicGet = (path, id) => {
-  const idCheck = id ? `${id}` : "";
-  axiosInstance.get(`/${path}/${idCheck}`);
+  const idCheck = id ? `/${id}` : "";
+  return axiosInstance.get(`/${path}${idCheck}`);
 };
 
 const Get = () => {
