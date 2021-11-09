@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const URL = 'http://ongapi.alkemy.org/public/api';
+const emptyActivity = {id: 0, name: '', description: '', image: ''}
 
 export const getActivityId = async (id) => {
     let {data}= await axios.get(`${URL}/activities/${id}`);
@@ -24,11 +25,13 @@ export const createOrUpdateActivity = async (activityId,body)=>{
     }else createActivity(body)
 };
 
-
-const getActivity = (id) => {
-
-  const response = axios.get(`http://ongapi.alkemy.org/api/slides/${id}`);
-  return response;
+const getActivity = async (id) => {
+    const activity = await axios.get(`${URL}/activities/${id}`)
+        .then(response => {
+            if(response.status === 200) return response.data.data;
+        })
+        .catch(_ => emptyActivity);
+    return activity;
 };
 
 export const getAllActivities = async () =>{
