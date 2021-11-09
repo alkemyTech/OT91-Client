@@ -15,7 +15,9 @@ import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import MemberEditCreate from './Components/Members/MemberEditCreate';
 import Home from './Components/Home';
+import BackofficeUsers from './Components/Backoffice/Users/BackofficeUsers'
 function App() {
   return (
     <>
@@ -31,6 +33,7 @@ function App() {
             component={OrganizationEditionForm}
           />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/users" component={BackofficeUsers} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
