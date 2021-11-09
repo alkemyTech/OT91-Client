@@ -27,16 +27,16 @@ export const createOrUpdateActivity = async (activityId,body)=>{
 
 const getActivity = async (id) => {
     const activity = await axios.get(`${URL}/activities/${id}`)
-        .then(response => {
-            if(response.status === 200) return response.data.data;
-        })
+        .then(response => response.data.data)
         .catch(_ => emptyActivity);
     return activity;
 };
 
 export const getAllActivities = async () =>{
-    let {data} =await axios.get(`${URL}/activities`)
-    return data
+    const allActivities = await axios.get(`${URL}/activities`)
+        .then(response => response.data.data)
+        .catch(_ => []);
+    return allActivities;
 };
 
 export default getActivity;
