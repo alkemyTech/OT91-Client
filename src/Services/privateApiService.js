@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use((config)=> {
     return config
 })
 
-export const privateGet = async (url,id,params={}) => {
+const privateGet = async (url,id,params={}) => {
     const idPlaceholder = id ? `/${id}` : '';
     const { data } = axiosInstance.get(`${url}${idPlaceholder}`, {params})
     return data
@@ -29,7 +29,7 @@ const Get = () => {
     .catch(err => console.log(err))
 };
 
-export const getAuthorizationHeader = () => {
+const getAuthorizationHeader = () => {
     const token = localStorage.getItem('token');
     if(!token) return;
     return {Authorization: `Bearer: ${token}`};
@@ -41,7 +41,7 @@ const verifyProps = (path,id,body) => {
     };
 };
 
-export const privateRequestPut = async(path,id,body) => {
+const privateRequestPut = async(path,id,body) => {
     verifyProps(path,id,body)
 
     const {Authorization}=getAuthorizationHeader();
@@ -53,4 +53,16 @@ export const privateRequestPut = async(path,id,body) => {
     return data;
 };
 
-export default Get;
+
+const privatePost = async (url, data) => {
+    const authorizationHeader = getAuthorizationHeader();
+    if (!authorizationHeader.Authorization) return;
+    return await axios
+      .post(url, data, {
+        headers: authorizationHeader,
+      })
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  };
+
+export {privatePost, Get, privateRequestPut,getAuthorizationHeader,privateGet }
