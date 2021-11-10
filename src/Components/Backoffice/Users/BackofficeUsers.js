@@ -4,12 +4,13 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import "../../../Styles/BackOfficerUsersTable.css";
 import Button from "@material-ui/core/Button/Button";
 import { Link } from 'react-router-dom';
+// import { createData } from '../../../Services/userServices';
 
 const BackofficeUsers = () => {
     const createData =(nombre, id, email,) => {
         return { nombre, id, email, };
       }
-      const rows = [
+      const Tablerows = [
         createData('Nombre 0', 159, "nombre@alkemy.org",),
         createData('Nombre 1', 237, "nombre@alkemy.org",),
         createData('Nombre 2', 262, "nombre@alkemy.org",),
@@ -26,8 +27,8 @@ const BackofficeUsers = () => {
              <Link className="CreateUserLinkBackoffice" to="/backoffice/users/create">Create User</Link>
              </Button>
              <hr></hr>
-        <Table>
-        <Thead className="BackofficeUsersThead">
+        <Table className="UsersTable">
+        <Thead>
           <Tr>
             <Th>Nombre</Th>
             <Th>Id</Th>
@@ -37,7 +38,7 @@ const BackofficeUsers = () => {
           </Tr>
         </Thead>
         <Tbody>
-        {rows.map((row) => (
+        {Tablerows.map((row) => (
           <Tr>
             <Td>{row.nombre}</Td>
             <Td>{row.id}</Td>
