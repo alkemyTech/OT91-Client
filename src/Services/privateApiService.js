@@ -21,12 +21,12 @@ export const getAuthorizationHeader = () => {
   return { Authorization: `Bearer: ${token}` };
 };
 
-export const postAutorizationHeader = async (url, data) => {
-  const token = getAuthorizationHeader();
-  if (!token.Authorization) return;
+export const privatePost = async (url, data) => {
+  const authorizationHeader = getAuthorizationHeader();
+  if (!authorizationHeader.Authorization) return;
   return await axios
     .post(url, data, {
-      headers: token,
+      headers: authorizationHeader,
     })
     .then((res) => res.data)
     .catch((err) => console.log(err));
