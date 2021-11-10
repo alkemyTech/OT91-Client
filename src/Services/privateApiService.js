@@ -56,7 +56,7 @@ const privateRequestPut = async(path,id,body) => {
 
 const privatePost = async (url, data) => {
     const authorizationHeader = getAuthorizationHeader();
-    if (!authorizationHeader.Authorization) return;
+    if (!authorizationHeader.Authorization) throw new Error('No token');
     return await axios
       .post(url, data, {
         headers: authorizationHeader,
