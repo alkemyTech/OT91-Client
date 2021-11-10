@@ -52,7 +52,7 @@ export const privateRequestPut = async(path,id,body) => {
 
     return data;
 };
-export const onPrivateDelete = async(url,id) =>{
+export const privateDelete = async(url,id) =>{
     const getAuthorization = getAuthorizationHeader();
     if(!getAuthorization.Authorization) return;
     else{
