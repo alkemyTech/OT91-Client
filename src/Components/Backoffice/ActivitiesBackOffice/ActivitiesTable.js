@@ -1,41 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { showSuccessAlert } from "../../../Utils/alerts";
 import { deleteActivity } from "../../../Utils/handlers";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "../../../Styles/TableStyle.css";
+import { getAllActivities, deleteActivityById } from "../../../Services/activityService";
+import { useHistory } from "react-router-dom";
 
 const ActivitiesTable = () => {
-  const [dataActivity, setDataActivity] = useState([
-    {
-      id: 1,
-      name: "Activity 1",
-      image: "https://picsum.photos/id/1/200/200",
-      CreatedAt: "01/01/2020",
-    },
-    {
-      id: 2,
-      name: "Activity 2",
-      image: "https://picsum.photos/id/237/200/200",
-      CreatedAt: "01/01/2020",
-    },
-    {
-      id: 3,
-      name: "Activity 3",
-      image: "https://picsum.photos/id/227/200/200",
-      CreatedAt: "01/01/2020",
-    },
-  ]);
+  const [dataActivity, setDataActivity] = useState([]);
+  const history = useHistory();
 
-  const editData = (id) => {
-    console.log("id", id);
-  };
+  const editData = (id) => history.push(`/activity-detail/${id}`);
 
   const deleteData = (id) => {
-    setDataActivity(deleteActivity(id, dataActivity));
-    showSuccessAlert("Delete Activity");
+    deleteActivityById(id)
+      .then(response => {
+        setDataActivity(deleteActivity(id, dataActivity));
+        showSuccessAlert("Delete Activity");
+      })
   };
+
+  useEffect(() => {
+    getAllActivities().then(allActivities => setDataActivity(allActivities));
+  }, [])
 
   return (
     <div>
