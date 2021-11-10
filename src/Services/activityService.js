@@ -1,12 +1,6 @@
 import axios from 'axios';
 
 const URL = 'http://ongapi.alkemy.org/public/api';
-const emptyActivity = {id: 0, name: '', description: '', image: ''}
-
-export const getActivityId = async (id) => {
-    let {data}= await axios.get(`${URL}/activities/${id}`);
-    return data;
-};
 
 export const modifyActivity = async (id,body) => {
     let {data}= await axios.put(`${URL}/activities/${id}`,body);
@@ -18,24 +12,27 @@ export const createActivity = async (body) => {
     return data;
 };
 
+export const deleteActivity = async (activityId) => {
+    return await axios.delete(`${URL}/activities/${activityId}`)
+        .then(response => response.data);
+}
+
 export const createOrUpdateActivity = async (activityId,body)=>{
-    if(activityId){
-        let {data} = await getActivityId(activityId)
-        data && modifyActivity(activityId,body)
-    }else createActivity(body)
+    const activityCreatedOrUpdated = await getActivity(activityId)
+        .then(activity => modifyActivity(activityId, body))
+        .catch(_ => createActivity(body));
+    return activityCreatedOrUpdated;
 };
 
 const getActivity = async (id) => {
     const activity = await axios.get(`${URL}/activities/${id}`)
         .then(response => response.data.data)
-        .catch(_ => emptyActivity);
     return activity;
 };
 
 export const getAllActivities = async () =>{
     const allActivities = await axios.get(`${URL}/activities`)
-        .then(response => response.data.data)
-        .catch(_ => []);
+        .then(response => response.data.data);
     return allActivities;
 };
 
