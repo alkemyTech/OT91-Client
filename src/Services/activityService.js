@@ -12,7 +12,7 @@ export const createActivity = async (body) => {
     return data;
 };
 
-export const deleteActivity = async (activityId) => {
+export const deleteActivityById = async (activityId) => {
     return await axios.delete(`${URL}/activities/${activityId}`)
         .then(response => response.data);
 }
