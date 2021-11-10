@@ -8,10 +8,7 @@ const headers = {
 
 export const getCategories = async () => {
   try {
-    const response = await axios.get(
-      'http://ongapi.alkemy.org/public/api/categories'
-    )
-    const data = response.data.data
+    const { data } = await axios.get(`${baseURL}/categories`)
     return data
   } catch (error) {
     console.error(error)
@@ -19,17 +16,19 @@ export const getCategories = async () => {
 }
 
 export const getCategory = async (id) => {
-  const response = await axios.get(`${baseURL}/categories/${id}`)
-  const data = response.data.data
-  return data
+  try {
+    const { data } = await axios.get(`${baseURL}/categories/${id}`)
+    return data
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const createCategory = (categoryData) => {
   try {
-    const response = axios.post(`${URL}/categories`, categoryData, {
+    const { data } = axios.post(`${baseURL}/categories`, categoryData, {
       headers: headers,
     })
-    const data = response.data.data
     return data
   } catch (error) {
     console.error(error)
@@ -38,34 +37,33 @@ export const createCategory = (categoryData) => {
 
 export const updateCategory = (id, categoryData) => {
   try {
-    const response = axios.put(`${URL}/categories/${id}`, categoryData, {
+    const { data } = axios.put(`${baseURL}/categories/${id}`, categoryData, {
       headers: headers,
     })
-    const data = response.data.data
     return data
   } catch (error) {
     console.error(error)
   }
 }
-
-export const createOrUpdate = async (id, categoryData) => {
+export const createOrUpdate = async (categoryData, id) => {
+  const allCategories = await getCategories()
+  const sameData = allCategories.data.find((category) => category.id === id)
   try {
-    if (id) {
-      const response = await updateCategory(id, categoryData)
-      return response
-    } else {
-      const response = await createCategory(categoryData)
-      return response
+    if (sameData) {
+      const data = updateCategory(id, categoryData)
+      return data
+    } else if (!id) {
+      const data = createCategory(categoryData)
+      return data
     }
-  } catch (err) {
-    console.error(err)
+  } catch {
+    console.error(error)
   }
 }
 
 export const removeCategory = (id) => {
   try {
-    const response = axios.delete(`${URL}/categories/${id}`)
-    const data = response.data.data
+    const { data } = axios.delete(`${baseURL}/categories/${id}`)
     return data
   } catch (error) {
     console.error(error)
