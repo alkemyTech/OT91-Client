@@ -22,6 +22,7 @@ import AboutUs from "./Components/About/AboutUs";
 import ContactForm from "./Components/Contact/ContactForm";
 import NewsListEditTable from "./Components/News/NewsListEditTable";
 import MembersResults from "./Components/Backoffice/Members/MembersResults";
+import EditHomeForm from "./Components/Backoffice/Home/EditHomeForm";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/activities" component={ActivitiesList} />
           <Route path="/nosotros" component={AboutUs} />
           <Route path="/create-contact-message" component={ContactForm} />
+          <Route path="/backoffice/home" component={EditHomeForm} />
         </Switch>
       </BrowserRouter>
     </>
