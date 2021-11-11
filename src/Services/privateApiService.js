@@ -23,11 +23,6 @@ export const privateGet = async (url, id, params = {}) => {
   return data;
 };
 
-export const privatePut = async (url, id, params) => {
-  const { data } = await axiosInstance.put(`${url}${id}`, params);
-  return data;
-};
-
 const Get = () => {
   axios
     .get('https://jsonplaceholder.typicode.com/users', config)
@@ -45,6 +40,10 @@ const verifyProps = (path, id, body) => {
   if (!path || !id || !body) {
     throw new Error(`props not specified for async action put`);
   }
+};
+export const privatePut = async (url, id, params) => {
+  const { data } = await axiosInstance.put(`${url}${id}`, params);
+  return data;
 };
 
 export const privateRequestPut = async (path, id, body) => {
