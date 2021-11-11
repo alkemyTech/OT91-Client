@@ -2,11 +2,6 @@ import axios from 'axios';
 
 const URL = 'http://ongapi.alkemy.org/public/api';
 
-export const getActivityId = async (id) => {
-    let {data}= await axios.get(`${URL}/activities/${id}`);
-    return data;
-};
-
 export const modifyActivity = async (id,body) => {
     let {data}= await axios.put(`${URL}/activities/${id}`,body);
     return data;
@@ -17,24 +12,31 @@ export const createActivity = async (body) => {
     return data;
 };
 
+export const deleteActivityById = async (activityId) => {
+    return await axios.delete(`${URL}/activities/${activityId}`)
+        .then(response => response.data);
+}
+
 export const createOrUpdateActivity = async (activityId,body)=>{
-    if(activityId){
-        let {data} = await getActivityId(activityId)
-        data && modifyActivity(activityId,body)
-    }else createActivity(body)
+    const activityCreatedOrUpdated = await getActivity(activityId)
+        .then(activity => modifyActivity(activityId, body))
+        .catch(_ => createActivity(body));
+    return activityCreatedOrUpdated;
 };
 
-
-const getActivity = (id) => {
-
-  const response = axios.get(`http://ongapi.alkemy.org/api/slides/${id}`);
-  return response;
+const getActivity = async (id) => {
+    const activity = await axios.get(`${URL}/activities/${id}`)
+        .then(response => response.data.data)
+    return activity;
 };
 
 export const getAllActivities = async () =>{
-    let {data} =await axios.get(`${URL}/activities`)
-    return data
+    const allActivities = await axios.get(`${URL}/activities`)
+        .then(response => response.data.data);
+    return allActivities;
 };
+
+export const isValidList = list => list && list.length > 0;
 
 export default getActivity;
 
