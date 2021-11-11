@@ -12,7 +12,7 @@ export const getTestimonial = async (id) => {
         let  {data}= await axios.get(`${URL}/testimonials/${id}`);
         return data;
     } catch (error) {
-        verifyStatus(error.split(' ')[error.length-1])
+        verifyStatus('buscar')
     }
 };
 
@@ -21,7 +21,7 @@ export const modifyTestimonial = async (id,body) => {
         let  {data}= await axios.put(`${URL}/testimonials/${id}`,body);
         return data;
     } catch (error) {
-        verifyStatus(error.split(' ')[error.length-1],ERROR_EDIT)
+        verifyStatus('editar',ERROR_EDIT)
     }
 };
 
@@ -30,7 +30,7 @@ export const createTestimonial = async (body) => {
         let data= await axios.post(`${URL}/testimonials`,body);
         return data;
     }catch(error){
-        verifyStatus(error.split(' ')[error.length-1],ERROR_CREATE)
+        verifyStatus('crear',ERROR_CREATE)
     }
 };
 
