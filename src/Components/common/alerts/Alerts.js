@@ -13,6 +13,6 @@ const Toast = Swal.mixin({
 export const AlertError = (body,status) => {
     return Toast.fire({
         icon:'error',
-        text:`${body}- status: ${status}`
+        text:`${body}- accion: ${status}`
     })
 };
