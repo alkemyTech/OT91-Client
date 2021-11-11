@@ -14,7 +14,7 @@ const ActivitiesList = () => {
             .then(allActivities => setItems(allActivities));
     }, []);
 
-    const showItemsListComponent = (items) => (<ActivitiesCards activities={items || []} />);
+    const showItemsListComponent = (items) => (<ActivitiesCards activities={items} />);
 
     return (
         <div>

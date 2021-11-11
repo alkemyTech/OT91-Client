@@ -36,5 +36,7 @@ export const getAllActivities = async () =>{
     return allActivities;
 };
 
+export const isValidList = list => list && list.length > 0;
+
 export default getActivity;
 

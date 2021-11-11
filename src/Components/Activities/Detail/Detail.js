@@ -22,8 +22,8 @@ const Detail = () => {
 
   useEffect(() => {
     getActivity(id)
-      .then((gettedActivity) => {
-          setActivity(gettedActivity);
+      .then((activityData) => {
+          setActivity(activityData);
           stripedHtml();
         })
   }, [stripedHtml]);
