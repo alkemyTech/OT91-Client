@@ -14,8 +14,13 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import OrganizationEditionForm from "./Components/Organization/OrganizationEditionForm";
 import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
+import Backoffice from "./Components/Backoffice/Backoffice";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
+import MemberEditCreate from "./Components/Members/MemberEditCreate";
 import Home from "./Components/Home";
+import AboutUs from "./Components/About/AboutUs";
+import ContactForm from "./Components/Contact/ContactForm";
+import NewsListEditTable from "./Components/News/NewsListEditTable";
 import MembersResults from "./Components/Backoffice/Members/MembersResults";
 
 function App() {
@@ -33,6 +38,7 @@ function App() {
             component={OrganizationEditionForm}
           />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/news" component={NewsListEditTable} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
@@ -47,8 +53,11 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+          <Route path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/members" component={MembersResults} />
           <Route path="/activities" component={ActivitiesList} />
+          <Route path="/nosotros" component={AboutUs} />
+          <Route path="/create-contact-message" component={ContactForm} />
         </Switch>
       </BrowserRouter>
     </>
