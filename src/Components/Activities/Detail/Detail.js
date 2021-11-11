@@ -22,13 +22,10 @@ const Detail = () => {
 
   useEffect(() => {
     getActivity(id)
-      .then((response) => {
-          setActivity(response.data.data);
+      .then((activityData) => {
+          setActivity(activityData);
           stripedHtml();
         })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [stripedHtml]);
 
   return (

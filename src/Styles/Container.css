@@ -1,0 +1,19 @@
+.title-container {
+    position: relative;
+    width: 100%;
+}
+
+.title-container-text {
+    width: 100%;
+    position: absolute;
+    top: 55%;
+    text-align: center;
+}
+
+.title-container-text p {
+    display: inline-block;
+    width: 90%;
+    max-width: 700px;
+    font-size: 18px;
+    line-height: 30px;
+}
