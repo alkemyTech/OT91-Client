@@ -12,10 +12,29 @@ import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+import OrganizationEditionForm from "./Components/Organization/OrganizationEditionForm";
+import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
+import Backoffice from "./Components/Backoffice/Backoffice";
+import ActivitiesList from "./Components/Activities/ActivitiesList";
+import MemberEditCreate from "./Components/Members/MemberEditCreate";
+import Home from "./Components/Home";
+import AboutUs from "./Components/About/AboutUs";
+import ContactForm from "./Components/Contact/ContactForm";
+import NewsListEditTable from "./Components/News/NewsListEditTable";
+import MembersResults from "./Components/Backoffice/Members/MembersResults";
+=======
+>>>>>>> Stashed changes
 import OrganizationEditionForm from './Components/Organization/OrganizationEditionForm';
 import NewsDetailLayout from './Components/News/Detail/NewsDetailLayout';
 import Home from './Components/Home';
 import EditHomeForm from './Components/Backoffice/Home/EditHomeForm'
+<<<<<<< Updated upstream
+=======
+>>>>>>> 110df37 (Change Backoffice/Home files names, add routing)
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -39,7 +58,19 @@ function App() {
           <Route path="/edit-project/:projectId" component={ProjectsForm} />
           <Route path="/novedades/:id" component={NewsDetailLayout} />
           <Route path="/activity-detail/:id" component={Detail} />
+<<<<<<< Updated upstream
           <Route path="/backoffice/home" component={EditHomeForm} />
+=======
+<<<<<<< HEAD
+          <Route path="/backoffice" component={Backoffice} />
+          <Route path="/backoffice/members" component={MembersResults} />
+          <Route path="/activities" component={ActivitiesList} />
+          <Route path="/nosotros" component={AboutUs} />
+          <Route path="/create-contact-message" component={ContactForm} />
+=======
+          <Route path="/backoffice/home" component={EditHomeForm} />
+>>>>>>> 110df37 (Change Backoffice/Home files names, add routing)
+>>>>>>> Stashed changes
         </Switch>
       </BrowserRouter>
     </>
