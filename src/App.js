@@ -22,6 +22,8 @@ import AboutUs from "./Components/About/AboutUs";
 import ContactForm from "./Components/Contact/ContactForm";
 import NewsListEditTable from "./Components/News/NewsListEditTable";
 import MembersResults from "./Components/Backoffice/Members/MembersResults";
+import Donation from "./Components/Donations/Donation";
+import Thanks from "./Components/Donations/Thanks";
 
 function App() {
   return (
@@ -58,6 +60,8 @@ function App() {
           <Route path="/activities" component={ActivitiesList} />
           <Route path="/nosotros" component={AboutUs} />
           <Route path="/create-contact-message" component={ContactForm} />
+          <Route path="/donate" component={Donation} />
+          <Route path="/thanks" component={Thanks} />
         </Switch>
       </BrowserRouter>
     </>
