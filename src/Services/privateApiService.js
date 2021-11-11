@@ -22,12 +22,6 @@ export const privateGet = async (url, id, params = {}) => {
   const { data } = axiosInstance.get(`${url}${idPlaceholder}`, { params });
   return data;
 };
-
-export const privatePut = async (url, id, params) => {
-  const { data } = await axiosInstance.put(`${url}${id}`, params);
-  return data;
-};
-
 export const privatePut = async (url, id, params) => {
   const { data } = await axiosInstance.put(`${url}${id}`, params);
   return data;
