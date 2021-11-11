@@ -7,14 +7,22 @@ import { Link } from 'react-router-dom';
 // import { createData } from '../../../Services/userServices';
 
 const BackofficeUsers = () => {
-    const createData =(nombre, id, email,) => {
-        return { nombre, id, email, };
-      }
-      const Tablerows = [
-        createData('Nombre 0', 159, "nombre@alkemy.org",),
-        createData('Nombre 1', 237, "nombre@alkemy.org",),
-        createData('Nombre 2', 262, "nombre@alkemy.org",),
-      ];
+      const UsersTable =[
+        {
+          "id": 7,
+          "email": "michael.lawson@alkemy.org",
+          "nombre": "Michael",
+        },
+        {
+          "id": 8,
+          "email": "lindsay@alkemy.org",
+          "nombre": "Lindsay",
+        },
+        {
+          "id": 9,
+          "email": "tobias.funke@alkemy.org",
+          "nombre": "Tobias",
+        }]
       const handdleEdit = () => {
           alert("use this if you need to modificate")
       }
@@ -38,11 +46,11 @@ const BackofficeUsers = () => {
           </Tr>
         </Thead>
         <Tbody>
-        {Tablerows.map((row) => (
+        {UsersTable.map((user) => (
           <Tr>
-            <Td>{row.nombre}</Td>
-            <Td>{row.id}</Td>
-            <Td>{row.email}</Td>
+            <Td>{user.nombre}</Td>
+            <Td>{user.id}</Td>
+            <Td>{user.email}</Td>
             <Td><Button size="small" onClick={handdleEdit} variant="contained">Editar</Button></Td>
             <Td><Button size="small" onClick={handdleDelete} variant="contained" >Eliminar</Button></Td>
           </Tr>
