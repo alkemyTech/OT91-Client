@@ -7,7 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { CardActionArea } from "@material-ui/core";
 import Title from "../../Title/Title";
-import getActivityId from '../../../Services/activityService'
+import getActivityById from '../../../Services/activityService'
 import "../../../Styles/CardStyle.css";
 
 const Detail = () => {
@@ -21,7 +21,7 @@ const Detail = () => {
   }, [activity.description]);
 
   useEffect(() => {
-    getActivity(id)
+    getActivityById(id)
       .then((activityData) => {
           setActivity(activityData);
           stripedHtml();
