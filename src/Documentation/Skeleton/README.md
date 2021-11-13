@@ -34,7 +34,10 @@ const CustomCard = () => {
             <CardImage src={card.image}>
         </SkeletonLoader>
         <SkeletonLoader isLoading={loading} variant="text" height={30}>
-            <CardContent title={card.title} description={card.description}>
+            <CardTitle title={card.title}>
+        </SkeletonLoader>
+        <SkeletonLoader isLoading={loading} variant="text" height={80}> 
+            <CardDescription description={card.description}>
         </SkeletonLoader>
       </Card>
   )
