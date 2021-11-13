@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const URL = process.env.REACT_APP_ACTIVITY_URL;
 
-export const getActivityId = async (id) => {
+export const getActivityById = async (id) => {
     let {data}= await axios.get(`${URL}/${id}`);
     return data;
   
