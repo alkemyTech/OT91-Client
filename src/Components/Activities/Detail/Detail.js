@@ -21,14 +21,11 @@ const Detail = () => {
   }, [activity.description]);
 
   useEffect(() => {
-    getActivityId(id)
-      .then((response) => {
-          setActivity(response.data.data);
+    getActivity(id)
+      .then((activityData) => {
+          setActivity(activityData);
           stripedHtml();
         })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [stripedHtml]);
 
   return (
