@@ -23,4 +23,6 @@ const createOrUpdateNews = async (news) => {
   }
 };
 
+export const createNewsObject = (id, name, image, createdAt) => ({id, name, image, createdAt});
+
 export { createOrUpdateNews };

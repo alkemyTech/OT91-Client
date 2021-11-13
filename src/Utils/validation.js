@@ -51,6 +51,7 @@ const isValidNameMembers = (value) => {
     return false;
   }
 };
+const listHasValues = (list) => list && list.length > 0;
 
 export {
   regExp,
@@ -63,4 +64,5 @@ export {
   isValidImage,
   isValidSocialMedia,
   isValidNameMembers,
+  listHasValues,
 };

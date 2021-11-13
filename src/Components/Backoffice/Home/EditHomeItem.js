@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button/Button";
 
-const EditItem = ({ item, slidesIds, setSlidesIds }) => {
+const EditHomeItem = ({ item, slidesIds, setSlidesIds }) => {
   const handleSelectImage = () => {
     slidesIds.length < 3
       ? setSlidesIds([...slidesIds, item.id])
@@ -35,4 +35,4 @@ const EditItem = ({ item, slidesIds, setSlidesIds }) => {
   );
 };
 
-export default EditItem;
+export default EditHomeItem;
