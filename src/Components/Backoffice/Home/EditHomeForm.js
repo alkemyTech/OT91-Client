@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import Button from "@material-ui/core/Button/Button";
-import EditItem from "./EditItem";
+import EditHomeItem from "./EditHomeItem";
 import getSlides from "../../../Services/slidesService";
 
 const EditHomeForm = ({ homeEditWelcomeTitle }) => {
@@ -18,7 +18,7 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
 
   const showSlidesEditionForm = () =>
     slides.map((slide) => (
-      <EditItem
+      <EditHomeItem
         item={slide}
         slidesIds={slidesIds}
         setSlidesIds={setSlidesIds}

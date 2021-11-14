@@ -10,8 +10,8 @@ const ActivitiesList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(async() => {
-        const { data }  =  await getAllActivities();
-        setItems(data)
+        getAllActivities()
+            .then(allActivities => setItems(allActivities));
     }, []);
 
     const showItemsListComponent = (items) => (<ActivitiesCards activities={items} />);
