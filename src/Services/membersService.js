@@ -2,7 +2,7 @@ import axios from "axios";
 import getAuthorizationHeader from "./privateApiService";
 
 const URL = process.env.REACT_APP_API_URL_MEMBERS;
-const authorizationHeader = getAuthorizationHeader();
+const authorizationHeader = { headers: getAuthorizationHeader() };
 
 const getMembers = () => {
   const response = axios.get(`${URL}`, authorizationHeader);
