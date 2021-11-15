@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as validations from '../../Services/validations'
 import '../FormStyles.css'
-import GenericInput from '../inputsForms/GenericInput'
+import GenericInput from '../inputsForms/GenericInput';
+import {createContact} from '../../Services/contactService'
 
 const validate = (values) => {
   const errors = {}
@@ -35,7 +36,7 @@ const ContactForm = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
     validate,
-    onSubmit: (values) => {},
+    onSubmit: (values) => createContact(values),
   })
   return (
     <form className='form-container' onSubmit={formik.handleSubmit}>
