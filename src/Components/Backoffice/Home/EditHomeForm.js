@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import {Button} from "@mui/material";
 import EditHomeItem from "./EditHomeItem";
 import { getSlides } from "../../../Services/slidesService";
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from "'@mui/material";
+import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from "@mui/material";
 import "../../FormStyles.css";
 import Swal from "sweetalert2";
 
