@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Provider } from 'react-redux';
+import store from './app/store'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
