@@ -28,9 +28,9 @@ const createOrUpdateNews = async (news) => {
   }
 };
 
-export const deleteNewByid = async (news) => {
+export const deleteNewByid = async (newsRemove) => {
   const data = await getNews();
-  const newToRemove = data.find(news => news.id === news.categoryId)
+  const newToRemove = data.find(news => news.id === newsRemove.categoryId)
   try {
     await axios.delete(`http://ongapi.alkemy.org/public/api/news/${newToRemove.categoryId}`)
   }catch(error){
