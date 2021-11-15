@@ -63,7 +63,6 @@ export const privateDelete = async(url,id) =>{
           .catch((error) => console.log(error));
     }
 }
-export default Get;
 const privatePost = async (url, data) => {
     const authorizationHeader = getAuthorizationHeader();
     if (!authorizationHeader.Authorization) throw new Error('No token');
