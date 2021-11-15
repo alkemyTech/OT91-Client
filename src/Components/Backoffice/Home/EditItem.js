@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button/Button";
+import Button from "@mui/material/Button";
 
 const EditItem = ({ item, slidesIds, setSlidesIds }) => {
   const handleSelectImage = () => {

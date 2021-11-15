@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import Button from "@material-ui/core/Button/Button";
+import Button from "@mui/material/Button";
 import EditItem from "./EditItem";
 import getSlides from "../../../Services/slidesService";
 

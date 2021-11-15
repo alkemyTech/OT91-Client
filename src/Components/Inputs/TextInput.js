@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
+import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
 import '../../Styles/inputs.css';
 
 const TextInput = ({name, label, type, placeholder, value, errorMessage, className, ...inputEvents}) => {
