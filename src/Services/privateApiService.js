@@ -52,8 +52,17 @@ const privateRequestPut = async(path,id,body) => {
 
     return data;
 };
-
-
+ const privateDelete = async(url,id) =>{
+    const getAuthorization = getAuthorizationHeader();
+    if(!getAuthorization.Authorization) return;
+    else{
+        return await axios.delete(url,id,{
+            headers:getAuthorization,
+        })
+        .then((response) => (response.data))
+          .catch((error) => console.log(error));
+    }
+}
 const privatePost = async (url, data) => {
     const authorizationHeader = getAuthorizationHeader();
     if (!authorizationHeader.Authorization) throw new Error('No token');
@@ -64,5 +73,4 @@ const privatePost = async (url, data) => {
       .then((res) => res.data)
       .catch((err) => console.log(err));
   };
-
-export {privatePost, Get, privateRequestPut,getAuthorizationHeader,privateGet }
+export {privatePost, Get, privateRequestPut,getAuthorizationHeader,privateGet, privateDelete }
