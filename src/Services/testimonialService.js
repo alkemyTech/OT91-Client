@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AlertError } from '../Components/common/alerts/Alerts';
-import { ERROR_CREATE, ERROR_EDIT } from '../Components/common/text/textTestimonial';
+import { ERROR_CREATE, ERROR_EDIT } from '../Components/common/text/text';
 const URL = 'http://ongapi.alkemy.org/api';
 
 function verifyStatus (status,message='An error occurred') {
@@ -12,7 +12,8 @@ export const getTestimonial = async (id) => {
         let  {data}= await axios.get(`${URL}/testimonials/${id}`);
         return data;
     } catch (error) {
-        verifyStatus('buscar')
+        verifyStatus(error.response.status,error.response.data.message)
+        return {succes:false}
     }
 };
 
@@ -21,7 +22,8 @@ export const modifyTestimonial = async (id,body) => {
         let  {data}= await axios.put(`${URL}/testimonials/${id}`,body);
         return data;
     } catch (error) {
-        verifyStatus('editar',ERROR_EDIT)
+        verifyStatus(error.response.status,error.response.data.message)
+        return {succes:false}
     }
 };
 
@@ -30,13 +32,14 @@ export const createTestimonial = async (body) => {
         let data= await axios.post(`${URL}/testimonials`,body);
         return data;
     }catch(error){
-        verifyStatus('crear',ERROR_CREATE)
+        verifyStatus(error.response.status,error.response.data.message)
+        return {succes:false}
     }
 };
 
 export const createOrUpdateTestimonial = async (testimonialId,body)=>{
     if(testimonialId){
-        let {data} = await getTestimonial(testimonialId)
-        data && modifyTestimonial(testimonialId,body)
+        let data= await getTestimonial(testimonialId)
+        data.success && modifyTestimonial(testimonialId,body)
     }else createTestimonial(body)
 };
