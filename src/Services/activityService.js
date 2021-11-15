@@ -1,14 +1,18 @@
 import axios from 'axios';
 
-const URL = 'http://ongapi.alkemy.org/public/api';
+const URL = process.env.REACT_APP_ACTIVITY_URL;
 
+export const getActivityById = async (id) => {
+    let {data}= await axios.get(`${URL}/${id}`);
+    return data;
+}
 export const modifyActivity = async (id,body) => {
-    let {data}= await axios.put(`${URL}/activities/${id}`,body);
+    let {data}= await axios.put(`${URL}/${id}`,body);
     return data;
 };
 
 export const createActivity = async (body) => {
-    let {data}= await axios.post(`${URL}/activities`,body);
+    let {data}= await axios.post(`${URL}`,body);
     return data;
 };
 
@@ -39,4 +43,3 @@ export const getAllActivities = async () =>{
 export const isValidList = list => list && list.length > 0;
 
 export default getActivity;
-
