@@ -52,7 +52,7 @@ const privateRequestPut = async(path,id,body) => {
 
     return data;
 };
-export const privateDelete = async(url,id) =>{
+ const privateDelete = async(url,id) =>{
     const getAuthorization = getAuthorizationHeader();
     if(!getAuthorization.Authorization) return;
     else{
@@ -73,4 +73,4 @@ const privatePost = async (url, data) => {
       .then((res) => res.data)
       .catch((err) => console.log(err));
   };
-export {privatePost, Get, privateRequestPut,getAuthorizationHeader,privateGet }
+export {privatePost, Get, privateRequestPut,getAuthorizationHeader,privateGet, privateDelete }
