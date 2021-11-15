@@ -3,7 +3,7 @@ import "../../Styles/CardStyle.css";
 import { listHasValues } from "../../Utils/validation";
 import Title from "../Title/Title";
 import CustomCard from "../Card/CustomCard";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 const lastNewsMock = [
   {
     id: 626,

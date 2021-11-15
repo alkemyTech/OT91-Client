@@ -1,4 +1,4 @@
-import { TableRow, TableCell, IconButton } from "@material-ui/core";
+import { TableRow, TableCell, IconButton } from "@mui/material";
 import { Edit, Delete } from "@material-ui/icons";
 import { formatDate } from "../../Utils/formatters";
 import '../../Styles/Table.css';
