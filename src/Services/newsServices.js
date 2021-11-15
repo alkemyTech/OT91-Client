@@ -28,7 +28,7 @@ const createOrUpdateNews = async (news) => {
   }
 };
 
-const deleteNewByid = async (news) => {
+export const deleteNewByid = async (news) => {
   const data = await getNews();
   const newToRemove = data.find(news => news.id === news.categoryId)
   try {
