@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Box} from '@mui/material";
+import {Box} from '@mui/material';
 import DefaultImage from "../../Assets/Title/default.jpg";
 
 import "../../Styles/BoxStyle.css";
