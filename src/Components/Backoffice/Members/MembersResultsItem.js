@@ -1,7 +1,5 @@
 import React from "react";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button/Button";
+import {TableCell,TableRow,Button} from "@mui/material";
 import { Link } from "react-router-dom";
 import "../../../Styles/TableStyle.css";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button/Button";
+import {Button} from "@mui/material";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Swal from "sweetalert2";

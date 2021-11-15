@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import  { Box, Container, Button} from '@material-ui/core';
+import  { Box, Container, Button} from '@mui/material';
 import { getOrganizationInformation } from '../../Services/OrganizationInformation';
 
 const OrganizationData = () => {

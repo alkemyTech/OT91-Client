@@ -1,4 +1,4 @@
-import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Button } from "@material-ui/core";
+import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { NewsTableRows } from "./NewsTableRows";
 import { createNewsObject } from "../../Services/newsServices";

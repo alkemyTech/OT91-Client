@@ -1,4 +1,4 @@
-import { Button, InputLabel, FormHelperText} from '@material-ui/core';
+import { Button, InputLabel, FormHelperText} from '@mui/material';
 import { isFile } from '../../Utils/validation';
 import '../../Styles/inputs.css';
 
