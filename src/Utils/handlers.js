@@ -20,10 +20,16 @@ const handleCKeditorForm = (editor, key, fn, state) => {
   fn({ ...state, [key]: data });
 };
 
+const deleteActivity = (id, state) => {
+  const newData = state?.filter((item) => item.id !== id);
+  return newData;
+};
+
 export {
   showError,
   handleCKEditorChange,
   handleFileChange,
   changeTouchedState,
   handleCKeditorForm,
+  deleteActivity,
 };

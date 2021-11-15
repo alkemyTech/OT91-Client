@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import { useParams } from 'react-router';
 import NewsTitle from './NewsTittle';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { getNewById } from '../../../Services/NewServices/getNewById';
 
 const NewsDetailLayout = ({prop}) => {

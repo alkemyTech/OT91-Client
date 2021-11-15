@@ -1,11 +1,3 @@
-# Ong Client
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
-## Available Scripts
-
-In the project directory, you can run:
-
 ### `yarn start`
 
 Runs the app in the development mode.<br />
@@ -28,3 +20,10 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### Reusable Components
+*Alerts*
+[src/Documentation/Alerts/README.md](https://github.com/alkemyTech/OT91-server/src/Documentation/Alerts/readme.md)
+
+*Loader*
+[src/Dcomuentation/Loader/README.md](https://github.com/alkemyTech/OT91-server/src/Documentation/Loader/README.md)

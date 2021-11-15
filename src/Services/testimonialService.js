@@ -11,7 +11,8 @@ export const getAllTestimonial = async () => {
         let  {data}= await axios.get(`${URL}`);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message)
+        verifyStatus(error.response.status,error.response.data.message);
+        return {success:false};
     };
 };
 
@@ -20,9 +21,9 @@ export const getTestimonial = async (id) => {
         let  {data}= await axios.get(`${URL}/${id}`);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message)
-        return {succes:false}
-    }
+        verifyStatus(error.response.status,error.response.data.message);
+        return {success:false};
+    };
 };
 
 export const modifyTestimonial = async (id,body) => {
@@ -30,8 +31,8 @@ export const modifyTestimonial = async (id,body) => {
         let  {data}= await axios.put(`${URL}/${id}`,body);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message)
-        return {succes:false}
+        verifyStatus(error.response.status,error.response.data.message);
+        return {success:false};
     }
 };
 
@@ -40,14 +41,14 @@ export const createTestimonial = async (body) => {
         let data= await axios.post(`${URL}`,body);
         return data;
     }catch(error){
-        verifyStatus(error.response.status,error.response.data.message)
-        return {succes:false}
-    }
+        verifyStatus(error.response.status,error.response.data.message);
+        return {success:false};
+    };
 };
 
 export const createOrUpdateTestimonial = async (testimonialId,body)=>{
     if(testimonialId){
-        let data= await getTestimonial(testimonialId)
-        data.success && modifyTestimonial(testimonialId,body)
-    }else createTestimonial(body)
+        let data= await getTestimonial(testimonialId);
+        data.success && modifyTestimonial(testimonialId,body);
+    }else createTestimonial(body);
 };
