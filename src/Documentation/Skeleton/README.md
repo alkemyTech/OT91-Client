@@ -43,4 +43,4 @@ const CustomCard = () => {
   )
 }
 ```
-![Alt text](https://lh5.googleusercontent.com/0h_CVX2HWpGp1h0EF9PZb6bPyc-W8XdO9dbR5-C2O3pV7xeymRK6nK7dl6MUWX-wxx1hjhvWVNvfkg=w861-h672)
+![Example]](https://user-images.githubusercontent.com/50643955/141656557-1c04f454-ce1e-415f-977c-d354e2d14a54.gif)

@@ -1,4 +1,4 @@
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton } from "@mui/material";
 
 const SkeletonLoader = ({isLoading, children, align, ...restProps}) => {
     const alignments = {
