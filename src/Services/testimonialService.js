@@ -1,25 +1,26 @@
 import axios from 'axios';
 
-const URL = 'http://ongapi.alkemy.org/api';
-
-export const getTestimonial = async (id) => {
-    let {data}= await axios.get(`${URL}/testimonials/${id}`);
+const URL = process.env.REACT_APP_API_URL_TESTIMONIALS
+ const getTestimonial = async (id) => {
+    let {data}= await axios.get(`${URL}/${id}`);
     return data;
 };
 
-export const modifyTestimonial = async (id,body) => {
-    let {data}= await axios.put(`${URL}/testimonials/${id}`,body);
+ const modifyTestimonial = async (id,body) => {
+    let {data}= await axios.put(`${URL}/${id}`,body);
     return data;
 };
 
-export const createTestimonial = async (body) => {
-    let {data}= await axios.post(`${URL}/testimonials`,body);
+const createTestimonial = async (body) => {
+    let {data}= await axios.post(`${URL}`,body);
     return data;
 };
 
-export const createOrUpdateTestimonial = async (testimonialId,body)=>{
+const createOrUpdateTestimonial = async (testimonialId,body)=>{
     if(testimonialId){
         let {data} = await getTestimonial(testimonialId)
         data && modifyTestimonial(testimonialId,body)
     }else createTestimonial(body)
 };
+
+export { getTestimonial, modifyTestimonial, createTestimonial, createOrUpdateTestimonial,}

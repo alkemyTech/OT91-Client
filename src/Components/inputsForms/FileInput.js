@@ -1,4 +1,4 @@
-import { FormHelperText } from '@material-ui/core'
+import { FormHelperText } from '@mui/material'
 import '../FormStyles.css'
 
 const FileInput = ({

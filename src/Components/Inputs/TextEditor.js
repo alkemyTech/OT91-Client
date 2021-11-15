@@ -1,6 +1,6 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { FormControl, FormHelperText, FormLabel, InputLabel } from '@material-ui/core';
+import { FormControl, FormHelperText, FormLabel, InputLabel } from '@mui/material';
 import '../../Styles/inputs.css';
 
 const TextEditor = ({label, errorMessage, name, value, className, ...events}) => {

@@ -5,7 +5,7 @@ import {
   FormHelperText,
   FormLabel,
   InputLabel,
-} from '@material-ui/core'
+} from '@mui/material'
 import '../FormStyles.css'
 
 const ckeditInput = ({
