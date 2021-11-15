@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import {Card,CardAction,CardContent,CardMedia,Button,Typography} from '@mui/material';
 
 const CustomCard = ({title,img,description}) => {

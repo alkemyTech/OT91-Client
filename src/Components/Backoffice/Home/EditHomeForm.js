@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import Button from "@material-ui/core/Button/Button";
+import {Button} from "@mui/material";
 import EditHomeItem from "./EditHomeItem";
 import { getSlides } from "../../../Services/slidesService";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from "'@mui/material";
 import "../../FormStyles.css";
 import Swal from "sweetalert2";
 

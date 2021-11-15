@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
-import ArrowLeft from '@material-ui/icons/ArrowLeft';
-import ArrowRight from '@material-ui/icons/ArrowRight';
+import {ArrowLeft} from '@mui/icons-material';
+import {ArrowRight} from '@mui/icons-material';
 const cards = 9;
 
 const ListPagination = ({items, showItemsListComponent}) => {

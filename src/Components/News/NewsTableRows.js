@@ -1,5 +1,5 @@
 import { TableRow, TableCell, IconButton } from "@mui/material";
-import { Edit, Delete } from "@material-ui/icons";
+import { Edit, Delete } from "@mui/icons-material";
 import { formatDate } from "../../Utils/formatters";
 import '../../Styles/Table.css';
 
