@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import Button from "@material-ui/core/Button/Button";
 import EditHomeItem from "./EditHomeItem";
-import getSlides from "../../../Services/slidesService";
+import { getSlides } from "../../../Services/slidesService";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import "../../FormStyles.css";
+import Swal from "sweetalert2";
 
 const EditHomeForm = ({ homeEditWelcomeTitle }) => {
   const [slides, setSlides] = useState([]);
@@ -15,6 +23,10 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
         console.log(err);
       });
   }, []);
+
+  const ShowSucessAlert = () => {
+    Swal.fire("Home Actualizado!");
+  };
 
   const showSlidesEditionForm = () =>
     slides.map((slide) => (
@@ -38,52 +50,65 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
 
     onSubmit: (values, { resetForm }) => {
       resetForm({ values: "" });
-      let greetingsText = JSON.stringify(values, null, 4);
-      alert(greetingsText + " Image Ids Selected: " + slidesIds);
+      ShowSucessAlert();
     },
   });
 
   return (
     <>
-      <h1 id="homeEditTitle" name="homeEditTitle">
-        Página de Edición de Home
-      </h1>
       <form
         id="homeEditForm"
         name="homeEditForm"
         onSubmit={formik.handleSubmit}
-        className="Form"
+        className="form-container"
       >
+        <h1 id="homeEditTitle" name="homeEditTitle">
+          Página de Edición de Home
+        </h1>
         <Button
           id="homeEditSubmitButton"
           name="homeEditSubmitButton"
+          class="submit-btn"
           type="submit"
           variant="contained"
         >
           Aplicar Cambios
         </Button>
-        <br />
-        <label
-          id="homeEditWelcomeLabel"
-          name="homeEditWelcomeLabel"
-          htmlFor="homeEditWelcomeTitle"
-        >
-          Título de bienvenida:{" "}
-        </label>
+        <strong>
+          <label
+            id="homeEditWelcomeLabel"
+            name="homeEditWelcomeLabel"
+            htmlFor="homeEditWelcomeTitle"
+            type="text"
+          >
+            Título de bienvenida:
+          </label>
+        </strong>
         <input
           id="homeEditWelcomeTitle"
           name="homeEditWelcomeTitle"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.homeEditWelcomeTitle}
-          className="form-control"
+          className="form-control input-field"
           maxLength={20}
         ></input>
-            {formik.errors.homeEditWelcomeTitle}
+        {formik.errors.homeEditWelcomeTitle}
         <h2 id="homeEditSubTitle" name="homeEditSubTitle">
-          Choose 3 images:{" "}
+          Seleccionar 3 imágenes:
         </h2>
-        {showSlidesEditionForm()}
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell> Nombre </TableCell>
+                <TableCell> Foto </TableCell>
+                <TableCell> Acciones </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{showSlidesEditionForm()}</TableBody>
+          </Table>
+        </TableContainer>
       </form>
     </>
   );

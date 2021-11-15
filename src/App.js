@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Provider } from 'react-redux';
+import store from './app/store'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
@@ -28,8 +29,8 @@ import CategoriesList from "./Components/Backoffice/Categories/CategoriesList";
 import NewsList from "./Components/News/NewsList";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
+import BackofficeUsers from './Components/Backoffice/Users/BackofficeUsers'
 function App() {
-
   return (
     <>
       <Provider store={store}>
