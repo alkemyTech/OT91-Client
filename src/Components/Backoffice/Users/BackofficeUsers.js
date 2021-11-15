@@ -2,7 +2,7 @@ import React from 'react'
 import {Table, Thead, Tbody, Tr, Th, Td} from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import "../../../Styles/BackOfficerUsersTable.css";
-import Button from "@material-ui/core/Button/Button";
+import {Button} from "@mui/material";
 import { Link } from 'react-router-dom';
 // import { createData } from '../../../Services/userServices';
 

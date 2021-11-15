@@ -1,7 +1,5 @@
 import React from "react";
-import {Button} from "@mui/material";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+import {Button,TableCell,TableRow} from "@mui/material";
 import Swal from "sweetalert2";
 
 const EditHomeItem = ({ item, slidesIds, setSlidesIds }) => {
