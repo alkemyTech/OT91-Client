@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import { CardActionArea } from "@material-ui/core";
+import {Card,CardContent,CardMedia,Typography,CardActionArea} from "@mui/material";
 import Title from "../../Title/Title";
 import getActivityById from '../../../Services/activityService'
 import "../../../Styles/CardStyle.css";

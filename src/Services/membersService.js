@@ -1,31 +1,31 @@
 import axios from "axios";
 import getAuthorizationHeader from "./privateApiService";
 
-const URL = "http://ongapi.alkemy.org/api";
-const authorizationHeader = getAuthorizationHeader();
+const URL = process.env.REACT_APP_API_URL_MEMBERS;
+const authorizationHeader = { headers: getAuthorizationHeader() };
 
 const getMembers = () => {
-  const response = axios.get(`${URL}/members`, authorizationHeader);
+  const response = axios.get(`${URL}`, authorizationHeader);
   return response;
 };
 
 const createMember = (data) => {
-  const response = axios.post(`${URL}/members`, data, authorizationHeader);
+  const response = axios.post(`${URL}`, data, authorizationHeader);
   return response;
 };
 
 const getMember = (id) => {
-  const response = axios.get(`${URL}/members/${id}`, authorizationHeader);
+  const response = axios.get(`${URL}/${id}`, authorizationHeader);
   return response;
 };
 
 const updateMember = (id, data) => {
-  const response = axios.put(`${URL}/members/${id}`, data, authorizationHeader);
+  const response = axios.put(`${URL}/${id}`, data, authorizationHeader);
   return response;
 };
 
 const removeMember = (id) => {
-  const response = axios.delete(`${URL}/members/${id}`, authorizationHeader);
+  const response = axios.delete(`${URL}/${id}`, authorizationHeader);
   return response;
 };
 

@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import TableEditable from '../../common/EditableTable'
 import { Link } from 'react-router-dom'
-import { Container } from '@material-ui/core'
+import { Container } from '@mui/material'
 
 const CategoriesList = () => {
   const mockCategories = [
