@@ -1,13 +1,15 @@
 import axios from "axios";
 
+const URL = process.env.REACT_APP_API_URL_NEWS;
+
 const getNews = async () => {
-  const response = await axios.get("http://ongapi.alkemy.org/public/api/news");
+  const response = await axios.get(URL);
   const data = response.data.data;
   return data;
 };
 
 const getNewById = async (id) => {
-    const {data}= await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
+    const {data}= await axios.get(`${URL}/${id}`)
     return data
 }
 
@@ -15,7 +17,7 @@ const updateNewById = async (news) => {
   const data = await getNews();
   const toUpdateNew = data.find(news => news.id === news.categoryId);
   try {
-    await axios.put(`http://ongapi.alkemy.org/public/api/news/${toUpdateNew.categoryId}`,
+    await axios.put(`${URL}/${toUpdateNew.categoryId}`,
     toUpdateNew)
   }catch (error) {
     console.log(error)
@@ -24,7 +26,7 @@ const updateNewById = async (news) => {
 
 const createNew = async (news) => {
   try{
-    await axios.put('http://ongapi.alkemy.org/public/api/news', news)
+    await axios.put(URL, news)
   }catch ( error ) {
     console.log(error)
   }
@@ -48,7 +50,7 @@ const deleteNewByid = async (newsRemove) => {
   const data = await getNews();
   const newToRemove = data.find(news => news.id === newsRemove.categoryId)
   try {
-    await axios.delete(`http://ongapi.alkemy.org/public/api/news/${newToRemove.categoryId}`)
+    await axios.delete(`${URL}/${newToRemove.categoryId}`)
   }catch(error){
     console.log(error)
   }
