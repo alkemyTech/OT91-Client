@@ -2,7 +2,7 @@ import '../CardListStyles.css';
 import Title from '../Title/Title';
 import { useEffect, useState } from 'react';
 import {ACTIVITIES} from '../common/text/textActivity';
-import {getAllActivities} from '../../Services/activityService';
+import activityService from '../../Services/activityService';
 import ActivitiesCards from './ActivitiesCards/ActivitiesCards';
 import ListPagination from '../common/ListPagination/ListPagination';
 const ActivitiesList = () => {
@@ -10,7 +10,7 @@ const ActivitiesList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(async() => {
-        getAllActivities()
+        activityService.getAllActivities()
             .then(allActivities => setItems(allActivities));
     }, []);
 
