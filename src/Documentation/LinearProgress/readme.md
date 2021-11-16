@@ -38,7 +38,7 @@ https://mui.com/components/progress/#linear
   );
 }`
 
-GIF: https://i.imgur.com/qZQXQZc.gif
+
 
 
 
