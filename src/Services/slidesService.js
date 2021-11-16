@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AlertError } from '../Components/common/alerts/Alerts';
 
 const getSlides = () => {
   const response = axios.get(`http://ongapi.alkemy.org/api/slides`);
@@ -12,8 +13,9 @@ const getImagesSlides = async () => {
       (item) => item.image !== null && item.image !== ""
     );
     return dataImage;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    AlertError(error.response.status,error.response.data.message);
+    return {success:false};
   }
 };
 
