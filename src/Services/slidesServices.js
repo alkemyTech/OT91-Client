@@ -6,7 +6,7 @@ const baseURL = process.env.REACT_APP_BASE_URL_SLIDES;
 const CreateSlide = (data) => {
   axios({
     method: "POST",
-    url: `${baseURL}/slides`,
+    url: `${baseURL}`,
     data,
   })
     .then((res) => {
@@ -17,14 +17,14 @@ const CreateSlide = (data) => {
 const EditSlide = (id, data) => {
   axios({
     method: "PUT",
-    url: `${baseURL}/slides/${id}`,
+    url: `${baseURL}/${id}`,
     data,
   });
 };
 const GetAllSlides = () => {
   axios({
     method: "GET",
-    url: `${baseURL}/slides`,
+    url: `${baseURL}`,
   })
     .then((res) => res)
     .catch((err) => err);
@@ -32,7 +32,7 @@ const GetAllSlides = () => {
 const GetAllSlidesById = (id) => {
   axios({
     method: "GET",
-    url: `${baseURL}/slides/${id}`,
+    url: `${baseURL}/${id}`,
   })
     .then((res) => res)
     .catch((err) => err);
@@ -40,7 +40,7 @@ const GetAllSlidesById = (id) => {
 const DeleteSlide = (id) => {
   axios({
     method: "DELETE",
-    url: `${baseURL}/slides/${id}`,
+    url: `${baseURL}/${id}`,
   })
     .then((res) => res)
     .catch((err) => err);
