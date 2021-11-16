@@ -2,16 +2,12 @@ import axios from 'axios';
 const URL = process.env.REACT_APP_API_URL_TESTIMONIALS;
 import { AlertError } from '../Components/common/alerts/Alerts';
 
-function verifyStatus (status,message='An error occurred') {
-    return AlertError(status,message);
-};
-
 export const getAllTestimonial = async () => {
     try {
         let  {data}= await axios.get(`${URL}`);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message);
+        AlertError(error.response.status,error.response.data.message);
         return {success:false};
     };
 };
@@ -21,7 +17,7 @@ export const getTestimonial = async (id) => {
         let  {data}= await axios.get(`${URL}/${id}`);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message);
+        AlertError(error.response.status,error.response.data.message);
         return {success:false};
     };
 };
@@ -31,7 +27,7 @@ export const modifyTestimonial = async (id,body) => {
         let  {data}= await axios.put(`${URL}/${id}`,body);
         return data;
     } catch (error) {
-        verifyStatus(error.response.status,error.response.data.message);
+        AlertError(error.response.status,error.response.data.message);
         return {success:false};
     }
 };
@@ -41,7 +37,7 @@ export const createTestimonial = async (body) => {
         let data= await axios.post(`${URL}`,body);
         return data;
     }catch(error){
-        verifyStatus(error.response.status,error.response.data.message);
+        AlertError(error.response.status,error.response.data.message);
         return {success:false};
     };
 };
