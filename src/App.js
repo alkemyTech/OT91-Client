@@ -21,6 +21,7 @@ import ActivitiesList from "./Components/Activities/ActivitiesList";
 import MemberEditCreate from "./Components/Members/MemberEditCreate";
 import Home from "./Components/Home";
 import AboutUs from "./Components/About/AboutUs";
+import ListSlides from './Components/Slides/ListSlides/ListSlides';
 import ContactForm from "./Components/Contact/ContactForm";
 import NewsListEditTable from "./Components/News/NewsListEditTable";
 import MembersResults from "./Components/Backoffice/Members/MembersResults";
@@ -70,6 +71,7 @@ function App() {
               <Route path="/donate" component={Donation} />
               <Route path="/thanks" component={Thanks} />
               <Route path="/backoffice/home" component={EditHomeForm} />
+              <Route path='/list-slides' component={ListSlides}/>
             </Switch>
           </BrowserRouter>
       </Provider>

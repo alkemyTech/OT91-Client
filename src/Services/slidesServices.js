@@ -1,62 +1,49 @@
 import axios from "axios";
-import Swal from 'sweetalert2'
-import React, { useState } from "react";
+import Swal from "sweetalert2";
+
+const baseURL = process.env.REACT_APP_BASE_URL_SLIDES;
+
 const CreateSlide = (data) => {
-    axios({
-      method: "POST",
-      url: "http://ongapi.alkemy.org/api/slides",
-      data: {
-        name: data.name,
-        description: data.description,
-        image: data.image,
-      },
-    })
+  axios({
+    method: "POST",
+    url: `${baseURL}`,
+    data,
+  })
     .then((res) => {
-          Swal.fire(
-            'Slide Creado!'
-          )
-      })
-      .catch((err) => (err));
-   }
-   const EditSlide = () => {
-       axios({
-        method: "PUT",
-        url: `http://ongapi.alkemy.org/api/slides/${slides.id}`,
-        data: {
-          name: data.name,
-          description: data.description,
-          image: data.image,
-        },
-       })
-   }
-   const GetAllSlides = () => {
-    axios({
-      method: "GET",
-      url: `http://ongapi.alkemy.org/api/slides`,
-     })
-    .then(res => (res))
-    .catch(err => (err))
-}
-const GetAllSlidesById = () => {
+      Swal.fire("Slide Creado!");
+    })
+    .catch((err) => err);
+};
+const EditSlide = (id, data) => {
+  axios({
+    method: "PUT",
+    url: `${baseURL}/${id}`,
+    data,
+  });
+};
+const GetAllSlides = () => {
   axios({
     method: "GET",
-    url: `http://ongapi.alkemy.org/api/slides/${slides.id}`,
-   })
-  .then(res => (res))
-  .catch(err => (err))
-}
-const DeleteSlide = () => {
+    url: `${baseURL}`,
+  })
+    .then((res) => res)
+    .catch((err) => err);
+};
+const GetAllSlidesById = (id) => {
+  axios({
+    method: "GET",
+    url: `${baseURL}/${id}`,
+  })
+    .then((res) => res)
+    .catch((err) => err);
+};
+const DeleteSlide = (id) => {
   axios({
     method: "DELETE",
-    url: `http://ongapi.alkemy.org/api/slides/${slides.id}`,
-    data: {
-      name: data.name,
-      description: data.description,
-      image: data.image,
-    },
-   })
-  .then(res => (res))
-  .catch(err => (err))
-}
+    url: `${baseURL}/${id}`,
+  })
+    .then((res) => res)
+    .catch((err) => err);
+};
 
-export {CreateSlide, EditSlide, GetAllSlides,GetAllSlidesById, DeleteSlide }
+export { CreateSlide, EditSlide, GetAllSlides, GetAllSlidesById, DeleteSlide };
