@@ -1,4 +1,5 @@
 import axios from "axios";
+import { showErrorAlert } from "../Utils/alerts";
 
 const URL = process.env.REACT_APP_API_URL_NEWS;
 
@@ -15,6 +16,7 @@ const getNews = async () => {
 const getNewById = async (id) => {
   try{
     const {data}= await axios.get(`${URL}/${id}`)
+      .catch(_ => showErrorAlert("No se ha podido obtener la novedad"))
     return data
   }catch(error) {
     console.log(error)
@@ -26,7 +28,7 @@ const updateNewById = async (id,dataToUpdate) => {
     const data = await axios.put(`${URL}/${id}`,dataToUpdate)
     return data
   }catch (error) {
-    console.log(error)
+    showErrorAlert("No se ha podido actualizar la novedad");
   }
 }
 
@@ -35,7 +37,7 @@ const createNew = async (news) => {
     const data = await axios.put(URL, news)
     return data
   }catch ( error ) {
-    console.log(error)
+    showErrorAlert("No se ha podido crear la novedad");
   }
 }
 
@@ -58,7 +60,7 @@ const deleteNewByid = async (id) => {
     const data = await axios.delete(`${URL}/${id}`)
     return data
   }catch(error){
-    console.log(error)
+    showErrorAlert("No se ha podido eliminar la novedad");
   }
 }
 
