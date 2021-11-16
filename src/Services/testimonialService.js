@@ -1,26 +1,50 @@
 import axios from 'axios';
+const URL = process.env.REACT_APP_API_URL_TESTIMONIALS;
+import { AlertError } from '../Components/common/alerts/Alerts';
 
-const URL = process.env.REACT_APP_API_URL_TESTIMONIALS
- const getTestimonial = async (id) => {
-    let {data}= await axios.get(`${URL}/${id}`);
-    return data;
+export const getAllTestimonial = async () => {
+    try {
+        let  {data}= await axios.get(`${URL}`);
+        return data;
+    } catch (error) {
+        AlertError(error.response.status,error.response.data.message);
+        return {success:false};
+    };
 };
 
- const modifyTestimonial = async (id,body) => {
-    let {data}= await axios.put(`${URL}/${id}`,body);
-    return data;
+export const getTestimonial = async (id) => {
+    try {
+        let  {data}= await axios.get(`${URL}/${id}`);
+        return data;
+    } catch (error) {
+        AlertError(error.response.status,error.response.data.message);
+        return {success:false};
+    };
 };
 
-const createTestimonial = async (body) => {
-    let {data}= await axios.post(`${URL}`,body);
-    return data;
+export const modifyTestimonial = async (id,body) => {
+    try {
+        let  {data}= await axios.put(`${URL}/${id}`,body);
+        return data;
+    } catch (error) {
+        AlertError(error.response.status,error.response.data.message);
+        return {success:false};
+    }
 };
 
-const createOrUpdateTestimonial = async (testimonialId,body)=>{
+export const createTestimonial = async (body) => {
+    try {
+        let data= await axios.post(`${URL}`,body);
+        return data;
+    }catch(error){
+        AlertError(error.response.status,error.response.data.message);
+        return {success:false};
+    };
+};
+
+export const createOrUpdateTestimonial = async (testimonialId,body)=>{
     if(testimonialId){
-        let {data} = await getTestimonial(testimonialId)
-        data && modifyTestimonial(testimonialId,body)
-    }else createTestimonial(body)
+        let data= await getTestimonial(testimonialId);
+        data.success && modifyTestimonial(testimonialId,body);
+    }else createTestimonial(body);
 };
-
-export { getTestimonial, modifyTestimonial, createTestimonial, createOrUpdateTestimonial,}
