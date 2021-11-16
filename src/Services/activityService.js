@@ -1,8 +1,7 @@
 import axios from "axios";
 import { alertCrudMessages as alert } from "../Utils/alertCrudMessages";
 
-const URL = "http://ongapi.alkemy.org/api/activities";
-// const URL = process.env.REACT_APP_ACTIVITY_URL;
+const URL = process.env.REACT_APP_ACTIVITY_URL;
 
 const getActivity = async (id) => {
   return await axios
