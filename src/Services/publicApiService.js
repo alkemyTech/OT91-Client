@@ -22,4 +22,14 @@ const Get = () => {
     .catch((err) => console.log(err));
 };
 
+const Post = (route,body) => {
+  try{
+    const data = axios.post(`${route}`,body);
+    return data
+  }catch(error) {
+    console.log(error)
+  }
+}
+
+export {Post};
 export default Get;
