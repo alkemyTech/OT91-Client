@@ -6,9 +6,28 @@ const getNews = async () => {
   return data;
 };
 
-export const getNewById = async (id) => {
+const getNewById = async (id) => {
     const {data}= await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
     return data
+}
+
+const updateNewById = async (news) => {
+  const data = await getNews();
+  const toUpdateNew = data.find(news => news.id === news.categoryId);
+  try {
+    await axios.put(`http://ongapi.alkemy.org/public/api/news/${toUpdateNew.categoryId}`,
+    news)
+  }catch (error) {
+    console.log(error)
+  }
+}
+
+const createNew = async (news) => {
+  try{
+    await axios.put('http://ongapi.alkemy.org/public/api/news', news)
+  }catch ( error ) {
+    console.log(error)
+  }
 }
 
 const createOrUpdateNews = async (news) => {
@@ -16,19 +35,16 @@ const createOrUpdateNews = async (news) => {
   const sameData = data.find((news) => news.id === news.categoryId);
   try {
     if (sameData) {
-      await axios.patch(
-        `http://ongapi.alkemy.org/public/api/news/${news.categoryId}`,
-        news
-      );
+      await updateNewById(news)
     } else {
-      axios.post("http://ongapi.alkemy.org/public/api/news", news);
+      await createNew(news)
     }
   } catch (err) {
     console.log(err);
   }
 };
 
-export const deleteNewByid = async (newsRemove) => {
+const deleteNewByid = async (newsRemove) => {
   const data = await getNews();
   const newToRemove = data.find(news => news.id === newsRemove.categoryId)
   try {
@@ -40,4 +56,4 @@ export const deleteNewByid = async (newsRemove) => {
 
 export const createNewsObject = (id, name, image, createdAt) => ({id, name, image, createdAt});
 
-export { createOrUpdateNews };
+export { createOrUpdateNews,getNewById,deleteNewByid,getNews,updateNewById,createNew };
