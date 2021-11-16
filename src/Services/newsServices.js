@@ -16,7 +16,7 @@ const updateNewById = async (news) => {
   const toUpdateNew = data.find(news => news.id === news.categoryId);
   try {
     await axios.put(`http://ongapi.alkemy.org/public/api/news/${toUpdateNew.categoryId}`,
-    news)
+    toUpdateNew)
   }catch (error) {
     console.log(error)
   }
