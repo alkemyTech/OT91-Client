@@ -5,10 +5,10 @@
   justify-content: center;
 }
 
-.list-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
+.list-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
   margin-top: 50px;
 }
 

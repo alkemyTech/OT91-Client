@@ -7,7 +7,7 @@ import { Container } from "@mui/material";
 import LoadingSpinner from "../../Utils/loadingSpinner";
 
 const NewsList = ({ lastNews }) => {
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     lastNews && setIsLoading(false);
@@ -23,7 +23,7 @@ const NewsList = ({ lastNews }) => {
       ) : (
         <div>
           <Title title="Novedades" />
-          <ul className="list-container">
+          <ul className="list-grid-container ">
             {newsListHasValues ? (
               lastNews.map((news) => {
                 return (
