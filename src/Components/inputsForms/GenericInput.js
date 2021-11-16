@@ -3,7 +3,7 @@ import {
   InputLabel,
   Input,
   FormHelperText,
-} from '@material-ui/core'
+} from '@mui/material'
 import '../FormStyles.css'
 
 const NewGenericInput = ({

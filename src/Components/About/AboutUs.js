@@ -1,5 +1,5 @@
 import Title from "../Title/Title";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import '../../Styles/Container.css';
 
 const AboutUs = () => {
