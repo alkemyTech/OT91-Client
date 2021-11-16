@@ -4,6 +4,7 @@
 .ContainerList {
   justify-content: center;
 }
+
 .list-container {
   display: flex;
   justify-content: space-around;
@@ -16,4 +17,11 @@
   padding: 10px 30px;
   background-color: #a1d4f6;
   border-radius: 5px;
+}
+.spinner {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
