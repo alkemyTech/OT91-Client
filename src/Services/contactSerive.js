@@ -1,29 +1,28 @@
 import axios from "axios";
-const URL = 'http://ongapi.alkemy.org/public/api/';
-
+const URL = process.env.REACT_APP_API_URL_CONTACT;
 
 export const getContactId = async (contactId) => {
-    let {data}= await axios.get(`${URL}/contacts/${contactId}`);
+    let {data}= await axios.get(`${URL}/${contactId}`);
     return data;
 };
 
 export const getContactsAll = async () => {
-    let {data}= await axios.get(`${URL}/contacts`);
+    let {data}= await axios.get(`${URL}`);
     return data;
 }
 
 export const modifyContact = async (contactId,body) => {
-    let {data}= await axios.put(`${URL}/contacts/${contactId}`,body);
+    let {data}= await axios.put(`${URL}/${contactId}`,body);
     return data;
 };
 
 export const createContact = async (body) => {
-    let {data}= await axios.post(`${URL}/contacts`,body);
+    let {data}= await axios.post(`${URL}`,body);
     return data;
 };
 
 export const deleteContac = async (contactId) =>{
-    let {data} = await axios.delete(`${URL}/contacts/${contactId}`);
+    let {data} = await axios.delete(`${URL}/${contactId}`);
     return data;
 };
 
