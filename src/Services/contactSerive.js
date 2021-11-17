@@ -9,7 +9,7 @@ export const getContactId = async (contactId) => {
 export const getContactsAll = async () => {
     let {data}= await axios.get(`${URL}`);
     return data;
-}
+};
 
 export const modifyContact = async (contactId,body) => {
     let {data}= await axios.put(`${URL}/${contactId}`,body);
@@ -28,7 +28,7 @@ export const deleteContac = async (contactId) =>{
 
 export const createOrUpdateContact = async (contactId,body)=>{
     if(contactId){
-        let {data} = await getContactId(contactId)
-        data && modifyContact(contactId,body)
-    }else createContact(body)
+        let {data} = await getContactId(contactId);
+        data && modifyContact(contactId,body);
+    }else createContact(body);
 };
