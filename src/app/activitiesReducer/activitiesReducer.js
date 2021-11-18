@@ -19,7 +19,8 @@ const activitiesSlice = createSlice({
         [getAll.pending]: (state) => { state.status = 'loading' },
         [getAll.fulfilled]: (state, action) => {
             state.status = 'success';
-            state.activities |= action.payload;
+            console.log(action)
+            state.activities = action.payload;
         },
         [getAll.rejected]: (state) => { state.status = 'failed' },
         [getById.pending]: (state) => { state.status = 'loading' },
