@@ -1,22 +1,29 @@
 import axios from "axios";
 
 const getNews = async () => {
-  const response = await axios.get("http://ongapi.alkemy.org/public/api/news");
-  const data = response.data.data;
-  return data;
+  try{
+    const response = await axios.get("http://ongapi.alkemy.org/public/api/news");
+    const data = response.data.data;
+    return data ;
+  }catch(error){
+    console.log(error)
+  }
 };
 
 const getNewById = async (id) => {
+  try {
     const {data}= await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
     return data
+  }catch(error) {
+    console.log(error)
+  }
 }
 
-const updateNewById = async (news) => {
-  const data = await getNews();
-  const toUpdateNew = data.find(news => news.id === news.categoryId);
+const updateNewById = async (id,dataToUpdate) => {
   try {
-    await axios.put(`http://ongapi.alkemy.org/public/api/news/${toUpdateNew.categoryId}`,
-    toUpdateNew)
+    const data = await axios.put(`http://ongapi.alkemy.org/public/api/news/${id}`,
+    dataToUpdate)
+    return data
   }catch (error) {
     console.log(error)
   }
@@ -24,7 +31,8 @@ const updateNewById = async (news) => {
 
 const createNew = async (news) => {
   try{
-    await axios.put('http://ongapi.alkemy.org/public/api/news', news)
+    const data = await axios.post('http://ongapi.alkemy.org/public/api/news', news)
+    return data
   }catch ( error ) {
     console.log(error)
   }
@@ -35,7 +43,7 @@ const createOrUpdateNews = async (news) => {
   const sameData = data.find((news) => news.id === news.categoryId);
   try {
     if (sameData) {
-      await updateNewById(news)
+      await updateNewById(id,dataToUpdate)
     } else {
       await createNew(news)
     }
@@ -44,11 +52,10 @@ const createOrUpdateNews = async (news) => {
   }
 };
 
-const deleteNewByid = async (newsRemove) => {
-  const data = await getNews();
-  const newToRemove = data.find(news => news.id === newsRemove.categoryId)
+const deleteNewByid = async (id) => {
   try {
-    await axios.delete(`http://ongapi.alkemy.org/public/api/news/${newToRemove.categoryId}`)
+    const data = await axios.delete(`http://ongapi.alkemy.org/public/api/news/${id}`)
+    return data
   }catch(error){
     console.log(error)
   }
