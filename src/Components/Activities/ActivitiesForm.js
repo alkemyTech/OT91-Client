@@ -7,7 +7,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
 import { validateForm} from '../common/validations/validateForm';
-import * as activityService from '../../Services/activityService';
+import { createOrUpdate } from '../../app/activitiesReducer/activitiesReducer';
+import { useDispatch } from 'react-redux';
 const ActivitiesForm = () => {
   const {activityId} = useParams();
   const [activity, setActivity] = useState({
@@ -15,7 +16,7 @@ const ActivitiesForm = () => {
     description:'',
     image: ''
   });
-
+  const dispatch = useDispatch();
   const handleChangeDescription = (description, setFieldValue) => {
     setFieldValue("description", description.getData())
   };
@@ -26,7 +27,7 @@ const ActivitiesForm = () => {
 
   const handleSubmit = (values,resetForm) => {
     let updatedValues =setCKEditorText(values,'description')
-    activityService.createOrUpdate(activityId,updatedValues)
+    dispatch(createOrUpdate(activityId,updatedValues));
     resetForm();
   }
 
