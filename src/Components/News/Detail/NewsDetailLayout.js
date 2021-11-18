@@ -36,6 +36,7 @@ const NewsDetailLayout = () => {
     setIsLoading(false);
   }, [id, stripedHtml]);
 
+
   return (
     <div>
       {loading ? (
