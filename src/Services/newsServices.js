@@ -2,7 +2,7 @@ import axios from "axios";
 import { showErrorAlert } from "../Utils/alerts";
 
 const URL = process.env.REACT_APP_API_URL_NEWS;
-const handleCatch = (error) => showErrorAlert(error.message);
+const handleCatch = (error) => showErrorAlert(error.response.data.message || error.message);
 
 const getNews = async () => {
   try{
