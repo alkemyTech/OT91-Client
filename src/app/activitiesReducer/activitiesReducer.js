@@ -51,7 +51,7 @@ const activitiesSlice = createSlice({
         [createOrUpdate.pending]: (state) => { state.status = 'loading'},
         [createOrUpdate.fulfilled]: (state, action) => {
             state.status = 'success';
-            getAll(action.payload.id);
+            state.activities = [...state.activities, action.payload];
         },
         [createOrUpdate.rejected]: (state) => { state.status = 'failed' }
     }
