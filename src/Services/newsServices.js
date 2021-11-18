@@ -1,6 +1,8 @@
 import axios from "axios";
+import { showErrorAlert } from "../Utils/alerts";
 
 const URL = process.env.REACT_APP_API_URL_NEWS;
+const handleCatch = (error) => showErrorAlert(error.response.data.message || error.message);
 
 const getNews = async () => {
   try{
@@ -8,7 +10,7 @@ const getNews = async () => {
       const data = response.data.data;
       return data;
   }catch(error){
-    console.log(error)
+    handleCatch(error);
   }
 };
 
@@ -17,7 +19,7 @@ const getNewById = async (id) => {
     const {data}= await axios.get(`${URL}/${id}`)
     return data
   }catch(error) {
-    console.log(error)
+    handleCatch(error);
   }
 }
 
@@ -26,7 +28,7 @@ const updateNewById = async (id,dataToUpdate) => {
     const data = await axios.put(`${URL}/${id}`,dataToUpdate)
     return data
   }catch (error) {
-    console.log(error)
+    handleCatch(error);
   }
 }
 
@@ -35,7 +37,7 @@ const createNew = async (news) => {
     const data = await axios.put(URL, news)
     return data
   }catch ( error ) {
-    console.log(error)
+    handleCatch(error)
   }
 }
 
@@ -58,7 +60,7 @@ const deleteNewByid = async (id) => {
     const data = await axios.delete(`${URL}/${id}`)
     return data
   }catch(error){
-    console.log(error)
+    handleCatch(error);
   }
 }
 
