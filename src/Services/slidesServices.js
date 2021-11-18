@@ -1,8 +1,10 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
 
+const baseURL = process.env.REACT_APP_BASE_URL_SLIDES;
+
 const getSlides = async () => {
-  const response = await axios.get(`http://ongapi.alkemy.org/api/slides`);
+  const response = await axios.get(`${baseURL}`);
   return(response.data.data);
 };
 
@@ -20,7 +22,7 @@ const getImagesSlides = async () => {
 
 const CreateSlide = async (data) => {
   try {
-    const response = await axios.post('http://ongapi.alkemy.org/api/slides',data)
+    const response = await axios.post(`${baseURL}`,data)
     Swal.fire('Slide Creado!')
     return response
   } catch (error) {
@@ -29,7 +31,7 @@ const CreateSlide = async (data) => {
 }
 const EditSlide = async (id,data) => {
   try{
-    const response = await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`,data)
+    const response = await axios.put(`${baseURL}/${id}`,data)
     return response;
   }catch(error){
     console.log(error)
@@ -38,7 +40,7 @@ const EditSlide = async (id,data) => {
 
 const GetSlidesById = async (id) => {
   try {
-    const data = await axios.get(`http://ongapi.alkemy.org/api/slides/${id}`)
+    const data = await axios.get(`${baseURL}/${id}`)
     return data
   }catch (error) {
     console.log(error)
@@ -46,7 +48,7 @@ const GetSlidesById = async (id) => {
 }
 const DeleteSlide = async (id) => {
   try{
-    const slideToDelete = await axios.delete(`http://ongapi.alkemy.org/api/slides/${id}`)
+    const slideToDelete = await axios.delete(`${baseURL}/${id}`)
     return slideToDelete
   }catch(error) {
     console.log(error)
