@@ -10,17 +10,16 @@ const getNews = async () => {
       const data = response.data.data;
       return data;
   }catch(error){
-    console.log(error)
+    handleCatch(error);
   }
 };
 
 const getNewById = async (id) => {
   try{
     const {data}= await axios.get(`${URL}/${id}`)
-      .catch(handleCatch);
     return data
   }catch(error) {
-    console.log(error)
+    handleCatch(error);
   }
 }
 
