@@ -5,11 +5,13 @@ import {Card,CardContent,CardMedia,Typography,CardActionArea} from "@mui/materia
 import Title from "../../Title/Title";
 import getActivityById from '../../../Services/activityService'
 import "../../../Styles/CardStyle.css";
+import LoadingSpinner from "../../../Utils/loadingSpinner";
 
 const Detail = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState("");
   const [activityDescription, setActivityDescription] = useState("");
+  const [loading, setIsLoading] = useState(true);
 
   const stripedHtml = useCallback(() => {
     activity.description &&
@@ -21,10 +23,13 @@ const Detail = () => {
       .then((activityData) => {
           setActivity(activityData);
           stripedHtml();
+          setIsLoading(false);
         })
   }, [stripedHtml]);
 
   return (
+    <>{ loading ? <LoadingSpinner/>
+    :
     <Card className="cardStyle">
       <CardActionArea>
         <CardMedia>
@@ -39,6 +44,8 @@ const Detail = () => {
         </CardContent>
       </CardActionArea>
     </Card>
+    }
+    </>
   );
 };
 

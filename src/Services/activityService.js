@@ -17,7 +17,7 @@ export const createActivity = async (body) => {
 };
 
 export const deleteActivityById = async (activityId) => {
-    return await axios.delete(`${URL}/activities/${activityId}`)
+    return await axios.delete(`${URL}/${activityId}`)
         .then(response => response.data);
 }
 
@@ -29,13 +29,13 @@ export const createOrUpdateActivity = async (activityId,body)=>{
 };
 
 const getActivity = async (id) => {
-    const activity = await axios.get(`${URL}/activities/${id}`)
+    const activity = await axios.get(`${URL}/${id}`)
         .then(response => response.data.data)
     return activity;
 };
 
 export const getAllActivities = async () =>{
-    const allActivities = await axios.get(`${URL}/activities`)
+    const allActivities = await axios.get(`${URL}`)
         .then(response => response.data.data);
     return allActivities;
 };
