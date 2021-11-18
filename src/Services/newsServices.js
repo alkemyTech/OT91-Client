@@ -3,22 +3,28 @@ import axios from "axios";
 const URL = process.env.REACT_APP_API_URL_NEWS;
 
 const getNews = async () => {
-  const response = await axios.get(URL);
-  const data = response.data.data;
-  return data;
+  try{
+      const response = await axios.get(URL);
+      const data = response.data.data;
+      return data;
+  }catch(error){
+    console.log(error)
+  }
 };
 
 const getNewById = async (id) => {
+  try{
     const {data}= await axios.get(`${URL}/${id}`)
     return data
+  }catch(error) {
+    console.log(error)
+  }
 }
 
-const updateNewById = async (news) => {
-  const data = await getNews();
-  const toUpdateNew = data.find(news => news.id === news.categoryId);
+const updateNewById = async (id,dataToUpdate) => {
   try {
-    await axios.put(`${URL}/${toUpdateNew.categoryId}`,
-    toUpdateNew)
+    const data = await axios.put(`${URL}/${id}`,dataToUpdate)
+    return data
   }catch (error) {
     console.log(error)
   }
@@ -26,7 +32,8 @@ const updateNewById = async (news) => {
 
 const createNew = async (news) => {
   try{
-    await axios.put(URL, news)
+    const data = await axios.put(URL, news)
+    return data
   }catch ( error ) {
     console.log(error)
   }
@@ -37,7 +44,7 @@ const createOrUpdateNews = async (news) => {
   const sameData = data.find((news) => news.id === news.categoryId);
   try {
     if (sameData) {
-      await updateNewById(news)
+      await updateNewById(id,dataToUpdate)
     } else {
       await createNew(news)
     }
@@ -46,11 +53,10 @@ const createOrUpdateNews = async (news) => {
   }
 };
 
-const deleteNewByid = async (newsRemove) => {
-  const data = await getNews();
-  const newToRemove = data.find(news => news.id === newsRemove.categoryId)
+const deleteNewByid = async (id) => {
   try {
-    await axios.delete(`${URL}/${newToRemove.categoryId}`)
+    const data = await axios.delete(`${URL}/${id}`)
+    return data
   }catch(error){
     console.log(error)
   }
