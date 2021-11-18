@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as activityService from '../../Services/activityService';
 
-export const getAllActivities = createAsyncThunk("activities/getAllActivities", activityService.getAllActivities);
-export const getActivity = createAsyncThunk('activities/getActivity', activityService.getActivityById);
-export const createActivity = createAsyncThunk('activities/createActivity', activityService.createActivity);
-export const updateActivity = createAsyncThunk('activities/updateActivity', activityService.modifyActivity);
-export const deleteActivity = createAsyncThunk('activities/deleteActivity', activityService.deleteActivityById);
-export const createOrUpdateActivity = createAsyncThunk('activities/createOrUpdateActivity', activityService.createOrUpdateActivity);
+export const getAll = createAsyncThunk("activities/getAll", activityService.getAll);
+export const getById = createAsyncThunk('activities/getById', activityService.getById);
+export const create = createAsyncThunk('activities/create', activityService.create);
+export const update = createAsyncThunk('activities/update', activityService.update);
+export const deleteById = createAsyncThunk('activities/delete', activityService.deleteById);
+export const createOrUpdate = createAsyncThunk('activities/createOrupdate', activityService.createOrUpdate);
 
 const activitiesSlice = createSlice({
     name:"activitiesReducer",
@@ -16,43 +16,43 @@ const activitiesSlice = createSlice({
         status: ''
     },
     extraReducers: {
-        [getAllActivities.pending]: (state) => { state.status = 'loading' },
-        [getAllActivities.fulfilled]: (state, action) => {
+        [getAll.pending]: (state) => { state.status = 'loading' },
+        [getAll.fulfilled]: (state, action) => {
             state.status = 'success';
-            state.activities = action.payload;
+            state.activities |= action.payload;
         },
-        [getAllActivities.rejected]: (state) => { state.status = 'failed' },
-        [getActivity.pending]: (state) => { state.status = 'loading' },
-        [getActivity.fulfilled]: (state, action) => {
+        [getAll.rejected]: (state) => { state.status = 'failed' },
+        [getById.pending]: (state) => { state.status = 'loading' },
+        [getById.fulfilled]: (state, action) => {
             state.status = 'success';
-            state.activity = action.payload.data;
+            state.activity |= action.payload;
         },
-        [getActivity.rejected]: (state) => { state.status = 'failed' },
-        [deleteActivity.pending]: (state) => { state.status = 'loading' },
-        [deleteActivity.fulfilled]: (state, action) => {
+        [getById.rejected]: (state) => { state.status = 'failed' },
+        [deleteById.pending]: (state) => { state.status = 'loading' },
+        [deleteById.fulfilled]: (state, action) => {
             state.status = 'success';
             state.activities = state.activities.filter(deletedActivity => deletedActivity.id != action.meta.arg);
         },
-        [deleteActivity.rejected]: (state) => { state.status = 'failed' },
-        [createActivity.pending]: (state) => { state.status = 'loading' },
-        [createActivity.fulfilled]: (state, action) => {
+        [deleteById.rejected]: (state) => { state.status = 'failed' },
+        [create.pending]: (state) => { state.status = 'loading' },
+        [create.fulfilled]: (state, action) => {
             state.status = 'success';
             state.activities = [...state.activities, action.payload];
         },
-        [createActivity.rejected]: (state) => { state.status = 'failed' },
-        [updateActivity.pending]: (state) => { state.status = 'loading' },
-        [updateActivity.fulfilled]: (state, action) => {
+        [create.rejected]: (state) => { state.status = 'failed' },
+        [update.pending]: (state) => { state.status = 'loading' },
+        [update.fulfilled]: (state, action) => {
             state.status = 'success';
             const updatedActivityIndex = state.activities.findIndex(activity => activity.id == action.payload.id);
             state.activities[updatedActivityIndex] = action.payload;
         },
-        [updateActivity.rejected]: (state) => { state.status = 'failed' },
-        [createOrUpdateActivity.pending]: (state) => { state.status = 'loading'},
-        [createOrUpdateActivity.fulfilled]: (state, action) => {
+        [update.rejected]: (state) => { state.status = 'failed' },
+        [createOrUpdate.pending]: (state) => { state.status = 'loading'},
+        [createOrUpdate.fulfilled]: (state, action) => {
             state.status = 'success';
-            getAllActivities(action.payload.id);
+            getAll(action.payload.id);
         },
-        [createOrUpdateActivity.rejected]: (state) => { state.status = 'failed' }
+        [createOrUpdate.rejected]: (state) => { state.status = 'failed' }
     }
 });
 
