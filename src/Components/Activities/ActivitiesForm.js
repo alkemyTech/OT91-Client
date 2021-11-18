@@ -7,7 +7,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
 import { validateForm} from '../common/validations/validateForm';
-import activityService from '../../Services/activityService';
+import * as activityService from '../../Services/activityService';
 const ActivitiesForm = () => {
   const {activityId} = useParams();
   const [activity, setActivity] = useState({
@@ -26,7 +26,7 @@ const ActivitiesForm = () => {
 
   const handleSubmit = (values,resetForm) => {
     let updatedValues =setCKEditorText(values,'description')
-    activityService.createOrUpdateActivity(activityId,updatedValues)
+    activityService.createOrUpdate(activityId,updatedValues)
     resetForm();
   }
 

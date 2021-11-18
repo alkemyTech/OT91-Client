@@ -1,6 +1,6 @@
 import {NO_ACTIVITIES} from '../../common/text/textActivity';
 import{setCKEditorText} from '../../common/ckEditor/setCKEditorText';
-import activityService from '../../../Services/activityService';
+import * as activityService from '../../../Services/activityService';
 const ActivitiesCards = ({activities}) => {
 
     return (
