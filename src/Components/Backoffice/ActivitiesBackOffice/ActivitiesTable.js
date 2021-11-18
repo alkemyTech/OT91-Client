@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { showSuccessAlert } from "../../../Utils/alerts";
-import { deleteActivity } from "../../../Utils/handlers";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "../../../Styles/TableStyle.css";
-import { getAllActivities, deleteActivityById } from "../../../Services/activityService";
+import { getAllActivities, deleteActivity} from '../../../app/activitiesReducer/activitiesReducer';
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const ActivitiesTable = () => {
-  const [dataActivity, setDataActivity] = useState([]);
   const history = useHistory();
-
+  const { activities: dataActivity } = useSelector(state => state.activities);
+  const dispatch = useDispatch();
   const editData = (id) => history.push(`/activity-detail/${id}`);
 
   const deleteData = (id) => {
-    deleteActivityById(id)
-      .then(response => {
-        setDataActivity(deleteActivity(id, dataActivity));
-        showSuccessAlert("Delete Activity");
-      })
+    dispatch(deleteActivity(id));
+    showSuccessAlert("Delete Activity");
   };
 
   useEffect(() => {
-    getAllActivities().then(allActivities => setDataActivity(allActivities));
+    dispatch(getAllActivities());
   }, [])
 
   return (
