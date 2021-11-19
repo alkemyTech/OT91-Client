@@ -11,10 +11,12 @@ const ActivitiesList = () => {
     const [items, setItems] = useState([]);
     const [loading, setIsLoading] = useState(true);
 
-    useEffect(async() => {
-         const allActivities = await getAllActivities()
-            setItems(allActivities);
-            setIsLoading(false);
+    useEffect(() => {
+      getAllActivities()
+      .then(allActivities => {
+          setItems(allActivities);
+          setIsLoading(false);
+      })
     }, []);
     const showItemsListComponent = (items) => (<ActivitiesCards activities={items} />);
     return (
