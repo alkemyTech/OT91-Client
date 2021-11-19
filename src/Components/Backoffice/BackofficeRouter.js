@@ -11,7 +11,7 @@ import SlidesForm from "../Slides/SlidesForm";
 import NewsListEditTable from "../News/NewsListEditTable";
 
 
-const Backoffice = () => {
+const BackOfficeRouter = () => {
     return (
         <div>
             <h1>Bienvenid@ a Backoffice</h1>
@@ -36,4 +36,4 @@ const Backoffice = () => {
     )
 };
 
-export default Backoffice;
+export default BackOfficeRouter;

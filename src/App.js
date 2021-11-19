@@ -14,7 +14,7 @@ import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Detail from "./Components/Activities/Detail/Detail";
 import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
-import Backoffice from "./Components/Backoffice/Backoffice";
+import BackofficeRouter from "./Components/Backoffice/BackofficeRouter";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import Home from "./Components/Home";
 import AboutUs from "./Components/About/AboutUs";
@@ -47,12 +47,12 @@ function App() {
               <Route path="/novedades/:id" component={NewsDetailLayout} />
               <Route path="/novedades" component={NewsList} />
               <Route path="/activity-detail/:id" component={Detail} />
-              <Route path="/backoffice" component={Backoffice} />
               <Route path="/activities" component={ActivitiesList} />
               <Route path="/nosotros" component={AboutUs} />
               <Route path="/create-contact-message" component={ContactForm} />
               <Route path="/donate" component={Donation} />
               <Route path="/thanks" component={Thanks} />
+              <BackofficeRouter/>
             </Switch>
           </BrowserRouter>
       </Provider>
