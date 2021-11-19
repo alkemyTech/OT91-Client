@@ -1,35 +1,59 @@
-import React, { useEffect,useState } from 'react';
-import { useParams } from 'react-router';
-import NewsTitle from './NewsTittle';
-import { Box } from '@mui/material';
-import { getNewById } from '../../../Services/NewServices/getNewById';
+import React, { useEffect, useState, useCallback, lazy, Suspense } from "react";
+import { useParams } from "react-router";
+import NewsTitle from "./NewsTittle";
+import { Box } from "@mui/material";
+import { getNewById } from "../../../Services/newsServices";
+import LoadingSpinner from "../../../Utils/loadingSpinner";
+import "../../../Styles/CardStyle.css";
 
-const NewsDetailLayout = ({prop}) => {
+const NewsImage = lazy(
+  () =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve(import("./NewsImage")), 600)
+    )
+);
 
-    const [newData,setNewData] = useState({})
+const NewsDetailLayout = () => {
+  const [newData, setNewData] = useState({});
+  const [newsDescription, setNewsDescription] = useState("");
+  const [loading, setIsLoading] = useState(true);
 
-    const {id} = useParams()
+  const { id } = useParams();
 
-    const loadNewData = async () => {
-        const {data} = await getNewById()
-        setNewData(data)
-    }
+  const loadNewData = async () => {
+    const { data } = await getNewById(id);
+    setNewData(data);
+  };
 
-    useEffect(()=>{
-        loadNewData()
-    },[id])
+  const stripedHtml = useCallback(() => {
+    newData.content &&
+      setNewsDescription(newData.content.replace(/<[^>]+>/g, ""));
+  }, [newData.content]);
 
-    return (
-        <div>
-            <NewsTitle
-                title={prop.title}
-            />
-            <img alt="newImg" src={newData.img}></img>
-            <Box>
-                {newData.body}
-            </Box>
+  useEffect(() => {
+    loadNewData();
+    stripedHtml();
+    setIsLoading(false);
+  }, [id, stripedHtml]);
+
+
+  return (
+    <div>
+      {loading ? (
+        <div className="spinner">
+          <LoadingSpinner />
         </div>
-    );
-}
+      ) : (
+        <div>
+          <NewsTitle title={newData.name} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <NewsImage image={newData.image} />
+          </Suspense>
+          <Box>{newsDescription}</Box>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default NewsDetailLayout;

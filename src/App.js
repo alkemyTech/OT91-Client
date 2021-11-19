@@ -18,6 +18,7 @@ import BackofficeRouter from "./Components/Backoffice/BackofficeRouter";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import Home from "./Components/Home";
 import AboutUs from "./Components/About/AboutUs";
+import ListSlides from './Components/Slides/ListSlides/ListSlides';
 import ContactForm from "./Components/Contact/ContactForm";
 import NewsList from "./Components/News/NewsList";
 import Donation from "./Components/Donations/Donation";
