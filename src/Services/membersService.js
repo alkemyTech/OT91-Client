@@ -1,5 +1,5 @@
 import axios from "axios";
-import getAuthorizationHeader from "./privateApiService";
+import { getAuthorizationHeader } from "./privateApiService";
 
 const URL = process.env.REACT_APP_API_URL_MEMBERS;
 const authorizationHeader = { headers: getAuthorizationHeader() };
