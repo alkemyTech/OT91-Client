@@ -30,3 +30,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 *SkeletonLoader*
 [src/Documentation/Skeleton/README.md](https://github.com/alkemyTech/OT91-server/tree/development/src/Documentation/Skeleton/README.md)
+
+*LinearProgress*
+[src/Documentation/LinearProgress/README.md](https://github.com/alkemyTech/OT91-Client/tree/development/src/Documentation/LinearProgress/README.md)
