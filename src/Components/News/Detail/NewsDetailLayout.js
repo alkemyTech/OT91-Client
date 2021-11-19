@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import { useParams } from "react-router";
 import NewsTitle from "./NewsTittle";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { getNewById } from "../../../Services/newsServices";
 import LoadingSpinner from "../../../Utils/loadingSpinner";
+import "../../../Styles/CardStyle.css";
 
 const NewsImage = lazy(
   () =>
@@ -15,6 +16,7 @@ const NewsImage = lazy(
 const NewsDetailLayout = () => {
   const [newData, setNewData] = useState({});
   const [newsDescription, setNewsDescription] = useState("");
+  const [loading, setIsLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -31,15 +33,25 @@ const NewsDetailLayout = () => {
   useEffect(() => {
     loadNewData();
     stripedHtml();
+    setIsLoading(false);
   }, [id, stripedHtml]);
+
 
   return (
     <div>
-      <NewsTitle title={newData.name} />
-      <Suspense fallback={<LoadingSpinner />}>
-        <NewsImage image={newData.image} />
-      </Suspense>
-      <Box>{newsDescription}</Box>
+      {loading ? (
+        <div className="spinner">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <div>
+          <NewsTitle title={newData.name} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <NewsImage image={newData.image} />
+          </Suspense>
+          <Box>{newsDescription}</Box>
+        </div>
+      )}
     </div>
   );
 };

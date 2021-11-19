@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import {Card,CardContent,CardMedia,Typography,CardActionArea} from "@mui/material";
 import Title from "../../Title/Title";
-import getActivityById from '../../../Services/activityService'
+import  * as activityService from '../../../Services/activityService'
 import "../../../Styles/CardStyle.css";
 
 const Detail = () => {
@@ -17,7 +17,7 @@ const Detail = () => {
   }, [activity.description]);
 
   useEffect(() => {
-    getActivityById(id)
+    activityService.getById(id)
       .then((activityData) => {
           setActivity(activityData);
           stripedHtml();
