@@ -1,45 +1,51 @@
-import axios from 'axios';
+import axios from "axios";
+import { alertCrudMessages as alert } from "../Utils/alertCrudMessages";
 
 const URL = process.env.REACT_APP_ACTIVITY_URL;
 
-export const getActivityById = async (id) => {
-    let {data}= await axios.get(`${URL}/${id}`);
+export const getById = async (id) => {
+  return await axios
+    .get(`${URL}/${id}`)
+    .then((response) => response.data.data)
+    .catch(() => alert.READ_ERROR("la actividad"));
+};
+
+export const getAll = async () => {
+  return await axios
+    .get(`${URL}`)
+    .then((response) => response.data.data)
+    .catch(() => alert.READ_ERROR("las actividades"));
+};
+export const create = async (body) => {
+  return await axios
+    .post(`${URL}`, body)
+    .then((response) => response.data)
+    .catch(() => alert.CREATE_ERROR("la actividad"));
+};
+
+export const update = async (id, body) => {
+  return await axios
+    .put(`${URL}/${id}`, body)
+    .then((response) => response.data)
+    .catch(() => alert.UPDATE_ERROR("la actividad"));
+};
+
+export const deleteById = async (activityId) => {
+  return await axios
+    .delete(`${URL}/${activityId}`)
+    .then((response) => response.data)
+    .catch(() => alert.DELETE_ERROR("la actividad"));
+};
+
+export const createOrUpdate = async (body, activityId) => {
+  if (activityId) {
+    await getActivity(activityId);
+    const data = await modifyActivity(body, ac);
     return data;
-}
-export const modifyActivity = async (id,body) => {
-    let {data}= await axios.put(`${URL}/${id}`,body);
+  } else if (!activityId && body) {
+    const data = await createActivity(body);
     return data;
+  }
 };
 
-export const createActivity = async (body) => {
-    let {data}= await axios.post(`${URL}`,body);
-    return data;
-};
-
-export const deleteActivityById = async (activityId) => {
-    return await axios.delete(`${URL}/activities/${activityId}`)
-        .then(response => response.data);
-}
-
-export const createOrUpdateActivity = async (activityId,body)=>{
-    const activityCreatedOrUpdated = await getActivity(activityId)
-        .then(activity => modifyActivity(activityId, body))
-        .catch(_ => createActivity(body));
-    return activityCreatedOrUpdated;
-};
-
-const getActivity = async (id) => {
-    const activity = await axios.get(`${URL}/activities/${id}`)
-        .then(response => response.data.data)
-    return activity;
-};
-
-export const getAllActivities = async () =>{
-    const allActivities = await axios.get(`${URL}/activities`)
-        .then(response => response.data.data);
-    return allActivities;
-};
-
-export const isValidList = list => list && list.length > 0;
-
-export default getActivity;
+export const isValidList = (list) => list && list.length > 0;
