@@ -1,31 +1,19 @@
-import React from "react";
+import React, { useEffect }from "react";
 import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Button} from "@mui/material";
 import { Link } from "react-router-dom";
 import MembersResultsItem from "./MembersResultsItem";
+import { useDispatch, useSelector } from "react-redux";
+import { getAll } from '../../../app/MembersReducer/membersReducer';
 
-const MembersResults = () => {
-  const membersMock = [
-    {
-      id: 1,
-      name: "Marco Fernandez",
-      image: "http://ongapi.alkemy.org/storage/Axu2E4oV8b.jpeg",
-    },
-    {
-      id: 2,
-      name: "María Garcia",
-      image: "http://ongapi.alkemy.org/storage/5JkTrvk8cG.jpeg",
-    },
-    {
-      id: 3,
-      name: "Nazareno Gabriel Bastanzo",
-      image: "http://ongapi.alkemy.org/storage/mgfbpI8iaL.png",
-    },
-  ];
-
+  const MembersResults = () => {
+  const dispatch = useDispatch()
+  const members = useSelector(state => state.members.data)
   const showMembers = () =>
-    membersMock.map((member) => <MembersResultsItem item={member} />);
-
-  return (
+    members.map((member) => <MembersResultsItem item={member} />);
+    useEffect(() => {
+      dispatch(getAll())
+    }, [])
+    return (
     <>
       <Button
         component={Link}
