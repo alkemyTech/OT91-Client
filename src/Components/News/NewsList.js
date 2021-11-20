@@ -30,7 +30,7 @@ const NewsList = ({ lastNews }) => {
       ) : (
         <div>
           <Title title="Novedades" />
-          {/* <ul className="list-grid-container ">
+          <ul className="list-grid-container ">
             {newsListHasValues ? (
               lastNews.map((news) => {
                 return (
@@ -45,7 +45,7 @@ const NewsList = ({ lastNews }) => {
             ) : (
               <p>No hay novedades</p>
             )}
-          </ul> */}
+          </ul>
           <VideoCard
             title={videoLastEvent.name}
             video={videoLastEvent.video}
