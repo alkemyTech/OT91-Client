@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import {Card,CardContent,Typography} from '@mui/material';
-import VideoPlayer from '../common/VideoPlayer';
+import VideoPlayer from '../common/VideoPlayer/VideoPlayer';
 
 const VideoCard = ({title,video,description}) => {
 
