@@ -40,7 +40,7 @@ export const deleteById = async (activityId) => {
 export const createOrUpdate = async (body, activityId) => {
   if (activityId) {
     await getActivity(activityId);
-    const data = await modifyActivity(body, ac);
+    const data = await modifyActivity(body, activityId);
     return data;
   } else if (!activityId && body) {
     const data = await createActivity(body);
