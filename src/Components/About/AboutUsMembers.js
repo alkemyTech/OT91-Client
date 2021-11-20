@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import CustomCard from "../Card/CustomCard";
-import AboutUsMembersList from "./AboutUsMembersList";
+import AboutUsMembersItem from "./AboutUsMembersItem";
 import membersApiActions from "../../Services/membersService";
 import "../../Styles/CardStyle.css";
 
@@ -22,7 +22,7 @@ const AboutUsMembers = () => {
   };
 
   const showAboutUsMembers = () =>
-    membersData.map((member) => <AboutUsMembersList member={member} />);
+    membersData.map((member) => <AboutUsMembersItem member={member} />);
 
   return (
     <div>
