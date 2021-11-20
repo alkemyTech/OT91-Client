@@ -4,6 +4,7 @@ import { listHasValues } from "../../Utils/validation";
 import Title from "../Title/Title";
 import CustomCard from "../Card/CustomCard";
 import { Container } from "@mui/material";
+import VideoCard from "../Card/VideoCard";
 import LoadingSpinner from "../../Utils/loadingSpinner";
 
 const NewsList = ({ lastNews }) => {
@@ -39,6 +40,11 @@ const NewsList = ({ lastNews }) => {
               <p>No hay novedades</p>
             )}
           </ul>
+          <VideoCard
+            title={videoLastEvent.name}
+            video={videoLastEvent.video}
+            description={videoLastEvent.content}
+        />
         </div>
       )}
     </Container>
