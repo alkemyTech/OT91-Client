@@ -5,95 +5,70 @@ const newsInitialState = {
   loading: false,
   data: [],
   error: "",
-  currentNews: "",
+  currentNews: {
+    name: "",
+    content: "",
+    category_id: "",
+    image: "",
+  },
 };
 
 export const getAll = createAsyncThunk("news/getAll", newsServices.getNews);
 
-export const getById = createAsyncThunk("news/getById",newsServices.getNewById);
+export const getById = createAsyncThunk("news/getById", newsServices.getById);
 
-export const create = createAsyncThunk("news/create", newsServices.createNew);
+export const create = createAsyncThunk("news/create", newsServices.create);
 
 export const update = createAsyncThunk("news/update", (news) =>
-  newsServices.updateNewById(news, news.id)
+  newsServices.update(news, news.id)
 );
 
 export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
-  newsServices.createOrUpdateNews(news, news.id)
+  newsServices.createOrUpdate(news, news.id)
 );
 
-export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteNewByid);
+export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteByid);
 
 const newsSlice = createSlice({
   name: "news",
   initialState: newsInitialState,
   reducers: {},
   extraReducers: {
-    [getAll.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [getAll.pending]: (state) => {
+      state.loading = true;
     },
     [getAll.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        data: action.payload,
-        loading: false,
-      };
+      state.data = action.payload;
+      state.loading = false;
     },
     [getAll.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
-    [getById.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [getById.pending]: (state) => {
+      state.loading = true;
     },
     [getById.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        currentNews: action.payload,
-        loading: false,
-      };
+      state.currentNews = action.payload;
+      state.loading = false;
     },
     [getById.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
-    [create.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [create.pending]: (state) => {
+      state.loading = true;
     },
     [create.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-        loading: false,
-      };
+      state.data = [...state.data, action.payload];
+      state.loading = false;
     },
     [create.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
-    [update.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [update.pending]: (state) => {
+      state.loading = true;
     },
     [update.fulfilled]: (state, action) => {
       const newsForUpdate = state.data.findIndex(
@@ -102,17 +77,11 @@ const newsSlice = createSlice({
       state.data[newsForUpdate] = action.payload;
     },
     [update.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
-    [createOrUpdate.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [createOrUpdate.pending]: (state) => {
+      state.loading = true;
     },
     [createOrUpdate.fulfilled]: (state, action) => {
       const payloadNews = state.data.findIndex(
@@ -122,31 +91,19 @@ const newsSlice = createSlice({
       else state.data = [...state.data, action.payload];
     },
     [createOrUpdate.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
-    [deletebyId.pending]: (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    [deletebyId.pending]: (state) => {
+      state.loading = true;
     },
     [deletebyId.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        data: [...state.data.filter((id) => id !== action.payload)],
-        loading: false,
-      };
+      state.data = [...state.data.filter((id) => id !== action.payload)];
+      state.loading = false;
     },
     [deletebyId.rejected]: (state, action) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+      state.loading = false;
+      state.error = action.error.message;
     },
   },
 });

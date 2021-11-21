@@ -56,24 +56,6 @@ const NewsForm = () => {
     setCategories(data);
   }, []);
 
-  const updateNews = () => {
-    dispatch(actions.getAll());
-  };
-
-  useEffect(() => {
-    updateNews();
-    setTimeout(() => {
-      dispatch(
-        actions.update({
-          id: 763,
-          name: "prueba Update",
-          content: "lkasjdalksdjlaksjd",
-          category_id: 1100,
-        })
-      );
-    }, 2000);
-  }, []);
-
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <label htmlFor="name">Title</label>

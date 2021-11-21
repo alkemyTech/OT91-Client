@@ -5,7 +5,7 @@ const URL = process.env.REACT_APP_API_URL_NEWS;
 const handleCatch = (error) =>
   showErrorAlert(error.response.data.message || error.message);
 
-const getNews = async () => {
+export const getAll = async () => {
   try {
     const response = await axios.get(URL);
     const data = response.data.data;
@@ -15,7 +15,7 @@ const getNews = async () => {
   }
 };
 
-const getNewById = async (id) => {
+export const getById = async (id) => {
   try {
     const data = await axios.get(`${URL}/${id}`);
     return data.data.data;
@@ -24,7 +24,7 @@ const getNewById = async (id) => {
   }
 };
 
-const updateNewById = async (newsdata, id) => {
+export const update = async (newsdata, id) => {
   try {
     const data = await axios.put(`${URL}/${id}`, newsdata);
     return data.data.data;
@@ -33,7 +33,7 @@ const updateNewById = async (newsdata, id) => {
   }
 };
 
-const createNew = async (news) => {
+export const create = async (news) => {
   try {
     const data = await axios.post(URL, news);
     return data.data.data;
@@ -42,12 +42,12 @@ const createNew = async (news) => {
   }
 };
 
-const createOrUpdateNews = async (newsdata, id) => {
+export const createOrUpdate = async (newsdata, id) => {
   const allNews = await getNews();
   const sameData = allNews.find((element) => element.id === id);
   try {
     if (sameData) {
-      const data = await updateNewById(id, newsdata);
+      const data = await updateNewById(newsdata, id);
       return data;
     } else if (!id && newsdata) {
       const data = await createNew(newsdata);
@@ -58,7 +58,7 @@ const createOrUpdateNews = async (newsdata, id) => {
   }
 };
 
-const deleteNewByid = async (id) => {
+export const deleteByid = async (id) => {
   try {
     const data = await axios.delete(`${URL}/${id}`);
     return data;
@@ -74,11 +74,3 @@ export const createNewsObject = (id, name, image, createdAt) => ({
   createdAt,
 });
 
-export {
-  createOrUpdateNews,
-  getNewById,
-  deleteNewByid,
-  getNews,
-  updateNewById,
-  createNew,
-};
