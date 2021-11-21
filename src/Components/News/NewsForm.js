@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/FormStyles.css";
-import { createOrUpdateNews, createNew } from "../../Services/newsServices";
 import { getCategories } from "../../Services/categoriesServices";
 import InputImg from "../Inputs/InputImg";
 import InputEditor from "../Inputs/InputEditor";
@@ -11,6 +10,7 @@ const NewsForm = () => {
   const currentNews = useSelector((state) => state.news.currentNews);
 
   const [news, setNews] = useState(currentNews);
+
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState("");
 
@@ -42,7 +42,7 @@ const NewsForm = () => {
   };
 
   const sendNews = async () => {
-    // createOrUpdateNews(news);
+    dispatch(actions.createOrUpdate(news));
     setNews({
       name: "",
       content: "",
@@ -54,7 +54,23 @@ const NewsForm = () => {
   useEffect(async () => {
     const { data } = await getCategories();
     setCategories(data);
-    dispatch(actions.deletebyId(841));
+  }, []);
+
+  const updateNews = () => {
+    dispatch(actions.getAll());
+  };
+
+  useEffect(() => {
+    updateNews();
+    setTimeout(() => {
+      dispatch(
+        actions.createOrUpdate({
+          name: "prueba ultima create",
+          content: "lkasjdalksdjlaksjd",
+          category_id: 1100,
+        })
+      );
+    }, 2000);
   }, []);
 
   return (

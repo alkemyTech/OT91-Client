@@ -42,14 +42,16 @@ const createNew = async (news) => {
   }
 };
 
-const createOrUpdateNews = async (news) => {
-  const data = await getNews();
-  const sameData = data.find((news) => news.id === news.categoryId);
+const createOrUpdateNews = async (newsdata, id) => {
+  const allNews = await getNews();
+  const sameData = allNews.find((element) => element.id === id);
   try {
     if (sameData) {
-      await updateNewById(id, dataToUpdate);
-    } else {
-      await createNew(news);
+      const data = await updateNewById(id, newsdata);
+      return data;
+    } else if (!id && newsdata) {
+      const data = await createNew(newsdata);
+      return data;
     }
   } catch (err) {
     console.log(err);

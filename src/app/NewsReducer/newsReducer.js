@@ -14,11 +14,16 @@ export const getById = createAsyncThunk("news/getById",newsServices.getNewById);
 
 export const create = createAsyncThunk("news/create", newsServices.createNew);
 
-export const update = createAsyncThunk("news/update", newsServices.updateNewById);
+export const update = createAsyncThunk("news/update", ({ id, data }) =>
+  newsServices.updateNewById(data, id)
+);
 
-export const createOrUpdate = createAsyncThunk("news/createOrUpdate",newsServices.createOrUpdateNews);
+export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
+  newsServices.createOrUpdateNews(news, news.id)
+);
 
 export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteNewByid);
+
 
 const newsSlice = createSlice({
   name: "news",
@@ -92,15 +97,10 @@ const newsSlice = createSlice({
       };
     },
     [update.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        data: [
-          state.data.map((element) =>
-            element.id === action.payload.id ? action.payload : element
-          ),
-        ],
-        loading: false,
-      };
+      const newsForUpdate = state.data.findIndex(
+        (element) => element.id == action.payload.id
+      );
+      state.data[newsForUpdate] = action.payload;
     },
     [update.rejected]: (state, action) => {
       return {
@@ -116,19 +116,15 @@ const newsSlice = createSlice({
       };
     },
     [createOrUpdate.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        data: [
-          action.payload.id
-            ? [
-                state.data.map((element) =>
-                  action.payload.id === element.id ? action.payload : element
-                ),
-              ]
-            : [...state.data, action.payload],
-        ],
-        loading: false,
-      };
+      console.group("CREATE OR UPDATE");
+      console.log(state);
+      console.log(action);
+      console.groupEnd("CREATE OR UPDATE");
+      const payloadNews = state.data.findIndex(
+        (element) => element.id == action.payload.id
+      );
+      if (payloadNews >= 0) state.data[payloadNews] = action.payload;
+      else state.data = [...state.data, action.payload];
     },
     [createOrUpdate.rejected]: (state, action) => {
       return {
