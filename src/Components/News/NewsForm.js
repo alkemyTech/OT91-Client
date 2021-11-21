@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/FormStyles.css";
-import { createOrUpdateNews } from "../../Services/newsServices";
-import { getCategory } from "../../Services/categoriesServices";
+import { createOrUpdateNews, createNew } from "../../Services/newsServices";
+import { getCategories } from "../../Services/categoriesServices";
 import InputImg from "../Inputs/InputImg";
 import InputEditor from "../Inputs/InputEditor";
+import { useDispatch } from "react-redux";
+import * as actions from "../../app/NewsReducer/newsReducer";
 
 const NewsForm = () => {
   const [news, setNews] = useState({
     name: "",
     content: "",
-    category: [],
-    categoryId: "",
+    category_id: "",
     image: "",
   });
   const [categories, setCategories] = useState([]);
+  const [categorySelect, setCategorySelect] = useState("");
 
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     switch (e.target.name) {
       case "name":
@@ -25,13 +28,13 @@ const NewsForm = () => {
         break;
       case "category":
         const newCategorySelected = categories?.find(
-          (category) => category.name === e.target.value
+          (element) => e.target.value === element.name
         );
         setNews({
           ...news,
-          category: e.target.value,
-          categoryId: newCategorySelected?.id,
+          category_id: newCategorySelected?.id,
         });
+        setCategorySelect(newCategorySelected.name);
         break;
     }
   };
@@ -42,18 +45,18 @@ const NewsForm = () => {
   };
 
   const sendNews = async () => {
-    createOrUpdateNews(news);
+    dispatch(actions.create(news));
+    // createOrUpdateNews(news);
     setNews({
       name: "",
       content: "",
-      category: [],
-      categoryId: "",
+      category_id: "",
       image: "",
     });
   };
 
   useEffect(async () => {
-    const data = await getCategory();
+    const { data } = await getCategories();
     setCategories(data);
   }, []);
 
@@ -74,7 +77,7 @@ const NewsForm = () => {
       <select
         className="select-field"
         name="category"
-        value={news.category || ""}
+        value={categorySelect || ""}
         onChange={handleChange}
         required
       >
