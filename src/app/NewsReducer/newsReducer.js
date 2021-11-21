@@ -14,8 +14,8 @@ export const getById = createAsyncThunk("news/getById",newsServices.getNewById);
 
 export const create = createAsyncThunk("news/create", newsServices.createNew);
 
-export const update = createAsyncThunk("news/update", ({ id, data }) =>
-  newsServices.updateNewById(data, id)
+export const update = createAsyncThunk("news/update", (news) =>
+  newsServices.updateNewById(news, news.id)
 );
 
 export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
@@ -23,7 +23,6 @@ export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
 );
 
 export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteNewByid);
-
 
 const newsSlice = createSlice({
   name: "news",
@@ -116,10 +115,6 @@ const newsSlice = createSlice({
       };
     },
     [createOrUpdate.fulfilled]: (state, action) => {
-      console.group("CREATE OR UPDATE");
-      console.log(state);
-      console.log(action);
-      console.groupEnd("CREATE OR UPDATE");
       const payloadNews = state.data.findIndex(
         (element) => element.id == action.payload.id
       );

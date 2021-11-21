@@ -64,8 +64,9 @@ const NewsForm = () => {
     updateNews();
     setTimeout(() => {
       dispatch(
-        actions.createOrUpdate({
-          name: "prueba ultima create",
+        actions.update({
+          id: 763,
+          name: "prueba Update",
           content: "lkasjdalksdjlaksjd",
           category_id: 1100,
         })

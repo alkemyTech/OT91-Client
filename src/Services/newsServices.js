@@ -24,10 +24,10 @@ const getNewById = async (id) => {
   }
 };
 
-const updateNewById = async (id, dataToUpdate) => {
+const updateNewById = async (newsdata, id) => {
   try {
-    const data = await axios.put(`${URL}/${id}`, dataToUpdate);
-    return data;
+    const data = await axios.put(`${URL}/${id}`, newsdata);
+    return data.data.data;
   } catch (error) {
     handleCatch(error);
   }
