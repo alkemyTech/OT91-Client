@@ -54,7 +54,7 @@ const NewsForm = () => {
   useEffect(async () => {
     const { data } = await getCategories();
     setCategories(data);
-    dispatch(actions.getAll());
+    dispatch(actions.deletebyId(841));
   }, []);
 
   return (
