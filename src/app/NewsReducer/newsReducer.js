@@ -5,7 +5,7 @@ const newsInitialState = {
   loading: false,
   data: [],
   error: "",
-  dataByid: "",
+  currentNews: "",
 };
 
 export const getAll = createAsyncThunk("news/getAll", newsServices.getNews);
@@ -54,7 +54,7 @@ const newsSlice = createSlice({
     [getById.fulfilled]: (state, action) => {
       return {
         ...state,
-        currentNew: action.payload,
+        currentNews: action.payload,
         loading: false,
       };
     },

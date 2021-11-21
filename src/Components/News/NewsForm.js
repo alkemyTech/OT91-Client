@@ -4,16 +4,13 @@ import { createOrUpdateNews, createNew } from "../../Services/newsServices";
 import { getCategories } from "../../Services/categoriesServices";
 import InputImg from "../Inputs/InputImg";
 import InputEditor from "../Inputs/InputEditor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../app/NewsReducer/newsReducer";
 
 const NewsForm = () => {
-  const [news, setNews] = useState({
-    name: "",
-    content: "",
-    category_id: "",
-    image: "",
-  });
+  const currentNews = useSelector((state) => state.news.currentNews);
+
+  const [news, setNews] = useState(currentNews);
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState("");
 
@@ -45,7 +42,6 @@ const NewsForm = () => {
   };
 
   const sendNews = async () => {
-    dispatch(actions.create(news));
     // createOrUpdateNews(news);
     setNews({
       name: "",
@@ -58,6 +54,7 @@ const NewsForm = () => {
   useEffect(async () => {
     const { data } = await getCategories();
     setCategories(data);
+    dispatch(actions.getById(841));
   }, []);
 
   return (
