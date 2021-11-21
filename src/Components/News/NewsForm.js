@@ -54,7 +54,7 @@ const NewsForm = () => {
   useEffect(async () => {
     const { data } = await getCategories();
     setCategories(data);
-    dispatch(actions.getById(841));
+    dispatch(actions.getAll());
   }, []);
 
   return (
