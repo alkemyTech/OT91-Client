@@ -4,7 +4,7 @@ import { showSuccessAlert } from "../../../Utils/alerts";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "../../../Styles/TableStyle.css";
-import { getAllActivities, deleteActivity} from '../../../app/activitiesReducer/activitiesReducer';
+import { getAll, deleteById } from '../../../app/activitiesReducer/activitiesReducer';
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -15,12 +15,12 @@ const ActivitiesTable = () => {
   const editData = (id) => history.push(`/activity-detail/${id}`);
 
   const deleteData = (id) => {
-    dispatch(deleteActivity(id));
+    dispatch(deleteById(id));
     showSuccessAlert("Delete Activity");
   };
 
   useEffect(() => {
-    dispatch(getAllActivities());
+    dispatch(getAll());
   }, [])
 
   return (
