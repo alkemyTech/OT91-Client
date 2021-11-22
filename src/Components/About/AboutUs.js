@@ -17,12 +17,17 @@ const AboutUs = () => {
         <div className="title-container-text">
           <p>{description}</p>
           <div>
-            <LinkedinCompanyProfile
-              lang="en_US"
-              companyId={68737437}
-              format="inline"
-              text="Company name"
-            />
+            <Box className="linkedin-badge-container">
+              <div
+                className="badge-base LI-profile-badge"
+                data-locale="es_ES"
+                data-size="large"
+                data-theme="light"
+                data-type="HORIZONTAL"
+                data-vanity="corporación-somos-más-68737437"
+                data-version="v1"
+              ></div>
+            </Box>
             <TwitterTweet
               align="center"
               coversation="none"
