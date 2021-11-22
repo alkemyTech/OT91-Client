@@ -1,41 +1,60 @@
-import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Button } from "@mui/material";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { NewsTableRows } from "./NewsTableRows";
 import { createNewsObject } from "../../Services/newsServices";
-
-const onEdit = (id) => console.log(`Editing a news with id:${id}`);
-const onDelete = (id) => console.log(`Deleting a news with id:${id}`);
-
-const newsList = [
-    createNewsObject(1, 'Novedad 1', 'https://bit.ly/3GRp1al', new Date()),
-    createNewsObject(2, 'Novedad 2', 'https://bit.ly/3GRp1al', new Date()),
-    createNewsObject(3, 'Novedad 3', 'https://bit.ly/3GRp1al', new Date())
-    ];
+import { useDispatch } from "react-redux";
+import * as newsActions from "../../app/NewsReducer/newsReducer";
+import { useEffect, useSelector } from "react";
 
 const NewsListEditTable = () => {
-    return (
+  const dispatch = useDispatch;
+  const news = useSelector((state) => state.news.data);
+  const onEdit = (id) => dispatch(newsActions.update(id));
+  const onDelete = (id) => dispatch(newsActions.deletebyId(id));
+  useEffect(() => {
+    dispatch(newsActions.getAll());
+  }, []);
+  return (
     <>
-    <TableContainer>
+      <TableContainer>
         <Table size="small" aria-label="simple table">
-            <TableHead>
-                <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="center">Image</TableCell>
-                    <TableCell align="center">Created At</TableCell>
-                    <TableCell align="center">
-                        <Button variant="contained" size="small" component={Link} to="/backoffice/news/create" color="primary">
-                            Create News
-                        </Button>
-                    </TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                <NewsTableRows newsList={newsList} onEdit={onEdit} onDelete={onDelete}/>
-            </TableBody>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="center">Image</TableCell>
+              <TableCell align="center">Created At</TableCell>
+              <TableCell align="center">
+                <Button
+                  variant="contained"
+                  size="small"
+                  component={Link}
+                  to="/backoffice/news/create"
+                  color="primary"
+                >
+                  Create News
+                </Button>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <NewsTableRows
+              newsList={news}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          </TableBody>
         </Table>
-    </TableContainer>
+      </TableContainer>
     </>
-    )
-}
+  );
+};
 
 export default NewsListEditTable;

@@ -29,7 +29,7 @@ const NewsDetailLayout = () => {
   }, [news.content]);
 
   useEffect(() => {
-    dispatch(newsActions.getById(id));
+    dispatch(newsActions.getById(802));
     stripedHtml();
     setIsLoading(false);
   }, [id, stripedHtml]);
