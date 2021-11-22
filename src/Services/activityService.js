@@ -19,14 +19,14 @@ export const getAll = async () => {
 export const create = async (body) => {
   return await axios
     .post(`${URL}`, body)
-    .then((response) => response.data)
+    .then((response) => response.data.data)
     .catch(() => alert.CREATE_ERROR("la actividad"));
 };
 
 export const update = async (id, body) => {
   return await axios
     .put(`${URL}/${id}`, body)
-    .then((response) => response.data)
+    .then((response) => response.data.data)
     .catch(() => alert.UPDATE_ERROR("la actividad"));
 };
 
@@ -39,11 +39,11 @@ export const deleteById = async (activityId) => {
 
 export const createOrUpdate = async (body, activityId) => {
   if (activityId) {
-    await getActivity(activityId);
-    const data = await modifyActivity(body, activityId);
+    await getById(activityId);
+    const data = await update(activityId, body);
     return data;
   } else if (!activityId && body) {
-    const data = await createActivity(body);
+    const data = await create(body);
     return data;
   }
 };
