@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useEffect, useState } from 'react';
 import {useParams} from 'react-router'
 import {Formik, Form, Field} from 'formik';
 import { setUrlImage } from '../common/File';
@@ -7,11 +7,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CustomErrorMessage } from '../common/CustomErrorMessage';
 import {setCKEditorText} from '../common/ckEditor/setCKEditorText';
 import { validateForm} from '../common/validations/validateForm';
-import { createOrUpdate } from '../../app/activitiesReducer/activitiesReducer';
+import * as activitiesReducer from '../../app/activitiesReducer/activitiesReducer';
 import { useDispatch } from 'react-redux';
 const ActivitiesForm = () => {
   const {activityId} = useParams();
   const [activity, setActivity] = useState({
+    id: activityId,
     name:'',
     description:'',
     image: ''
@@ -20,6 +21,9 @@ const ActivitiesForm = () => {
   const handleChangeDescription = (description, setFieldValue) => {
     setFieldValue("description", description.getData())
   };
+  useEffect(() => {
+    dispatch(activitiesReducer.getAll())
+  })
 
   const handleChangeImage = (e, setImage) =>{
     setUrlImage(e.target.files[0],setImage)
@@ -27,7 +31,7 @@ const ActivitiesForm = () => {
 
   const handleSubmit = (values,resetForm) => {
     let updatedValues =setCKEditorText(values,'description')
-    dispatch(createOrUpdate(activityId,updatedValues));
+    dispatch(activitiesReducer.createOrUpdate(values));
     resetForm();
   }
 
