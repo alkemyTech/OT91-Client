@@ -5,6 +5,8 @@ import { Box } from "@mui/material";
 import { getNewById } from "../../../Services/newsServices";
 import LoadingSpinner from "../../../Utils/loadingSpinner";
 import "../../../Styles/CardStyle.css";
+import { useDispatch, useSelector } from "react-redux";
+import * as newsActions from "../../../app/NewsReducer/newsReducer";
 
 const NewsImage = lazy(
   () =>
@@ -14,28 +16,23 @@ const NewsImage = lazy(
 );
 
 const NewsDetailLayout = () => {
-  const [newData, setNewData] = useState({});
   const [newsDescription, setNewsDescription] = useState("");
-  const [loading, setIsLoading] = useState(true);
+  const [loading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
   const { id } = useParams();
 
-  const loadNewData = async () => {
-    const { data } = await getNewById(id);
-    setNewData(data);
-  };
+  const news = useSelector((state) => state.news.currentNews);
 
   const stripedHtml = useCallback(() => {
-    newData.content &&
-      setNewsDescription(newData.content.replace(/<[^>]+>/g, ""));
-  }, [newData.content]);
+    news.content && setNewsDescription(news.content.replace(/<[^>]+>/g, ""));
+  }, [news.content]);
 
   useEffect(() => {
-    loadNewData();
+    dispatch(newsActions.getById(id));
     stripedHtml();
     setIsLoading(false);
   }, [id, stripedHtml]);
-
 
   return (
     <div>
@@ -45,9 +42,9 @@ const NewsDetailLayout = () => {
         </div>
       ) : (
         <div>
-          <NewsTitle title={newData.name} />
+          <NewsTitle title={news.name} />
           <Suspense fallback={<LoadingSpinner />}>
-            <NewsImage image={newData.image} />
+            <NewsImage image={news.image} />
           </Suspense>
           <Box>{newsDescription}</Box>
         </div>

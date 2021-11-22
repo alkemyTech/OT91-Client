@@ -13,7 +13,7 @@ const newsInitialState = {
   },
 };
 
-export const getAll = createAsyncThunk("news/getAll", newsServices.getNews);
+export const getAll = createAsyncThunk("news/getAll", newsServices.getAll);
 
 export const getById = createAsyncThunk("news/getById", newsServices.getById);
 
