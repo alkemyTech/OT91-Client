@@ -1,20 +1,19 @@
 import React from 'react';
 import '../FormStyles.css';
 import { useFormik } from 'formik';
-import { createUser, updateUser } from '../../Services/userServices';
+import { useDispatch } from 'react-redux';
 import { rolesList } from '../utilsData/roleList';
+import { createUser, updateUser } from '../../app/usersReducer/usersAccion';
 
 const UserModifierForm = ({user}) => {
-
+    const dispatch = useDispatch()
     const hasUser = () => user ? true : false;
 
     const handleOnSubmit =  async (values) => {
         if(hasUser){
-            updateUser(user.id,values).then(result => result)
-            .catch(error => console.log(error))
+            dispatch(updateUser({id:user.id,user:values}))
         }else {
-            createUser(values).then(response => response)
-            .catch(error => console.log(error))
+            dispatch(createUser(values))
         }
     };
 
