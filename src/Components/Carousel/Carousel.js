@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getImagesSlides } from "../../Services/slideServices";
+import { getImagesSlides } from "../../Services/slidesService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
   Autoplay,
