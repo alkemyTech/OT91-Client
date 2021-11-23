@@ -11,8 +11,7 @@ const InputEditor = ({ news, setNews }) => {
         required={true}
         onChange={(event, editor) => {
           const data = editor.getData();
-          const newsData = data.replace(/'<p>'|['</p>']|<strong>|['</strong>']/gi,'');
-          setNews({ ...news, content: newsData });
+          setNews({ ...news, content: data });
         }}
       />
     </div>

@@ -4,6 +4,7 @@ import { getCategories } from "../../Services/categoriesServices";
 import * as newsService from "../../Services/newsServices";
 import InputImg from "../Inputs/InputImg";
 import InputEditor from "../Inputs/InputEditor";
+import { setCKEditorText } from "../common/ckEditor/setCKEditorText";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
@@ -23,7 +24,11 @@ const NewsForm = () => {
         setNews({ ...news, name: e.target.value });
         break;
       case "content":
-        setNews({ ...news, content: e.target.value });
+        const textReset = e.target.value.replace(
+          /'<p>'|['</p>']|<strong>|['</strong>']/gi,
+          ""
+        );
+        setNews({ ...news, content: textReset });
         break;
       case "image":
         const imageFile = e.target.files[0];
@@ -105,7 +110,7 @@ const NewsForm = () => {
       <input
         className="input-image"
         type="file"
-        accept="image/png, image/jpg"
+        accept="image/jpeg, image/jpg, image/png"
         id="image"
         name="image"
         value={undefined}
