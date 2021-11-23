@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import "../FormStyles.css";
 import Swal from 'sweetalert2'
-import {CreateSlide, EditSlide} from '../../Services/slideServices'
+import {CreateSlide, EditSlide} from '../../Services/slidesService'
 
 const SlidesForm = ({slide}) => {
   const [initialSlides, setInitialSlides] = useState({
