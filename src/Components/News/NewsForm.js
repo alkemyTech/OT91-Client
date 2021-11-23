@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../Components/FormStyles.css";
 import { getCategories } from "../../Services/categoriesServices";
-import * as newsService from "../../Services/newsServices";
-import InputImg from "../Inputs/InputImg";
 import InputEditor from "../Inputs/InputEditor";
 import { setCKEditorText } from "../common/ckEditor/setCKEditorText";
-
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useHistory, useParams } from "react-router";
@@ -73,6 +70,7 @@ const NewsForm = () => {
 
   useEffect(() => {
     getNewsforEdit(newsid);
+    setNews(currentNews);
   }, [newsid]);
 
   return (

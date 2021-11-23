@@ -43,8 +43,8 @@ export const create = async (news) => {
 };
 
 export const createOrUpdate = async (news, newsid) => {
-  const idExist = await getById(newsid);
   try {
+    const idExist = (await newsid) && getById(newsid);
     if (idExist) {
       const data = await update(news, newsid);
       return data;

@@ -6,12 +6,17 @@ import "../../Styles/Table.css";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getById } from "../../Services/newsServices";
 
 const NewsTableRows = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onEdit = (id) => history.push(`/edit-news/${id}`);
+  const onEdit = (id) => {
+    dispatch(newsActions.getById(id)).then(() => {
+      history.push(`/edit-news/${id}`);
+    });
+  };
   const onDelete = (id) => dispatch(newsActions.deletebyId(id));
 
   const news = useSelector((state) => state.news.data);
