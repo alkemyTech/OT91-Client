@@ -25,7 +25,7 @@ const MembersResultsItem = ({ item }) => {
             component={Link}
             to="/backoffice/members/edit"
             variant="contained"
-            color="terciary"
+            color="primary"
             className="member-action"
             key={item && item.id}
           >

@@ -2,16 +2,15 @@ import '../CardListStyles.css';
 import Title from '../Title/Title';
 import { useEffect, useState } from 'react';
 import {ACTIVITIES} from '../common/text/textActivity';
-import {getAllActivities} from '../../Services/activityService';
 import ActivitiesCards from './ActivitiesCards/ActivitiesCards';
 import ListPagination from '../common/ListPagination/ListPagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAll } from '../../app/activitiesReducer/activitiesReducer';
 const ActivitiesList = () => {
-
-    const [items, setItems] = useState([]);
-
-    useEffect(async() => {
-        getAllActivities()
-            .then(allActivities => setItems(allActivities));
+    const {activities: items} = useSelector(state => state.activities);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAll());
     }, []);
 
     const showItemsListComponent = (items) => (<ActivitiesCards activities={items} />);

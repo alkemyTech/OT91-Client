@@ -1,35 +1,59 @@
 import axios from "axios";
-const URL = 'http://ongapi.alkemy.org/public/api/';
-
+import { showErrorAlert } from "../Utils/alerts";
+const URL = process.env.REACT_APP_API_URL_CONTACT;
 
 export const getContactId = async (contactId) => {
-    let {data}= await axios.get(`${URL}/contacts/${contactId}`);
+  try {
+    let { data } = await axios.get(`${URL}/${contactId}`);
     return data;
+  } catch (err) {
+    showErrorAlert(err);
+  }
 };
 
 export const getContactsAll = async () => {
-    let {data}= await axios.get(`${URL}/contacts`);
+  try {
+    let { data } = await axios.get(`${URL}`);
     return data;
-}
+  } catch (err) {
+    showErrorAlert(err);
+  }
+};
 
-export const modifyContact = async (contactId,body) => {
-    let {data}= await axios.put(`${URL}/contacts/${contactId}`,body);
+export const modifyContact = async (contactId, body) => {
+  try {
+    let { data } = await axios.put(`${URL}/${contactId}`, body);
     return data;
+  } catch (err) {
+    showErrorAlert(err);
+  }
 };
 
 export const createContact = async (body) => {
-    let {data}= await axios.post(`${URL}/contacts`,body);
+  try {
+    let { data } = await axios.post(`${URL}`, body);
     return data;
+  } catch (err) {
+    showErrorAlert(err);
+  }
 };
 
-export const deleteContac = async (contactId) =>{
-    let {data} = await axios.delete(`${URL}/contacts/${contactId}`);
+export const deleteContac = async (contactId) => {
+  try {
+    let { data } = await axios.delete(`${URL}/${contactId}`);
     return data;
+  } catch (err) {
+    showErrorAlert(err);
+  }
 };
 
-export const createOrUpdateContact = async (contactId,body)=>{
-    if(contactId){
-        let {data} = await getContactId(contactId)
-        data && modifyContact(contactId,body)
-    }else createContact(body)
+export const createOrUpdateContact = async (contactId, body) => {
+  try {
+    if (contactId) {
+      let { data } = await getContactId(contactId);
+      data && modifyContact(contactId, body);
+    } else createContact(body);
+  } catch (err) {
+    showErrorAlert(err);
+  }
 };

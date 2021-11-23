@@ -3,25 +3,24 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import {Card,CardContent,CardMedia,Typography,CardActionArea} from "@mui/material";
 import Title from "../../Title/Title";
-import getActivityById from '../../../Services/activityService'
+import { getById } from "../../../app/activitiesReducer/activitiesReducer";
+import { useSelector } from "react-redux";
 import "../../../Styles/CardStyle.css";
+import { useDispatch } from "react-redux";
 
 const Detail = () => {
   const { id } = useParams();
-  const [activity, setActivity] = useState("");
+  const activity = useSelector(state => state.activities.activity);
   const [activityDescription, setActivityDescription] = useState("");
 
   const stripedHtml = useCallback(() => {
     activity.description &&
       setActivityDescription(activity.description.replace(/<[^>]+>/g, ""));
   }, [activity.description]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    getActivityById(id)
-      .then((activityData) => {
-          setActivity(activityData);
-          stripedHtml();
-        })
+    dispatch(getById(id));
+    stripedHtml();
   }, [stripedHtml]);
 
   return (
