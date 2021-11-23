@@ -1,7 +1,6 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
 const InputEditor = ({ news, setNews }) => {
   return (
     <div>
@@ -12,7 +11,7 @@ const InputEditor = ({ news, setNews }) => {
         required={true}
         onChange={(event, editor) => {
           const data = editor.getData();
-          const newsData = data.replace(/<[^>]*>/g, "");
+          const newsData = data.replace(/'<p>'|['</p>']|<strong>|['</strong>']/gi,'');
           setNews({ ...news, content: newsData });
         }}
       />
