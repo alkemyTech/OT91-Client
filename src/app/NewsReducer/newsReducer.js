@@ -20,12 +20,11 @@ export const getById = createAsyncThunk("news/getById", newsServices.getById);
 export const create = createAsyncThunk("news/create", newsServices.create);
 
 export const update = createAsyncThunk("news/update", (news) =>
-  newsServices.update(news, news.id)
+  newsServices.update(news.news, news.newsid)
 );
 
 export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
-  newsServices.createOrUpdate(news, news.id)
-);
+  newsServices.createOrUpdate(news.news, news.newsid))
 
 export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteByid);
 

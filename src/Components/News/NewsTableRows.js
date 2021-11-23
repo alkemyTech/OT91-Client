@@ -5,11 +5,13 @@ import { formatDate } from "../../Utils/formatters";
 import "../../Styles/Table.css";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const NewsTableRows = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const onEdit = (id) => dispatch(newsActions.update(id));
+  const onEdit = (id) => history.push(`/edit-news/${id}`);
   const onDelete = (id) => dispatch(newsActions.deletebyId(id));
   const news = useSelector((state) => state.news.data);
 
@@ -31,9 +33,9 @@ const NewsTableRows = () => {
               alt={element.name}
             />
           </TableCell>
-          <TableCell align="center">{formatDate(element.created_at)}</TableCell>
+          {/* <TableCell align="center">{formatDate(element.created_at)}</TableCell> */}
           <TableCell align="center">
-            <IconButton onClick={() => onEdit()}>
+            <IconButton onClick={() => onEdit(element.id)}>
               <Edit />
             </IconButton>
             <IconButton onClick={() => onDelete(element.id)}>

@@ -27,7 +27,7 @@ const NewsListEditTable = () => {
                   variant="contained"
                   size="small"
                   component={Link}
-                  to="/backoffice/news/create"
+                  to="/create-news"
                   color="primary"
                 >
                   Create News

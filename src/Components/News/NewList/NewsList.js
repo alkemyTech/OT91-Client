@@ -7,14 +7,24 @@ import { Container } from "@mui/material";
 import VideoCard from "../../Card/VideoCard";
 import LoadingSpinner from "../../../Utils/loadingSpinner";
 import {videoLastEvent} from './videoEvent';
-const NewsList = ({ lastNews }) => {
+import { Link } from "react-router-dom";
+import * as newsActions from "../../../app/NewsReducer/newsReducer";
+import { useDispatch, useSelector } from "react-redux";
+
+const NewsList = () => {
   const [loading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const allNews = useSelector((state) => state.news.data);
 
   useEffect(() => {
-    lastNews && setIsLoading(false);
-  }, [lastNews]);
+    dispatch(newsActions.getAll());
+  }, []);
 
-  const newsListHasValues = listHasValues(lastNews);
+  useEffect(() => {
+    allNews && setIsLoading(false);
+  }, [allNews]);
+
+  const newsListHasValues = listHasValues(allNews);
   return (
     <Container className="ContainerList">
       {loading ? (
@@ -26,7 +36,7 @@ const NewsList = ({ lastNews }) => {
           <Title title="Novedades" />
           <ul className="list-grid-container ">
             {newsListHasValues ? (
-              lastNews.map((news) => {
+              allNews.map((news) => {
                 return (
                   <CustomCard
                     key={news.id}

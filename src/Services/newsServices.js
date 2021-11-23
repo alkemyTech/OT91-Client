@@ -24,9 +24,9 @@ export const getById = async (id) => {
   }
 };
 
-export const update = async (newsdata, id) => {
+export const update = async (news, newsid) => {
   try {
-    const data = await axios.put(`${URL}/${id}`, newsdata);
+    const data = await axios.put(`${URL}/${newsid}`, news);
     return data.data.data;
   } catch (error) {
     handleCatch(error);
@@ -42,15 +42,14 @@ export const create = async (news) => {
   }
 };
 
-export const createOrUpdate = async (newsdata, id) => {
-  const allNews = await getNews();
-  const sameData = allNews.find((element) => element.id === id);
+export const createOrUpdate = async (news, newsid) => {
+  const idExist = await getById(newsid);
   try {
-    if (sameData) {
-      const data = await updateNewById(newsdata, id);
+    if (idExist) {
+      const data = await update(news, newsid);
       return data;
-    } else if (!id && newsdata) {
-      const data = await createNew(newsdata);
+    } else if (!idExist && news) {
+      const data = await create(news);
       return data;
     }
   } catch (err) {
@@ -73,4 +72,3 @@ export const createNewsObject = (id, name, image, createdAt) => ({
   image,
   createdAt,
 });
-
