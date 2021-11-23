@@ -13,6 +13,7 @@ const NewsTableRows = () => {
 
   const onEdit = (id) => history.push(`/edit-news/${id}`);
   const onDelete = (id) => dispatch(newsActions.deletebyId(id));
+
   const news = useSelector((state) => state.news.data);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const NewsTableRows = () => {
               alt={element.name}
             />
           </TableCell>
-          {/* <TableCell align="center">{formatDate(element.created_at)}</TableCell> */}
+          <TableCell align="center">{formatDate(new Date())}</TableCell>
           <TableCell align="center">
             <IconButton onClick={() => onEdit(element.id)}>
               <Edit />

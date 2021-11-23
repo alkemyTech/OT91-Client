@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "../../Components/FormStyles.css";
 import { getCategories } from "../../Services/categoriesServices";
 import * as newsService from "../../Services/newsServices";
@@ -7,20 +7,15 @@ import InputEditor from "../Inputs/InputEditor";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const NewsForm = () => {
   const currentNews = useSelector((state) => state.news.currentNews);
   const { newsid } = useParams();
-  const [news, setNews] = useState({
-    name: "",
-    content: "",
-    category_id: "",
-    image: "",
-  });
+  const [news, setNews] = useState(currentNews);
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState("");
-
+  const history = useHistory();
   const dispatch = useDispatch();
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -57,18 +52,11 @@ const NewsForm = () => {
   };
 
   const sendNews = async () => {
-    console.group("sendFormNEws");
-    console.log(news);
-    console.groupEnd("sendFormNEws");
-    if (newsid) dispatch(newsActions.createOrUpdate({ newsid, news }));
-    // dispatch(newsActions.update({ newsid, news }));
-    else dispatch(newsActions.create(news));
-    setNews({
-      name: "",
-      content: "",
-      category_id: "",
-      image: "",
-    });
+    dispatch(newsActions.createOrUpdate({ newsid, news }));
+    dispatch(newsActions.cleanCurrentState());
+    setTimeout(() => {
+      history.push("/backoffice/news");
+    }, 1500);
   };
   const getNewsforEdit = (idForEdit) =>
     idForEdit && dispatch(newsActions.getById(idForEdit));

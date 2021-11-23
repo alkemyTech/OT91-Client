@@ -24,14 +24,22 @@ export const update = createAsyncThunk("news/update", (news) =>
 );
 
 export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
-  newsServices.createOrUpdate(news.news, news.newsid))
+  newsServices.createOrUpdate(news.news, news.newsid)
+);
 
-export const deletebyId = createAsyncThunk("news/delete",newsServices.deleteByid);
+export const deletebyId = createAsyncThunk(
+  "news/delete",
+  newsServices.deleteByid
+);
 
 const newsSlice = createSlice({
   name: "news",
   initialState: newsInitialState,
-  reducers: {},
+  reducers: {
+    cleanCurrentState: (state) => {
+      state.currentNews = { name: "", content: "", category_id: "", image: "" };
+    },
+  },
   extraReducers: {
     [getAll.pending]: (state) => {
       state.loading = true;
@@ -97,7 +105,7 @@ const newsSlice = createSlice({
       state.loading = true;
     },
     [deletebyId.fulfilled]: (state, action) => {
-      state.data = [...state.data.filter((id) => id !== action.payload)];
+      state.data = state.data.filter((news) => news.id != action.meta.arg);
       state.loading = false;
     },
     [deletebyId.rejected]: (state, action) => {
@@ -106,4 +114,5 @@ const newsSlice = createSlice({
     },
   },
 });
+export const { cleanCurrentState } = newsSlice.actions;
 export default newsSlice.reducer;
