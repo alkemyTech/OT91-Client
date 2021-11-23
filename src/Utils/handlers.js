@@ -27,7 +27,17 @@ const deleteActivity = (id, state) => {
   return newData;
 };
 
-export const handleNewsImputChange = (e, state, setState, setState2, state3, case1, case2, case3, case4) => {
+export const handleNewsImputChange = (
+  e,
+  state,
+  setState,
+  setState2,
+  state3,
+  case1,
+  case2,
+  case3,
+  case4
+) => {
   switch (e.target.name) {
     case case1:
       setState({ ...state, [case1]: e.target.value });
@@ -39,7 +49,7 @@ export const handleNewsImputChange = (e, state, setState, setState2, state3, cas
       URLFileFormater(e, state, setState, [case3]);
       break;
     case case4:
-      const newCategorySelected = state3?.find(
+      const newCategorySelected = state3.find(
         (element) => e.target.value === element.name
       );
       setState({

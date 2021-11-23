@@ -8,7 +8,8 @@ import { handleNewsImputChange } from "../../Utils/handlers";
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useHistory, useParams } from "react-router";
-
+import InputImg from "../Inputs/InputImg";
+import { right } from "@popperjs/core";
 const NewsForm = () => {
   const currentNews = useSelector((state) => state.news.currentNews);
   const { newsid } = useParams();
@@ -19,9 +20,18 @@ const NewsForm = () => {
   const dispatch = useDispatch();
 
   const handleChange = (e) =>
-    handleNewsImputChange(e,news,setNews,setCategorySelect,categories,
-      "name","content","image","category_id");
-    // handleNewsImputChange(e,news,setNews,setCategorySelect,categories,"name","content","image","category_id");
+    handleNewsImputChange(
+      e,
+      news,
+      setNews,
+      setCategorySelect,
+      categories,
+      "name",
+      "content",
+      "image",
+      "category_id"
+    );
+  // handleNewsImputChange(e,news,setNews,setCategorySelect,categories,"name","content","image","category_id");
   const handleSubmit = (e) => {
     e.preventDefault();
     sendNews();
@@ -44,7 +54,7 @@ const NewsForm = () => {
     newsid && dispatch(newsActions.getById(newsid));
     setNews(currentNews);
   }, [newsid]);
-
+  useEffect(() => {}, [news.image]);
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <label htmlFor="name">Title</label>
@@ -58,10 +68,10 @@ const NewsForm = () => {
         required
       ></input>
       <InputEditor news={news} setNews={setNews} />
-      <label htmlFor="category">Category</label>
+      <label htmlFor="category_id">Category</label>
       <select
         className="select-field"
-        name=" category_id"
+        name="category_id"
         value={categorySelect || ""}
         onChange={handleChange}
         required
@@ -85,8 +95,12 @@ const NewsForm = () => {
         name="image"
         value={undefined}
         onChange={handleChange}
+        style={{ color: "white" }}
       />
-      {/* <InputImg news={news} setNews={setNews} /> */}
+      {news.image && (
+        <img style={{ width: "100px" }} src={news.image} alt="img" />
+      )}
+
       <button className="submit-btn" type="submit">
         Send
       </button>
