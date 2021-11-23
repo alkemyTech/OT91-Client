@@ -31,5 +31,4 @@ const Post = (route,body) => {
   }
 }
 
-export {Post};
-export default Get;
+export {Post, Get};
