@@ -3,6 +3,8 @@ import "../../Components/FormStyles.css";
 import { getCategories } from "../../Services/categoriesServices";
 import InputEditor from "../Inputs/InputEditor";
 import { setCKEditorText } from "../common/ckEditor/setCKEditorText";
+import { URLFileFormater, CKEditorTextFormater } from "../../Utils/formatters";
+import { handleNewsImputChange } from "../../Utils/handlers";
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useHistory, useParams } from "react-router";
@@ -15,39 +17,11 @@ const NewsForm = () => {
   const [categorySelect, setCategorySelect] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleChange = (e) => {
-    switch (e.target.name) {
-      case "name":
-        setNews({ ...news, name: e.target.value });
-        break;
-      case "content":
-        const textReset = e.target.value.replace(
-          /'<p>'|['</p>']|<strong>|['</strong>']/gi,
-          ""
-        );
-        setNews({ ...news, content: textReset });
-        break;
-      case "image":
-        const imageFile = e.target.files[0];
-        const imageUrl = new FileReader();
-        imageUrl.readAsDataURL(imageFile);
-        imageUrl.onload = (e) => {
-          setNews({ ...news, image: e.target.result });
-        };
-        break;
-      case "category":
-        const newCategorySelected = categories?.find(
-          (element) => e.target.value === element.name
-        );
-        setNews({
-          ...news,
-          category_id: newCategorySelected?.id,
-        });
-        setCategorySelect(newCategorySelected.name);
-        break;
-    }
-  };
 
+  const handleChange = (e) =>
+    handleNewsImputChange(e,news,setNews,setCategorySelect,categories,
+      "name","content","image","category_id");
+    // handleNewsImputChange(e,news,setNews,setCategorySelect,categories,"name","content","image","category_id");
   const handleSubmit = (e) => {
     e.preventDefault();
     sendNews();
@@ -60,8 +34,6 @@ const NewsForm = () => {
       history.push("/backoffice/news");
     }, 1500);
   };
-  const getNewsforEdit = (idForEdit) =>
-    idForEdit && dispatch(newsActions.getById(idForEdit));
 
   useEffect(async () => {
     const { data } = await getCategories();
@@ -69,7 +41,7 @@ const NewsForm = () => {
   }, []);
 
   useEffect(() => {
-    getNewsforEdit(newsid);
+    newsid && dispatch(newsActions.getById(newsid));
     setNews(currentNews);
   }, [newsid]);
 
@@ -89,7 +61,7 @@ const NewsForm = () => {
       <label htmlFor="category">Category</label>
       <select
         className="select-field"
-        name="category"
+        name=" category_id"
         value={categorySelect || ""}
         onChange={handleChange}
         required
