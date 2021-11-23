@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Provider } from 'react-redux';
-import store from './app/store'
+import store from './app/store';
+import {AnimatedSwitch} from 'react-router-transition';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
@@ -24,11 +25,16 @@ import NewsList from "./Components/News/NewsList";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
 function App() {
+
   return (
     <>
       <Provider store={store}>
           <BrowserRouter>
-            <Switch>
+            <AnimatedSwitch
+              atEnter={{opacity:0}}
+              atLeave={{opacity:0}}
+              atActive={{opacity:1}}
+            >
               <Route exact path="/" component={Home} />
               <Route path="/create-activity" component={ActivitiesForm} />
               <Route path="/create-category" component={CategoriesForm} />
@@ -54,7 +60,7 @@ function App() {
               <Route path="/donate" component={Donation} />
               <Route path="/thanks" component={Thanks} />
               <BackofficeRouter/>
-            </Switch>
+            </AnimatedSwitch>
           </BrowserRouter>
       </Provider>
     </>
