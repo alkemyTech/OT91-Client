@@ -27,7 +27,7 @@ import NewsListEditTable from "./Components/News/NewsListEditTable";
 import MembersResults from "./Components/Backoffice/Members/MembersResults";
 import EditHomeForm from "./Components/Backoffice/Home/EditHomeForm";
 import CategoriesList from "./Components/Backoffice/Categories/CategoriesList";
-import NewsList from "./Components/News/NewsList";
+import NewsList from "./Components/News/NewList/NewsList";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
 import BackofficeUsers from './Components/Backoffice/Users/BackofficeUsers'
