@@ -9,6 +9,30 @@ import Logo from "../../Assets/Logo/Logo.png";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
+  const socialMediaIconStyle = { fontSize: 40 };
+  const socialMediaList = [
+    { name: "Instagram", icon: <InstagramIcon sx={socialMediaIconStyle} /> },
+    { name: "Facebook", icon: <FacebookIcon sx={socialMediaIconStyle} /> },
+    { name: "Twitter", icon: <TwitterIcon sx={socialMediaIconStyle} /> },
+    { name: "LinkedIn", icon: <LinkedInIcon sx={socialMediaIconStyle} /> },
+  ];
+
+  const socialMediaBox = () =>
+    socialMediaList.map((media) => (
+      <Box
+        sx={{
+          display: { md: "flex" },
+          justifyContent: { xs: "center" },
+          alignItems: { xs: "center" },
+        }}
+      >
+        <Link to="">{media.icon}</Link>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <p>{media.name}</p>
+        </Box>
+      </Box>
+    ));
+
   return (
     <TableFooter
       sx={{
@@ -42,65 +66,7 @@ export const Footer = () => {
             width: { xs: "100%" },
           }}
         >
-          <Box
-            sx={{
-              display: { md: "flex" },
-              justifyContent: { xs: "center" },
-              alignItems: { xs: "center" },
-            }}
-          >
-            <Link to="">
-              <FacebookIcon sx={{ fontSize: 40 }} />
-            </Link>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <p>Facebook</p>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: { md: "flex" },
-              justifyContent: { xs: "center" },
-              alignItems: { xs: "center" },
-            }}
-          >
-            <Link to="">
-              <LinkedInIcon sx={{ fontSize: 40 }} />
-            </Link>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <p>Linkedin</p>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: { md: "flex" },
-              justifyContent: { xs: "center" },
-              alignItems: { xs: "center" },
-            }}
-          >
-            <Link to="">
-              <InstagramIcon sx={{ fontSize: 40 }} />
-            </Link>
-            <Box sx={{ display: { xs: "none", md: "inline-block" } }}>
-              <p>Instagram</p>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: { md: "flex" },
-              justifyContent: { xs: "center" },
-              alignItems: { xs: "center" },
-            }}
-          >
-            <Link to="">
-              <TwitterIcon sx={{ fontSize: 40 }} />
-            </Link>
-            <Box sx={{ display: { xs: "none", md: "inline-block" } }}>
-              <p>Twitter</p>
-            </Box>
-          </Box>
+          {socialMediaBox()}
         </Box>
       </Container>
       <Box
