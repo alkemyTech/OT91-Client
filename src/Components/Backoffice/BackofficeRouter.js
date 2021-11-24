@@ -9,6 +9,7 @@ import MemberEditCreate from "../Members/MemberEditCreate";
 import OrganizationEditionForm from "../Organization/OrganizationEditionForm";
 import SlidesForm from "../Slides/SlidesForm";
 import NewsListEditTable from "../News/NewsListEditTable";
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 
 const BackOfficeRouter = () => {
@@ -18,18 +19,18 @@ const BackOfficeRouter = () => {
             <p>Aqui podras administrar el sitio</p>
             <Router>
                 <Switch>
-                    <Route path="/backoffice/home" component={EditHomeForm}/>
-                    <Route path="/backoffice/members" component={MembersResults} />
-                    <Route path="/backoffice/create-category" component={CategoriesList}/>
-                    <Route path="/backoffice/users/create" component={BackofficeUsers}/>
-                    <Route path="/backoffice/activities" component={ActivitiesTable}/>
-                    <Route path="/backoffice/members/edit" component={MemberEditCreate} />
-                    <Route
+                    <PrivateRoute path="/backoffice/home" component={EditHomeForm}/>
+                    <PrivateRoute path="/backoffice/members" component={MembersResults} />
+                    <PrivateRoute path="/backoffice/create-category" component={CategoriesList}/>
+                    <PrivateRoute path="/backoffice/users/create" component={BackofficeUsers}/>
+                    <PrivateRoute path="/backoffice/activities" component={ActivitiesTable}/>
+                    <PrivateRoute path="/backoffice/members/edit" component={MemberEditCreate} />
+                    <PrivateRoute
                         path="/backoffice/organization/edit"
                         component={OrganizationEditionForm}
                     />
-                    <Route path="/backoffice/create-slide" component={SlidesForm} />
-                    <Route path="/backoffice/news" component={NewsListEditTable} />
+                    <PrivateRoute path="/backoffice/create-slide" component={SlidesForm} />
+                    <PrivateRoute path="/backoffice/news" component={NewsListEditTable} />
                 </Switch>
             </Router>
         </div>
