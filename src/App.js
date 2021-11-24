@@ -56,8 +56,9 @@ function App() {
               <Route path="/create-contact-message" component={ContactForm} />
               <Route path="/donate" component={Donation} />
               <Route path="/thanks" component={Thanks} />
-              <BackofficeRouter/>
+              <PrivateRoute path="/backoffice" component={BackofficeRouter}/>
               <Route path="/login" component={LoginForm} />
+              <LoginForm></LoginForm>
             </Switch>
           </BrowserRouter>
       </Provider>
