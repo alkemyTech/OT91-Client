@@ -10090,6 +10090,14 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
+react-social-plugins@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-social-plugins/-/react-social-plugins-2.1.0.tgz#ef26e87c5a0bb7a25ff5406c0342752471681c2b"
+  integrity sha512-TiCJI8DGtMn+NjkjgH0QoGrAl3Mplg//c0/r8nF13nl8fgBzEP0QTvBR3pJnc+Klb4N5oBEeWim6jWntjW/eSg==
+  dependencies:
+    prop-types "^15.7.2"
+    react "^16.13.1"
+
 react-super-responsive-table@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-super-responsive-table/-/react-super-responsive-table-5.2.0.tgz#5357c928f7bca7851b3ae3f2e8e7550f7acf5c7d"
@@ -10112,6 +10120,15 @@ react@17.0.2:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+react@^16.13.1:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 read-pkg-up@^7.0.1:
   version "7.0.1"
