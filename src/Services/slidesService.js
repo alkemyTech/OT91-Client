@@ -1,7 +1,9 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { showErrorAlert } from "../Utils/alerts";
 
 const baseURL = process.env.REACT_APP_BASE_URL_SLIDES;
+const handleCatch = (error) => showErrorAlert(error.response.data.message || error.message);
 
 const getSlides = async () => {
   const response = await axios.get(`${baseURL}`);
@@ -16,7 +18,7 @@ const getImagesSlides = async () => {
     );
     return dataImage;
   } catch (err) {
-    console.log(err);
+    handleCatch(err);
   }
 };
 
@@ -26,7 +28,7 @@ const CreateSlide = async (data) => {
     Swal.fire('Slide Creado!')
     return response
   } catch (error) {
-    console.log(error)
+    handleCatch(error)
   }
 }
 const EditSlide = async (id,data) => {
@@ -34,7 +36,7 @@ const EditSlide = async (id,data) => {
     const response = await axios.put(`${baseURL}/${id}`,data)
     return response;
   }catch(error){
-    console.log(error)
+    handleCatch(error)
   }
 }
 
@@ -43,7 +45,7 @@ const GetSlidesById = async (id) => {
     const data = await axios.get(`${baseURL}/${id}`)
     return data
   }catch (error) {
-    console.log(error)
+    handleCatch(error)
   }
 }
 const DeleteSlide = async (id) => {
@@ -51,7 +53,7 @@ const DeleteSlide = async (id) => {
     const slideToDelete = await axios.delete(`${baseURL}/${id}`)
     return slideToDelete
   }catch(error) {
-    console.log(error)
+    handleCatch(error)
   }
 }
 
