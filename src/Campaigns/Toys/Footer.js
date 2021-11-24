@@ -81,7 +81,7 @@ export const Footer = () => {
           <Link to="">Visita nuestra página</Link>
         </Box>
         <Box sx={{ display: { xs: "none", xl: "flex" } }}>
-          <Link to="">Campaña Juguetes</Link>
+          <Link to="">Campaña Escolar</Link>
         </Box>
       </Box>
     </TableFooter>
