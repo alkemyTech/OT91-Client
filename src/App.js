@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Provider } from 'react-redux';
-import store from './app/store'
+import store from './app/store';
+import {AnimatedSwitch} from 'react-router-transition';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
@@ -27,11 +28,16 @@ import LoginForm from './Components/Auth/LoginForm';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 function App() {
+
   return (
     <>
       <Provider store={store}>
           <BrowserRouter>
-            <Switch>
+            <AnimatedSwitch
+              atEnter={{opacity:0}}
+              atLeave={{opacity:0}}
+              atActive={{opacity:1}}
+            >
               <Route exact path="/" component={Home} />
               <PrivateRoute path="/create-activity" component={ActivitiesForm} />
               <PrivateRoute path="/create-category" component={CategoriesForm} />
@@ -59,7 +65,7 @@ function App() {
               <PrivateRoute path="/backoffice" component={BackofficeRouter}/>
               <Route path="/login" component={LoginForm} />
               <LoginForm></LoginForm>
-            </Switch>
+            </AnimatedSwitch>
           </BrowserRouter>
       </Provider>
     </>
