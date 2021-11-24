@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { getImagesSlides } from "../../Services/slidesService";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,11 +14,13 @@ import "swiper/swiper.min.css";
 import "../../Styles/Carousel.css";
 SwiperCore.use([Parallax, Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 const Carousel = () => {
-  const [data, setData] = useState([]);
+  const [cardsSlides, setCardsSlides] = useState([]);
+
+  const isValidData = (data) => data.length >0;
 
   useEffect(async () => {
-    const dataImage = await getImagesSlides();
-    dataImage.length > 0 && setData(dataImage);
+    const cardsDataSlides= await getImagesSlides();
+    isValidData(cardsDataSlides) && setCardsSlides(cardsDataSlides);
   }, []);
 
   return (
@@ -47,7 +48,7 @@ const Carousel = () => {
           delay: 5000,
         }}
       >
-        {data?.map((item, index) => (
+        {cardsSlides?.map((item, index) => (
           <div key={index} data-swiper-parallax="-23%">
             <SwiperSlide
               style={{
