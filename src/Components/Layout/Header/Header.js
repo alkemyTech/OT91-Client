@@ -7,28 +7,14 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useEffect} from 'react';
 import NavLinksList from './NavLinksList';
+import { navLinks, manageLinkActivation } from './HeaderLinks';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const isLogged = false;
-  const navLinks = [
-    {text: 'Inicio', link: '/', private:false, active:false},
-    {text: 'Nosotros', link: '/nosotros', private:false, active:false},
-    {text: 'Contacto', link: '/contacto', private:false, active:false},
-    {text: 'Campaña escolar', link: '/school-campaign', private:false, active:false},
-    {text: 'Campaña de juguetes', link: '/toys-campaign', private:false, active:false}
-  ]
-  const activeLink = (pathname) => {
-    navLinks.forEach((navLink, index) => {
-      if(navLink == true)
-        navLinks[index].active = false;
-      else if(navLink.link == pathname)
-        navLinks[index].active = true;
-    })
-  }
-  activeLink(window.location.pathname)
+  manageLinkActivation(window.location.pathname);
   return (
-    <Container maxWidth={false} sx={{display: 'flex', justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
+    <Container maxWidth={false} sx={{display: 'flex', justifyContent: 'space-between', position:'sticky', top:'0', padding:'0 15px 0 10px'}}>
       <Box sx={{display:'flex', gap:'20px'}}>
         <img src={logo} height="100px"/>
         <NavLinksList horizontal navLinks={navLinks} isLogged={isLogged}/>
