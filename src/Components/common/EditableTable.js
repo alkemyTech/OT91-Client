@@ -1,3 +1,5 @@
+import {  IconButton, TableCell } from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
 const EditableTable = ({ element, handleEditClick, handleDeleteClick }) => {
   return (
     <tr>
@@ -5,15 +7,8 @@ const EditableTable = ({ element, handleEditClick, handleDeleteClick }) => {
       <td>{element.createdAt}</td>
 
       <td>
-        <button
-          type='button'
-          onClick={(event) => handleEditClick(event, contact)}
-        >
-          Edit
-        </button>
-        <button type='button' onClick={() => handleDeleteClick(contact.id)}>
-          Delete
-        </button>
+          <IconButton onClick={(event) => handleEditClick(event, contact)}><Edit/> </IconButton>
+          <IconButton onClick={() => handleDeleteClick(contact.id)}><Delete/> </IconButton>
       </td>
     </tr>
   )
