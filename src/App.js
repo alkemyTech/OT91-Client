@@ -21,7 +21,11 @@ import Home from "./Components/Home";
 import AboutUs from "./Components/About/AboutUs";
 import ListSlides from './Components/Slides/ListSlides/ListSlides';
 import ContactForm from "./Components/Contact/ContactForm";
-import NewsList from "./Components/News/NewsList";
+import NewsListEditTable from "./Components/News/NewsListEditTable";
+import MembersResults from "./Components/Backoffice/Members/MembersResults";
+import EditHomeForm from "./Components/Backoffice/Home/EditHomeForm";
+import CategoriesList from "./Components/Backoffice/Categories/CategoriesList";
+import NewsList from "./Components/News/NewList/NewsList";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
 function App() {

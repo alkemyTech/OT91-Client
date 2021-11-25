@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
 
-const LoadingSpinner = ({type,color,height,width,visible}) => {
+const LoadingSpinner = ({type='ThreeDots',color='black',height,width,visible}) => {
 
     return(
         <Loader
