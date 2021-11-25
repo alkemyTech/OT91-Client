@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "../../../Styles/CardStyle.css";
-import { listHasValues } from "../../../Utils/validation";
-import Title from "../../Title/Title"
-import CustomCard from "../../Card/CustomCard";
+import "../../Styles/CardStyle.css";
+import { listHasValues } from "../../Utils/validation";
+import Title from "../Title/Title";
+import CustomCard from "../Card/CustomCard";
 import { Container } from "@mui/material";
-import VideoCard from "../../Card/VideoCard";
-import LoadingSpinner from "../../../Utils/loadingSpinner";
-import {videoLastEvent} from './videoEvent';
-import { Link } from "react-router-dom";
-import * as newsActions from "../../../app/NewsReducer/newsReducer";
+import LoadingSpinner from "../../Utils/loadingSpinner";
+import * as newsActions from "../../app/NewsReducer/newsReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewsList = () => {
@@ -50,11 +47,6 @@ const NewsList = () => {
               <p>No hay novedades</p>
             )}
           </ul>
-          <VideoCard
-            title={videoLastEvent.name}
-            video={videoLastEvent.video}
-            description={videoLastEvent.content}
-        />
         </div>
       )}
     </Container>

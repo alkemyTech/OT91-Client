@@ -69,6 +69,8 @@ function App() {
               <PrivateRoute path="/backoffice" component={BackofficeRouter}/>
               <Route path="/login" component={LoginForm} />
               <LoginForm></LoginForm>
+              <Route path='/list-slides' component={ListSlides}/>
+              <Route path="/edit-news/:newsid" component={NewsForm} />
             </AnimatedSwitch>
           </BrowserRouter>
       </Provider>

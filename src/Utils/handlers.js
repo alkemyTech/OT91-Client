@@ -1,3 +1,5 @@
+import { URLFileFormater, CKEditorTextFormater } from "./formatters";
+
 const showError = (formik, value) =>
   formik.touched[value] && formik.errors[value];
 
@@ -25,6 +27,39 @@ const deleteActivity = (id, state) => {
   return newData;
 };
 
+export const handleNewsImputChange = (
+  e,
+  state,
+  setState,
+  setState2,
+  state3,
+  case1,
+  case2,
+  case3,
+  case4
+) => {
+  switch (e.target.name) {
+    case case1:
+      setState({ ...state, [case1]: e.target.value });
+      break;
+    case case2:
+      CKEditorTextFormater(e, state, setState, [case2]);
+      break;
+    case case3:
+      URLFileFormater(e, state, setState, [case3]);
+      break;
+    case case4:
+      const newCategorySelected = state3.find(
+        (element) => e.target.value === element.name
+      );
+      setState({
+        ...state,
+        [case4]: newCategorySelected?.id,
+      });
+      setState2(newCategorySelected.name);
+      break;
+  }
+};
 export {
   showError,
   handleCKEditorChange,
