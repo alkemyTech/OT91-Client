@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { hasRequiredError, regExp, validValue } from '../../Utils/validation';
 import '../FormStyles.css';
@@ -17,7 +18,6 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(initialValues);
         localStorage.setItem('token', 'tokenValueExample')
     }
 
