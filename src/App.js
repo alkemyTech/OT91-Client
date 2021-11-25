@@ -28,6 +28,9 @@ import CategoriesList from "./Components/Backoffice/Categories/CategoriesList";
 import NewsList from "./Components/News/NewList/NewsList";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
+import LoginForm from './Components/Auth/LoginForm';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+
 function App() {
 
   return (
@@ -40,21 +43,21 @@ function App() {
               atActive={{opacity:1}}
             >
               <Route exact path="/" component={Home} />
-              <Route path="/create-activity" component={ActivitiesForm} />
-              <Route path="/create-category" component={CategoriesForm} />
-              <Route path="/create-news" component={NewsForm} />
-              <Route path="/create-testimonials" component={TestimonialForm} />
-              <Route path="/create-user" component={UserForm} />
-              <Route path="/create-member" component={MembersForm} />
-              <Route path="/create-project" component={ProjectsForm} />
+              <PrivateRoute path="/create-activity" component={ActivitiesForm} />
+              <PrivateRoute path="/create-category" component={CategoriesForm} />
+              <PrivateRoute path="/create-news" component={NewsForm} />
+              <PrivateRoute path="/create-testimonials" component={TestimonialForm} />
+              <PrivateRoute path="/create-user" component={UserForm} />
+              <PrivateRoute path="/create-member" component={MembersForm} />
+              <PrivateRoute path="/create-project" component={ProjectsForm} />
               <Route path="/school-campaign" component={SchoolCampaign} />
               <Route path="/toys-campaign" component={ToysCampaign} />
-              <Route path="/edit-activity/:activityId" component={ActivitiesForm} />
-              <Route
+              <PrivateRoute path="/edit-activity/:activityId" component={ActivitiesForm} />
+              <PrivateRoute
                 path="/edit-testimonial/:testimonialId"
                 component={TestimonialForm}
               />
-              <Route path="/edit-project/:projectId" component={ProjectsForm} />
+              <PrivateRoute path="/edit-project/:projectId" component={ProjectsForm} />
               <Route path="/novedades/:id" component={NewsDetailLayout} />
               <Route path="/novedades" component={NewsList} />
               <Route path="/activity-detail/:id" component={Detail} />
@@ -63,7 +66,9 @@ function App() {
               <Route path="/create-contact-message" component={ContactForm} />
               <Route path="/donate" component={Donation} />
               <Route path="/thanks" component={Thanks} />
-              <BackofficeRouter/>
+              <PrivateRoute path="/backoffice" component={BackofficeRouter}/>
+              <Route path="/login" component={LoginForm} />
+              <LoginForm></LoginForm>
             </AnimatedSwitch>
           </BrowserRouter>
       </Provider>
