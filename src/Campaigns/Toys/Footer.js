@@ -5,7 +5,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Container, Box } from "@mui/material";
 import TableFooter from "@mui/material/TableFooter";
-import Logo from "../../Assets/Logo/Logo.png";
+import Logo from "../../Assets/Logo/logo.png";
 import { Link } from "react-router-dom";
 export const Footer = () => {
   const socialMediaIconStyle = { fontSize: 40 };
