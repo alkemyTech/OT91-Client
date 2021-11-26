@@ -6,12 +6,10 @@ export const navLinks = [
     {text: 'Campaña de juguetes', link: '/toys-campaign', private:false, active:false}
 ]
 export const manageLinkActivation = (pathname) => {
-    console.log(navLinks)
     navLinks.forEach((navLink, index) => {
         if(navLink.link == pathname)
             navLinks[index].active = true;
         else if(navLink.active == true)
             navLinks[index].active = false;
     })
-    console.log(navLinks)
 }
