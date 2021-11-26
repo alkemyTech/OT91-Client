@@ -34,8 +34,10 @@ const Content = () => {
           <Typography variant="h5">Avenida Lacarra 621, Parque avellaneda, Provincia de buenos aires</Typography>
         </Box>
         <Typography variant="h5" sx={{display: {xs:'none', sm:'block'}}}>TE QUEDAN: {timeLeftFormatted} para participar</Typography>
-        <Typography paragraph sx={{maxWidth:{xs:'100%', lg:'65%'}}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam atque harum vero, in nobis
-         suscipit ullam reprehenderit debitis fugiat, neque, aliquam est ipsam maiores repellendus cum voluptate at tenetur perferendis.</Typography>
+        <Typography paragraph sx={{maxWidth:{xs:'100%', lg:'65%'}}}>
+          Te invitamos a sumarte donando útiles escolares nuevos o usados en buen estado
+          para que podamos armarles regalos personalizados a los niños y adultos de las instituciones que ayudamos desde la Fundación
+        </Typography>
       </Box>
       <Box sx={{display:{xs:'none', lg:'flex'}, minHeight:'300px', justifyContent:'space-between', position:'absolute', width:'100%', top:'60px'}}>
         {images.map((image) => <img src={image.img} alt={image.alt} width="200px" style={{transform:`rotate(${image.rotate})`, height:'fit-content', alignSelf:image.align}}/> )}
