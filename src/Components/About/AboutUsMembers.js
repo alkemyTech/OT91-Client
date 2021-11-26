@@ -4,25 +4,20 @@ import CustomCard from "../Card/CustomCard";
 import AboutUsMembersItem from "./AboutUsMembersItem";
 import membersApiActions from "../../Services/membersService";
 import "../../Styles/CardStyle.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getAll } from "../../app/aboutUsReducer/aboutUsReducer";
 
 const AboutUsMembers = () => {
-  const [membersData, setMembersData] = useState([]);
-
-  useEffect(() => {
-    loadMembers();
-  }, []);
-
-  const loadMembers = () => {
-    membersApiActions
-      .getMembers()
-      .then((response) => setMembersData(response.data.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const dispatch = useDispatch();
+  const aboutUsMembersData = useSelector((state) => state.aboutUs.data);
 
   const showAboutUsMembers = () =>
-    membersData.map((member) => <AboutUsMembersItem member={member} />);
+    aboutUsMembersData.map((member) => (
+      <AboutUsMembersItem member={member} key={member.id} />
+    ));
+  useEffect(() => {
+    dispatch(getAll());
+  }, []);
 
   return (
     <div>

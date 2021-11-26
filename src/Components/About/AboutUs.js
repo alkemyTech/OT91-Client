@@ -6,6 +6,7 @@ import {
   LinkedinFollowCompany,
   TwitterTweet,
 } from "react-social-plugins";
+import AboutUsMembers from "./AboutUsMembers";
 
 const AboutUs = () => {
   const description = `Somos un centro comunitario que acompaña a más de 700 personas a través de las áreas de:
