@@ -10,7 +10,6 @@ const Home = () => {
         <Carousel />
         <div>.map() del listado general de noticias</div>
       </section>
-      <Footer />
     </div>
   );
 };
