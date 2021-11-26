@@ -66,6 +66,16 @@ export const deleteByid = async (id) => {
   }
 };
 
+export const searchNew = async (newSearch) => {
+  console.log(newSearch)
+  try {
+    const {data} = await axios.get(`${URL}?search=${newSearch}`);
+    return data;
+  } catch (error) {
+    handleCatch(error);
+  }
+};
+
 export const createNewsObject = (id, name, image, createdAt) => ({
   id,
   name,

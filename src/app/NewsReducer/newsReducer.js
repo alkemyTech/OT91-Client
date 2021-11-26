@@ -11,6 +11,7 @@ const newsInitialState = {
     category_id: "",
     image: "",
   },
+  newsSearch:[]
 };
 
 export const getAll = createAsyncThunk("news/getAll", newsServices.getAll);
@@ -21,6 +22,9 @@ export const create = createAsyncThunk("news/create", newsServices.create);
 
 export const update = createAsyncThunk("news/update", (news) =>
   newsServices.update(news.news, news.newsid)
+);
+export const getSearch = createAsyncThunk("news/search", (news) =>
+  newsServices.searchNew(news)
 );
 
 export const createOrUpdate = createAsyncThunk("news/createOrUpdate", (news) =>
@@ -109,6 +113,17 @@ const newsSlice = createSlice({
       state.loading = false;
     },
     [deletebyId.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+    [getSearch.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSearch.fulfilled]: (state, action) => {
+      state.newsSearch= action.payload.data
+      state.loading = false;
+    },
+    [getSearch.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     },
