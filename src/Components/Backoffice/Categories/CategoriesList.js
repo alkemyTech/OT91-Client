@@ -1,7 +1,9 @@
-import { Fragment } from 'react'
-import TableEditable from '../../common/EditableTable'
 import { Link } from 'react-router-dom'
-import { Container } from '@mui/material'
+import TableEditable from '../../common/EditableTable'
+import { NewsTableRows } from '../../News/NewsTableRows'
+import {Table,TableBody,TableCell,TableContainer,TableHead,Button,TableRow} from "@mui/material";
+import '../../../Styles/TableStyle.css'
+import '../../../Styles/Table.css'
 
 const CategoriesList = () => {
   const mockCategories = [
@@ -13,31 +15,29 @@ const CategoriesList = () => {
   const handleDeleteClick = () => {}
 
   return (
-    <Container>
-      <div className='app-container'>
-        <Link to='/backoffice/categorías/create'>Create a New Category</Link>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Created At</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mockCategories.map((category) => (
-              <Fragment>
+    <>
+    <Link to='/backoffice/categorías/create'>Create a New Category</Link>
+      <TableContainer  className="TableContainer">
+        <Table className="TableFinal">
+          <TableHead  className="TableRowModify">
+            <TableRow>
+              <TableCell align="center" className="TableCell">Name</TableCell>
+              <TableCell align="center" className="TableCell">Created At</TableCell>
+              <TableCell align="center" className="TableCell">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {mockCategories.map((category) => (
                 <TableEditable
                   element={category}
                   handleEditClick={handleEditClick}
                   handleDeleteClick={handleDeleteClick}
                 />
-              </Fragment>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </Container>
+          </TableBody>
+        </Table>
+    </TableContainer>
+    </>
   )
 }
 export default CategoriesList

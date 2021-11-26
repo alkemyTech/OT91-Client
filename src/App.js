@@ -30,12 +30,15 @@ import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
 import LoginForm from './Components/Auth/LoginForm';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import { createTheme, ThemeProvider, } from '@mui/material/styles';
+import { GlobalTheme } from "./Styles/Theme"
 
 function App() {
 
   return (
     <>
       <Provider store={store}>
+      <ThemeProvider theme={GlobalTheme}>
           <BrowserRouter>
             <AnimatedSwitch
               atEnter={{opacity:0}}
@@ -73,6 +76,7 @@ function App() {
               <Route path="/edit-news/:newsid" component={NewsForm} />
             </AnimatedSwitch>
           </BrowserRouter>
+          </ThemeProvider>
       </Provider>
     </>
   );

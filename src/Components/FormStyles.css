@@ -4,11 +4,24 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 10px 48px 0px rgba(0,0,0,0.75);
+    background-color:#476072;
+    border-radius: 5px;
+    height: 700px;
+}
+.form-container input{
+    background-color:whitesmoke;
+    height: 40px;
+    width: 620px;
+    justify-content: center;
 }
 
 .input-field{
     padding: 15px 30px;
     border: 1px solid #c1c1c1;
+    background-color:pink;
 }
 
 .select-field{

@@ -6,8 +6,8 @@ import "../../../Styles/TableStyle.css";
 const MembersResultsItem = ({ item }) => {
   return (
     <>
-      <TableRow key={item.name}>
-        <TableCell id="membersName" name="membersName" classNmae="member-name">
+      <TableRow color="buttondelete" key={item.name}>
+        <TableCell color="tablebackground" id="membersName" name="membersName" classNmae="member-name">
           {item && item.name}
         </TableCell>
         <TableCell>
@@ -31,9 +31,10 @@ const MembersResultsItem = ({ item }) => {
           >
             Editar Miembro
           </Button>
+          <p></p>
           <Button
             variant="contained"
-            color="secondary"
+            color="buttondelete"
             className="member-action"
           >
             Eliminar Miembro
@@ -45,3 +46,4 @@ const MembersResultsItem = ({ item }) => {
 };
 
 export default MembersResultsItem;
+
