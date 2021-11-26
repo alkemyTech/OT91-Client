@@ -5,7 +5,7 @@ import { AlertError } from '../Components/common/alerts/Alerts';
 export const getAllTestimonial = async () => {
     try {
         let  {data}= await axios.get(`${URL}`);
-        return data;
+        return data.data;
     } catch (error) {
         AlertError(error.response.status,error.response.data.message);
         return {success:false};
