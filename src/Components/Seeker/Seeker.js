@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import loadingSpinner from "../../Utils/loadingSpinner";
+import LoadingSpinner from "../../Utils/loadingSpinner";
 import axios from "axios";
 import {
   Form,
@@ -13,25 +13,25 @@ import {
 import CustomCard from "../Card/CustomCard";
 import { searchIn } from "../../Services/seekerService";
 
-const Seeker = ({ endpointName, minLength, getAll, setResult }) => {
+const Seeker = ({ endpointName, minLength }) => {
   const [targetValue, setTargetValue] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [result, setResult] = useState([]);
 
   const targetValueSearch = (e) => {
     setTargetValue(e.target.value);
   };
 
-  useEffect(() => {
-    getAll().then((res) => {
+  const showresults = async () => {
+    setIsLoading(true);
+    await searchIn(endpointName, targetValue, minLength).then((res) => {
       setResult(res);
-      setIsSubmitting(true);
+      setIsLoading(false);
     });
-  }, []);
+  };
+
   useEffect(() => {
-    searchIn(endpointName, targetValue, minLength, getAll).then((res) => {
-      setResult(res);
-      setIsSubmitting(true);
-    });
+    showresults();
   }, [targetValue]);
 
   return (
@@ -44,7 +44,7 @@ const Seeker = ({ endpointName, minLength, getAll, setResult }) => {
           onChange={targetValueSearch}
         >
           <Button
-            disabled={isSubmitting}
+            disabled={isLoading}
             variant="outline-primary"
             onClick={() => searchResult()}
           >
@@ -53,8 +53,8 @@ const Seeker = ({ endpointName, minLength, getAll, setResult }) => {
         </TextField>
       </form>
 
-      {/* <Container>
-        {!isSubmitting ? (
+      <Container>
+        {targetValue && !isLoading ? (
           <TableRow>
             {result.map((element) => (
               <TableCell sm key={element.id}>
@@ -66,12 +66,14 @@ const Seeker = ({ endpointName, minLength, getAll, setResult }) => {
               </TableCell>
             ))}
           </TableRow>
-        ) : (
+        ) : isLoading ? (
           <div className="d-flex justify-content-center m-5">
-            <loadingSpinner />
+            <LoadingSpinner />
           </div>
+        ) : (
+          ""
         )}
-      </Container>*/}
+      </Container>
     </div>
   );
 };
