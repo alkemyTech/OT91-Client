@@ -9,7 +9,10 @@ import {
   TableCell,
   TextField,
   Spinner,
+  Grid,
+  Box,
 } from "@mui/material";
+
 import CustomCard from "../Card/CustomCard";
 import { searchIn } from "../../Services/seekerService";
 
@@ -36,36 +39,35 @@ const Seeker = ({ endpointName, minLength }) => {
 
   return (
     <div>
-      <form className="d-flex justify-content-center align-items-center mt-4">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          m: 4,
+        }}
+      >
         <TextField
+          sx={{ width: "75%" }}
           controlId="floatingInput"
           label="Ingrese su busqueda"
           className="d-flex"
           onChange={targetValueSearch}
-        >
-          <Button
-            disabled={isLoading}
-            variant="outline-primary"
-            onClick={() => searchResult()}
-          >
-            Buscar
-          </Button>
-        </TextField>
-      </form>
+        />
+      </Box>
 
       <Container>
         {targetValue && !isLoading ? (
-          <TableRow>
+          <Grid container spacing={2}>
             {result.map((element) => (
-              <TableCell sm key={element.id}>
+              <Grid item xs={6} md={4} key={element.id}>
                 <CustomCard
                   title={element.name}
                   image={element.image}
                   description={element.description}
                 />
-              </TableCell>
+              </Grid>
             ))}
-          </TableRow>
+          </Grid>
         ) : isLoading ? (
           <div className="d-flex justify-content-center m-5">
             <LoadingSpinner />
