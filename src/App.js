@@ -13,26 +13,12 @@ import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
-import Detail from "./Components/Activities/Detail/Detail";
-import NewsDetailLayout from "./Components/News/Detail/NewsDetailLayout";
 import BackofficeRouter from "./Components/Backoffice/BackofficeRouter";
-import ActivitiesList from "./Components/Activities/ActivitiesList";
-import Home from "./Components/Home";
-import AboutUs from "./Components/About/AboutUs";
-import ListSlides from './Components/Slides/ListSlides/ListSlides';
-import ContactForm from "./Components/Contact/ContactForm";
-import NewsListEditTable from "./Components/News/NewsListEditTable";
-import MembersResults from "./Components/Backoffice/Members/MembersResults";
-import EditHomeForm from "./Components/Backoffice/Home/EditHomeForm";
-import CategoriesList from "./Components/Backoffice/Categories/CategoriesList";
-import NewsList from "./Components/News/NewList/NewsList";
-import Donation from "./Components/Donations/Donation";
-import Thanks from "./Components/Donations/Thanks";
 import LoginForm from './Components/Auth/LoginForm';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import { createTheme, ThemeProvider, } from '@mui/material/styles';
 import { GlobalTheme } from "./Styles/Theme"
-
+import PublicRouter from "./Components/PublicWeb/PublicRouter";
 function App() {
 
   return (
@@ -45,7 +31,6 @@ function App() {
               atLeave={{opacity:0}}
               atActive={{opacity:1}}
             >
-              <Route exact path="/" component={Home} />
               <PrivateRoute path="/create-activity" component={ActivitiesForm} />
               <PrivateRoute path="/create-category" component={CategoriesForm} />
               <PrivateRoute path="/create-news" component={NewsForm} />
@@ -61,19 +46,11 @@ function App() {
                 component={TestimonialForm}
               />
               <PrivateRoute path="/edit-project/:projectId" component={ProjectsForm} />
-              <Route path="/novedades/:id" component={NewsDetailLayout} />
-              <Route path="/novedades" component={NewsList} />
-              <Route path="/activity-detail/:id" component={Detail} />
-              <Route path="/activities" component={ActivitiesList} />
-              <Route path="/nosotros" component={AboutUs} />
-              <Route path="/create-contact-message" component={ContactForm} />
-              <Route path="/donate" component={Donation} />
-              <Route path="/thanks" component={Thanks} />
               <PrivateRoute path="/backoffice" component={BackofficeRouter}/>
+              <PrivateRoute path="/edit-news/:newsid" component={NewsForm} />
               <Route path="/login" component={LoginForm} />
               <LoginForm></LoginForm>
-              <Route path='/list-slides' component={ListSlides}/>
-              <Route path="/edit-news/:newsid" component={NewsForm} />
+              <PublicRouter/>
             </AnimatedSwitch>
           </BrowserRouter>
           </ThemeProvider>
