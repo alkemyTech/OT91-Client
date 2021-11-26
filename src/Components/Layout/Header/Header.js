@@ -14,7 +14,7 @@ const Header = () => {
   const isLogged = false;
   manageLinkActivation(window.location.pathname);
   return (
-    <Container maxWidth={false} sx={{display: 'flex', justifyContent: 'space-between', position:'sticky', top:'0', padding:'0 15px 0 10px'}}>
+    <Container maxWidth={false} sx={{display: 'flex', justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
       <Box sx={{display:'flex', gap:'20px'}}>
         <img src={logo} height="100px"/>
         <NavLinksList horizontal navLinks={navLinks} isLogged={isLogged}/>
