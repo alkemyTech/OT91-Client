@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { showErrorAlert } from "../Utils/alerts";
+import { AlertError } from '../Components/common/alerts/Alerts';
 
 const baseURL = process.env.REACT_APP_BASE_URL_SLIDES;
 const handleCatch = (error) => showErrorAlert(error.response.data.message || error.message);
@@ -17,8 +18,9 @@ const getImagesSlides = async () => {
       (item) => item.image !== null && item.image !== ""
     );
     return dataImage;
-  } catch (err) {
-    handleCatch(err);
+  } catch (error) {
+    AlertError(error.response.status,error.response.data.message);
+    return {success:false};
   }
 };
 
