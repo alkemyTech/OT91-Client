@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 import { getImagesSlides } from "../../Services/slidesService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
@@ -22,23 +23,20 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="containerSlide">
+    <Box sx={{
+      height: "100%",
+    }}>
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
           "--swiper-pagination-color": "#fff",
+          "--swiper-pagination-active-color": "#000",
+          "--swiper-navigation-size": "500px",
           textShadow: "0 0 0 #000",
-        }}
-        grid={{
-          gutter: 10,
-          minWidth: 300,
-          maxWidth: 300,
+          background: "0 0 0 #000",
         }}
         speed={2000}
         parallax={true}
-        pagination={{
-          clickable: true,
-        }}
         loop={true}
         navigation={true}
         Autoplay={true}
@@ -68,7 +66,7 @@ const Carousel = () => {
           </div>
         ))}
       </Swiper>
-    </div>
+    </Box>
   );
 };
 
