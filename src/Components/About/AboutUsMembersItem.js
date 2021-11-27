@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
 
 const AboutUsMembersItem = ({ member }) => {
   return (
@@ -22,7 +23,7 @@ const AboutUsMembersItem = ({ member }) => {
             {member.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {member.description}
+            {member.description && setCKEditorText(member, "description")}
           </Typography>
         </CardContent>
         <CardActions>
