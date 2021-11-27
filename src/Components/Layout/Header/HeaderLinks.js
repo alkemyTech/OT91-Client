@@ -3,7 +3,7 @@ export const navLinks = [
     {text: 'Nosotros', link: '/nosotros', private:false, active:false},
     {text: 'Contacto', link: '/contacto', private:false, active:false},
     {text: 'Actividades', link: '/activities', private:false, active:false},
-    {text: 'Novedades', link: '/news', private:false, active:false},
+    {text: 'Novedades', link: '/novedades', private:false, active:false},
     {text: 'Campaña escolar', link: '/school-campaign', private:false, active:false},
     {text: 'Campaña de juguetes', link: '/toys-campaign', private:false, active:false}
 ]
