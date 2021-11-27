@@ -2,6 +2,7 @@ import { Container, Grid, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomCard from '../Card/CustomCard'
+import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
 
 const CardsSection = ({title, button, getInformation,slices}) => {
     const [cardsInfo, setCardsInfo] = useState([]);
@@ -20,7 +21,7 @@ const CardsSection = ({title, button, getInformation,slices}) => {
             <Grid container sx={{m:3}}>
                 {cardsInfo && cardsInfo.map(card => (
                     <Grid xs={4} >
-                        <CustomCard title={card.name} img={card.image} description={card.content}/>
+                        <CustomCard title={card.name} img={card.image} description={card.content && setCKEditorText(card, "content")}/>
                     </Grid>
                 ))}
             </Grid>
