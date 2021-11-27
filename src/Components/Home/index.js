@@ -13,7 +13,7 @@ const [welcomeText, setWelcomeText] = useState("");
   useEffect(() => {
     getOrganizationInformation().then(res => setWelcomeText(res.data.welcome_text));
   }, []);
-  
+
   return (
     <div>
      {listNews ? <div>
