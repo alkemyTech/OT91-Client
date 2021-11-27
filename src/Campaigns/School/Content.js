@@ -26,6 +26,7 @@ const Content = () => {
     {img: Image3, alt:"", rotate:'-10deg', align:'end'},
     {img: Image, alt:"", rotate:'-45deg', align:'start'}
   ]
+
   return (
     <Container width={false} sx={{display:'flex', alignItems:'center', flexDirection:'column', position:'relative', marginTop:'20px', marginBottom:{lg:'150px'}}}>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems:'center', textAlign:'center', zIndex:'10', gap:'15px'}}>
