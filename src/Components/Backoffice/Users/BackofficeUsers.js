@@ -1,11 +1,9 @@
 import React from 'react'
-import {Table, Thead, Tbody, Tr, Th, Td} from 'react-super-responsive-table'
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
-import "../../../Styles/BackOfficerUsersTable.css";
-import {Button} from "@mui/material";
 import { Link } from 'react-router-dom';
-// import { createData } from '../../../Services/userServices';
-
+import { Edit, Delete } from "@mui/icons-material";
+import {Table,TableBody,TableCell,TableContainer,TableHead,Button,TableRow,IconButton} from "@mui/material";
+import '../../../Styles/TableStyle.css'
+import { Fade } from "react-awesome-reveal";
 const BackofficeUsers = () => {
       const UsersTable =[
         {
@@ -30,34 +28,38 @@ const BackofficeUsers = () => {
           alert("use this if you need to delete")
       }
     return (
-        <div className="BackofficeUsers">
-            <Button color="sucess" variant="contained">
+      <>
+       <Fade duration="2000">
+        <div className="TableContainer">
+            {/* <Button color="button" variant="contained">
              <Link className="CreateUserLinkBackoffice" to="/backoffice/users/create">Create User</Link>
              </Button>
-             <hr></hr>
-        <Table className="UsersTable">
-        <Thead>
-          <Tr>
-            <Th>Nombre</Th>
-            <Th>Id</Th>
-            <Th>Email</Th>
-            <Th>Editar</Th>
-            <Th>Eliminar</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+             <hr></hr> */}
+        <Table className="TableFinal">
+        <TableHead className="TableRowModify">
+          <TableRow>
+            <TableCell className="TableCell" >Nombre</TableCell>
+            <TableCell className="TableCell">Id</TableCell>
+            <TableCell className="TableCell">Email</TableCell>
+            <TableCell className="TableCell">Editar</TableCell>
+            <TableCell className="TableCell">Eliminar</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
         {UsersTable.map((user) => (
-          <Tr>
-            <Td>{user.nombre}</Td>
-            <Td>{user.id}</Td>
-            <Td>{user.email}</Td>
-            <Td><Button size="small" onClick={handdleEdit} variant="contained">Editar</Button></Td>
-            <Td><Button size="small" onClick={handdleDelete} variant="contained" >Eliminar</Button></Td>
-          </Tr>
+          <TableRow>
+            <TableCell>{user.nombre}</TableCell>
+            <TableCell>{user.id}</TableCell>
+            <TableCell>{user.email}</TableCell>
+            <TableCell><IconButton onClick={handdleEdit} variant="contained"><Edit/></IconButton></TableCell>
+            <TableCell><IconButton onClick={handdleDelete} variant="contained" ><Delete/></IconButton></TableCell>
+          </TableRow>
         ))}
-        </Tbody>
+        </TableBody>
       </Table>
       </div>
+      </Fade>
+      </>
     )
 }
 

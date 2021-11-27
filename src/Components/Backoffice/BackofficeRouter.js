@@ -9,12 +9,13 @@ import MemberEditCreate from "../Members/MemberEditCreate";
 import OrganizationEditionForm from "../Organization/OrganizationEditionForm";
 import SlidesForm from "../Slides/SlidesForm";
 import NewsListEditTable from "../News/NewsListEditTable";
+import BackofficeHeader from './BackofficeHeader';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
-
 
 const BackOfficeRouter = () => {
     return (
         <div>
+            <BackofficeHeader/>
             <h1>Bienvenid@ a Backoffice</h1>
             <p>Aqui podras administrar el sitio</p>
             <Router>

@@ -24,16 +24,16 @@ import { getAll } from '../../../app/MembersReducer/membersReducer';
       >
         Crear Miembro
       </Button>
-      <TableContainer>
-        <Table>
-          <TableHead>
+      <TableContainer color="tablebackground">
+        <Table color="tablebackground">
+          <TableHead color="tablebackground">
             <TableRow>
               <TableCell> Nombre </TableCell>
               <TableCell> Foto </TableCell>
               <TableCell> Acciones </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{showMembers()}</TableBody>
+          <TableBody color="tablebackground">{showMembers()}</TableBody>
         </Table>
       </TableContainer>
     </>

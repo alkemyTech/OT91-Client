@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { showSuccessAlert } from "../../Utils/alerts";
 import "../FormStyles.css";
 import Map from "../Map/Map";
+import UsersFormTerms from "./UsersFormTerms";
 
 const UserForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -10,6 +11,18 @@ const UserForm = () => {
     address: "",
     roleId: "",
   });
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [sendButton, setSendButton] = useState(true);
+
+  useEffect(() => {
+    acceptTerms && setSendButton(false);
+  }, [acceptTerms]);
+
+  const showTerms =
+    initialValues.name.length > 0 &&
+    initialValues.email.length > 0 &&
+    initialValues.address.length > 0 &&
+    initialValues.roleId.length > 0;
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -99,7 +112,8 @@ const UserForm = () => {
         <option value="user">User</option>
       </select>
       <Map address={initialValues.address} />
-      <button className="submit-btn" type="submit">
+      <UsersFormTerms setAcceptTerms={setAcceptTerms} showTerms={showTerms} />
+      <button className="submit-btn" type="submit" disabled={sendButton}>
         Send
       </button>
     </form>
