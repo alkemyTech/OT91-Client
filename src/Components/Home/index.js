@@ -13,14 +13,19 @@ const Home = () => {
     getOrganizationInformation().then(res => setWelcomeText(res.data.welcome_text))
   }, [])
   return (
-    <div>
-      <h2 style={{textAlign:"center"}}>{welcomeText}</h2>
-      <section>
+    <>
+      <h2 style={{ textAlign: "center" }}>{welcomeText}</h2>
+      <section
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+        }}
+      >
         <Carousel />
-        <CardsSection title="Últimas novedades" getInformation={newsService.getAll} button={{text:'Ver todas', to:'/novedades'}}/>
-        <CardsSection title="Testimonios" getInformation={testimonialService.getAllTestimonial}/>
+        <CardsSection title="Últimas novedades" getInformation={newsService.getAll} slices={3} button={{text:'Ver todas', to:'/novedades'}}/>
+        <CardsSection title="Testimonios" getInformation={testimonialService.getAllTestimonial} slices={3}/>
       </section>
-    </div>
+    </>
   );
 };
 
