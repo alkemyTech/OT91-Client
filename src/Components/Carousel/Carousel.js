@@ -23,15 +23,13 @@ const Carousel = () => {
   }, []);
 
   return (
-    <Box sx={{
-      height: "100%",
-    }}>
+    <Box>
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
           "--swiper-pagination-color": "#fff",
           "--swiper-pagination-active-color": "#000",
-          "--swiper-navigation-size": "500px",
+          "--swiper-navigation-size": "80px",
           textShadow: "0 0 0 #000",
           background: "0 0 0 #000",
         }}
@@ -45,25 +43,60 @@ const Carousel = () => {
         }}
       >
         {data?.map((item, index) => (
-          <div key={index} data-swiper-parallax="-23%">
+          <Box key={index} sx={{}} data-swiper-parallax="-23%">
             <SwiperSlide
               style={{
                 backgroundImage: `url(${item.image})`,
                 backgroundPosition: "center",
+                height: "450px",
+                backgroundRepeat: "no-repeat",
+                boxSizing: "border-box",
               }}
-              className="swiperSlide"
             >
-              <div className="contentSlide">
-                <h2 className="titleSlide" data-swiper-parallax="-300">
-                  {item.name}
-                </h2>
+              <SwiperSlide
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  alignContent: "center",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    // flexDirection: "column",
+                    alignItems: "center",
+                    padding: "0 0 0 50px",
+                    marginTop: "15%",
+                  }}
+                >
+                  <h2
+                    style={{
+                      color: "#fff",
+                      fontSize: "2.5rem",
+                      fontWeight: "bold",
+                      marginRight: "10px",
+                    }}
+                    data-swiper-parallax="-300"
+                  >
+                    {item.name}
+                  </h2>
 
-                <div className="descriptionSlide" data-swiper-parallax="-100">
-                  <p>{item.description}</p>
-                </div>
-              </div>
+                  <Box
+                    sx={{
+                      color: "#fff",
+                      fontSize: "1.5rem",
+                      fontWeight: "bold",
+                      marginLeft: "10px",
+                    }}
+                    data-swiper-parallax="-100"
+                  >
+                    <p>{item.description}</p>
+                  </Box>
+                </Box>
+              </SwiperSlide>
             </SwiperSlide>
-          </div>
+          </Box>
         ))}
       </Swiper>
     </Box>
