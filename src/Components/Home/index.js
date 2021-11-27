@@ -14,7 +14,7 @@ const Home = () => {
     );
   }, []);
   return (
-    <div>
+    <>
       <Header />
       <h2 style={{ textAlign: "center" }}>{welcomeText}</h2>
       <section
@@ -34,7 +34,7 @@ const Home = () => {
           getInformation={testimonialService.getAllTestimonial}
         />
       </section>
-    </div>
+    </>
   );
 };
 
