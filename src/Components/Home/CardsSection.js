@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomCard from '../Card/CustomCard'
 
-const CardsSection = ({title, button, getInformation}) => {
+const CardsSection = ({title, button, getInformation,slices}) => {
     const [cardsInfo, setCardsInfo] = useState([]);
     useEffect(() => {
         getInformation().then(res => {
-            setCardsInfo(res.slice(-3));
-            console.log(cardsInfo)
+            if(slices){
+                setCardsInfo(res.slice(-slices));
+            }else{
+                setCardsInfo(res)
+            }
         })
     },[])
     return (

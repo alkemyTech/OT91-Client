@@ -5,58 +5,23 @@ import Title from "../../Title/Title"
 import CustomCard from "../../Card/CustomCard";
 import { Container } from "@mui/material";
 import VideoCard from "../../Card/VideoCard";
-import LoadingSpinner from "../../../Utils/loadingSpinner";
 import {videoLastEvent} from './videoEvent';
-import { Link } from "react-router-dom";
-import * as newsActions from "../../../app/NewsReducer/newsReducer";
-import { useDispatch, useSelector } from "react-redux";
+import CardSection from '../../Home/CardsSection';
+import { getAll } from '../../../Services/newsServices';
 
 const NewsList = () => {
-  const [loading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
-  const allNews = useSelector((state) => state.news.data);
 
-  useEffect(() => {
-    dispatch(newsActions.getAll());
-  }, []);
-
-  useEffect(() => {
-    allNews && setIsLoading(false);
-  }, [allNews]);
-
-  const newsListHasValues = listHasValues(allNews);
   return (
     <Container className="ContainerList">
-      {loading ? (
-        <div className="spinner">
-          <LoadingSpinner />
-        </div>
-      ) : (
         <div>
-          <Title title="Novedades" />
-          <ul className="list-grid-container ">
-            {newsListHasValues ? (
-              allNews.map((news) => {
-                return (
-                  <CustomCard
-                    key={news.id}
-                    title={news.name}
-                    img={news.image}
-                    description={news.content}
-                  />
-                );
-              })
-            ) : (
-              <p>No hay novedades</p>
-            )}
-          </ul>
+          <Title title="Novedades" image='https://bit.ly/3nXJHGn' />
+          <CardSection getInformation={getAll}/>
           <VideoCard
             title={videoLastEvent.name}
             video={videoLastEvent.video}
             description={videoLastEvent.content}
         />
         </div>
-      )}
     </Container>
   );
 };
