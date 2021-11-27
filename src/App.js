@@ -38,8 +38,6 @@ function App() {
               <PrivateRoute path="/create-user" component={UserForm} />
               <PrivateRoute path="/create-member" component={MembersForm} />
               <PrivateRoute path="/create-project" component={ProjectsForm} />
-              <Route path="/school-campaign" component={SchoolCampaign} />
-              <Route path="/toys-campaign" component={ToysCampaign} />
               <PrivateRoute path="/edit-activity/:activityId" component={ActivitiesForm} />
               <PrivateRoute
                 path="/edit-testimonial/:testimonialId"
