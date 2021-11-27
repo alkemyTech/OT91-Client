@@ -15,16 +15,18 @@ import "../../Styles/Carousel.css";
 import LoadingSpinnner from '../../Utils/loadingSpinner'
 SwiperCore.use([Parallax, Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 const Carousel = () => {
-  const [data, setData] = useState([]);
+  const [cardsSlides, setCardsSlides] = useState([]);
+
+  const isValidData = (data) => data.length >0;
 
   useEffect(async () => {
-    const dataImage = await getImagesSlides();
-    setData(dataImage);
+    const cardsDataSlides= await getImagesSlides();
+    isValidData(cardsDataSlides) && setCardsSlides(cardsDataSlides);
   }, []);
 
   return (
     <div className="containerSlide">
-      {data.length ? (<Swiper
+      {cardsSlides.length ? (<Swiper
           style={{
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
@@ -47,7 +49,7 @@ const Carousel = () => {
             delay: 5000,
           }}
         >
-          {data.map((item, index) => (
+          {cardsSlides.map((item, index) => (
             <div key={index} data-swiper-parallax="-23%">
               <SwiperSlide
                 style={{

@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "../Carousel/Carousel";
+import LoadingSpinner from "../../Utils/loadingSpinner";
 import Footer from "../Footer/Footer";
 import LoadingSpinner from "../../Utils/loadingSpinner";
 
