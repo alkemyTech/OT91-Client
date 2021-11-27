@@ -6,6 +6,7 @@ import Header from '../Layout/Header/Header'
 import CardsSection from './CardsSection';
 import * as newsService from '../../Services/newsServices'
 import * as testimonialService from '../../Services/testimonialService'
+
 const Home = () => {
   const [welcomeText, setWelcomeText] = useState("");
   useEffect(() => {
@@ -13,7 +14,6 @@ const Home = () => {
   }, [])
   return (
     <>
-      <Header />
       <h2 style={{ textAlign: "center" }}>{welcomeText}</h2>
       <section
         style={{
