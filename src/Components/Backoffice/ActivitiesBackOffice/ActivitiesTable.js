@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { showSuccessAlert } from "../../../Utils/alerts";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "../../../Styles/TableStyle.css";
 import { getAll, deleteById } from '../../../app/activitiesReducer/activitiesReducer';
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import {NewsTableRows} from '../../News/NewsTableRows';
+import {Table,TableBody,TableCell,TableContainer,TableHead,Button,TableRow} from "@mui/material";
 
 const ActivitiesTable = () => {
   const history = useHistory();
@@ -24,8 +24,8 @@ const ActivitiesTable = () => {
   }, [])
 
   return (
-    <div>
-      <Link
+    <>
+    <Link
         to="/backoffice/activities/create"
         style={{ textDecoration: "none" }}
       >
@@ -33,50 +33,22 @@ const ActivitiesTable = () => {
           <h1>Create activities</h1>
         </span>
       </Link>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th className="activityTh">Name</Th>
-            <Th className="activityTh">Image</Th>
-            <Th className="activityTh">CreatedAt</Th>
-            <Th className="activityTh">updated</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {dataActivity?.map((item, index) => {
-            return (
-              <Tr key={index}>
-                <Td>{item.name}</Td>
-                <Td>
-                  <div className="activityImageContainer">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="activityImage"
-                    ></img>
-                  </div>
-                </Td>
-                <Td>{item.CreatedAt}</Td>
-                <Td>
-                  <button
-                    className="activityButton"
-                    onClick={() => editData(item.id)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="activityButton"
-                    onClick={() => deleteData(item.id)}
-                  >
-                    Delete
-                  </button>
-                </Td>
-              </Tr>
-            );
-          })}
-        </Tbody>
+      <TableContainer className="TableContainer">
+      <Table className="TableFinal">
+        <TableHead className="TableRowModify">
+          <TableRow>
+            <TableCell className="TableCell"align="center">Name</TableCell>
+            <TableCell className="TableCell"align="center">Image</TableCell>
+            <TableCell className="TableCell"align="center">CreatedAt</TableCell>
+            <TableCell className="TableCell"align="center">updated</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <NewsTableRows newsList={dataActivity} onDelete={deleteData} onEdit={editData}/>
+        </TableBody>
       </Table>
-    </div>
+      </TableContainer>
+    </>
   );
 };
 
