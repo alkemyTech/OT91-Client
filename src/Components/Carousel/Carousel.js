@@ -13,6 +13,7 @@ import SwiperCore, {
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import "../../Styles/Carousel.css";
+import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
 SwiperCore.use([Parallax, Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 const Carousel = () => {
   const [data, setData] = useState([]);
@@ -81,7 +82,6 @@ const Carousel = () => {
                   >
                     {item.name}
                   </h2>
-
                   <Box
                     sx={{
                       color: "#fff",
@@ -91,7 +91,7 @@ const Carousel = () => {
                     }}
                     data-swiper-parallax="-100"
                   >
-                    <p>{item.description}</p>
+                    <p>{item.description && setCKEditorText(item, "description")}</p>
                   </Box>
                 </Box>
               </SwiperSlide>
