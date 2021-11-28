@@ -82,16 +82,16 @@ const Footer = () => {
             justifyContent: { xs: "space-evenly" },
           }}
         >
-          <a href={organizationInformation.facebook_url} target="_blank">
+          <a href={`https://${organizationInformation.facebook_url}`} target="_blank">
             <FacebookIcon sx={{ fontSize: 40 }} />
           </a>
-          <a href={organizationInformation.linkedin_url} target="_blank">
+          <a href={`https://${organizationInformation.linkedin_url}`} target="_blank">
             <LinkedInIcon sx={{ fontSize: 40 }} />
           </a>
-          <a href={organizationInformation.instagram_url} target="_blank">
+          <a href={`https://${organizationInformation.instagram_url}`} target="_blank">
             <InstagramIcon sx={{ fontSize: 40 }} />
           </a>
-          <a href={organizationInformation.twitter_url} target="_blank">
+          <a href={`https://${organizationInformation.twitter_url}`} target="_blank">
             <TwitterIcon sx={{ fontSize: 40 }} />
           </a>
         </Box>
