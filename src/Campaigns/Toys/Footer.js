@@ -81,7 +81,7 @@ export const Footer = () => {
         }}
       >
         <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-          <Link to="/home" style={linkStyle}>
+          <Link to="/" style={linkStyle}>
             Visita nuestra página
           </Link>
         </Box>
