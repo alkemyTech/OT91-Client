@@ -7,6 +7,7 @@ import {
   TwitterTweet,
 } from "react-social-plugins";
 import AboutUsMembers from "./AboutUsMembers";
+import nosotros from "../../Assets/TitleImages/nosotros.jpg";
 
 const AboutUs = () => {
   const description = `Somos un centro comunitario que acompaña a más de 700 personas a través de las áreas de:
@@ -14,7 +15,7 @@ const AboutUs = () => {
   return (
     <>
       <Box className="title-container">
-        <Title title="Nosotros" />
+        <Title title="Nosotros" image={nosotros} />
         <div className="title-container-text">
           <p>{description}</p>
           <div>

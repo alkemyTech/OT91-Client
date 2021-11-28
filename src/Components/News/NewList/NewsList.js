@@ -8,11 +8,12 @@ import VideoCard from "../../Card/VideoCard";
 import { videoLastEvent } from "./videoEvent";
 import CardSection from "../../Home/CardsSection";
 import { getAll } from "../../../Services/newsServices";
+import novedades from "../../../Assets/TitleImages/novedades.jpg";
 
 const NewsList = () => {
   return (
     <div>
-      <Title title="Novedades" image="https://bit.ly/3nXJHGn" />
+      <Title title="Novedades" image={novedades} />
       <CardSection getInformation={getAll} />
       <VideoCard
         title={videoLastEvent.name}
