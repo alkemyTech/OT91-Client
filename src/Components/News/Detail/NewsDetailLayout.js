@@ -7,11 +7,18 @@ import LoadingSpinner from "../../../Utils/loadingSpinner";
 import "../../../Styles/CardStyle.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as newsActions from "../../../app/NewsReducer/newsReducer";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActionArea,
+} from "@mui/material";
 
-const NewsImage = lazy(
+const Title = lazy(
   () =>
     new Promise((resolve) =>
-      setTimeout(() => resolve(import("./NewsImage")), 600)
+      setTimeout(() => resolve(import("../../Title/Title")), 600)
     )
 );
 
@@ -42,11 +49,18 @@ const NewsDetailLayout = () => {
         </div>
       ) : (
         <div>
-          <NewsTitle title={news.name} />
-          <Suspense fallback={<LoadingSpinner />}>
-            <NewsImage image={news.image} />
-          </Suspense>
-          <Box>{newsDescription}</Box>
+          <Card className="cardStyle">
+            <CardActionArea>
+              <CardMedia>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Title title={news.name} image={news.image} key={news.id} />
+                </Suspense>
+              </CardMedia>
+              <CardContent>
+                <Typography>{newsDescription}</Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         </div>
       )}
     </div>
