@@ -6,7 +6,7 @@ import membersApiActions from "../../Services/membersService";
 import "../../Styles/CardStyle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll } from "../../app/aboutUsReducer/aboutUsReducer";
-
+import { Grid, Button } from '@mui/material';
 const AboutUsMembers = () => {
   const dispatch = useDispatch();
   const aboutUsMembersData = useSelector((state) => state.aboutUs.data);
@@ -20,11 +20,11 @@ const AboutUsMembers = () => {
   }, []);
 
   return (
-    <div>
-      <Container className="ContainerList">
-        <ul className="list-container">{showAboutUsMembers()}</ul>
-      </Container>
-    </div>
+    <Container sx={{display:'flex', flexDirection:'column', alignItems:'center', my:1,mb:7,mt:9}}>
+    <Grid container sx={{m:3}}>
+        {showAboutUsMembers()}
+      </Grid>
+    </Container>
   );
 };
 
