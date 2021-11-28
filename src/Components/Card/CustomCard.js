@@ -10,13 +10,25 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomCard = ({ title, img, description, button, path, route }) => {
+const CustomCard = ({
+  title,
+  img,
+  description,
+  button,
+  path,
+  route,
+  firstSocialLink,
+  firstSocialLinkName,
+  secondSocialLink,
+  secondSocialLinkName,
+}) => {
   const { push } = useHistory();
 
   return (
-    <Container sx={{display:'inline-flex'}}>
+    <Container sx={{ display: "inline-flex" }}>
       <Card
-        to={route} component={route ? Link : ""}
+        to={route}
+        component={route ? Link : ""}
         sx={{
           width: 345,
           m: 2,
@@ -24,7 +36,7 @@ const CustomCard = ({ title, img, description, button, path, route }) => {
           borderRadius: 3,
           display: "flex",
           flexDirection: "column",
-          textDecoration:'none'
+          textDecoration: "none",
         }}
       >
         <CardMedia
@@ -83,6 +95,12 @@ const CustomCard = ({ title, img, description, button, path, route }) => {
           ) : (
             <div></div>
           )}
+          <a href={firstSocialLink} target="_blank">
+            {firstSocialLinkName}
+          </a>
+          <a href={secondSocialLink} target="_blank">
+            {secondSocialLinkName}
+          </a>
         </CardActions>
       </Card>
     </Container>
