@@ -12,16 +12,17 @@ import Donation from "../Donations/Donation";
 import Thanks from "../Donations/Thanks";
 import SchoolCampaign from "../../Campaigns/School/SchoolCampaign";
 import ToysCampaign from "../../Campaigns/Toys/ToysCampaign";
-import PublicRoute from './PublicRoute'
-import {AnimatedSwitch} from 'react-router-transition';
+import PublicRoute from "./PublicRoute";
+import { AnimatedSwitch } from "react-router-transition";
+import Contacto from "../Contact/Contact";
 
 const PublicRouter = () => {
   return (
     <>
       <AnimatedSwitch
-        atEnter={{opacity:0}}
-        atLeave={{opacity:0}}
-        atActive={{opacity:1}}
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
       >
         <Route path="/school-campaign" component={SchoolCampaign} />
         <Route path="/toys-campaign" component={ToysCampaign} />
@@ -35,9 +36,10 @@ const PublicRouter = () => {
         <PublicRoute path="/donate" component={Donation} />
         <PublicRoute path="/thanks" component={Thanks} />
         <PublicRoute path="/list-slides" component={ListSlides} />
+        <PublicRoute path="/contacto" component={Contacto} />
       </AnimatedSwitch>
     </>
   );
-}
+};
 
 export default PublicRouter;
