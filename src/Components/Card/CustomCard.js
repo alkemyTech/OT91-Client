@@ -10,13 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomCard = ({ title, img, description, button, path }) => {
+const CustomCard = ({ title, img, description, button, path, route }) => {
   const { push } = useHistory();
-  const linkStyle = { textDecoration: "none", display: "inline-flex" };
 
   return (
-    <Container to="/" component={Link} sx={linkStyle}>
+    <Container sx={{display:'inline-flex'}}>
       <Card
+        to={route} component={route ? Link : ""}
         sx={{
           width: 345,
           m: 2,
@@ -24,6 +24,7 @@ const CustomCard = ({ title, img, description, button, path }) => {
           borderRadius: 3,
           display: "flex",
           flexDirection: "column",
+          textDecoration:'none'
         }}
       >
         <CardMedia

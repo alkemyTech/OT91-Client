@@ -14,7 +14,7 @@ const NewsList = () => {
   return (
     <div>
       <Title title="Novedades" image={novedades} />
-      <CardSection getInformation={getAll} />
+      <CardSection getInformation={getAll} clickeable={{to:'/novedades'}} />
       <VideoCard
         title={videoLastEvent.name}
         video={videoLastEvent.video}

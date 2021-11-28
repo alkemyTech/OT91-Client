@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CustomCard from '../Card/CustomCard'
 import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
 
-const CardsSection = ({title, button, getInformation,slices}) => {
+const CardsSection = ({title, button, getInformation, slices, clickeable}) => {
     const [cardsInfo, setCardsInfo] = useState([]);
     useEffect(() => {
         getInformation().then(res => {
@@ -21,7 +21,8 @@ const CardsSection = ({title, button, getInformation,slices}) => {
             <Grid container sx={{m:3}}>
                 {cardsInfo && cardsInfo.map(card => (
                     <Grid xs={4} >
-                        <CustomCard title={card.name} img={card.image} description={card.content && setCKEditorText(card, "content")}/>
+                        <CustomCard title={card.name} img={card.image} route={clickeable && `${clickeable.to}/${card.id}`}
+                            description={card.content && setCKEditorText(card, "content")}/>
                     </Grid>
                 ))}
             </Grid>
@@ -29,5 +30,6 @@ const CardsSection = ({title, button, getInformation,slices}) => {
         </Container>
     )
 }
+
 
 export default CardsSection;

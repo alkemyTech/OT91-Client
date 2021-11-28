@@ -22,7 +22,7 @@ const Home = () => {
         }}
       >
         <Carousel />
-        <CardsSection title="Últimas novedades" getInformation={newsService.getAll} slices={3} button={{text:'Ver todas', to:'/novedades'}}/>
+        <CardsSection title="Últimas novedades" clickeable={{to:'/novedades'}} getInformation={newsService.getAll} slices={3} button={{text:'Ver todas', to:'/novedades'}}/>
         <CardsSection title="Testimonios" getInformation={testimonialService.getAllTestimonial} slices={3}/>
       </section>
     </>
