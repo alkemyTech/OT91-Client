@@ -22,6 +22,7 @@ const ActivitiesCards = ({ activities }) => {
           activities.map((card) => (
             <Grid xs={4}>
               <CustomCard
+                route={`/activity-detail/${card.id}`}
                 title={card.name}
                 img={card.image}
                 description={card.description && setCKEditorText(card, "description")}
