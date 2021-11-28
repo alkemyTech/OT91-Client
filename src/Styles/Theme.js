@@ -8,6 +8,12 @@ export const GlobalTheme = createTheme({
       button: {
         main: '#476072',
       },
+      buttonlogin: {
+        main: '#f8fc74',
+      },
+      buttonregistrate: {
+        main: '#8dcaff',
+      },
       buttondelete: {
         main: '#b92222',
       },

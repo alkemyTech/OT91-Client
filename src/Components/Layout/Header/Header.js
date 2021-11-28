@@ -14,16 +14,16 @@ const Header = () => {
   const isLogged = false;
   manageLinkActivation(window.location.pathname);
   return (
-    <Container maxWidth={false} sx={{display: 'flex', justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
-      <Box sx={{display:'flex', gap:'20px'}}>
+    <Container maxWidth={false} sx={{display: 'flex',  backgroundColor:"#28527A",justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
+      <Box sx={{display:'flex', gap:'20px', color:"white"}}>
         <img src={logo} height="100px"/>
         <NavLinksList horizontal navLinks={navLinks} isLogged={isLogged}/>
       </Box>
         <List sx={{display:{xs:'none', lg:'flex'}, gap:'10px'}}>
-          <Button component={Link} to="/login" variant="outlined" sx={{alignSelf:'center'}}>
+          <Button component={Link} to="/login" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>
             LOGIN
           </Button>
-          <Button component={Link} to="/register" variant="contained" sx={{alignSelf: 'center'}}>
+          <Button component={Link} to="/register"  color="buttonregistrate" variant="contained" sx={{alignSelf: 'center'}}>
             Registrate
           </Button>
         </List>
