@@ -15,7 +15,7 @@ const AboutUsMembersItem = ({ member }) => {
         <CustomCard
           title={member.name}
           img={member.image}
-          description={member.content && setCKEditorText(member, "content")}
+          description={member.description && setCKEditorText(member, "description")}
         />
       </Grid>
   );
