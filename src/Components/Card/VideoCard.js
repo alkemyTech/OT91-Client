@@ -6,10 +6,10 @@ import VideoPlayer from '../common/VideoPlayer/VideoPlayer';
 const VideoCard = ({title,video,description}) => {
 
     return (
-        <Container sx={{ display: 'inline-flex' }}>
-            <Card sx={{ maxWidth: 345 }}>
+        <Container maxWidth={false} sx={{ display: 'inline-flex', justifyContent:'center' }}>
+            <Card sx={{ maxWidth: 800 }}>
                 <div>
-                    <VideoPlayer video={video} />
+                    <VideoPlayer video={video}/>
                 </div>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
