@@ -1,5 +1,5 @@
 import Title from "../Title/Title";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Container} from "@mui/material";
 import "../../Styles/Container.css";
 import {
   LinkedinCompanyProfile,
@@ -22,7 +22,7 @@ const AboutUs = () => {
       </Box>
       <AboutUsMembers />
       <div>
-        <Box>
+        {/* <Box>
           <div
             className="badge-base LI-profile-badge"
             data-locale="es_ES"
@@ -32,7 +32,8 @@ const AboutUs = () => {
             data-vanity="corporación-somos-más-68737437"
             data-version="v1"
           ></div>
-        </Box>
+        </Box> */}
+        <Container >
         <TwitterTweet
           align="center"
           coversation="none"
@@ -54,6 +55,7 @@ const AboutUs = () => {
           theme="light"
           width={300}
         />
+        </Container>
       </div>
     </>
   );
