@@ -1,5 +1,5 @@
 import Title from "../Title/Title";
-import { Box, Grid, Container} from "@mui/material";
+import { Box, Grid, Container } from "@mui/material";
 import "../../Styles/Container.css";
 import {
   LinkedinCompanyProfile,
@@ -17,13 +17,15 @@ const AboutUs = () => {
       <Box className="title-container">
         <Title title="Nosotros" image={nosotros} />
         <div className="title-container-text">
-          <p>{description}</p>
         </div>
       </Box>
+      <h1>{description}</h1>
+      <h1>TODAVIA NO TERMINE ESTA SECCION, SOLAMENTE MERGEO PARA ACTUALIZAR ALGUNAS COSAS PASADAS SOY JULIAN</h1>
+      <div className="ContenedorCards">
       <AboutUsMembers />
+      </div>
       <div>
-        {/* <Box>
-          <div
+          {/* <div
             className="badge-base LI-profile-badge"
             data-locale="es_ES"
             data-size="large"
@@ -31,31 +33,34 @@ const AboutUs = () => {
             data-type="HORIZONTAL"
             data-vanity="corporación-somos-más-68737437"
             data-version="v1"
-          ></div>
-        </Box> */}
-        <Container >
-        <TwitterTweet
+          ></div> */}
+          <div className="ContenedorTweets">
+          <Container sx={{display:'flex', flexDirection:'column', alignItems:'center', my:1,mb:7,mt:9}}>
+    <Grid container sx={{m:3}}>
+    <TwitterTweet
           align="center"
           coversation="none"
           tweetId="1450535690199085058"
           theme="light"
           width={300}
-        />
+          />
         <TwitterTweet
           align="center"
           coversation="none"
           tweetId="1440383594615042052"
           theme="light"
           width={300}
-        />
+          />
         <TwitterTweet
           align="center"
           coversation="none"
           tweetId="1271501359658012675"
           theme="light"
           width={300}
-        />
-        </Container>
+          />
+      </Grid>
+    </Container>
+          </div>
       </div>
     </>
   );

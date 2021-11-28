@@ -8,7 +8,7 @@ import { Container, Box, TableFooter } from "@mui/material";
 import { getOrganizationInformation } from "../../Services/OrganizationInformation";
 
 const Footer = () => {
-  const linkStyle = { textDecoration: "none" };
+  const linkStyle = { textDecoration: "none", color:"white" };
   const [organizationInformation, setOrganizationInformation] = useState({});
 
   useEffect(() => {
@@ -25,6 +25,8 @@ const Footer = () => {
         alignItems: { xs: "center" },
         justifyContent: { xs: "space-evenly" },
         flexDirection: { xs: "column" },
+        backgroundColor:"#28527A",
+        color:"white"
       }}
     >
       <Container
@@ -44,8 +46,7 @@ const Footer = () => {
             width: { xs: "100%" },
           }}
         >
-          <img src={organizationInformation.logo} alt="logo" />
-          <p>{organizationInformation.name}</p>
+          <img  height="120px" src={organizationInformation.logo} alt="logo" />
         </Box>
         <Box
           sx={{
@@ -83,16 +84,16 @@ const Footer = () => {
           }}
         >
           <a href={`https://${organizationInformation.facebook_url}`} target="_blank">
-            <FacebookIcon sx={{ fontSize: 40 }} />
+            <FacebookIcon sx={{ fontSize: 40, textDecoration: "none", color:"#ec4c4c"}} />
           </a>
           <a href={`https://${organizationInformation.linkedin_url}`} target="_blank">
-            <LinkedInIcon sx={{ fontSize: 40 }} />
+          <LinkedInIcon sx={{ fontSize: 40, textDecoration: "none", color:"#f8fc74" }} />
           </a>
           <a href={`https://${organizationInformation.instagram_url}`} target="_blank">
-            <InstagramIcon sx={{ fontSize: 40 }} />
+          <InstagramIcon sx={{ fontSize: 40, textDecoration: "none", color:"#8dcaff" }} />
           </a>
           <a href={`https://${organizationInformation.twitter_url}`} target="_blank">
-            <TwitterIcon sx={{ fontSize: 40 }} />
+          <TwitterIcon sx={{ fontSize: 40, textDecoration: "none", color:"white" }} />
           </a>
         </Box>
       </Container>

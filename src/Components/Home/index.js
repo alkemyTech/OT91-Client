@@ -14,7 +14,7 @@ const Home = () => {
   }, [])
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>{welcomeText}</h2>
+      {/* <h1 style={{ textAlign: "center" }}>{welcomeText}</h1> */}
       <section
         style={{
           maxWidth: "1400px",

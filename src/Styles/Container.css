@@ -19,7 +19,9 @@
 }
 #tweet-embed {
   display: flex;
-  justify-content: center;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .linkedin-badge-container {
   display: flex;
@@ -29,3 +31,12 @@
   padding: 20px;
   background-color: #d4cac8;
 }
+.ContenedorTweets{
+  background: url(../Assets/waves/wave.svg) no-repeat bottom center;
+}
+.css-1wmwz36-MuiContainer-root{
+  margin-bottom: 0 !important;
+}
+/* .ContenedorCards{
+  background: url(../Assets/waves/wavenosotroscards.svg) no-repeat  center;
+} */

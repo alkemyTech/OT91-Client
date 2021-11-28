@@ -9,6 +9,8 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const CustomCard = ({
   title,
@@ -96,10 +98,10 @@ const CustomCard = ({
             <div></div>
           )}
           <a href={firstSocialLink} target="_blank">
-            {firstSocialLinkName}
+            {firstSocialLinkName&&<FacebookIcon sx={{ fontSize: 40, textDecoration: "none", color:"blue"}}/>}
           </a>
           <a href={secondSocialLink} target="_blank">
-            {secondSocialLinkName}
+            {secondSocialLinkName&&<LinkedInIcon sx={{ fontSize: 40, textDecoration: "none", color:"black" }} />}
           </a>
         </CardActions>
       </Card>
