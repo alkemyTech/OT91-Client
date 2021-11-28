@@ -10,12 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomCard = ({ title, img, description, button, path }) => {
+const CustomCard = ({ title, img, description, button, path, route }) => {
   const { push } = useHistory();
   const linkStyle = { textDecoration: "none", display: "inline-flex" };
 
   return (
-    <Container to="/" component={Link} sx={linkStyle}>
+    <Container to={route} component={route ? Link : ""} sx={linkStyle}>
       <Card
         sx={{
           width: 345,
