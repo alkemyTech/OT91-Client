@@ -12,9 +12,10 @@ import {
 
 const CustomCard = ({ title, img, description, button, path }) => {
   const { push } = useHistory();
+  const linkStyle = { textDecoration: "none", display: "inline-flex" };
 
   return (
-    <Container to="/" component={Link} sx={{ display: "inline-flex" }}>
+    <Container to="/" component={Link} sx={linkStyle}>
       <Card
         sx={{
           width: 345,

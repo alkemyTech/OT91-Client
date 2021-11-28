@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const socialMediaIconStyle = { fontSize: 40 };
+  const linkStyle = { textDecoration: "none" };
   const socialMediaList = [
     { name: "Instagram", icon: <InstagramIcon sx={socialMediaIconStyle} /> },
     { name: "Facebook", icon: <FacebookIcon sx={socialMediaIconStyle} /> },
@@ -26,7 +27,9 @@ export const Footer = () => {
           alignItems: { xs: "center" },
         }}
       >
-        <Link to="">{media.icon}</Link>
+        <Link to="" style={linkStyle}>
+          {media.icon}
+        </Link>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <p>{media.name}</p>
         </Box>
@@ -79,10 +82,14 @@ export const Footer = () => {
         }}
       >
         <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-          <Link to="">Visita nuestra página</Link>
+          <Link to="" style={linkStyle}>
+            Visita nuestra página
+          </Link>
         </Box>
         <Box sx={{ display: { xs: "none", xl: "flex" } }}>
-          <Link to="">Campaña Juguetes</Link>
+          <Link to="" style={linkStyle}>
+            Campaña Juguetes
+          </Link>
         </Box>
       </Box>
     </TableFooter>

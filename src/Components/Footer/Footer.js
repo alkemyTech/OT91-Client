@@ -8,6 +8,7 @@ import { Container, Box, TableFooter } from "@mui/material";
 import { getOrganizationInformation } from "../../Services/OrganizationInformation";
 
 const Footer = () => {
+  const linkStyle = { textDecoration: "none" };
   const [organizationInformation, setOrganizationInformation] = useState({});
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Footer = () => {
               margin: "3px",
             }}
           >
-            <Link to="/school-campaign" target="_blank">
+            <Link to="/school-campaign" style={linkStyle}>
               Campaña Escolar
             </Link>
           </Box>
@@ -69,7 +70,7 @@ const Footer = () => {
               margin: "3px",
             }}
           >
-            <Link to="/toys-campaign" target="_blank">
+            <Link to="/toys-campaign" style={linkStyle}>
               Campaña Juguetes
             </Link>
           </Box>
