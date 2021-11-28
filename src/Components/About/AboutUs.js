@@ -18,7 +18,7 @@ const AboutUs = () => {
         <div className="title-container-text">
           <p>{description}</p>
           <div>
-            <Box className="linkedin-badge-container">
+            <Box>
               <div
                 className="badge-base LI-profile-badge"
                 data-locale="es_ES"

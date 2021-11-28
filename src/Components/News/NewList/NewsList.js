@@ -11,17 +11,15 @@ import { getAll } from "../../../Services/newsServices";
 
 const NewsList = () => {
   return (
-    <Container className="ContainerList">
-      <div>
-        <Title title="Novedades" image="https://bit.ly/3nXJHGn" />
-        <CardSection getInformation={getAll} />
-        <VideoCard
-          title={videoLastEvent.name}
-          video={videoLastEvent.video}
-          description={videoLastEvent.content}
-        />
-      </div>
-    </Container>
+    <div>
+      <Title title="Novedades" image="https://bit.ly/3nXJHGn" />
+      <CardSection getInformation={getAll} />
+      <VideoCard
+        title={videoLastEvent.name}
+        video={videoLastEvent.video}
+        description={videoLastEvent.content}
+      />
+    </div>
   );
 };
 
