@@ -15,23 +15,33 @@ import "../../Styles/Carousel.css";
 SwiperCore.use([Parallax, Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 
 const CarouselCampaign = ({ values }) => {
+  const sliderContent = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "450 px",
+    backgroundRepeat: "no-repeat",
+    boxSizing: "border-box",
+  };
+  const sliderContainer = {
+    "--swiper-navigation-color": "#fff",
+    "--swiper-pagination-color": "#fff",
+    "--swiper-pagination-active-color": "#000",
+    "--swiper-navigation-size": "80px",
+    textShadow: "0 0 0 #000",
+    background: "0 0 0 #000",
+    height: "450px",
+  };
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         paddingTop: "20px",
+        width: "80%",
+        margin: "0 auto",
       }}
     >
       <Swiper
-        style={{
-          "--swiper-navigation-color": "#000",
-          "--swiper-pagination-color": "#000",
-          textAlign: "center",
-        }}
-        grid={{
-          gutter: 10,
-          minWidth: 300,
-          maxWidth: 300,
-        }}
+        style={sliderContainer}
         speed={2000}
         parallax={true}
         loop={true}
@@ -44,15 +54,7 @@ const CarouselCampaign = ({ values }) => {
           <>
             <SwiperSlide key={index}>
               <div data-swiper-parallax="-23%">
-                <SwiperSlide
-                  className="swiperSlide"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "400 px",
-                  }}
-                >
+                <SwiperSlide style={sliderContent}>
                   <Box
                     xs={{
                       width: "100%",
@@ -61,6 +63,7 @@ const CarouselCampaign = ({ values }) => {
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
+                      textAlign: "center",
                     }}
                   >
                     <img
@@ -88,7 +91,7 @@ const CarouselCampaign = ({ values }) => {
           </>
         ))}
       </Swiper>
-    </div>
+    </Box>
   );
 };
 

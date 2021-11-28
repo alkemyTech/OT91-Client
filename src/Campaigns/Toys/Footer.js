@@ -8,6 +8,7 @@ import TableFooter from "@mui/material/TableFooter";
 import Logo from "../../Assets/Logo/logo.png";
 import { Link } from "react-router-dom";
 export const Footer = () => {
+  const linkStyle = { textDecoration: "none" };
   const socialMediaIconStyle = { fontSize: 40 };
   const socialMediaList = [
     { name: "Instagram", icon: <InstagramIcon sx={socialMediaIconStyle} /> },
@@ -25,7 +26,9 @@ export const Footer = () => {
           alignItems: { xs: "center" },
         }}
       >
-        <Link to="">{media.icon}</Link>
+        <Link to="" style={linkStyle}>
+          {media.icon}
+        </Link>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <p>{media.name}</p>
         </Box>
@@ -78,10 +81,14 @@ export const Footer = () => {
         }}
       >
         <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-          <Link to="">Visita nuestra página</Link>
+          <Link to="/home" style={linkStyle}>
+            Visita nuestra página
+          </Link>
         </Box>
         <Box sx={{ display: { xs: "none", xl: "flex" } }}>
-          <Link to="">Campaña Escolar</Link>
+          <Link to="/school-campaign" style={linkStyle}>
+            Campaña Escolar
+          </Link>
         </Box>
       </Box>
     </TableFooter>
