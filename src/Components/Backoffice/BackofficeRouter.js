@@ -11,6 +11,7 @@ import SlidesForm from "../Slides/SlidesForm";
 import NewsListEditTable from "../News/NewsListEditTable";
 import BackofficeHeader from './BackofficeHeader';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import BackofficeLayout from './BackofficeLayout/BackofficeLayout';
 
 const BackOfficeRouter = () => {
     return (
@@ -20,6 +21,7 @@ const BackOfficeRouter = () => {
             <p>Aqui podras administrar el sitio</p>
             <Router>
                 <Switch>
+                    <PrivateRoute exact path="/backoffice" component={BackofficeLayout}/>
                     <PrivateRoute path="/backoffice/home" component={EditHomeForm}/>
                     <PrivateRoute path="/backoffice/members" component={MembersResults} />
                     <PrivateRoute path="/backoffice/create-category" component={CategoriesList}/>
