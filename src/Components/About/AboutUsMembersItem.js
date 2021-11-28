@@ -11,13 +11,19 @@ import CustomCard from "../Card/CustomCard";
 import { Grid } from "@mui/material";
 const AboutUsMembersItem = ({ member }) => {
   return (
-      <Grid xs={4}>
-        <CustomCard
-          title={member.name}
-          img={member.image}
-          description={member.description && setCKEditorText(member, "description")}
-        />
-      </Grid>
+    <Grid xs={4}>
+      <CustomCard
+        title={member.name}
+        img={member.image}
+        description={
+          member.description && setCKEditorText(member, "description")
+        }
+        firstSocialLink={member.facebookUrl}
+        firstSocialLinkName="Facebook"
+        secondSocialLink={member.linkedinUrl}
+        secondSocialLinkName="Linkedin"
+      />
+    </Grid>
   );
 };
 
