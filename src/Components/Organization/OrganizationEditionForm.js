@@ -1,6 +1,7 @@
 import { TextInput } from '../Inputs/TextInput';
 import { FileInput } from '../Inputs/FileInput';
 import { TextEditor } from '../Inputs/TextEditor';
+import { Button } from '@mui/material'
 import { validateRequiredValues, regExp, validValue, isValidFile} from '../../Utils/validation';
 import { showError, handleCKEditorChange, changeTouchedState, handleFileChange } from '../../Utils/handlers';
 import { useFormik } from 'formik';
@@ -51,7 +52,7 @@ const OrganizationEditionForm = () => {
                 onChange={(e, editor) => handleCKEditorChange(formik, editor, 'shortDescription')}
                 onBlur={() => changeTouchedState(formik, 'shortDescription')}
                 errorMessage={showError(formik, 'shortDescription')}/>
-            <FileInput btnText="Subir logo" name="logo" color="primary" accept="image/png, image/jpg"
+            <FileInput btnText="Subir logo" name="logo" color="buttoncreatenews" accept="image/png, image/jpg"
                 value={formik.values.logo}
                 onChange={(e) => handleFileChange(formik, e.target.files, 'logo')}
                 errorMessage={showError(formik, 'logo')}/>
@@ -70,7 +71,7 @@ const OrganizationEditionForm = () => {
                 onChange={formik.handleChange} placeholder="Ingrese la url"
                 onBlur={formik.handleBlur}
                 errorMessage={showError(formik, 'instagram')}/>
-            <button className="submit-btn" type="submit">Guardar cambios</button>
+            <Button variant="contained" color="buttoncreatenews" className="submit-btn" type="submit">Guardar cambios</Button>
         </form>
     )
 }
