@@ -34,7 +34,7 @@ const VideoPlayer = ({video}) => {
             <ReactPlayer
                 url={video}
                 width='100%'
-                height='100%'
+                height='350px'
                 muted={muted}
                 volume={volume}
                 playing={isPlay}
