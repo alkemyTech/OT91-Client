@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { Container, IconButton } from "@mui/material";
 import {ArrowLeft} from '@mui/icons-material';
 import {ArrowRight} from '@mui/icons-material';
 const cards = 9;
@@ -36,10 +37,10 @@ return (
             <div className='paginacion_activities'>
                 {showItemsListComponent(currentItems)}
             </div>
-          <div className='paginacion_buttons'>
-                <button className='paginacion_btn' onClick={()=>prev()}><ArrowLeft/></button>
-                <button className='paginacion_btn' onClick={()=>next()}><ArrowRight/></button>
-          </div>
+          <Container sx={{display:'flex', justifyContent:'center', gap:'10px'}}>
+                <IconButton size="small" sx={{border:'1px solid #29527b'}} onClick={()=>prev()}><ArrowLeft fontSize="large"/></IconButton>
+                <IconButton size="small" sx={{border:'1px solid #29527b'}} onClick={()=>next()}><ArrowRight fontSize="large"/></IconButton>
+          </Container>
         </div>
     )
 };

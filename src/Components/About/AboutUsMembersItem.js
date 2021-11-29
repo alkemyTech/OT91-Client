@@ -6,35 +6,25 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
+import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
+import CustomCard from "../Card/CustomCard";
+import { Grid } from "@mui/material";
 const AboutUsMembersItem = ({ member }) => {
   return (
-    <>
-      <Card key={member.id}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={member.image}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {member.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {member.description}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Link href={member.facebookUrl} variant="body2">
-            Facebook
-          </Link>
-          <Link href={member.linkedinUrl} variant="body2">
-            LinkedIn
-          </Link>
-        </CardActions>
-      </Card>
-    </>
+    <Grid xs={4}>
+      <CustomCard
+        sx={{ fontSize: 40, textDecoration: "none", color:"#8dcaff"}}
+        title={member.name}
+        img={member.image}
+        description={
+          member.description && setCKEditorText(member, "description")
+        }
+        firstSocialLink={member.facebookUrl}
+        firstSocialLinkName="Facebook"
+        secondSocialLink={member.linkedinUrl}
+        secondSocialLinkName="Linkedin"
+      />
+    </Grid>
   );
 };
 

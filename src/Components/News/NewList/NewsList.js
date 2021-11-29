@@ -1,63 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "../../../Styles/CardStyle.css";
 import { listHasValues } from "../../../Utils/validation";
-import Title from "../../Title/Title"
+import Title from "../../Title/Title";
 import CustomCard from "../../Card/CustomCard";
 import { Container } from "@mui/material";
 import VideoCard from "../../Card/VideoCard";
-import LoadingSpinner from "../../../Utils/loadingSpinner";
-import {videoLastEvent} from './videoEvent';
-import { Link } from "react-router-dom";
-import * as newsActions from "../../../app/NewsReducer/newsReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { videoLastEvent } from "./videoEvent";
+import CardSection from "../../Home/CardsSection";
+import { getAll } from "../../../Services/newsServices";
+import novedades from "../../../Assets/TitleImages/novedades.jpg";
 
 const NewsList = () => {
-  const [loading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
-  const allNews = useSelector((state) => state.news.data);
-
-  useEffect(() => {
-    dispatch(newsActions.getAll());
-  }, []);
-
-  useEffect(() => {
-    allNews && setIsLoading(false);
-  }, [allNews]);
-
-  const newsListHasValues = listHasValues(allNews);
   return (
-    <Container className="ContainerList">
-      {loading ? (
-        <div className="spinner">
-          <LoadingSpinner />
-        </div>
-      ) : (
-        <div>
-          <Title title="Novedades" />
-          <ul className="list-grid-container ">
-            {newsListHasValues ? (
-              allNews.map((news) => {
-                return (
-                  <CustomCard
-                    key={news.id}
-                    title={news.name}
-                    img={news.image}
-                    description={news.content}
-                  />
-                );
-              })
-            ) : (
-              <p>No hay novedades</p>
-            )}
-          </ul>
-          <VideoCard
-            title={videoLastEvent.name}
-            video={videoLastEvent.video}
-            description={videoLastEvent.content}
-        />
-        </div>
-      )}
-    </Container>
+    <div>
+      <Title title="Novedades" image={novedades} />
+      <CardSection getInformation={getAll} clickeable={{to:'/novedades'}} />
+      <VideoCard
+        title={videoLastEvent.name}
+        video={videoLastEvent.video}
+        description={videoLastEvent.content}
+      />
+    </div>
   );
 };
 
