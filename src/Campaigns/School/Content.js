@@ -28,7 +28,7 @@ const Content = () => {
   ]
 
   return (
-    <Container width={false} sx={{display:'flex', alignItems:'center', flexDirection:'column', position:'relative', marginTop:'20px', marginBottom:{lg:'150px'}}}>
+    <Container width={false} sx={{display:'flex', alignItems:'center', flexDirection:'column', position:'relative', marginTop:'50px', marginBottom:{lg:'250px'}}}>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems:'center', textAlign:'center', zIndex:'10', gap:'15px'}}>
         <Box sx={{display:'flex', flexDirection:{xs:'column', md:'row'}, justifyContent:'center', maxWidth:{lg:'70%'}, flexWrap:'wrap', gap:'10px'}}>
           <Typography variant="h5">{campaignDate.toLocaleString('en-GB').slice(0, -3)}hs</Typography>

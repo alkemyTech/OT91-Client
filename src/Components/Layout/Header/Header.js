@@ -1,18 +1,28 @@
 import { Box, Button, List, Divider, SwipeableDrawer, Container, IconButton } from '@mui/material';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../../../Assets/Logo/logo.png'
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useEffect} from 'react';
 import NavLinksList from './NavLinksList';
 import { navLinks, manageLinkActivation } from './HeaderLinks';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLogged = false;
+  const [isLogged,setIsLogged] = useState(false);
+  const [userName,setUserName] = useState();
+  const logout = () =>{
+    localStorage.clear();
+    setIsLogged(false)
+  }
   manageLinkActivation(window.location.pathname);
+  useEffect(()=>{
+    setUserName(localStorage.getItem('userName'))
+    if(userName){
+      setIsLogged(true)
+    }
+  },[userName])
   return (
     <Container maxWidth={false} sx={{display: 'flex',  backgroundColor:"#28527A",justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
       <Box sx={{display:'flex', gap:'20px', color:"white"}}>
@@ -20,12 +30,21 @@ const Header = () => {
         <NavLinksList horizontal navLinks={navLinks} isLogged={isLogged}/>
       </Box>
         <List sx={{display:{xs:'none', lg:'flex'}, gap:'10px'}}>
-          <Button component={Link} to="/login" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>
-            LOGIN
-          </Button>
-          <Button component={Link} to="/register"  color="buttonregistrate" variant="contained" sx={{alignSelf: 'center'}}>
-            Registrate
-          </Button>
+          {isLogged
+          ?<>
+            <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>{userName}</Button>
+            <Button component={Link} to="/backoffice" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>Backoffice</Button>
+            <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}} onClick={()=>logout()}>Cerrar sesión</Button>
+          </>
+          :<>
+            <Button component={Link} to="/login" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>
+              LOGIN
+            </Button>
+            <Button component={Link} to="/register"  color="buttonregistrate" variant="contained" sx={{alignSelf: 'center'}}>
+              Registrate
+            </Button>
+          </>
+          }
         </List>
       <IconButton onClick={() => setIsOpen(true)} aria-label="menu" size="large" sx={{display: {xs:'inline-block', lg:'none'}}}>
           <MenuIcon/>

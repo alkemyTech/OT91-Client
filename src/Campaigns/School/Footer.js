@@ -9,8 +9,8 @@ import Logo from "../../Assets/Logo/logo.png";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
+  const linkStyle = { textDecoration: "none", color:"white", };
   const socialMediaIconStyle = { fontSize: 40 };
-  const linkStyle = { textDecoration: "none" };
   const socialMediaList = [
     { name: "Instagram", icon: <InstagramIcon sx={socialMediaIconStyle} /> },
     { name: "Facebook", icon: <FacebookIcon sx={socialMediaIconStyle} /> },
@@ -44,6 +44,8 @@ export const Footer = () => {
         alignItems: { xs: "center" },
         justifyContent: { xs: "space-evenly" },
         flexDirection: { xs: "column" },
+        backgroundColor: "#28527a",
+        color:"white"
       }}
     >
       <Container
@@ -58,7 +60,7 @@ export const Footer = () => {
             display: { xs: "flex" },
           }}
         >
-          <img src={Logo} alt="Logo de la ONG" />
+          <img width="110px" src={Logo} alt="Logo de la ONG" />
         </Box>
 
         <Box
@@ -81,14 +83,14 @@ export const Footer = () => {
           width: { xs: "100%" },
         }}
       >
-        <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-          <Link to="" style={linkStyle}>
+        <Box sx={{ display: { xs: "none", sm: "flex" }, marginBottom:'15px' }}>
+          <Link to="/" style={linkStyle}>
             Visita nuestra página
           </Link>
         </Box>
         <Box sx={{ display: { xs: "none", xl: "flex" } }}>
-          <Link to="" style={linkStyle}>
-            Campaña Juguetes
+          <Link to="/school-campaign" style={linkStyle}>
+            Campaña Escolar
           </Link>
         </Box>
       </Box>

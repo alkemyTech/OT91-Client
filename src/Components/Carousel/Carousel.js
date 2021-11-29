@@ -49,7 +49,7 @@ const Carousel = () => {
               style={{
                 backgroundImage: `url(${item.image})`,
                 backgroundPosition: "center",
-                height: "450px",
+                height: "580px",
                 backgroundRepeat: "no-repeat",
                 boxSizing: "border-box",
               }}

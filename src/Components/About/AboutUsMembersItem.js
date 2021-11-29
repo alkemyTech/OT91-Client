@@ -13,6 +13,7 @@ const AboutUsMembersItem = ({ member }) => {
   return (
     <Grid xs={4}>
       <CustomCard
+       className="CardTransition"
         sx={{ fontSize: 40, textDecoration: "none", color:"#8dcaff"}}
         title={member.name}
         img={member.image}

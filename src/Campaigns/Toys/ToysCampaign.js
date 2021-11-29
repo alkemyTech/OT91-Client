@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from './Header';
 import Slider from './Slider';
 import Content from './Content';
 import Footer from './Footer';
+import Header from "../../Components/Layout/Header/Header"
 
 const ToysCampaign = () => {
   return (
     <>
-      <Header />
+    <Header/>
       <Slider />
       <Content />
       <Footer />

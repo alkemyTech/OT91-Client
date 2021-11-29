@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import { useParams } from "react-router";
 import NewsTitle from "./NewsTittle";
-import { Box } from "@mui/material";
 import { getNewById } from "../../../Services/newsServices";
 import LoadingSpinner from "../../../Utils/loadingSpinner";
 import "../../../Styles/CardStyle.css";
@@ -13,6 +12,7 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
+  Box
 } from "@mui/material";
 
 const Title = lazy(
@@ -43,16 +43,20 @@ const NewsDetailLayout = () => {
 
   return (
     <div>
-      {loading ? (
-        <div className="spinner">
+      {loading
+      ? <Box className="spinner" sx={{display:'flex',flexDirection:'row',justifyContent:'center',zIndex:99,bgcolor:'transparent'}}>
           <LoadingSpinner />
-        </div>
-      ) : (
+        </Box>
+       :
         <div>
           <Card className="cardStyle">
             <CardActionArea>
               <CardMedia>
-                <Suspense fallback={<LoadingSpinner />}>
+                <Suspense fallback={
+                  <Box className="spinner" sx={{display:'flex',flexDirection:'row',justifyContent:'center',zIndex:99,bgcolor:'transparent'}}>
+                    <LoadingSpinner />
+                  </Box>
+                }>
                   <Title title={news.name} image={news.image} key={news.id} />
                 </Suspense>
               </CardMedia>
@@ -62,7 +66,7 @@ const NewsDetailLayout = () => {
             </CardActionArea>
           </Card>
         </div>
-      )}
+      }
     </div>
   );
 };

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import EditHomeItem from "./EditHomeItem";
 import { getSlides } from "../../../Services/slidesService";
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow} from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import "../../FormStyles.css";
 import Swal from "sweetalert2";
 
@@ -13,7 +20,7 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
 
   useEffect(() => {
     getSlides()
-      .then((response) => setSlides(response.data.data))
+      .then((response) => setSlides(response))
       .catch((err) => {
         console.log(err);
       });

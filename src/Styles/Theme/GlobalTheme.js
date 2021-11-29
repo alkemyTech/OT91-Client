@@ -1,15 +1,18 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 export const tema = createTheme({
   palette: {
     boton: {
-      main: '#334257',
+      main: "#28527a",
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+    lightBotons: {
+      main: "#ffffff",
     },
   },
 });
