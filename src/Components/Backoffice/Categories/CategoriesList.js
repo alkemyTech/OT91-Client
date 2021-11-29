@@ -25,6 +25,7 @@ const CategoriesList = () => {
 
   return (
     <>
+     <TitleBackoffice title={"Edición de Categorías"} />
       <Link to="/backoffice/categorías/create" style={linkStyle}>
         Create a New Category
       </Link>

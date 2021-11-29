@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {NewsTableRows} from '../../News/NewsTableRows';
 import {Table,TableBody,TableCell,TableContainer,TableHead,Button,TableRow} from "@mui/material";
-
+import TitleBackoffice from '../TitleBackoffice'
 const ActivitiesTable = () => {
   const history = useHistory();
   const { activities: dataActivity } = useSelector(state => state.activities);
@@ -25,6 +25,7 @@ const ActivitiesTable = () => {
 
   return (
     <>
+     <TitleBackoffice title={"Edición de Actividades"} />
     <Link
         to="/backoffice/activities/create"
         style={{ textDecoration: "none" }}
