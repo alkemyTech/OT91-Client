@@ -8,6 +8,7 @@ import "../../../Styles/BackofficeLayout.css";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import { Fade, Zoom } from "react-awesome-reveal";
+import TitleBackoffice from "../TitleBackoffice";
 const BackofficeLayout = () => {
   const BackofficeCategories = [
     {
@@ -74,6 +75,7 @@ const BackofficeLayout = () => {
   ];
   return (
     <div>
+      <TitleBackoffice title={"Backoffice home"} />
       <Zoom duration="500" cascade>
         <Grid
           sx={{

@@ -22,9 +22,14 @@
   border-radius: 5px;
   padding: 25px;
 }
-
+.css-v5yj2f-MuiButtonBase-root-MuiButton-root {
+  background-color: #28527a !important;
+  border: 0.5px solid white !important;
+  height: 40px;
+}
 .TableRowModify tr th {
   margin: 10px;
+  height: 80px;
   background-color: #28527a !important;
 }
 .TableCell {
@@ -39,13 +44,13 @@ th {
   border-bottom: 1px solid black;
   color: rgb(14, 13, 13) !important;
   font-weight: 500 !important;
-  padding: 7px !important;
+  padding: 7px 20px !important;
   text-align: center;
   font-size: 1rem !important;
 }
 .TableFinal {
   margin-top: 10px;
-  width: 95% !important;
+  width: 90% !important;
   display: flex;
   justify-content: center;
   position: relative;
@@ -55,6 +60,7 @@ th {
   display: flex;
   justify-content: center;
   width: 100% !important;
+  margin-bottom: 100px !important;
 }
 
 .activityImageContainer td {
