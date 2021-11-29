@@ -16,7 +16,7 @@ const CustomVideoPlayerControls = ({playing,volume,currentSeek,handlePlay,handle
             container
             direction='row'
             alignItems='center'
-            justify='center'
+            justifyContent='space-between'
         >
            { !playing ? (<IconButton onClick={handlePlay}>
                 <PlayArrow fontSize='inherit'/>
@@ -25,7 +25,17 @@ const CustomVideoPlayerControls = ({playing,volume,currentSeek,handlePlay,handle
                 <Pause fontSize='inherit'/>
             </IconButton>)
             }
-            <div>
+            <div style={{width:'72%'}}>
+                <input
+                    type='range'
+                    min={0}
+                    max={durationOfVideo}
+                    value={currentSeek}
+                    onInput={(e)=>handleSeekChange(e)}
+                    style={{width:'100%'}}
+                />
+            </div>
+            <div style={{display:'flex', alignItems:'center'}}>
                 <div>
                     {
                         (volume) != 0 ? volume > 50 ? <VolumeUp/> : <VolumeDown/> : <VolumeOff/>
@@ -37,15 +47,6 @@ const CustomVideoPlayerControls = ({playing,volume,currentSeek,handlePlay,handle
                     max={100}
                     value={volume}
                     onInput={(e)=>handleVolumeChange(e)}
-                />
-            </div>
-            <div>
-                <input
-                    type='range'
-                    min={0}
-                    max={durationOfVideo}
-                    value={currentSeek}
-                    onInput={(e)=>handleSeekChange(e)}
                 />
             </div>
         </Grid>

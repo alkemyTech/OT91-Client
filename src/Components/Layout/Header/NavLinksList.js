@@ -11,10 +11,10 @@ const NavLinksList = ({navLinks, isLogged, horizontal}) => {
                 {navLinks.map((navLink) => (
                     navLink.private ? (isLogged ??
                 <ListItem component={Link} to={navLink.link} sx={{minWidth:'fit-content'}} button key={navLink.text}>
-                    <ListItemText primary={navLink.text} sx={navLink.active ? {borderBottom:'2px solid #1a76d2'} : {}}/>
+                    <ListItemText primary={navLink.text} sx={navLink.active ? {borderBottom:'2px solid #ec4c4c'} : {}}/>
                 </ListItem>)
                 : <ListItem component={Link} to={navLink.link} sx={{minWidth:'fit-content'}} button key={navLink.text}>
-                    <ListItemText primary={navLink.text} sx={navLink.active ? {borderBottom:'2px solid #1a76d2'} : {}}/>
+                    <ListItemText primary={navLink.text} sx={navLink.active ? {borderBottom:'2px solid #ec4c4c'} : {}}/>
                   </ListItem>
                 ))}
             </List>

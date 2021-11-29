@@ -20,8 +20,8 @@
 #tweet-embed {
   display: flex;
   width: 100vw;
-  margin-top: 130px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .linkedin-badge-container {
   display: flex;
@@ -31,3 +31,12 @@
   padding: 20px;
   background-color: #d4cac8;
 }
+.ContenedorTweets{
+  background: url(../Assets/waves/wave.svg) no-repeat bottom center;
+}
+.css-1wmwz36-MuiContainer-root{
+  margin-bottom: 0 !important;
+}
+/* .ContenedorCards{
+  background: url(../Assets/waves/wavenosotroscards.svg) no-repeat  center;
+} */

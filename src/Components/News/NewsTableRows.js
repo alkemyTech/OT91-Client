@@ -14,7 +14,7 @@ const NewsTableRows = () => {
 
   const onEdit = (id) => {
     dispatch(newsActions.getById(id)).then(() => {
-      history.push(`/edit-news/${id}`);
+      history.push(`/backoffice/news/edit/${id}`);
     });
   };
   const onDelete = (id) => dispatch(newsActions.deletebyId(id));
@@ -22,7 +22,7 @@ const NewsTableRows = () => {
   const news = useSelector((state) => state.news.data);
 
   useEffect(() => {
-    news && dispatch(newsActions.getAll());
+    dispatch(newsActions.getAll());
   }, []);
 
   return (
