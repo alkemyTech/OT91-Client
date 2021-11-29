@@ -23,25 +23,27 @@
   padding: 25px;
 }
 
-.TableRowModify tr {
+.TableRowModify tr th {
   margin: 10px;
-  background-color: #476072 !important;
+  background-color: #28527a !important;
 }
 .TableCell {
   color: rgb(255, 255, 255) !important;
-  font-weight: 800 !important;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
 }
 
-td,th {
-  background-color: #233f474f !important;
+td,
+th {
+  background-color: #d8e0e24f !important;
   border-bottom: 1px solid black;
-  color:rgb(14, 13, 13) !important;
+  color: rgb(14, 13, 13) !important;
   font-weight: 500 !important;
-  padding: 15px;
+  padding: 7px !important;
   text-align: center;
-  
+  font-size: 1rem !important;
 }
-.TableFinal{
+.TableFinal {
   margin-top: 10px;
   width: 95% !important;
   display: flex;
@@ -49,11 +51,10 @@ td,th {
   position: relative;
 }
 
-.TableContainer{
+.TableContainer {
   display: flex;
   justify-content: center;
   width: 100% !important;
-  
 }
 
 .activityImageContainer td {
@@ -74,35 +75,38 @@ td,th {
   margin: 5px 0px;
   border-radius: 5px;
   cursor: pointer;
-  
 }
-.CardTransition:hover{
-  border-radius: 10%;
-  box-shadow: 0.6rem 0.6rem 0.6rem 0.6rem rgba(165, 146, 146, 0.404);
-  transition:all 0.5s ease-in-out !important;
+.CardTransition:hover {
+  border-radius: 2%;
+  box-shadow: 0.6rem 0.6rem 0.6rem 0.6rem rgba(138, 137, 137, 0.404);
+  transition: all 0.5s ease-in-out !important;
   transform: rotateX(20deg) !important;
   transform: rotateY(5deg) !important;
 }
-.CardTransition{
-  transition:all 1s ease-in-out !important;
+.CardTransition {
+  transition: all 1s ease-in-out !important;
 }
-.TableTitles{
-  width:1900px;
+.TableTitles {
+  width: 1900px;
   height: 60px;
   justify-content: center;
   align-items: center;
   display: flex;
-  margin:0 auto;
+  margin: 0 auto;
 }
-.TableTitles h1{
-  color:black;
+.TableTitles h1 {
+  color: black;
 }
-.TableLinks{
+.TableLinks {
   display: flex;
 }
-.TableLinks button{
-  height:40px;
+.TableLinks button {
+  height: 40px;
   margin-left: 20px;
   text-decoration: none;
-  color:white;
+  color: white;
+}
+.table-row-image {
+  max-height: 70px !important;
+  width: 100px !important;
 }

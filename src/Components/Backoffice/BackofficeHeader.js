@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import { styled, useTheme } from "@mui/material/styles";
 import {
   Box,
   Drawer,
@@ -12,15 +12,15 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Main } from '../../Utils/MUI Components/Main';
-import { AppBar } from '../../Utils/MUI Components/AppBar';
-import { DrawerHeader } from '../../Utils/MUI Components/DrawerHeader';
-import { tema } from '../../Styles/Theme/GlobalTheme';
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Main } from "../../Utils/MUI Components/Main";
+import { AppBar } from "../../Utils/MUI Components/AppBar";
+import { DrawerHeader } from "../../Utils/MUI Components/DrawerHeader";
+import { tema } from "../../Styles/Theme/GlobalTheme";
 
 const BackofficeHeader = () => {
   const [open, setOpen] = useState(false);
@@ -36,16 +36,16 @@ const BackofficeHeader = () => {
   };
   return (
     <ThemeProvider theme={tema}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar color="boton" position="fixed" open={open}>
           <Toolbar>
             <IconButton
-              color="inherit"
+              color="lightBotons"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+              sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
               <MenuIcon />
             </IconButton>
@@ -58,9 +58,9 @@ const BackofficeHeader = () => {
           sx={{
             width: 240,
             flexShrink: 0,
-            '& .MuiDrawer-paper': {
+            "& .MuiDrawer-paper": {
               width: 240,
-              boxSizing: 'border-box',
+              boxSizing: "border-box",
             },
           }}
           variant="persistent"
@@ -69,13 +69,16 @@ const BackofficeHeader = () => {
         >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
             </IconButton>
           </DrawerHeader>
           <Divider />
-            <List sx={{ ml:1}}>
-            </List>
-          <Divider/>
+          <List sx={{ ml: 1 }}></List>
+          <Divider />
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
