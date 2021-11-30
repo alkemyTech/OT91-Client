@@ -19,12 +19,14 @@ import TestimonialForm from "../Testimonials/TestimonialsForm";
 import UserForm from "../Users/UsersForm";
 import MembersForm from "../Members/MembersForm";
 import ProjectsForm from "../Projects/ProjectsForm";
+import BackofficeHeader from './BackofficeHeader';
 
 const BackOfficeRouter = () => {
   const path = "/backoffice"
   return (
     <>
       <Router>
+        <BackofficeHeader/>
         <AnimatedSwitch
           atEnter={{opacity:0}}
           atLeave={{opacity:0}}

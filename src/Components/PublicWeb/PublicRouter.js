@@ -20,8 +20,8 @@ const PublicRouter = () => {
   return (
     <>
       <AnimatedSwitch
-        atEnter={{ opacity: 1 }}
-        atLeave={{ opacity: 1 }}
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
         atActive={{ opacity: 1 }}
       >
         <Route path="/school-campaign" component={SchoolCampaign} />
