@@ -1,41 +1,111 @@
-import React, { useState } from 'react';
-import '../../Components/FormStyles.css';
-
+import React, { useState, useEffect } from "react";
+import "../../Components/FormStyles.css";
+import { getCategories } from "../../Services/categoriesServices";
+import InputEditor from "../Inputs/InputEditor";
+import { setCKEditorText } from "../common/ckEditor/setCKEditorText";
+import { URLFileFormater, CKEditorTextFormater } from "../../Utils/formatters";
+import { handleNewsImputChange } from "../../Utils/handlers";
+import { useDispatch, useSelector } from "react-redux";
+import * as newsActions from "../../app/NewsReducer/newsReducer";
+import { useHistory, useParams } from "react-router";
+import InputImg from "../Inputs/InputImg";
+import { right } from "@popperjs/core";
 const NewsForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        title: '',
-        content: '',
-        category: ''
-    });
+  const currentNews = useSelector((state) => state.news.currentNews);
+  const { newsid } = useParams();
+  const [news, setNews] = useState(currentNews);
+  const [categories, setCategories] = useState([]);
+  const [categorySelect, setCategorySelect] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    const handleChange = (e) => {
-        if(e.target.name === 'title'){
-            setInitialValues({...initialValues, title: e.target.value})
-        } if(e.target.name === 'content'){
-            setInitialValues({...initialValues, content: e.target.value})
-        } if(e.target.name === 'category') {
-            setInitialValues({...initialValues, category: e.target.value})
-        }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="title" value={initialValues.title || ''} onChange={handleChange}></input>
-            <input className="input-field" type="text" name="content" value={initialValues.content || ''} onChange={handleChange}></input>
-            <select className="select-field" name="category" value={initialValues.category || ''} onChange={handleChange}>
-                <option value="" disabled>Select category</option>
-                <option value="1">Demo option 1</option>
-                <option value="2">Demo option 2</option>
-                <option value="3">Demo option 3</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
+  const handleChange = (e) =>
+    handleNewsImputChange(
+      e,
+      news,
+      setNews,
+      setCategorySelect,
+      categories,
+      "name",
+      "content",
+      "image",
+      "category_id"
     );
-}
- 
+  // handleNewsImputChange(e,news,setNews,setCategorySelect,categories,"name","content","image","category_id");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendNews();
+  };
+
+  const sendNews = async () => {
+    dispatch(newsActions.createOrUpdate({ newsid, news }));
+    dispatch(newsActions.cleanCurrentState());
+    setTimeout(() => {
+      history.push("/backoffice/news");
+    }, 1500);
+  };
+
+  useEffect(async () => {
+    const { data } = await getCategories();
+    setCategories(data);
+  }, []);
+
+  useEffect(() => {
+    newsid && dispatch(newsActions.getById(newsid));
+    setNews(currentNews);
+  }, [newsid]);
+  useEffect(() => {}, [news.image]);
+  return (
+    <form className="form-container" onSubmit={handleSubmit}>
+      <label htmlFor="name">Title</label>
+      <input
+        className="input-field"
+        type="text"
+        name="name"
+        value={news.name || ""}
+        onChange={handleChange}
+        minLength="5"
+        required
+      ></input>
+      <InputEditor news={news} setNews={setNews} />
+      <label htmlFor="category_id">Category</label>
+      <select
+        className="select-field"
+        name="category_id"
+        value={categorySelect || ""}
+        onChange={handleChange}
+        required
+      >
+        <option value="" disabled>
+          Select Category
+        </option>
+        {categories?.map((category) => {
+          return (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          );
+        })}
+      </select>
+      <input
+        className="input-image"
+        type="file"
+        accept="image/jpeg, image/jpg, image/png"
+        id="image"
+        name="image"
+        value={undefined}
+        onChange={handleChange}
+        style={{ color: "white" }}
+      />
+      {news.image && (
+        <img style={{ width: "100px" }} src={news.image} alt="img" />
+      )}
+
+      <button className="submit-btn" type="submit">
+        Send
+      </button>
+    </form>
+  );
+};
+
 export default NewsForm;

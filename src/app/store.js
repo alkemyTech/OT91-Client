@@ -1,8 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import activitiesReducer from "./activitiesReducer/activitiesReducer";
+import authReducer from "./authReducer/authReducer";
+import userReducer from "./usersReducer/userReducer";
+import membersReducer from "./MembersReducer/membersReducer";
+import newsReducer from "./NewsReducer/newsReducer";
+import aboutUsReducer from "./aboutUsReducer/aboutUsReducer";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    authorization: authReducer,
+    users: userReducer,
+    members: membersReducer,
+    activities: activitiesReducer,
+    news: newsReducer,
+    aboutUs: aboutUsReducer,
   },
 });
+
+export default store;
