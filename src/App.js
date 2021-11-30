@@ -10,6 +10,8 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import { createTheme, ThemeProvider, } from '@mui/material/styles';
 import { GlobalTheme } from "./Styles/Theme"
 import PublicRouter from "./Components/PublicWeb/PublicRouter";
+import UsersForm from './Components/Users/UsersForm'
+import PublicRoute from './Components/PublicWeb/PublicRoute';
 function App() {
 
   return (
@@ -22,7 +24,8 @@ function App() {
               atLeave={{opacity:1}}
               atActive={{opacity:1}}
             >
-              <Route path="/login" component={LoginForm} />
+              <PublicRoute path="/login" component={LoginForm} />
+              <PublicRoute path="/register" component={UsersForm}/>
               <PrivateRoute path="/backoffice" component={BackofficeRouter} />
               <PublicRouter/>
             </AnimatedSwitch>

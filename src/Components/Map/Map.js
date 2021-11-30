@@ -3,9 +3,9 @@ import axios from "axios";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const Map = ({ address, coordinates }) => {
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+const Map = ({ address }) => {
+  const [latitude, setLatitude] = useState(-34.55881726737178);
+  const [longitude, setLongitude] = useState(-58.47476996280374);
 
   useEffect(async () => {
     if (address) {
@@ -24,14 +24,11 @@ const Map = ({ address, coordinates }) => {
       } catch (err) {
         console.log(err);
       }
-    } else {
-      setLatitude(coordinates[0]);
-      setLongitude(coordinates[1]);
     }
-  }, [address, coordinates]);
+  }, [address]);
 
   return (
-    <div style={{ height: "60vh", width: "620px", padding:"20px" }}>
+    <div style={{ height: "60vh", width: "620px", padding: "20px" }}>
       <GoogleMap
         mapContainerStyle={{
           height: "100%",
@@ -39,11 +36,11 @@ const Map = ({ address, coordinates }) => {
         }}
         zoom={15}
         center={{
-          lat: latitude || 40.6643,
-          lng: longitude || -73.9385,
+          lat: latitude,
+          lng: longitude,
         }}
       >
-        <Marker position={{ lat: latitude, lng: longitude  }} />
+        <Marker position={{ lat: latitude, lng: longitude }} />
       </GoogleMap>
     </div>
   );
