@@ -1,5 +1,5 @@
 import React from "react";
-import {Button,TableCell,TableRow} from "@mui/material";
+import { Button, TableCell, TableRow } from "@mui/material";
 import Swal from "sweetalert2";
 
 const EditHomeItem = ({ item, slidesIds, setSlidesIds }) => {
@@ -23,6 +23,7 @@ const EditHomeItem = ({ item, slidesIds, setSlidesIds }) => {
         </TableCell>
         <TableCell>
           <img
+            style={{ height: "100px" }}
             id="sliderImage"
             name="sliderImage"
             src={item && item.image}

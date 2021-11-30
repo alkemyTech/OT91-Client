@@ -92,6 +92,7 @@
   background-color: lightgrey !important;
   transition: 1s;
 }
-/* .ContenedorCards{
-  background: url(../Assets/waves/wavenosotroscards.svg) no-repeat  center;
-} */
+
+.AnimatedSwitch {
+  min-height: 100vh;
+}
