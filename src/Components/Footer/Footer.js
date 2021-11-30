@@ -18,6 +18,9 @@ const Footer = () => {
   }, []);
 
   return (
+    <>
+    <div className="ContenedorWaveFooter">
+      </div>
     <TableFooter
       sx={{
         display: { xs: "flex" },
@@ -98,6 +101,7 @@ const Footer = () => {
         </Box>
       </Container>
     </TableFooter>
+    </>
   );
 };
 

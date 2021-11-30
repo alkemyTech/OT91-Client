@@ -15,4 +15,12 @@
   letter-spacing: -0.015em;
   color: #000000;
   padding: 200px;
+  height: 20px;
 }
+@media (max-width: 1400px) {
+  .boxStyle{
+    height: 20px;
+
+  }
+  }
+

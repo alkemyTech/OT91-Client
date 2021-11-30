@@ -4,9 +4,11 @@ import { Edit, Delete } from "@mui/icons-material";
 import { formatDate } from "../../Utils/formatters";
 import "../../Styles/Table.css";
 import * as newsActions from "../../app/NewsReducer/newsReducer";
+import { cleanCurrentState } from "../../app/NewsReducer/newsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getById } from "../../Services/newsServices";
+import Swal from "sweetalert2";
 
 const NewsTableRows = () => {
   const dispatch = useDispatch();
@@ -21,8 +23,13 @@ const NewsTableRows = () => {
 
   const news = useSelector((state) => state.news.data);
 
+  const newsDeleted = () => {
+    Swal.fire("Noticia Eliminada");
+  };
+
   useEffect(() => {
     dispatch(newsActions.getAll());
+    dispatch(cleanCurrentState());
   }, []);
 
   return (
@@ -44,7 +51,12 @@ const NewsTableRows = () => {
             <IconButton onClick={() => onEdit(element.id)}>
               <Edit />
             </IconButton>
-            <IconButton onClick={() => onDelete(element.id)}>
+            <IconButton
+              onClick={() => {
+                onDelete(element.id);
+                newsDeleted();
+              }}
+            >
               <Delete />
             </IconButton>
           </TableCell>

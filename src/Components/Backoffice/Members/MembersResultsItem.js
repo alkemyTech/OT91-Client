@@ -1,44 +1,49 @@
-import React from "react";
-import {TableCell,TableRow,Button} from "@mui/material";
+import React, { useEffect } from "react";
+import { TableCell, TableRow, Button, IconButton } from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
+import { formatDate } from "../../../Utils/formatters";
 import { Link } from "react-router-dom";
 import "../../../Styles/TableStyle.css";
+import * as membersActions from "../../../app/MembersReducer/membersReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getMember } from "../../../Services/membersService";
 
 const MembersResultsItem = ({ item }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onEdit = (id) => {
+    dispatch(membersActions.getById(id)).then(() => {
+      history.push(`/backoffice/members/edit/${id}`);
+    });
+  };
+  const onDelete = (id) => dispatch(membersActions.deletebyId(id));
+
+  const members = useSelector((state) => state.members.data);
+
   return (
     <>
-      <TableRow color="buttondelete" key={item.name}>
-        <TableCell color="tablebackground" id="membersName" name="membersName" classNmae="member-name">
+      <TableRow key={item.name}>
+        <TableCell component="th" scope="row">
           {item && item.name}
         </TableCell>
-        <TableCell>
+        <TableCell align="center">
           <img
-            id="membersImage"
-            name="membersImage"
-            className="member-image"
+            className="table-row-image"
             src={item && item.image}
             alt={item && item.name}
             key={item && item.id}
           />
         </TableCell>
-        <TableCell>
-          <Button
-            component={Link}
-            to="/backoffice/members/edit"
-            variant="contained"
-            color="primary"
-            className="member-action"
-            key={item && item.id}
-          >
-            Editar Miembro
-          </Button>
-          <p></p>
-          <Button
-            variant="contained"
-            color="buttondelete"
-            className="member-action"
-          >
-            Eliminar Miembro
-          </Button>
+        <TableCell align="center">{formatDate(new Date())}</TableCell>
+        <TableCell align="center">
+          <IconButton onClick={() => onEdit(item.id)}>
+            <Edit />
+          </IconButton>
+          <IconButton onClick={() => onDelete(item.id)}>
+            <Delete />
+          </IconButton>
         </TableCell>
       </TableRow>
     </>
@@ -46,4 +51,3 @@ const MembersResultsItem = ({ item }) => {
 };
 
 export default MembersResultsItem;
-

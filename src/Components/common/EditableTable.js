@@ -7,8 +7,8 @@ const EditableTable = ({ element, handleEditClick, handleDeleteClick }) => {
       <td>{element.createdAt}</td>
 
       <td>
-          <IconButton onClick={(event) => handleEditClick(event, contact)}><Edit/> </IconButton>
-          <IconButton onClick={() => handleDeleteClick(contact.id)}><Delete/> </IconButton>
+          <IconButton onClick={() => handleEditClick(element.id)}><Edit/> </IconButton>
+          <IconButton onClick={() => handleDeleteClick(element.id)}><Delete/> </IconButton>
       </td>
     </tr>
   )
