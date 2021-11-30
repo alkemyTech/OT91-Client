@@ -59,6 +59,7 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
   return (
     <>
       <form
+        style={{ width: "60%" }}
         id="homeEditForm"
         name="homeEditForm"
         onSubmit={formik.handleSubmit}
