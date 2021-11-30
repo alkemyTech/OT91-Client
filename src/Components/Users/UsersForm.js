@@ -55,15 +55,15 @@ const UserForm = () => {
     }
   };
 
-  const handleclick = () => {
-    setInitialValues({
-      ...initialValues,
-      address: "",
-    });
-    showSuccessAlert("Location deleted");
-    console.log("initialValues en el onclick", initialValues);
-    return true;
-  };
+  // const handleclick = () => {
+  //   setInitialValues({
+  //     ...initialValues,
+  //     address: "",
+  //   });
+  //   showSuccessAlert("Location deleted");
+  //   console.log("initialValues en el onclick", initialValues);
+  //   return true;
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ const UserForm = () => {
         onChange={handleChange}
         placeholder="Street Number Town"
       ></input>
-      <button onClick={handleclick}>Reset your address</button>
+      {/* <button onClick={handleclick}>Reset your address</button> */}
 
       <select
         className="input-field"

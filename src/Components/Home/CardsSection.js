@@ -22,7 +22,8 @@ const CardsSection = ({title, button, getInformation, slices, clickeable}) => {
                 {cardsInfo && cardsInfo.map(card => (
                     <Grid xs={4} >
                         <CustomCard title={card.name} img={card.image} route={clickeable && `${clickeable.to}/${card.id}`}
-                            description={card.content && setCKEditorText(card, "content")}/>
+                            description={(card.content && setCKEditorText(card, "content")) || card.description && setCKEditorText(card, "description")}
+                            lines={card.description && 3}/>
                     </Grid>
                 ))}
             </Grid>

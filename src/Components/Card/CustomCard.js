@@ -23,6 +23,7 @@ const CustomCard = ({
   firstSocialLinkName,
   secondSocialLink,
   secondSocialLinkName,
+  lines
 }) => {
   const { push } = useHistory();
 
@@ -76,7 +77,7 @@ const CustomCard = ({
               display: "-webkit-box",
               overflow: "hidden",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: lines || 2,
             }}
           >
             {description || ""}
