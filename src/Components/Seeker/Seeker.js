@@ -15,7 +15,7 @@ import {
 
 import CustomCard from "../Card/CustomCard";
 import { searchIn } from "../../Services/seekerService";
-
+import { setCKEditorText } from "../../Components/common/ckEditor/setCKEditorText";
 const Seeker = ({ endpointName, minLength }) => {
   const [targetValue, setTargetValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -62,8 +62,12 @@ const Seeker = ({ endpointName, minLength }) => {
               <Grid item xs={6} md={4} key={element.id}>
                 <CustomCard
                   title={element.name}
-                  image={element.image}
-                  description={element.description}
+                  img={element.image}
+                  description={
+                    (element.content && setCKEditorText(element, "content")) ||
+                    (element.description &&
+                      setCKEditorText(element, "description"))
+                  }
                 />
               </Grid>
             ))}
