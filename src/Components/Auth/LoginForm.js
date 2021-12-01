@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import { regExp, validValue } from "../../Utils/validation";
 import "../FormStyles.css";
@@ -9,6 +9,12 @@ import { Alert, Container, Button } from "@mui/material";
 const LoginForm = () => {
   const { push } = useHistory();
   const { email } = regExp;
+
+  const [existsToken, setExistsToken] = useState(false);
+  const token = window.localStorage.getItem("token");
+  useEffect(() => {
+    token && setExistsToken(true);
+  }, []);
 
   const [initialValues, setInitialValues] = useState({
     email: "",
@@ -33,10 +39,13 @@ const LoginForm = () => {
     if (e.target.name === "password") {
       setInitialValues({ ...initialValues, password: e.target.value });
       setHasErrors(false);
-    }}
+    }
+  };
   const loginRequest = async () => {
     try {
-      const {data:{ data }} = await loginUser(initialValues);
+      const {
+        data: { data },
+      } = await loginUser(initialValues);
       setUserName(data.user.name);
       return data;
     } catch (error) {
@@ -47,7 +56,7 @@ const LoginForm = () => {
     e.preventDefault();
     const { token } = await loginRequest();
     localStorage.setItem("token", token);
-    localStorage.setItem('userName','Juan')
+    localStorage.setItem("userName", "Juan");
     setLoading(true);
     setTimeout(() => {
       push("/");
@@ -55,55 +64,61 @@ const LoginForm = () => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <form className="form-container" onSubmit={handleSubmit}>
-        <input
-          className="input-field"
-          type="text"
-          name="email"
-          value={initialValues.name}
-          onChange={handleChange}
-          placeholder="Enter email"
-        ></input>
-        {errors ? (
-          <Container sx={{ display: "flex", justifyContent: "center" }}>
-            <Alert severity="error">{errors}</Alert>
-          </Container>
-        ) : (
-          <p></p>
-        )}
-        <input
-          className="input-field"
-          type="password"
-          name="password"
-          value={initialValues.password}
-          onChange={handlePasswordChange}
-          placeholder="Ingrese su contraseña"
-        />
-        {hasErrors || loading ? (
-          <Button
-            variant="outlined"
-            color="buttondelete"
-            type="submit"
-            disabled
-          >
-            Ingresar
-          </Button>
-        ) : (
-          <Button variant="contained" type="submit">
-            Ingresar
-          </Button>
-        )}
-        {loading && <Alert severity="success">{userName}</Alert>}
-      </form>
-    </div>
+    <>
+      {existsToken ? (
+        <Redirect to="/" />
+      ) : (
+        <div
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <form className="form-container" onSubmit={handleSubmit}>
+            <input
+              className="input-field"
+              type="text"
+              name="email"
+              value={initialValues.name}
+              onChange={handleChange}
+              placeholder="Enter email"
+            ></input>
+            {errors ? (
+              <Container sx={{ display: "flex", justifyContent: "center" }}>
+                <Alert severity="error">{errors}</Alert>
+              </Container>
+            ) : (
+              <p></p>
+            )}
+            <input
+              className="input-field"
+              type="password"
+              name="password"
+              value={initialValues.password}
+              onChange={handlePasswordChange}
+              placeholder="Ingrese su contraseña"
+            />
+            {hasErrors || loading ? (
+              <Button
+                variant="outlined"
+                color="buttondelete"
+                type="submit"
+                disabled
+              >
+                Ingresar
+              </Button>
+            ) : (
+              <Button variant="contained" type="submit">
+                Ingresar
+              </Button>
+            )}
+            {loading && <Alert severity="success">{userName}</Alert>}
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 
