@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { showSuccessAlert } from "../../Utils/alerts";
 import "../FormStyles.css";
 import Map from "../Map/Map";
+import { registerUser } from "../../Services/authService";
 import UsersFormTerms from "./UsersFormTerms";
 
 const UserForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
+    password: "",
     address: "",
     roleId: "",
   });
@@ -38,6 +40,12 @@ const UserForm = () => {
           email: e.target.value,
         });
         break;
+      case "password":
+        setInitialValues({
+          ...initialValues,
+          password: e.target.value,
+        });
+        break;
       case "address":
         setInitialValues({
           ...initialValues,
@@ -55,19 +63,23 @@ const UserForm = () => {
     }
   };
 
-  // const handleclick = () => {
-  //   setInitialValues({
-  //     ...initialValues,
-  //     address: "",
-  //   });
-  //   showSuccessAlert("Location deleted");
-  //   console.log("initialValues en el onclick", initialValues);
-  //   return true;
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(initialValues);
+    registerUser(initialValues)
+      .then((res) => {
+        showSuccessAlert("User created");
+        setInitialValues({
+          name: "",
+          email: "",
+          password: "",
+          address: "",
+          roleId: "",
+        });
+      })
+      .catch((err) => {
+        showSuccessAlert("Error");
+        console.log(err);
+      });
   };
 
   return (
@@ -90,6 +102,15 @@ const UserForm = () => {
         onChange={handleChange}
         placeholder="Email"
       ></input>
+      <label htmlFor="password">Password</label>
+      <input
+        className="input-field"
+        type="password"
+        name="password"
+        value={initialValues.password || ""}
+        onChange={handleChange}
+        placeholder="Password"
+      ></input>
       <label htmlFor="address">Address</label>
       <input
         className="input-field"
@@ -99,8 +120,6 @@ const UserForm = () => {
         onChange={handleChange}
         placeholder="Street Number Town"
       ></input>
-      {/* <button onClick={handleclick}>Reset your address</button> */}
-
       <select
         className="input-field"
         name="roleId"
@@ -113,7 +132,7 @@ const UserForm = () => {
       </select>
       <Map address={initialValues.address} />
       <UsersFormTerms setAcceptTerms={setAcceptTerms} showTerms={showTerms} />
-      <button className="submit-btn" type="submit" disabled={sendButton}>
+      <button className="submit-btn" type="submit">
         Send
       </button>
     </form>
