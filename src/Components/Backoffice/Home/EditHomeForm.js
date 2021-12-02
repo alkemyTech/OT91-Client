@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../../app/SlidesReducer/slidesReducer";
 import { useFormik } from "formik";
 import { Button } from "@mui/material";
 import EditHomeItem from "./EditHomeItem";
-import { getSlides } from "../../../Services/slidesService";
 import {
   Table,
   TableBody,
@@ -15,15 +16,12 @@ import "../../FormStyles.css";
 import Swal from "sweetalert2";
 
 const EditHomeForm = ({ homeEditWelcomeTitle }) => {
-  const [slides, setSlides] = useState([]);
+  const dispatch = useDispatch();
+  const slides = useSelector((state) => state.slides.data);
   const [slidesIds, setSlidesIds] = useState([]);
 
   useEffect(() => {
-    getSlides()
-      .then((response) => setSlides(response))
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(actions.getAll());
   }, []);
 
   const ShowSucessAlert = () => {
@@ -31,7 +29,7 @@ const EditHomeForm = ({ homeEditWelcomeTitle }) => {
   };
 
   const showSlidesEditionForm = () =>
-    slides.map((slide) => (
+    slides?.map((slide) => (
       <EditHomeItem
         item={slide}
         slidesIds={slidesIds}
