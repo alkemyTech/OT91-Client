@@ -1,25 +1,21 @@
-import React, { useEffect } from "react";
-import { TableCell, TableRow, Button, IconButton } from "@mui/material";
+import React from "react";
+import { TableCell, TableRow, IconButton } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { formatDate } from "../../../Utils/formatters";
-import { Link } from "react-router-dom";
 import "../../../Styles/TableStyle.css";
 import * as membersActions from "../../../app/MembersReducer/membersReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getMember } from "../../../Services/membersService";
 
 const MembersResultsItem = ({ item }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const onEdit = (id) => {
     dispatch(membersActions.getById(id)).then(() => {
       history.push(`/backoffice/members/edit/${id}`);
     });
   };
   const onDelete = (id) => dispatch(membersActions.deletebyId(id));
-
   const members = useSelector((state) => state.members.data);
 
   return (
