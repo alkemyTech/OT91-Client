@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../app/SlidesReducer/slidesReducer";
 import { Box } from "@mui/material";
-import { getImagesSlides } from "../../Services/slidesService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import LoadingSpinner from "../../Utils/loadingSpinner";
 import SwiperCore, {
