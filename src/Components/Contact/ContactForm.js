@@ -5,7 +5,8 @@ import "../FormStyles.css";
 import GenericInput from "../inputsForms/GenericInput";
 import { createContact } from "../../Services/contactSerive";
 import { getOrganizationInformation } from "../../Services/OrganizationInformation";
-import Map from "../Map/Map";
+import Map from "./Map";
+import { showErrorAlert } from "../../Utils/alerts";
 
 const validate = (values) => {
   const errors = {};
@@ -28,7 +29,6 @@ const ContactForm = () => {
     { type: "number", english: "phone", spanish: "Teléfono" },
     { type: "text", english: "message", spanish: "Mensaje" },
   ];
-
   const formInitialValues = {
     name: "",
     email: "",
@@ -43,9 +43,9 @@ const ContactForm = () => {
   });
 
   useEffect(() => {
-    getOrganizationInformation().then((response) => {
-      setCoordinates(JSON.parse(response.data.address));
-    });
+    getOrganizationInformation()
+      .then((response) => setCoordinates(JSON.parse(response.data.address)))
+      .catch(error => showErrorAlert(error.message))
   }, []);
   return (
     <form className="form-container" onSubmit={formik.handleSubmit}>
@@ -62,7 +62,7 @@ const ContactForm = () => {
           isTouched={formik.touched[inputValues.english]}
         />
       ))}
-      <Map coordinates={coordinates} />
+      {coordinates[0] && <Map position={coordinates} />}
       <button className="submit-btn" type="submit">
         Enviar
       </button>
