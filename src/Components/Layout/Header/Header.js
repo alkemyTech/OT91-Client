@@ -7,22 +7,35 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NavLinksList from './NavLinksList';
 import { navLinks, manageLinkActivation } from './HeaderLinks';
+import { getUserRole } from "../../../Services/authService";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogged,setIsLogged] = useState(false);
   const [userName,setUserName] = useState();
+  const [userRole, setUserRole] = useState("user");
   const logout = () =>{
     localStorage.clear();
     setIsLogged(false)
   }
   manageLinkActivation(window.location.pathname);
-  useEffect(()=>{
-    setUserName(localStorage.getItem('userName'))
-    if(userName){
-      setIsLogged(true)
+
+  const token = localStorage.getItem("token");
+  const getRole = async () => {
+    return await getUserRole().then((res) => setUserRole(res));
+  };
+  useEffect(() => {
+    token && getRole();
+  }, [token]);
+
+  useEffect(() => {
+    setUserName(localStorage.getItem("userName"));
+    if (userName) {
+      setIsLogged(true);
     }
-  },[userName])
+    console.log(token);
+  }, [userName]);
+
   return (
     <Container maxWidth={false} sx={{display: 'flex',  backgroundColor:"#28527A",justifyContent: 'space-between', padding:'0 15px 0 10px'}}>
       <Box sx={{display:'flex', gap:'20px', color:"white"}}>
@@ -31,12 +44,20 @@ const Header = () => {
       </Box>
         <List sx={{display:{xs:'none', lg:'flex'}, gap:'10px'}}>
           {isLogged
-          ?<>
-            <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>{userName}</Button>
-            <Button component={Link} to="/backoffice" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>Backoffice</Button>
-            <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}} onClick={()=>logout()}>Cerrar sesión</Button>
+          ?( <>
+            {userRole === "user" && (
+              <>
+                <Button to="" color="buttonlogin" variant="outlined"sx={{ alignSelf: "center" }}>Donar</Button>
+              </>)}
+            {userRole === "admin" && (
+              <>
+                <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>{userName}</Button>
+                <Button component={Link} to="/backoffice" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>Backoffice</Button>
+                <Button color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}} onClick={()=>logout()}>Cerrar sesión</Button>
+            </>)}
           </>
-          :<>
+        ) : (
+          <>
             <Button component={Link} to="/login" color="buttonlogin" variant="outlined" sx={{alignSelf:'center'}}>
               LOGIN
             </Button>
@@ -44,7 +65,7 @@ const Header = () => {
               Registrate
             </Button>
           </>
-          }
+        )}
         </List>
       <IconButton onClick={() => setIsOpen(true)} aria-label="menu" size="large" sx={{display: {xs:'inline-block', lg:'none'}}}>
           <MenuIcon/>

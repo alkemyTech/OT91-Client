@@ -4,8 +4,8 @@ export const navLinks = [
     {text: 'Contacto', link: '/contacto', private:false, active:false},
     {text: 'Actividades', link: '/activities', private:false, active:false},
     {text: 'Novedades', link: '/novedades', private:false, active:false},
-    {text: 'Campaña escolar', link: '/school-campaign', private:false, active:false},
-    {text: 'Campaña de juguetes', link: '/toys-campaign', private:false, active:false}
+    {text: 'Camp Escolar', link: '/school-campaign', private:false, active:false},
+    {text: 'Camp Juguetes', link: '/toys-campaign', private:false, active:false}
 ]
 export const manageLinkActivation = (pathname) => {
     navLinks.forEach((navLink, index) => {

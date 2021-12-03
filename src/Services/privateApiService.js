@@ -8,7 +8,7 @@ const config = {
 const getAuthorizationHeader = () => {
   const token = localStorage.getItem("token");
   if (!token) return;
-  return { Authorization: `Bearer: ${token}` };
+  return `Bearer ${token}`;
 };
 
 const axiosInstance = axios.create({
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 const privateGet = async (url, id, params = {}) => {
   const idPlaceholder = id ? `/${id}` : "";
-  const { data } = axiosInstance.get(`${url}${idPlaceholder}`, { params });
+  const data = axiosInstance.get(`${url}${idPlaceholder}`, { params });
   return data;
 };
 

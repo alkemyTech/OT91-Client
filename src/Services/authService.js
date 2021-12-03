@@ -30,15 +30,25 @@ const loginUser = async (loginData) => {
 const getAuthUserData = async () => {
     try{
         const data = await privateGet(getAuthUserDataURL)
-        return data
+        return data.data.data.user
     }catch(error){
         handleCatch(error)
     }
 };
 
-export {
+const getUserRole = async () => {
+  try {
+    const { role_id } = await getAuthUserData();
+    return role_id === 1 ? "admin" : "user";
+  } catch (error) {
+    handleCatch(error);
+  }
+  };
+
+  export {
     registerUser,
     loginUser,
-    getAuthUserData
+    getAuthUserData,
+    getUserRole
 };
 
