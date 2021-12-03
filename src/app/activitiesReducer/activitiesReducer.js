@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as activityService from '../../Services/activityService';
+import { searchIn } from '../../Services/seekerService';
 
 export const getAll = createAsyncThunk("activities/getAll", activityService.getAll);
 export const getById = createAsyncThunk('activities/getById', activityService.getById);
@@ -13,6 +14,9 @@ export const createOrUpdate = createAsyncThunk(
     'activities/createOrupdate',
     async (state) => activityService.createOrUpdate(state, state.id)
     );
+export const search = createAsyncThunk('activities/search',
+    async (state) => searchIn('activities', state.searchValue, state.minLength)
+)
 
 const activitiesSlice = createSlice({
     name:"activitiesReducer",
@@ -61,7 +65,13 @@ const activitiesSlice = createSlice({
             if(isUpdateAction) state.activities[updatedActivityIndex] = action.payload;
             else state.activities.push(action.payload)
         },
-        [createOrUpdate.rejected]: (state) => { state.status = 'failed' }
+        [createOrUpdate.rejected]: (state) => { state.status = 'failed' },
+        [search.pending]: (state) => { state.status = 'loading'},
+        [search.fulfilled]: (state, action) => {
+            state.status = 'success';
+            state.activities = action.payload;
+        },
+        [search.rejected]: (state) => { state.status = 'failed' }
     }
 });
 
